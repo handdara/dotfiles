@@ -1,12 +1,30 @@
-theme = "autumn"
+theme = "hex_steel_transparent"
 
 [editor]
+true-color = true
 line-number = "relative"
 bufferline = "always"
-shell = ["fish","-c"]
+shell = ["fish", "-c"]
 
 [keys.normal]
 esc = ["collapse_selection","keep_primary_selection"]
+D = "delete_char_backward"
+
+[keys.normal.L]
+f = ":format"
+c = ":lsp-workspace-command"
+
+# snippets!
+[keys.normal.A-s.l] # latex snips
+t = ":insert-output printf test"
+a = ":append-output printf test"
+
+[keys.normal.A-s.l.s]
+a = [":insert-output latex_snippet_sec", "collapse_selection"]
+# '%sbegin{%s}\n\n%send{%s}' '\\' $argv[1] '\\' $argv[1]
+
+[keys.normal.A-s.l.e]
+e = ["goto_line_start", ":insert-output latex_snippet_begin 'equation'"]
 
 [editor.cursor-shape]
 insert = "bar"
