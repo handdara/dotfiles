@@ -1,0 +1,22 @@
+Base installs:
+- alacritty
+- fish
+- cargo/rust analyzer
+  - zellij
+  - wiki-tui
+  - bat
+  - exa
+  - gitui (or equiv)
+  - porsmo
+- helix
+- zotero
+- firefox
+- gatech vpn
+- discord
+- cabal/ghc
+- matlab
+- parsec/teamviewer
+- vscode 
+- texlive
+- zathura/okular
+- docker **without snap!!!! causes gui/X issues**
