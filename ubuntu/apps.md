@@ -9,6 +9,7 @@ Base installs:
   - gitui (or equiv)
   - texlab
   - porsmo
+  - nu? (another rusty shell, works wherever cargo does)
 - helix
 - zotero
 - firefox
