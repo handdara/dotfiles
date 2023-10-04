@@ -7,6 +7,7 @@ Base installs:
   - bat
   - exa
   - gitui (or equiv)
+  - texlab
   - porsmo
 - helix
 - zotero

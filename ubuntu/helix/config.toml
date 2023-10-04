@@ -1,4 +1,4 @@
-theme = "hex_steel_transparent"
+theme = "base16_transparent"
 
 [editor]
 true-color = true
