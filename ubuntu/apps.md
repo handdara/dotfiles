@@ -10,6 +10,7 @@ Base installs:
   - texlab
   - porsmo
   - nu? (another rusty shell, works wherever cargo does)
+  - irust? (repl and dbg)
 - helix
 - zotero
 - firefox
