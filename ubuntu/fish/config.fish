@@ -15,20 +15,25 @@ fish_add_path ~/.cargo/bin
 fish_add_path ~/matlab/r2022b/bin
 fish_add_path /usr/local/texlive/2023/bin/x86_64-linux/
 fish_add_path ~/.local/bin
+fish_add_path ~/.local/scripts
 
 # ------------------ ALIASES ------------------
 
 alias e "exa"
 alias ea "exa -a"
 alias el "exa -al"
+
 alias zdi "zellij -s dothe"
 
 alias batconf "bat (find ~/.config * | fzf)"
+alias batcode "bat (find ~/code * | fzf)"
 
-alias cc "xclip"
-alias cz "xclip -o"
+alias openconf "cd (find ~/.config * -type d | fzf)"
+alias opencode "cd (find ~/code * -mindepth 1 -maxdepth 1 -type d | fzf)"
+alias openscripts "cd ~/.local/scripts"
 
-echo "aliases!"
+alias xc "xclip"
+alias xp "xclip -o"
 
 # ------------------ END ALIASES ------------------
 
