@@ -1,3 +1,4 @@
+#!/bin/fish
 if status is-interactive
     # Commands to run in interactive sessions can go here
     function fish_prompt
@@ -21,6 +22,13 @@ alias e "exa"
 alias ea "exa -a"
 alias el "exa -al"
 alias zdi "zellij -s dothe"
+
+alias batconf "bat (find ~/.config * | fzf)"
+
+alias cc "xclip"
+alias cz "xclip -o"
+
+echo "aliases!"
 
 # ------------------ END ALIASES ------------------
 

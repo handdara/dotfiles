@@ -23,3 +23,4 @@ Base installs:
 - texlive
 - zathura/okular
 - docker **without snap!!!! causes gui/X issues**
+- xclip
