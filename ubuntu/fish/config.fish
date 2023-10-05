@@ -32,7 +32,7 @@ alias el "exa -al"
 alias zdi "zellij -s dothe"
 
 alias batconf "bat (find ~/.config -type f | fzf)"
-alias batcode "bat (find ~/code * | fzf)"
+alias batcode "bat (find ~/code -type f | fzf)"
 
 alias fd "find . -type d -not -path '*/.*/'| fzf"
 
@@ -45,9 +45,11 @@ alias opencodedir "cd (find ~/code -mindepth 1 -type d \
                                 -not -path '*.vscode*' \
                     | fzf)"
 alias openscripts "cd ~/.local/scripts"
+alias openconf "cd (find ~/.config -type d | fzf)"
+
 # helix fuzzy find in code directory
 alias hxfc "hx (find ~/code -mindepth 1 | fzf)"
-alias openconf "cd (find ~/.config -type d | fzf)"
+alias hxfx "hx (find ~/.config -mindepth 1 | fzf)"
 
 alias xc "xclip"
 alias xp "xclip -o"
