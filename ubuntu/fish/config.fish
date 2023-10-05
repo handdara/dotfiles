@@ -28,8 +28,17 @@ alias zdi "zellij -s dothe"
 alias batconf "bat (find ~/.config -type f | fzf)"
 alias batcode "bat (find ~/code * | fzf)"
 
+alias fd "find . -type d | fzf"
+
 alias openconf "cd (find ~/.config -type d | fzf)"
-alias opencode "cd (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
+alias openproject "cd (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
+alias opencode "cd (find ~/code -mindepth 1 -type d \
+                                -not -path '*/.git*' \
+                                -not -path '*/target*' \
+                                -not -path '*dist-newstyle*' \
+                                -not -path '*.stack*' \
+                                -not -path '*.vscode*' \
+                    | fzf)"
 alias openscripts "cd ~/.local/scripts"
 
 alias xc "xclip"

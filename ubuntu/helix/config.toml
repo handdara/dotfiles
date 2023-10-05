@@ -1,4 +1,4 @@
-theme = "base16_transparent"
+theme = "base16_alacritty_seashells"
 
 [editor]
 true-color = true
