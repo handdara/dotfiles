@@ -24,3 +24,4 @@ Base installs:
 - zathura/okular
 - docker **without snap!!!! causes gui/X issues**
 - xclip
+- tree
