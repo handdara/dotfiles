@@ -9,6 +9,13 @@ if status is-interactive
     function fish_greeting
         printf "This machine is %s%s%s. Lets fish...\n" (set_color green) $hostname (set_color normal)
     end
+
+    # ------------------ IS WSL? ------------------
+    if set -q WSL_DISTRO_NAME[1]
+        printf "I think you are working in %sWSL%s.\n" (set_color green) (set_color normal)
+    else    
+        # printf "I think you are %snot%s working in WSL.\n" (set_color green) (set_color normal)  
+    end
 end
 
 fish_add_path ~/.cargo/bin
@@ -30,9 +37,8 @@ alias batcode "bat (find ~/code * | fzf)"
 
 alias fd "find . -type d -not -path '*/.*/'| fzf"
 
-alias openconf "cd (find ~/.config -type d | fzf)"
 alias openproject "cd (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
-alias opencode "cd (find ~/code -mindepth 1 -type d \
+alias opencodedir "cd (find ~/code -mindepth 1 -type d \
                                 -not -path '*/.git*' \
                                 -not -path '*/target*' \
                                 -not -path '*dist-newstyle*' \
@@ -40,6 +46,9 @@ alias opencode "cd (find ~/code -mindepth 1 -type d \
                                 -not -path '*.vscode*' \
                     | fzf)"
 alias openscripts "cd ~/.local/scripts"
+# helix fuzzy find in code directory
+alias hxfc "hx (find ~/code -mindepth 1 | fzf)"
+alias openconf "cd (find ~/.config -type d | fzf)"
 
 alias xc "xclip"
 alias xp "xclip -o"
@@ -47,3 +56,4 @@ alias xp "xclip -o"
 # ------------------ END ALIASES ------------------
 
 sh ~/.cargo/env
+
