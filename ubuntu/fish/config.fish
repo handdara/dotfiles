@@ -28,7 +28,7 @@ alias zdi "zellij -s dothe"
 alias batconf "bat (find ~/.config -type f | fzf)"
 alias batcode "bat (find ~/code * | fzf)"
 
-alias fd "find . -type d | fzf"
+alias fd "find . -type d -not -path '*/.*/'| fzf"
 
 alias openconf "cd (find ~/.config -type d | fzf)"
 alias openproject "cd (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
