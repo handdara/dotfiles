@@ -25,11 +25,11 @@ alias el "exa -al"
 
 alias zdi "zellij -s dothe"
 
-alias batconf "bat (find ~/.config * | fzf)"
+alias batconf "bat (find ~/.config -type f | fzf)"
 alias batcode "bat (find ~/code * | fzf)"
 
-alias openconf "cd (find ~/.config * -type d | fzf)"
-alias opencode "cd (find ~/code * -mindepth 1 -maxdepth 1 -type d | fzf)"
+alias openconf "cd (find ~/.config -type d | fzf)"
+alias opencode "cd (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
 alias openscripts "cd ~/.local/scripts"
 
 alias xc "xclip"
