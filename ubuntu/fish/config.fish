@@ -8,13 +8,12 @@ if status is-interactive
 
     function fish_greeting
         printf "This machine is %s%s%s. Lets fish...\n" (set_color green) $hostname (set_color normal)
-    end
-
-    # ------------------ IS WSL? ------------------
-    if set -q WSL_DISTRO_NAME[1]
-        printf "I think you are working in %sWSL%s.\n" (set_color green) (set_color normal)
-    else    
-        # printf "I think you are %snot%s working in WSL.\n" (set_color green) (set_color normal)  
+        # ------------------ IS WSL? ------------------
+        if set -q WSL_DISTRO_NAME[1]
+            printf "I think you are working in %sWSL%s.\n" (set_color green) (set_color normal)
+        else    
+            # printf "I think you are %snot%s working in WSL.\n" (set_color green) (set_color normal)  
+        end
     end
 end
 
@@ -52,6 +51,14 @@ alias openconf "cd (find ~/.config -type d | fzf)"
 
 alias xc "xclip"
 alias xp "xclip -o"
+
+# ------------------ IS WSL? ------------------
+if set -q WSL_DISTRO_NAME[1]
+    alias cdc "cd /mnt/c/"
+    alias cdd "cd /mnt/d/"
+    alias cde "cd /mnt/e/"
+    alias cdf "cd /mnt/f/"
+end
 
 # ------------------ END ALIASES ------------------
 
