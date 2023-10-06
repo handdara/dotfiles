@@ -20,6 +20,9 @@ end
 # default editor
 set -gx EDITOR hx
 
+# disable conda autoactivate for now
+set -gx CONDA_AUTO_ACTIVATE_BASE false
+
 fish_add_path ~/.cargo/bin
 fish_add_path ~/matlab/r2022b/bin
 fish_add_path /usr/local/texlive/2023/bin/x86_64-linux/
@@ -70,4 +73,11 @@ end
 zoxide init fish | source
 
 sh ~/.cargo/env
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/handdara/apps/miniconda3/bin/conda
+    eval /home/handdara/apps/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
 
