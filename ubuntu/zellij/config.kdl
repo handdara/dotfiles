@@ -7,7 +7,7 @@ keybinds {
         bind "Alt b" {ToggleFloatingPanes; SwitchToMode "Locked";}
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
-            Run "zellij" "r" "-fc" "--" "fish" "-c" "hx ~/scratch.md" {
+            Run "zellij" "r" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml ~/scratch.md" {
                 cwd "~"
                 close_on_exit true
             }
@@ -19,7 +19,7 @@ keybinds {
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
             SwitchToMode "Normal";
-            Run "zellij" "r" "-fc" "--" "fish" "-c" "hx ~/scratch.md" {
+            Run "zellij" "r" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml ~/scratch.md" {
                 cwd "~"
                 close_on_exit true
             }
