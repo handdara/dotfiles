@@ -5,6 +5,7 @@ keybinds {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
         bind "Alt b" {ToggleFloatingPanes; SwitchToMode "Locked";}
+        bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
             Run "zellij" "r" "-fc" "--" "fish" "-c" "hx ~/scratch.md" {
                 cwd "~"
@@ -15,6 +16,7 @@ keybinds {
     locked {
         bind "Alt g" { SwitchToMode "Normal"; }
         bind "Alt b" {ToggleFloatingPanes; SwitchToMode "Normal";}
+        bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
             SwitchToMode "Normal";
             Run "zellij" "r" "-fc" "--" "fish" "-c" "hx ~/scratch.md" {
@@ -309,7 +311,7 @@ theme "dracula"
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-// scrollback_editor "/usr/bin/vim"
+scrollback_editor "hx"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

@@ -1,4 +1,4 @@
-#!/bin/fish
+#!/usr/bin/fish
 if status is-interactive
     # Commands to run in interactive sessions can go here
     function fish_prompt
@@ -16,6 +16,9 @@ if status is-interactive
         end
     end
 end
+
+# default editor
+set -gx EDITOR hx
 
 fish_add_path ~/.cargo/bin
 fish_add_path ~/matlab/r2022b/bin
