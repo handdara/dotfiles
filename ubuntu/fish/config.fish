@@ -39,16 +39,16 @@ alias batcode "bat (find ~/code -type f | fzf)"
 
 alias fd "find . -type d -not -path '*/.*/'| fzf"
 
-alias openproject "cd (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
-alias opencodedir "cd (find ~/code -mindepth 1 -type d \
+alias openproject "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
+alias opencodedir "z (find ~/code -mindepth 1 -type d \
                                 -not -path '*/.git*' \
                                 -not -path '*/target*' \
                                 -not -path '*dist-newstyle*' \
                                 -not -path '*.stack*' \
                                 -not -path '*.vscode*' \
                     | fzf)"
-alias openscripts "cd ~/.local/scripts"
-alias openconf "cd (find ~/.config -type d | fzf)"
+alias openscripts "z ~/.local/scripts"
+alias openconf "z (find ~/.config -type d | fzf)"
 
 # helix fuzzy find in code directory
 alias hxfc "hx (find ~/code -mindepth 1 | fzf)"
