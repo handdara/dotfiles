@@ -68,9 +68,9 @@ if set -q WSL_DISTRO_NAME[1]
     alias cdd "cd /mnt/d/"
     alias cde "cd /mnt/e/"
     alias cdf "cd /mnt/f/"
-end
 
-# ------------------ END ALIASES ------------------
+    echo -e -n "\e[2 q"
+end
 
 zoxide init fish | source
 
