@@ -189,9 +189,9 @@ keybinds {
     // }
 }
 
-env {
-  SCRATCHPATH "~/Documents/ansible/scratch.md"  
-} 
+// env {
+//   SCRATCHPATH "~/Documents/ansible/scratch.md"  
+// } 
 
 plugins {
     tab-bar { path "tab-bar"; }

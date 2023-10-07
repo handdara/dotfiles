@@ -20,6 +20,7 @@ end
 # default editor
 set -gx EDITOR hx
 
+
 # miniconda3
 # disable conda autoactivate for now
 set -gx CONDA_AUTO_ACTIVATE_BASE false
@@ -69,7 +70,14 @@ if set -q WSL_DISTRO_NAME[1]
     alias cde "cd /mnt/e/"
     alias cdf "cd /mnt/f/"
 
-    echo -e -n "\e[2 q"
+    # attempt to remove blinking cursor here
+    # echo -e -n "\e[2 q"
+
+    # set scratch.md path
+    # - for my personal zellij setup
+    set -gx SCRATCHPATH "~/ansible/scratch.md"
+else
+    set -gx SCRATCHPATH "~/Documents/ansible/scratch.md"
 end
 
 zoxide init fish | source
