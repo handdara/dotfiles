@@ -7,8 +7,7 @@ keybinds {
         bind "Alt b" {ToggleFloatingPanes; SwitchToMode "Locked";}
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
-            Run "zellij" "r" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml ~/scratch.md" {
-                cwd "~"
+            Run "zellij" "r" "-n" "scratchpad" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml $SCRATCHPATH" {
                 close_on_exit true
             }
         }
@@ -19,8 +18,7 @@ keybinds {
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
             SwitchToMode "Normal";
-            Run "zellij" "r" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml ~/scratch.md" {
-                cwd "~"
+            Run "zellij" "r" "-n" "scratchpad" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml $SCRATCHPATH" {
                 close_on_exit true
             }
         }
@@ -190,6 +188,10 @@ keybinds {
     //     bind "Ctrl b" { SwitchToMode "Tmux"; }
     // }
 }
+
+env {
+  SCRATCHPATH "~/Documents/ansible/scratch.md"  
+} 
 
 plugins {
     tab-bar { path "tab-bar"; }
