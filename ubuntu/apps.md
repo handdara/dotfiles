@@ -25,3 +25,4 @@ Base installs:
 - docker **without snap!!!! causes gui/X issues**
 - xclip
 - tree
+- miniconda3

@@ -20,6 +20,11 @@ end
 # default editor
 set -gx EDITOR hx
 
+# miniconda3
+# disable conda autoactivate for now
+set -gx CONDA_AUTO_ACTIVATE_BASE false
+# end miniconda3
+
 fish_add_path ~/.cargo/bin
 fish_add_path ~/matlab/r2022b/bin
 fish_add_path /usr/local/texlive/2023/bin/x86_64-linux/
@@ -63,11 +68,20 @@ if set -q WSL_DISTRO_NAME[1]
     alias cdd "cd /mnt/d/"
     alias cde "cd /mnt/e/"
     alias cdf "cd /mnt/f/"
-end
 
-# ------------------ END ALIASES ------------------
+    echo -e -n "\e[2 q"
+end
 
 zoxide init fish | source
 
 sh ~/.cargo/env
+
+# miniconda3
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/handdara/apps/miniconda3/bin/conda
+    eval /home/handdara/apps/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+# miniconda3
 
