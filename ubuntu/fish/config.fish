@@ -69,3 +69,4 @@ end
 
 sh ~/.cargo/env
 
+zoxide init fish | source
