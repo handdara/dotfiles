@@ -6,5 +6,5 @@
 
     // stash_open: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
 
-    // open_help: Some(( code: F(1), modifiers: ( bits: 0,),)),
+    open_help: Some(( code: Char('?'), modifiers: ( bits: 0,),)),
 )
