@@ -67,6 +67,7 @@ end
 
 # ------------------ END ALIASES ------------------
 
+zoxide init fish | source
+
 sh ~/.cargo/env
 
-zoxide init fish | source
