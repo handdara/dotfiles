@@ -10,7 +10,7 @@
 "ui.menu.scroll" = { fg = "light-gray" }
 "ui.linenr" = { fg = "light-gray" }
 "ui.linenr.selected" = { fg = "white",  modifiers = ["bold"] }
-"ui.popup" = { fg = "white" }
+"ui.popup" = { fg = "white" , bg = "black"}
 "ui.window" = { fg = "gray" }
 "ui.selection" = { bg = "gray" }
 "ui.statusline" = { fg = "white" }

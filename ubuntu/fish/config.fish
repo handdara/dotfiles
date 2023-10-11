@@ -43,7 +43,7 @@ alias zdi "zellij -s dothe"
 alias batconf "bat (find ~/.config -type f | fzf)"
 alias batcode "bat (find ~/code -type f | fzf)"
 
-alias fd "find . -type d -not -path '*/.*/'| fzf"
+alias fd "find . -type d -not -path '*/.*/*'| fzf"
 
 alias openproject "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
 alias opencodedir "z (find ~/code -mindepth 1 -type d \
@@ -56,7 +56,7 @@ alias opencodedir "z (find ~/code -mindepth 1 -type d \
 alias openscripts "z ~/.local/scripts"
 alias openconf "z (find ~/.config -type d | fzf)"
 
-# helix fuzzy find in code directory
+# open helix with fuzzy find in code directory
 alias hxfc "hx (find ~/code -mindepth 1 | fzf)"
 alias hxfx "hx (find ~/.config -mindepth 1 | fzf)"
 
@@ -71,6 +71,7 @@ if set -q WSL_DISTRO_NAME[1]
     alias cdf "cd /mnt/f/"
 
     # attempt to remove blinking cursor here
+    # - [ ] fix blinking cursor in WSL2
     # echo -e -n "\e[2 q"
 
     # set scratch.md path
