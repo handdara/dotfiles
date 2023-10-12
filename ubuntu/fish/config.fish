@@ -30,6 +30,8 @@ fish_add_path ~/matlab/r2022b/bin
 fish_add_path /usr/local/texlive/2023/bin/x86_64-linux/
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/scripts
+fish_add_path /usr/local/go/bin
+fish_add_path ~/go/bin
 
 # ------------------ ALIASES ------------------
 
@@ -67,6 +69,10 @@ alias hxfx "hx (find ~/.config -mindepth 1 | fzf)"
 
 alias xc "xclip"
 alias xp "xclip -o"
+
+# dumb fun
+alias confetti "ssh -p 2222 ssh.caarlos0.dev"
+alias fireworks "ssh -p 2223 ssh.caarlos0.dev"
 
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]
