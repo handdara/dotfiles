@@ -15,6 +15,19 @@ args = ["--unique", "file:%p#src:%l%f"]
 # onEdit = true
 
 [[language]]
+name = "haskell"
+
+[language-server.haskell-language-server-wrapper]
+command = "haskell-language-server-wrapper"
+
+# [language-server.haskell-language-server-wrapper.config.haskell.plugin.eval]
+# exception = true
+# globalOn = true
+
+# [language-server.haskell-language-server-wrapper.config.plugin.gadt]
+# globalOn = false
+
+[[language]]
 name = "rust"
 
 [language.debugger]

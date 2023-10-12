@@ -1,0 +1,3 @@
+
+cp ./*.toml ~/.config/helix/
+
