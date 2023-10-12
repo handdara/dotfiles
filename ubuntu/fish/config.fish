@@ -20,7 +20,6 @@ end
 # default editor
 set -gx EDITOR hx
 
-
 # miniconda3
 # disable conda autoactivate for now
 set -gx CONDA_AUTO_ACTIVATE_BASE false
@@ -34,9 +33,15 @@ fish_add_path ~/.local/scripts
 
 # ------------------ ALIASES ------------------
 
+# alias out ls to exa
+alias ls "exa"
+
 alias e "exa"
 alias ea "exa -a"
-alias el "exa -al"
+alias eal "exa -al"
+alias et "exa -Tl --no-time"
+alias eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
+alias ed "exa -lTD"
 
 alias zdi "zellij -s dothe"
 
