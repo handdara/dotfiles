@@ -4,7 +4,7 @@ keybinds {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
-        bind "Alt b" {ToggleFloatingPanes; SwitchToMode "Locked";}
+        bind "Alt z" {ToggleFloatingPanes; SwitchToMode "Locked";}
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
             Run "zellij" "r" "-n" "scratchpad" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml $SCRATCHPATH" {
@@ -14,7 +14,7 @@ keybinds {
     }
     locked {
         bind "Alt g" { SwitchToMode "Normal"; }
-        bind "Alt b" {ToggleFloatingPanes; SwitchToMode "Normal";}
+        bind "Alt z" {ToggleFloatingPanes; SwitchToMode "Normal";}
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
             SwitchToMode "Normal";
