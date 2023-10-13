@@ -200,6 +200,7 @@ plugins {
     status-bar { path "status-bar"; }
     strider { path "strider"; }
     compact-bar { path "compact-bar"; }
+    // session-manager { path "session-manager"; }
     // zjstatus???? (https://github.com/dj95/zjstatus)
 }
 
@@ -260,7 +261,7 @@ themes {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "dracula"
+theme "catppuccin-mocha"
 
 // The name of the default layout to load on startup
 // Default: "default"
