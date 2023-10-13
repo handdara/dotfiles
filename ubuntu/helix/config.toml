@@ -15,6 +15,10 @@ skip-levels = 1
 esc = ["collapse_selection","keep_primary_selection"]
 D = "delete_char_backward"
 
+[keys.normal.g]
+t = ["goto_window_top", "align_view_center"]
+b = ["goto_window_bottom", "align_view_center"]
+
 [keys.normal.L]
 f = ":format"
 c = ":lsp-workspace-command"
