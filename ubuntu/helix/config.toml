@@ -3,8 +3,13 @@ theme = "rose_pine_transparent"
 [editor]
 true-color = true
 line-number = "relative"
-bufferline = "always"
+# bufferline = "always"
 shell = ["fish", "-c"]
+
+[editor.indent-guides]
+render = true
+character = "⸽"
+skip-levels = 1
 
 [keys.normal]
 esc = ["collapse_selection","keep_primary_selection"]
