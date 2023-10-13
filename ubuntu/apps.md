@@ -9,6 +9,7 @@ Base installs:
   - gitui (or equiv)
   - texlab
   - porsmo
+  - starship
   - nu? (another rusty shell, works wherever cargo does)
   - irust? (repl and dbg)
 - helix
