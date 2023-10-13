@@ -40,8 +40,10 @@ alias ls "exa"
 
 alias e "exa"
 alias ea "exa -a"
-alias eal "exa -al"
+alias el "exa -l"
+alias ela "exa -la"
 alias et "exa -Tl --no-time"
+# tree view of a git repo
 alias eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
 alias ed "exa -lTD"
 
@@ -67,6 +69,7 @@ alias openconf "z (find ~/.config -type d | fzf)"
 alias hxfc "hx (find ~/code -mindepth 1 | fzf)"
 alias hxfx "hx (find ~/.config -mindepth 1 | fzf)"
 
+# command line clipboard
 alias xc "xclip"
 alias xp "xclip -o"
 
@@ -87,10 +90,13 @@ if set -q WSL_DISTRO_NAME[1]
 
     # set scratch.md path
     # - for my personal zellij setup
-    set -gx SCRATCHPATH "~/ansible/scratch.md"
+    set -gx SCRATCHDIR "~/ansible"
 else
-    set -gx SCRATCHPATH "~/Documents/ansible/scratch.md"
+    # set scratch.md path
+    # - for my personal zellij setup
+    set -gx SCRATCHDIR "~/Documents/ansible"
 end
+set -gx SCRATCHPATH (string join '/' $SCRATCHDIR "scratch.md")
 
 zoxide init fish | source
 
