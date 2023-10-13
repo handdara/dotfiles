@@ -1,0 +1,28 @@
+layout {
+    tab name="term" {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        pane split_direction="vertical" {
+            pane
+            pane
+        }
+    }
+    tab name="hx" {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        pane name="helix" {
+            // command "cd"
+            // args "(find ~ -type d | fzf)"
+        }
+    }
+    tab name="misc" {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        pane {
+            command "spt"
+        }
+    }
+}

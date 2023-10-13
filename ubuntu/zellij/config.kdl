@@ -1,9 +1,11 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds {
     unbind "Ctrl g"
+    unbind "Ctrl t"
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
+
         bind "Alt z" {ToggleFloatingPanes; SwitchToMode "Locked";}
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt m" {
@@ -63,7 +65,7 @@ keybinds {
         bind "l" "Right" { MovePane "Right"; }
     }
     tab {
-        bind "Ctrl t" { SwitchToMode "Normal"; }
+        bind "Alt t" { SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "h" "Left" "Up" "k" { GoToPreviousTab; }
         bind "l" "Right" "Down" "j" { GoToNextTab; }
@@ -179,7 +181,7 @@ keybinds {
         bind "Ctrl o" { SwitchToMode "Session"; }
     }
     shared_except "tab" "locked" {
-        bind "Ctrl t" { SwitchToMode "Tab"; }
+        bind "Alt t" { SwitchToMode "Tab"; }
     }
     shared_except "move" "locked" {
         bind "Ctrl h" { SwitchToMode "Move"; }
@@ -198,6 +200,7 @@ plugins {
     status-bar { path "status-bar"; }
     strider { path "strider"; }
     compact-bar { path "compact-bar"; }
+    // zjstatus???? (https://github.com/dj95/zjstatus)
 }
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
@@ -320,11 +323,11 @@ scrollback_editor "hx"
 // or should each user have their own cursor (false)
 // Default: false
 //
-// mirror_session true
+mirror_session false
 
 // The folder in which Zellij will look for layouts
 //
-// layout_dir "/path/to/my/layout_dir"
+// layout_dir "/home/handdara/.config/zellij/layouts"
 
 // The folder in which Zellij will look for themes
 //

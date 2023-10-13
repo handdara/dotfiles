@@ -47,7 +47,7 @@ alias et "exa -Tl --no-time"
 alias eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
 alias ed "exa -lTD"
 
-alias zdi "zellij -s dothe"
+alias zdi "zellij --session dothe --layout dothe"
 
 alias batconf "bat (find ~/.config -type f | fzf)"
 alias batcode "bat (find ~/code -type f | fzf)"

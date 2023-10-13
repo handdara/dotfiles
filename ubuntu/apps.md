@@ -16,7 +16,11 @@ Base installs:
 - firefox
 - gatech vpn
 - discord
-- cabal/ghc
+- ghcup/stack/cabal/ghc
+  - summoner
+  - hoogle
+  - Hasklig (font)
+  - gen-hie
 - matlab
 - parsec/teamviewer
 - vscode 
