@@ -111,3 +111,4 @@ end
 # <<< conda initialize <<<
 # miniconda3
 
+starship init fish | source
