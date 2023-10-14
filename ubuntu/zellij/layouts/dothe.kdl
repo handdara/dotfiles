@@ -26,3 +26,5 @@ layout {
         }
     }
 }
+
+theme "catppuccin-mocha"
