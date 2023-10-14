@@ -38,6 +38,9 @@ fish_add_path ~/go/bin
 # alias out ls to exa
 alias ls "exa"
 
+# alias out cat to bat
+alias cat "bat"
+
 alias e "exa"
 alias ea "exa -a"
 alias el "exa -l"
