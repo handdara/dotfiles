@@ -10,6 +10,9 @@ Base installs:
   - texlab
   - porsmo
   - starship
+  - hyperfine [repo](https://github.com/sharkdp/hyperfine)
+  - pastel [repo](https://github.com/sharkdp/pastel)
+  - watchexec [repo](https://github.com/watchexec/watchexec)
   - nu? (another rusty shell, works wherever cargo does)
   - irust? (repl and dbg)
 - helix
