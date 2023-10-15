@@ -35,6 +35,14 @@ fish_add_path ~/go/bin
 
 # ------------------ ALIASES ------------------
 
+function today
+    date +'%d%b%Y,  %a'
+end
+
+function today-time
+    date +'%d%b%Y,  %a,  %H:%M'
+end
+
 # alias out ls to exa
 alias ls "exa"
 
