@@ -70,7 +70,6 @@ style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [cmd_duration]
-min_time = 4
 show_milliseconds = false
 disabled = false
 style = "italic #394260"
