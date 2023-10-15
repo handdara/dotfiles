@@ -13,6 +13,7 @@ Base installs:
   - hyperfine [repo](https://github.com/sharkdp/hyperfine)
   - pastel [repo](https://github.com/sharkdp/pastel)
   - watchexec [repo](https://github.com/watchexec/watchexec)
+  - tokei 
   - nu? (another rusty shell, works wherever cargo does)
   - irust? (repl and dbg)
 - helix
