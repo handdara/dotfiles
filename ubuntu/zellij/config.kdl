@@ -13,6 +13,16 @@ keybinds {
                 close_on_exit true
             }
         }
+        bind "Alt q" {
+            Run "zellij" "r" "-n" "quick personal notes" "-fc" "--" "fish" "-c" "mdh qp" {
+                close_on_exit true
+            }
+        }
+        bind "Alt w" {
+            Run "zellij" "r" "-n" "quick work notes" "-fc" "--" "fish" "-c" "mdh qw" {
+                close_on_exit true
+            }
+        }
     }
     locked {
         bind "Alt g" { SwitchToMode "Normal"; }
@@ -21,6 +31,18 @@ keybinds {
         bind "Alt m" {
             SwitchToMode "Normal";
             Run "zellij" "r" "-n" "scratchpad" "-fc" "--" "fish" "-c" "hx -c ~/.config/helix/scratch.toml $SCRATCHPATH" {
+                close_on_exit true
+            }
+        }
+        bind "Alt q" {
+            SwitchToMode "Normal";
+            Run "zellij" "r" "-n" "quick personal notes" "-fc" "--" "fish" "-c" "mdh qp" {
+                close_on_exit true
+            }
+        }
+        bind "Alt w" {
+            SwitchToMode "Normal";
+            Run "zellij" "r" "-n" "quick work notes" "-fc" "--" "fish" "-c" "mdh qw" {
                 close_on_exit true
             }
         }

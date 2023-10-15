@@ -4,7 +4,7 @@
   selection_bg: Some(LightMagenta),
   // selection_fg: Some(White),
   cmdbar_bg: Some(DarkGray),
-  // cmdbar_extra_lines_bg: Some(Blue),
+  cmdbar_extra_lines_bg: Some(DarkGray),
   disabled_fg: Some(Blue),
   // diff_line_add: Some(Green),
   // diff_line_delete: Some(Red),
