@@ -35,11 +35,11 @@ fish_add_path ~/go/bin
 
 # ------------------ ALIASES ------------------
 
-function today
+function today-onlydate
     date +'%d%b%Y'
 end
 
-function today-weekday
+function today
     date +'%d%b%Y,  %a'
 end
 
