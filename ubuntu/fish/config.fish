@@ -33,7 +33,7 @@ fish_add_path ~/.local/scripts
 fish_add_path /usr/local/go/bin
 fish_add_path ~/go/bin
 
-# ------------------ ALIASES ------------------
+# ------------------ Custom Funcs ------------------
 
 function today-onlydate
     date +'%d%b%Y'
@@ -47,57 +47,73 @@ function today-time
     date +'%d%b%Y,  %a,  %H:%M'
 end
 
+if set -q WSL_DISTRO_NAME[1]
+else
+    function dump_okular
+        echo $argv > ~/okular_file_line_dump.log
+    end
+end
+
+# ------------------ ALIASes / ABBRs ------------------
+
 # alias out ls to exa
-alias ls "exa"
+abbr --add ls "exa"
 
 # alias out cat to bat
-alias cat "bat"
+abbr --add cat "bat"
 
-alias e "exa"
-alias ea "exa -a"
-alias el "exa -l"
-alias ela "exa -la"
-alias et "exa -Tl --no-time"
+abbr --add e "exa"
+abbr --add ea "exa -a"
+abbr --add el "exa -l"
+abbr --add ela "exa -la"
+abbr --add et "exa -Tl --no-time"
 # tree view of a git repo
-alias eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
-alias ed "exa -lTD"
+abbr --add eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
+abbr --add ed "exa -lTD"
 
-alias zdi "zellij --session dothe --layout dothe"
+abbr --add zdi "zellij --session dothe --layout dothe"
 
-alias batconf "bat (find ~/.config -type f | fzf)"
-alias batcode "bat (find ~/code -type f | fzf)"
+abbr --add batconf "bat (find ~/.config -type f | fzf)"
+abbr --add batcode "bat (find ~/code -type f | fzf)"
 
-alias fd "find . -type d -not -path '*/.*/*'| fzf"
+abbr --add fd "find % -type d -not -path '*/.*/*'| fzf" --set-cursor
 
-alias openproject "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
-alias opencodedir "z (find ~/code -mindepth 1 -type d \
-                                -not -path '*/.git*' \
-                                -not -path '*/target*' \
-                                -not -path '*dist-newstyle*' \
-                                -not -path '*.stack*' \
-                                -not -path '*.vscode*' \
-                    | fzf)"
-alias openscripts "z ~/.local/scripts"
-alias openconf "z (find ~/.config -type d | fzf)"
+abbr --add openproject "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
 
-# open helix with fuzzy find in code directory
-alias hxfc "hx (find ~/code -mindepth 1 | fzf)"
-alias hxfx "hx (find ~/.config -mindepth 1 | fzf)"
+abbr --add opencodedir "z (find ~/code -mindepth 1 -type d \
+-not -path '*/.git*' \
+-not -path '*/target*' \
+-not -path '*dist-newstyle*' \
+-not -path '*.stack*' \
+-not -path '*.vscode*' \
+| fzf)"
+
+abbr --add openscripts "z ~/.local/scripts"
+
+abbr --add openconf "z (find ~/.config -type d | fzf)"
+
+# open helix with fuzzy find in common directories
+abbr --add hxfc "hx (find ~/code -mindepth 1 | fzf)"
+abbr --add hxfx "hx (find ~/.config -mindepth 1 | fzf)"
 
 # command line clipboard
-alias xc "xclip"
-alias xp "xclip -o"
+abbr --add xc "xclip"
+abbr --add xp "xclip -o"
 
 # dumb fun
-alias confetti "ssh -p 2222 ssh.caarlos0.dev"
-alias fireworks "ssh -p 2223 ssh.caarlos0.dev"
+abbr --add confetti "ssh -p 2222 ssh.caarlos0.dev"
+abbr --add fireworks "ssh -p 2223 ssh.caarlos0.dev"
+
+# hoogle shortening
+abbr --add hsi --set-cursor hoogle search --info \"%\" 
+abbr --add hs  --set-cursor hoogle search \"%\" 
 
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]
-    alias cdc "cd /mnt/c/"
-    alias cdd "cd /mnt/d/"
-    alias cde "cd /mnt/e/"
-    alias cdf "cd /mnt/f/"
+    abbr --add cdc "cd /mnt/c/"
+    abbr --add cdd "cd /mnt/d/"
+    abbr --add cde "cd /mnt/e/"
+    abbr --add cdf "cd /mnt/f/"
 
     # attempt to remove blinking cursor here
     # - [ ] fix blinking cursor in WSL2
