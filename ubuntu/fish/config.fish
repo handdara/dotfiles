@@ -108,6 +108,8 @@ abbr --add fireworks "ssh -p 2223 ssh.caarlos0.dev"
 abbr --add hsi --set-cursor hoogle search --info \"%\" 
 abbr --add hs  --set-cursor hoogle search \"%\" 
 
+abbr --add allhs --position anywhere --set-cursor=! "find ! -name \*.hs -not -path \*dist\*"
+
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]
     abbr --add cdc "cd /mnt/c/"
