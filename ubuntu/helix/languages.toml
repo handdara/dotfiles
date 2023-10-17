@@ -1,9 +1,14 @@
 [[language]]
 name = "latex"
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
 
 [language-server.texlab.config.texlab.build]
 onSave = true
 forwardSearchAfter = true
+
+[language-server.texlab.config.texlab.symbols]
+ignoredPatterns = [ "/Equation/" ]
 
 [language-server.texlab.config.texlab.forwardSearch]
 # executable = "zathura" 

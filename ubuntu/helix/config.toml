@@ -25,15 +25,25 @@ c = ":lsp-workspace-command"
 
 # snippets!
 [keys.normal.A-s.l] # latex snips
-t = ":insert-output printf test"
-a = ":append-output printf test"
+# aligned equation
+a = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_aldeqn", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "goto_line_end", "move_prev_word_start", "change_selection"]
+# definition
+d = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_defn", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# equation
+e = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_eqn", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# proof
+p = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_proof", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# theorem
+t = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_thm", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+
+[keys.normal.A-s.l."*"] # latex "starred" snips
+# aligned equation
+a = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_aldeqn_star", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "goto_line_end", "move_prev_word_start", "change_selection"]
+# equation
+e = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_eqn_star", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
 
 [keys.normal.A-s.l.s]
 a = [":insert-output latex_snippet_sec", "collapse_selection"]
-# '%sbegin{%s}\n\n%send{%s}' '\\' $argv[1] '\\' $argv[1]
-
-[keys.normal.A-s.l.e]
-e = ["goto_line_start", ":insert-output latex_snippet_begin 'equation'"]
 
 [editor.cursor-shape]
 insert = "bar"
