@@ -35,3 +35,4 @@ Base installs:
 - xclip
 - tree
 - miniconda3
+- maybe: json/yaml/toml converter? [yj](https://github.com/sclevine/yj)

@@ -66,9 +66,11 @@ abbr --add e "exa"
 abbr --add ea "exa -a"
 abbr --add el "exa -l"
 abbr --add ela "exa -la"
+# tree view
 abbr --add et "exa -Tl --no-time"
 # tree view of a git repo
 abbr --add eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
+# tree view of directories only
 abbr --add ed "exa -lTD"
 
 abbr --add zdi "zellij --session dothe --layout dothe"
@@ -76,11 +78,20 @@ abbr --add zdi "zellij --session dothe --layout dothe"
 abbr --add batconf "bat (find ~/.config -type f | fzf)"
 abbr --add batcode "bat (find ~/code -type f | fzf)"
 
-abbr --add fd "find % -type d -not -path '*/.*/*'| fzf" --set-cursor
+# find directory
+abbr --add fd --set-cursor=! "find ~/! -type d -not -path '*/.*'| fzf" 
+# find directory including `.___` dirs 
+abbr --add fd-dots --set-cursor=! "find ! -type d | fzf" 
+# find file
+abbr --add ff --set-cursor=! "find ~/! -type f -not -path '*/.*'| fzf" 
+# find file including `.___` dirs 
+abbr --add ff-dots --set-cursor=! "find ! -type f | fzf" 
 
-abbr --add openproject "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
+# "open project"
+abbr --add op "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
 
-abbr --add opencodedir "z (find ~/code -mindepth 1 -type d \
+# "open code subdirectory"
+abbr --add oc "z (find ~/code -mindepth 1 -type d \
 -not -path '*/.git*' \
 -not -path '*/target*' \
 -not -path '*dist-newstyle*' \
@@ -88,9 +99,11 @@ abbr --add opencodedir "z (find ~/code -mindepth 1 -type d \
 -not -path '*.vscode*' \
 | fzf)"
 
-abbr --add openscripts "z ~/.local/scripts"
+# "open scripts"
+abbr --add oscr "z ~/.local/scripts"
 
-abbr --add openconf "z (find ~/.config -type d | fzf)"
+# "open config directory"
+abbr --add oconf "z (find ~/.config -type d | fzf)"
 
 # open helix with fuzzy find in common directories
 abbr --add hxfc "hx (find ~/code -mindepth 1 | fzf)"
@@ -105,10 +118,17 @@ abbr --add confetti "ssh -p 2222 ssh.caarlos0.dev"
 abbr --add fireworks "ssh -p 2223 ssh.caarlos0.dev"
 
 # hoogle shortening
-abbr --add hsi --set-cursor hoogle search --info \"%\" 
-abbr --add hs  --set-cursor hoogle search \"%\" 
+abbr --add hsi --set-cursor=! "hoogle search --info \"!\"" 
+abbr --add hs  --set-cursor=! "hoogle search \"!\"" 
 
+# file searching in a directory, useful for `hx (allhs)` to open all haskell files in a project
 abbr --add allhs --position anywhere --set-cursor=! "find ! -name \*.hs -not -path \*dist\*"
+
+# porsmo abbreviations, quick timers
+# time minutes
+abbr --add pt --set-cursor=! "porsmo timer (math !\*60)"
+# time hours
+abbr --add pt-hr --set-cursor=! "porsmo timer (math !\*3600)"
 
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]
