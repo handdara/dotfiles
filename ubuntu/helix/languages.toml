@@ -33,6 +33,10 @@ command = "haskell-language-server-wrapper"
 # globalOn = false
 
 [[language]]
+name = "matlab"
+indent = { tab-width = 2, unit = "  "}
+
+[[language]]
 name = "rust"
 
 [language.debugger]
