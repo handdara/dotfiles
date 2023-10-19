@@ -1,0 +1,33 @@
+theme = "yellowed"
+
+[editor]
+true-color = true
+line-number = "relative"
+# bufferline = "always"
+shell = ["fish", "-c"]
+
+[editor.indent-guides]
+render = true
+character = "⸽"
+skip-levels = 1
+
+[keys.insert]
+"A-c" = "normal_mode"
+
+[keys.normal]
+esc = ["collapse_selection","keep_primary_selection"]
+D = "delete_char_backward"
+X = "extend_line_above"
+
+[keys.normal.g]
+t = ["goto_window_top", "align_view_center"]
+b = ["goto_window_bottom", "align_view_center"]
+
+[keys.normal.L]
+f = ":format"
+c = ":lsp-workspace-command"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"

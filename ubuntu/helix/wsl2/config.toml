@@ -1,0 +1,55 @@
+theme = "rose_pine_transparent"
+
+[editor]
+true-color = true
+line-number = "relative"
+# bufferline = "always"
+shell = ["fish", "-c"]
+
+[editor.indent-guides]
+render = true
+character = "⸽"
+skip-levels = 1
+
+[keys.insert]
+"A-c" = "normal_mode"
+
+[keys.normal]
+esc = ["collapse_selection","keep_primary_selection"]
+D = "delete_char_backward"
+X = "extend_line_above"
+
+[keys.normal.g]
+t = ["goto_window_top", "align_view_center"]
+b = ["goto_window_bottom", "align_view_center"]
+
+[keys.normal.L]
+f = ":format"
+c = ":lsp-workspace-command"
+
+# snippets!
+[keys.normal.A-s.l] # latex snips
+# aligned equation
+a = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_aldeqn", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "goto_line_end", "move_prev_word_start", "change_selection"]
+# definition
+d = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_defn", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# equation
+e = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_eqn", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# proof
+p = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_proof", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# theorem
+t = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_thm", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+
+[keys.normal.A-s.l."*"] # latex "starred" snips
+# aligned equation
+a = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_aldeqn_star", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "goto_line_end", "move_prev_word_start", "change_selection"]
+# equation
+e = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_eqn_star", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+
+[keys.normal.A-s.l.s]
+a = [":insert-output latex_snippet_sec", "collapse_selection"]
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"

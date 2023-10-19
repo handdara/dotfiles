@@ -6,7 +6,7 @@ indent = { tab-width = 2, unit = "  " }
 [language-server.texlab.config.texlab.build]
 onSave = true
 forwardSearchAfter = true
-# executable = "wsl_latex_wrapper"
+executable = "wsl_latex_wrapper"
 
 [language-server.texlab.config.texlab.symbols]
 ignoredPatterns = [ "/Equation/" ]
@@ -14,10 +14,10 @@ ignoredPatterns = [ "/Equation/" ]
 [language-server.texlab.config.texlab.forwardSearch]
 # executable = "zathura" 
 # args = [ "--synctex-forward", "%l:%c:%f", "%p" ]
-executable = "okular"
-args = ["--unique", "file:%p#src:%l%f"]
-# executable = "wsl_sumatra_wrapper" # for wsl2 use
-# args = [ "-reuse-instance", "%p", "-forward-search", "%f", "%l" ]
+# executable = "okular"
+# args = ["--unique", "file:%p#src:%l%f"]
+executable = "wsl_sumatra_wrapper"
+args = [ "-reuse-instance", "%p", "-forward-search", "%f", "%l" ]
 
 # [language-server.texlab.config.texlab.chktex]
 # onEdit = true
