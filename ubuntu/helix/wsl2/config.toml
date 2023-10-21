@@ -14,6 +14,8 @@ skip-levels = 1
 [keys.insert]
 "A-c" = "normal_mode"
 
+# # snippets!
+
 [keys.insert.A-s]
 t = ":insert-output today"
 d = ":insert-output today-onlydate"
@@ -31,8 +33,6 @@ b = ["goto_window_bottom", "align_view_center"]
 [keys.normal.L]
 f = ":format"
 c = ":lsp-workspace-command"
-
-# # snippets!
 
 [keys.normal.A-s]
 t = ":insert-output today"
