@@ -145,7 +145,7 @@ font:
     family: HasklugNerdFontMono
 
     # The `style` can be specified to pick a specific face.
-    style: SemiBold
+    style: Regular
 
   # Bold font face
   bold:

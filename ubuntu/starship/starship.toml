@@ -11,6 +11,7 @@ $rust\
 $c\
 $golang\
 $haskell\
+$conda\
 ${custom.latex}\
 [](fg:#212736 bg:#1d2230)\
 $time\
@@ -64,6 +65,11 @@ format = '[[ $symbol ](fg:#769ff0 bg:#212736)]($style)'
 symbol = ""
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[conda]
+style = "bg:#212736"
+format = "[[ $symbol ($environment) ](fg:#769ff0 bg:#212736)]($style)"
+ignore_base = false
 
 [php]
 symbol = ""
