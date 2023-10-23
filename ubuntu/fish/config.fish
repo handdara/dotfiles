@@ -18,7 +18,7 @@ if status is-interactive
 end
 
 # default editor
-set -gx EDITOR hx
+set -gx EDITOR nvim
 
 # miniconda3
 # disable conda autoactivate for now
@@ -79,11 +79,11 @@ abbr --add batconf "bat (find ~/.config -type f | fzf)"
 abbr --add batcode "bat (find ~/code -type f | fzf)"
 
 # find directory
-abbr --add fdir --set-cursor=! "find ~/! -type d -not -path '*/.*'| fzf" 
+abbr --add fdir --set-cursor=! "find ~! -type d -not -path '*/.*'| fzf" 
 # find directory including `.___` dirs 
 abbr --add fdots --set-cursor=! "find ! -type d | fzf" 
 # find file
-abbr --add ff --set-cursor=! "find ~/! -type f -not -path '*/.*'| fzf" 
+abbr --add ff --set-cursor=! "find ~! -type f -not -path '*/.*'| fzf" 
 # find file including `.___` dirs 
 abbr --add ff-dots --set-cursor=! "find ! -type f | fzf" 
 
