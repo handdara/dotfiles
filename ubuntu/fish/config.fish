@@ -79,9 +79,9 @@ abbr --add batconf "bat (find ~/.config -type f | fzf)"
 abbr --add batcode "bat (find ~/code -type f | fzf)"
 
 # find directory
-abbr --add fd --set-cursor=! "find ~/! -type d -not -path '*/.*'| fzf" 
+abbr --add fdir --set-cursor=! "find ~/! -type d -not -path '*/.*'| fzf" 
 # find directory including `.___` dirs 
-abbr --add fd-dots --set-cursor=! "find ! -type d | fzf" 
+abbr --add fdots --set-cursor=! "find ! -type d | fzf" 
 # find file
 abbr --add ff --set-cursor=! "find ~/! -type f -not -path '*/.*'| fzf" 
 # find file including `.___` dirs 
@@ -129,6 +129,11 @@ abbr --add allhs --position anywhere --set-cursor=! "find ! -name \*.hs -not -pa
 abbr --add pt --set-cursor=! "porsmo timer (math !\*60)"
 # time hours
 abbr --add pt-hr --set-cursor=! "porsmo timer (math !\*3600)"
+
+abbr --add vim "nvim"
+
+abbr --add config-refresh "source ~/.config/fish/config.fish"
+abbr --add conf-r "source ~/.config/fish/config.fish"
 
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]
