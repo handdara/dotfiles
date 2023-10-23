@@ -42,10 +42,20 @@ T = ":insert-output today-time"
 [keys.normal.A-s.l] # latex snips
 # aligned equation
 a = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_aldeqn", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "goto_line_end", "move_prev_word_start", "change_selection"]
+# block
+b = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_block", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# block
+B = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_alertblock", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
 # definition
 d = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_defn", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
 # equation
 e = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_eqn", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# enumerate
+E = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_enumerate", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# frame
+f = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_frame", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
+# itemize
+i = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_itemize", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
 # proof
 p = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_proof", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
 # theorem
@@ -56,9 +66,6 @@ t = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_thm", 
 a = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_aldeqn_star", "collapse_selection", "move_line_up", "move_line_up", ":format", "goto_line_end", "goto_line_end", "move_prev_word_start", "change_selection"]
 # equation
 e = ["add_newline_below", "move_line_down", ":insert-output latex_snippet_eqn_star", "collapse_selection", "move_line_up", ":format", "goto_line_end", "move_prev_word_start", "change_selection"]
-
-[keys.normal.A-s.l.s]
-a = [":insert-output latex_snippet_sec", "collapse_selection"]
 
 [editor.cursor-shape]
 insert = "bar"
