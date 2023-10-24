@@ -105,9 +105,9 @@ abbr --add oscr "z ~/.local/scripts"
 # "open config directory"
 abbr --add oconf "z (find ~/.config -type d | fzf)"
 
-# open helix with fuzzy find in common directories
-abbr --add hxfc "hx (find ~/code -mindepth 1 | fzf)"
-abbr --add hxfx "hx (find ~/.config -mindepth 1 | fzf)"
+# open editor with fuzzy find in common directories
+abbr --add efc "$EDITOR (find ~/code -mindepth 1 | fzf)"
+abbr --add efx "$EDITOR (find ~/.config -mindepth 1 | fzf)"
 
 # command line clipboard
 abbr --add xc "xclip"
