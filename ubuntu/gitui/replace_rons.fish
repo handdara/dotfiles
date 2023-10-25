@@ -1,2 +1,0 @@
-
-cp ./*.ron ~/.config/gitui/

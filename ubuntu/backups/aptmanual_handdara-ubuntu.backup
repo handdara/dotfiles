@@ -9,6 +9,7 @@ apport-gtk
 appstream
 apt
 apt-config-icons-hidpi
+apt-transport-https
 apt-utils
 aptdaemon
 apturl
@@ -32,6 +33,7 @@ cmake
 code
 command-not-found
 console-setup
+containerd.io
 cups
 cups-bsd
 cups-client
@@ -46,6 +48,11 @@ diffutils
 dirmngr
 discord
 dmz-cursor-theme
+docker-buildx-plugin
+docker-ce
+docker-ce-cli
+docker-ce-rootless-extras
+docker-compose-plugin
 duplicity
 e2fsprogs
 efibootmgr

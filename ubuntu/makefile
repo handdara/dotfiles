@@ -4,6 +4,7 @@ MKTREE := mkdir -p
 LN := ln -svf
 LNDIR := ln -sv
 RMTREE := rm -Rf
+SUDO := sudo
 
 allowed_envs_help := wsl2 | native
 allowed_envs := $(filter-out |, $(allowed_envs_help))
@@ -20,16 +21,18 @@ neovim_dir_to = $(PWD)/nvim $(HOME)/.config/nvim
 # === Calcs ===
 compname:=$(shell hostname)
 
-ifneq (,$(strip $(logname)))
-	DUMPLOG := >> $(logname).log
+ifneq (,$(strip $(logfile)))
+	DUMPLOG := >> $(logfile).log
 else
 	DUMPLOG := 
 endif
 
 # === Recipes ===
-.PHONY: all link checkopts backup help 
 
-all: link checkopts backup
+# default behaviour is to just refresh configs
+refresh: link
+
+all: install link checkopts backup 
 
 checkopts:
 ifeq ($(strip $(env)),wsl2)
@@ -37,6 +40,24 @@ else ifeq ($(strip $(env)),native)
 else
 	$(error Must pass env variable, run `make help` for more)
 endif
+
+install: export DEBIAN_FRONTEND:=noninteractive
+install: checkopts ghcup cargo docker fish
+
+curl:
+	$(SUDO) apt-get -y install curl $(DUMPLOG)
+
+ghcup: curl
+	cd ghcup && $(MAKE) 
+
+cargo: curl
+	cd cargo && $(MAKE)
+
+docker: curl
+	cd docker && $(MAKE)
+
+fish:
+	cd fish && $(MAKE)
 
 link: checkopts
 ifeq ($(strip $(env)),wsl2)
@@ -62,4 +83,6 @@ help:
 	@echo 'mandatory options:'
 	@echo '  env=($(allowed_envs_help))'
 	@echo 'optional options:'
-	@echo '  logname=<filebasename> will append output into `<filebasename>.log`'
+	@echo '  logfile=<filebasename> will append output into `<filebasename>.log`'
+
+.PHONY: all install curl ghcup docker link checkopts backup help fish
