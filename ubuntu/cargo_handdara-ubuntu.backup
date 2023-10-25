@@ -1,0 +1,40 @@
+bat v0.23.0:
+    bat
+exa v0.10.1:
+    exa
+fd-find v8.7.1:
+    fd
+fibg v0.3.0 (/home/handdara/code/dothe/fibg):
+    fibg
+gitui v0.24.3:
+    gitui
+helix-term v0.6.0 (/home/handdara/apps/helix/helix-term):
+    hx
+hordle v0.3.0 (/home/handdara/code/dothe/hordle):
+    hordle
+hyperfine v1.17.0:
+    hyperfine
+pastel v0.9.0:
+    pastel
+porsmo v0.2.4:
+    porsmo
+ripgrep v13.0.0:
+    rg
+spotify-tui v0.25.0:
+    spt
+starship v1.16.0:
+    starship
+taplo-cli v0.8.1:
+    taplo
+tcli v0.3.0 (/home/handdara/code/dothe/template_cli):
+    tcli
+texlab v5.10.0 (https://github.com/latex-lsp/texlab?tag=v5.10.0#817457f6):
+    texlab
+tokei v12.1.2:
+    tokei
+watchexec-cli v1.23.0:
+    watchexec
+wiki-tui v0.6.4:
+    wiki-tui
+zellij v0.36.0:
+    zellij
