@@ -32,9 +32,10 @@ Base installs:
 - vscode 
 - texlive
 - zathura/okular
-- docker **without snap!!!! causes gui/X issues**
+- docker 
 - xclip
 - tree
 - miniconda3
 - maybe: json/yaml/toml converter? [yj](https://github.com/sclevine/yj)
 - neovim
+- kmonad
