@@ -55,8 +55,8 @@ endif
 	@echo 'finished linking for env='$(env) $(DUMPLOG)
 
 backup: 
-	apt-mark showmanual > aptmanual_$(compname).backup
-	cargo install --list > cargo_$(compname).backup
+	apt-mark showmanual > backups/aptmanual_$(compname).backup
+	cargo install --list > backups/cargo_$(compname).backup
 
 help:
 	@echo 'mandatory options:'
