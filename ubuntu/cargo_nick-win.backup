@@ -1,0 +1,38 @@
+bat v0.23.0:
+    bat
+cargo-cabal v0.8.5:
+    cargo-cabal
+exa v0.10.1:
+    exa
+fd-find v8.7.1:
+    fd
+fibg v0.3.0 (/home/nick/dothe/fibg):
+    fibg
+gitui v0.22.1:
+    gitui
+helix-term v0.6.0 (/home/nick/apps/helix/helix-term):
+    hx
+hordle v0.3.0 (/home/nick/dothe/hordle):
+    hordle
+porsmo v0.2.0:
+    porsmo
+ripgrep v13.0.0:
+    rg
+spotify-tui v0.25.0:
+    spt
+spotifyd v0.3.5 (/home/nick/apps/spotifyd):
+    spotifyd
+starship v1.16.0:
+    starship
+taplo-cli v0.8.1:
+    taplo
+tcli v0.3.0 (/home/nick/dothe/template_cli):
+    tcli
+texlab v5.10.0 (https://github.com/latex-lsp/texlab?tag=v5.10.0#817457f6):
+    texlab
+tokei v13.0.0-alpha.0 (https://github.com/XAMPPRocky/tokei.git#c8e4d070):
+    tokei
+zellij v0.36.0:
+    zellij
+zoxide v0.9.2:
+    zoxide

@@ -10,10 +10,10 @@ Base installs:
   - texlab
   - porsmo
   - starship
-  - hyperfine [repo](https://github.com/sharkdp/hyperfine)
-  - pastel [repo](https://github.com/sharkdp/pastel)
-  - watchexec [repo](https://github.com/watchexec/watchexec)
   - tokei 
+  - hyperfine? [repo](https://github.com/sharkdp/hyperfine)
+  - pastel? [repo](https://github.com/sharkdp/pastel)
+  - watchexec? [repo](https://github.com/watchexec/watchexec)
   - nu? (another rusty shell, works wherever cargo does)
   - irust? (repl and dbg)
 - helix
@@ -22,6 +22,7 @@ Base installs:
 - gatech vpn
 - discord
 - ghcup/stack/cabal/ghc
+  - pandoc
   - summoner
   - hoogle
   - Hasklig (font)
@@ -36,3 +37,4 @@ Base installs:
 - tree
 - miniconda3
 - maybe: json/yaml/toml converter? [yj](https://github.com/sclevine/yj)
+- neovim
