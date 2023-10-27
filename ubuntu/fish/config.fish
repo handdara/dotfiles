@@ -135,6 +135,8 @@ abbr --add vim "nvim"
 abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
+abbr --add start-kmonad "cd ~/.dotfiles/ubuntu/kmonad/keymap && kmonad handdara.kbd &"
+
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]
     abbr --add cdc "cd /mnt/c/"
