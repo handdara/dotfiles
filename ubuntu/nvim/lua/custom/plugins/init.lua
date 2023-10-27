@@ -27,4 +27,6 @@ return {
 	'lervag/vimtex',
 
 	'xiyaowong/transparent.nvim',
+
+	'kmonad/kmonad-vim',
 }
