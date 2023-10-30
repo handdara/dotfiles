@@ -12,8 +12,13 @@
 
 (defcfg
   ;; For Linux
-  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
-  output (uinput-sink "My KMonad output")
+
+  ;; The first following can be used for handdara-ubuntu's default keyboard
+  ;; The second following can be used to choose if multiple keyboards are available
+  ;; input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  input  (device-file "$KBD_DEV")
+
+  output (uinput-sink "handdara keyboard sink")
 
   ;; Comment this if you want unhandled events not to be emitted
   fallthrough true
@@ -26,11 +31,12 @@
   to0  (layer-toggle l0) ;; Bind num to a button that switches to a layer
   to1  (layer-toggle l1)
   to2  (layer-toggle l2)
-  stl1 (layer-toggle l1)
-  shn (tap-next ret lsft)
+  stl1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1))
+  shn (tap-hold-next-release 150 (around ret (pause 35)) lsft)
   rwk M-pgdn
   lwk M-pgup
 )
+
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
   grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
