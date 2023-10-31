@@ -32,9 +32,17 @@
   to1  (layer-toggle l1)
   to2  (layer-toggle l2)
   stl1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1))
-  shn (tap-hold-next 200 (around ret (pause 35)) lsft)
-  rwk M-pgdn
-  lwk M-pgup
+  shn  (tap-hold-next 200 (around ret (pause 35)) lsft)
+  rwk  M-pgdn
+  lwk  M-pgup
+  mw1  S-M-f1
+  mw2  S-M-f2
+  mw3  S-M-f3
+  mw4  S-M-f4
+  w1   M-f1
+  w2   M-f2
+  w3   M-f3
+  w4   M-f4
 )
 
 (defsrc
@@ -49,7 +57,7 @@
 
 (deflayer l0
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11    f12    home end  ins  del
-  grv  1    2    3    4    5    6    7    8    @lwk @rwk  _  _  XX
+  grv  @w1  @w2  @w3  @w4  5    6    7    8    @lwk @rwk  _  _  XX
   -    q    w    e    r    t    y    u    i    o    p    bspc del  esc
   lctl a    s    d    f    g    h    j    k    l    S-;  '         @shn
   @shn z    x    c    v    b    n    m    ,    .    =              tab
@@ -59,7 +67,7 @@
 
 (deflayer l1
   _  _    _    _    _    _    _    _    _    _    _    _     _    _  _  _  _
-  _  _    _    _    _    _    _    _    _    _    _    _     _    _
+  _  @mw1 @mw2 @mw3 @mw4 _    _    _    _    _    _    _     _    _
   grv  !    @    #    $    [    ]    %    ^    &    *    _     _    _
   0    1    2    3    4    S-[  S-]  5    6    7    8    9          ret
   S-`  ;    \    |    S-9  S-/  S-0  /    ,    .    =               tab

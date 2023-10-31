@@ -18,7 +18,7 @@ if status is-interactive
 end
 
 function start-kmonad
-    cd ~/.dotfiles/ubuntu/kmonad/keymap 
+    cd ~/.dotfiles/debian_based/kmonad/keymap 
     set -Ux KBD_DEV (find /dev/input/by-path/*kbd* | fzf)
     set KBDCFG (envsubst < handdara.kbd)
     # printf "%s\n" $KBDCFG # uncomment to view the file used on startup
