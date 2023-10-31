@@ -119,8 +119,10 @@ lspconf.texlab.setup {
 			auxDirectory = ".",
 			bibtexFormatter = "texlab",
 			build = {
-				args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-				executable = "wsl_latex_wrapper",
+				-- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+				-- executable = "wsl_latex_wrapper",
+				-- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+				-- executable = "latexmk",
 				forwardSearchAfter = true,
 				onSave = true
 			},
@@ -131,8 +133,10 @@ lspconf.texlab.setup {
 			diagnosticsDelay = 300,
 			formatterLineLength = 100,
 			forwardSearch = {
-				executable = "wsl_sumatra_wrapper",
-				args = { "-reuse-instance", "%p", "-forward-search", "%f", "%l" },
+				-- executable = "wsl_sumatra_wrapper",
+				-- args = { "-reuse-instance", "%p", "-forward-search", "%f", "%l" },
+				executable = "okular",
+				args = {"--unique", "file:%p#src:%l%f"},
 			},
 			latexFormatter = "latexindent",
 			latexindent = {

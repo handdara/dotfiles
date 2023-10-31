@@ -32,7 +32,7 @@
   to1  (layer-toggle l1)
   to2  (layer-toggle l2)
   stl1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1))
-  shn (tap-hold-next-release 150 (around ret (pause 35)) lsft)
+  shn (tap-hold-next 200 (around ret (pause 35)) lsft)
   rwk M-pgdn
   lwk M-pgup
 )
@@ -62,9 +62,9 @@
   _  _    _    _    _    _    _    _    _    _    _    _     _    _
   grv  !    @    #    $    [    ]    %    ^    &    *    _     _    _
   0    1    2    3    4    S-[  S-]  5    6    7    8    9          ret
-  S-`  ;    \    |    S-9  S-/  S-0  /    S-,  S-.  =               tab
-  wkup @to2 XX   spc           XX              XX   XX   XX    XX   XX   XX  
-                                                               XX   XX   XX  
+  S-`  ;    \    |    S-9  S-/  S-0  /    ,    .    =               tab
+  wkup @to2 _    spc           XX              _    _    _     _    _    _   
+                                                               _    _    _   
 )
 
 (deflayer l2

@@ -56,7 +56,7 @@ cargo: curl
 docker: curl
 	cd docker && $(MAKE)
 
-fish:
+fish: curl
 	cd fish && $(MAKE)
 
 link: checkopts
