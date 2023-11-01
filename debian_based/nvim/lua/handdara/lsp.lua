@@ -1,4 +1,4 @@
--- [[ Configure LSP ]] *section copied from kickstart's `init.lua`
+-- [ Configure LSP ] *section copied from kickstart's `init.lua`
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -108,7 +108,7 @@ mason_lspconfig.setup_handlers {
 	end,
 }
 
--- Start of handdara added stuff
+-- [[handdara]]
 local lspconf = require 'lspconfig'
 
 lspconf.texlab.setup {

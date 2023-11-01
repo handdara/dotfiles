@@ -3,10 +3,6 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-	{
-		'rose-pine/neovim',
-		name = 'rose-pine',
-	},
 
 	'nvim-treesitter/playground',
 
@@ -25,8 +21,6 @@ return {
 	},
 
 	'lervag/vimtex',
-
-	'xiyaowong/transparent.nvim',
 
 	'kmonad/kmonad-vim',
 }

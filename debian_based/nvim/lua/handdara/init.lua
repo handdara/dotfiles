@@ -1,9 +1,9 @@
-require("handdara.remap")
-require("handdara.color")
+require("handdara.telescope")
+require("handdara.treesitter")
 require("handdara.set")
 require("handdara.snippet")
 require("handdara.lsp")
-require("handdara.transparent")
+require("handdara.remap")
+require("handdara.color")
 
 SetHanddaraColor()
-SetTransparent()
