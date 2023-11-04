@@ -10,7 +10,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Handdara: `:Ex`" })
+vim.keymap.set("n", "<leader>pv", vim.cmd.Vex, { desc = "Handdara: `:Vex`" })
+vim.keymap.set("n", "<leader>pe", vim.cmd.Ex, { desc = "Handdara: `:Ex`" })
+vim.keymap.set("n", "<leader>ph", vim.cmd.Hex, { desc = "Handdara: `:Hex`" })
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Handdara: Open undo tree" })
 
 -- Better feeling exit insert mode
@@ -31,9 +33,9 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "<leader>pp", [["+p]], { desc = '[P]aste system clipboard' })
 
--- Drop delete/paste
-vim.keymap.set({"n", "v"}, "<leader>dd", [["_d]])
-vim.keymap.set({"n", "v"}, "<leader>dc", [["_c]])
+-- -- Drop delete/paste
+-- vim.keymap.set({"n", "v"}, "<leader>dd", [["_d]])
+-- vim.keymap.set({"n", "v"}, "<leader>dc", [["_c]])
 
 -- Keep in center after move
 vim.keymap.set("n", "J", "mzJ`z")

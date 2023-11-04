@@ -7,6 +7,11 @@ require("rose-pine").setup({
 	variant = 'moon',
 	disable_background = true,
 	disable_float_background = true,
+
+	groups = {
+		error = '#ff3333',
+	},
+
 	highlight_groups = {
 		TelescopeBorder = { fg = "highlight_high", bg = "none" },
 		TelescopeNormal = { bg = "none" },
@@ -16,6 +21,8 @@ require("rose-pine").setup({
 		TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
 
 		String = { fg = "love" },
+		Special = { fg = "gold" },
 		['@variable.builtin'] = { fg = "gold" },
+		['@function.builtin'] = { fg = "gold" },
 	},
 })

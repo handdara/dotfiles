@@ -55,23 +55,29 @@ else
 end
 
 # ------------------ ALIASes / ABBRs ------------------
+abbr --erase (abbr --list)
 
-# alias out ls to exa
 abbr --add ls "exa"
 
-# alias out cat to bat
 abbr --add cat "bat"
 
 abbr --add e "exa"
 abbr --add ea "exa -a"
 abbr --add el "exa -l"
 abbr --add ela "exa -la"
+
+# the following are added so they can be used also by neovim/helix/etc
 # tree view
-abbr --add et "exa -Tl --no-time"
+abbr --add et "exa -T --group-directories-first"
+alias et "exa -T --group-directories-first"
+alias e2 "exa -T --group-directories-first -L2"
+alias e3 "exa -T --group-directories-first -L3"
 # tree view of a git repo
 abbr --add eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
+alias eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
 # tree view of directories only
 abbr --add ed "exa -lTD"
+alias ed "exa -lTD"
 
 abbr --add zdi "zellij --session dothe --layout dothe"
 
@@ -81,11 +87,11 @@ abbr --add batcode "bat (find ~/code -type f | fzf)"
 # find directory
 abbr --add fdir --set-cursor=! "find ~! -type d -not -path '*/.*'| fzf" 
 # find directory including `.___` dirs 
-abbr --add fdots --set-cursor=! "find ! -type d | fzf" 
+abbr --add fdira --set-cursor=! "find ! -type d | fzf" 
 # find file
 abbr --add ff --set-cursor=! "find ~! -type f -not -path '*/.*'| fzf" 
 # find file including `.___` dirs 
-abbr --add ff-dots --set-cursor=! "find ! -type f | fzf" 
+abbr --add ffa --set-cursor=! "find ! -type f | fzf" 
 
 # "open project"
 abbr --add op "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)"
@@ -107,11 +113,12 @@ abbr --add oconf "z (find ~/.config -type d | fzf)"
 
 # open editor with fuzzy find in common directories
 abbr --add efc "$EDITOR (find ~/code -mindepth 1 | fzf)"
-abbr --add efx "$EDITOR (find ~/.config -mindepth 1 | fzf)"
 
 # command line clipboard
 abbr --add xc "xclip"
+alias xc "xclip"
 abbr --add xp "xclip -o"
+alias xp "xclip -o"
 
 # dumb fun
 abbr --add confetti "ssh -p 2222 ssh.caarlos0.dev"
@@ -130,6 +137,7 @@ abbr --add pt --set-cursor=! "porsmo timer (math !\*60)"
 # time hours
 abbr --add pt-hr --set-cursor=! "porsmo timer (math !\*3600)"
 
+abbr --add vi "nvim"
 abbr --add vim "nvim"
 
 abbr --add config-refresh "source ~/.config/fish/config.fish"
