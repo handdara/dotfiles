@@ -32,6 +32,7 @@ wk.register(
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "<leader>pp", [["+p]], { desc = '[P]aste system clipboard' })
+vim.keymap.set("v", "<leader>p", [["_dP]])
 
 -- -- Drop delete/paste
 -- vim.keymap.set({"n", "v"}, "<leader>dd", [["_d]])
