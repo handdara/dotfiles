@@ -42,6 +42,16 @@ return {
       },
     },
     {
+      key = 'r',
+      mods = 'ALT|SHIFT',
+      action = act.SwitchToWorkspace {
+        name = 'hpi',
+        spawn = {
+          args = { 'fish', '-c', 'hpiconnect' }
+        },
+      },
+    },
+    {
       key = 'w',
       mods = 'ALT|SHIFT',
       action = act.SwitchToWorkspace {
@@ -83,7 +93,7 @@ return {
       { key = 'c',      action = act.ShowLauncherArgs { flags = 'FUZZY|COMMANDS' } },
       { key = 'd',      action = act.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' } },
       { key = 'f',      action = act.ShowLauncherArgs { flags = 'FUZZY|LAUNCH_MENU_ITEMS' } },
-      { key = 't',      action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
+      -- { key = 't',      action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
       { key = 'w',      action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
       { key = 'Escape', action = 'PopKeyTable' },
     },

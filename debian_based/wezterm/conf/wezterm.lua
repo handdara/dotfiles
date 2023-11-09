@@ -11,15 +11,11 @@ config.color_scheme = 'rose-pine'
 config.font = wezterm.font('HasklugNerdFontMono')
 
 config.enable_wayland = true
--- config.use_fancy_tab_bar = true
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
-config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
   font = wezterm.font('HasklugNerdFontMono'),
   font_size = 10.0,
-  -- active_titlebar_bg = '#333333',
-  -- inactive_titlebar_bg = '#333333',
 }
 
 config.window_background_opacity = 0.75
