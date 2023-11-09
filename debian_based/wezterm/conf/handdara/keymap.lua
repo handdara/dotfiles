@@ -20,7 +20,6 @@ return {
     { key = 'k',   mods = 'ALT',        action = act.ActivatePaneDirection 'Up' },
     { key = 'j',   mods = 'ALT',        action = act.ActivatePaneDirection 'Down' },
     { key = 'p',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
-    { key = 'm',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'move_mode', one_shot = false } },
     { key = 'f',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'launch_mode', one_shot = true } },
     { key = 'v',   mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
     { key = 'c',   mods = 'CTRL|SHIFT', action = act.CopyTo 'Clipboard' },
@@ -95,10 +94,5 @@ return {
       { key = 'j',      action = act.AdjustPaneSize { 'Down', 1 } },
       { key = 'Escape', action = 'PopKeyTable' },
     },
-    move_mode = {
-      { key = 'h',      mods = 'SHIFT',        action = act.MoveTabRelative(-1) },
-      { key = 'l',      mods = 'SHIFT',        action = act.MoveTabRelative(1) },
-      { key = 'Escape', action = 'PopKeyTable' },
-    }
   }
 }
