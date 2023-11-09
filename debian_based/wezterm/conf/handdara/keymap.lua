@@ -12,7 +12,7 @@ return {
     { key = '=',   mods = 'ALT',        action = act.IncreaseFontSize },
     { key = 'P',   mods = 'CTRL',       action = act.ActivateCommandPalette },
     { key = 'W',   mods = 'ALT',        action = act.CloseCurrentTab { confirm = true } },
-    { key = 't',   mods = 'ALT',        action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = 't',   mods = 'ALT|SHIFT',  action = act.SpawnTab 'CurrentPaneDomain' },
     { key = 'w',   mods = 'ALT',        action = act.CloseCurrentPane { confirm = false } },
     { key = 'q',   mods = 'ALT|CTRL',   action = act.QuitApplication },
     { key = 'h',   mods = 'ALT',        action = act.ActivatePaneDirection 'Left' },
@@ -20,23 +20,79 @@ return {
     { key = 'k',   mods = 'ALT',        action = act.ActivatePaneDirection 'Up' },
     { key = 'j',   mods = 'ALT',        action = act.ActivatePaneDirection 'Down' },
     { key = 'p',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
-    { key = 'q',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'quick_mode', one_shot = true } },
     { key = 'm',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'move_mode', one_shot = false } },
+    { key = 'f',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'launch_mode', one_shot = true } },
     { key = 'v',   mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
     { key = 'c',   mods = 'CTRL|SHIFT', action = act.CopyTo 'Clipboard' },
+    { key = 't',   mods = 'ALT',        action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
+    {
+      key = 'x',
+      mods = 'ALT|SHIFT',
+      action = act.SwitchToWorkspace {
+        name = 'miscellaneous',
+      },
+    },
+    {
+      key = 's',
+      mods = 'ALT|SHIFT',
+      action = act.SwitchToWorkspace {
+        name = 'spotify',
+        spawn = {
+          args = { 'fish', '-c', 'spt' }
+        },
+      },
+    },
+    {
+      key = 'w',
+      mods = 'ALT|SHIFT',
+      action = act.SwitchToWorkspace {
+        name = 'work-notes',
+        spawn = {
+          args = { 'fish', '-c', 'mdh qw' }
+        },
+      },
+    },
+    {
+      key = 'c',
+      mods = 'ALT|SHIFT',
+      action = act.SwitchToWorkspace {
+        name = 'code',
+      },
+    },
+    {
+      key = 'd',
+      mods = 'ALT|SHIFT',
+      action = act.SwitchToWorkspace {
+        name = 'default',
+      },
+    },
+    {
+      key = 'p',
+      mods = 'ALT|SHIFT',
+      action = act.SwitchToWorkspace {
+        name = 'personal-notes',
+        spawn = {
+          args = { 'fish', '-c', 'mdh qp' }
+        },
+      },
+    },
   },
 
   key_tables = {
+    launch_mode = {
+      { key = 'a',      action = act.ShowLauncher },
+      { key = 'c',      action = act.ShowLauncherArgs { flags = 'FUZZY|COMMANDS' } },
+      { key = 'd',      action = act.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' } },
+      { key = 'f',      action = act.ShowLauncherArgs { flags = 'FUZZY|LAUNCH_MENU_ITEMS' } },
+      { key = 't',      action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
+      { key = 'w',      action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+      { key = 'Escape', action = 'PopKeyTable' },
+    },
     resize_pane = {
       { key = 'h',      action = act.AdjustPaneSize { 'Left', 1 } },
       { key = 'l',      action = act.AdjustPaneSize { 'Right', 1 } },
       { key = 'k',      action = act.AdjustPaneSize { 'Up', 1 } },
       { key = 'j',      action = act.AdjustPaneSize { 'Down', 1 } },
-      { key = 'Escape', action = 'PopKeyTable' },
-    },
-    quick_mode = {
-      { key = 'w',      action = act.SpawnCommandInNewTab { args = { 'fish', '-c', 'mdh qw' } } },
-      { key = 'p',      action = act.SpawnCommandInNewTab { args = { 'fish', '-c', 'mdh qp' } } },
       { key = 'Escape', action = 'PopKeyTable' },
     },
     move_mode = {
