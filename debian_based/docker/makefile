@@ -14,14 +14,14 @@ all: install clean
 
 install: $(REMOVE_PKGS)
 	curl -fsSL https://get.docker.com -o install-docker.sh $(DUMPLOG)
-	$(SH) install-docker.sh --dry-run $(DUMPLOG)
-	$(SUDO) $(SH) install-docker.sh $(DUMPLOG)
+	$(SH) $(INSTALL_NAME) --dry-run $(DUMPLOG)
+	$(SUDO) $(SH) $(INSTALL_NAME) $(DUMPLOG)
 
 $(REMOVE_PKGS):
 	$(SUDO) apt-get -y remove $@ $(DUMPLOG)
 
 clean:
-	$(RM) install-docker.sh $(DUMPLOG)
+	$(RM) $(INSTALL_NAME) $(DUMPLOG)
 
 .PHONY: $(REMOVE_PKGS) install all
 

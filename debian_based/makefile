@@ -12,12 +12,13 @@ allowed_envs := $(filter-out |, $(allowed_envs_help))
 alacritty_fr_to = $(PWD)/alacritty/alacritty.yml $(HOME)/.config/alacritty/alacritty.yml
 fish_fr_to = $(PWD)/fish/config.fish $(HOME)/.config/fish/config.fish
 fish_funcs_fr_to = $(PWD)/fish/functions/* $(HOME)/.config/fish/functions
-gitui_remap_fr_to = $(PWD)/gitui/key_bindings.ron $(HOME)/.config/key_bindings.ron 
-gitui_theme_fr_to = $(PWD)/gitui/theme.ron $(HOME)/.config/theme.ron 
+gitui_remap_fr_to = $(PWD)/gitui/key_bindings.ron $(HOME)/.config/gitui/key_bindings.ron 
+gitui_theme_fr_to = $(PWD)/gitui/theme.ron $(HOME)/.config/gitui/theme.ron 
 starship_fr_to = $(PWD)/starship/starship.toml $(HOME)/.config/starship.toml
 zellij_conf_fr_to = $(PWD)/zellij/config.kdl $(HOME)/.config/zellij/config.kdl
 zellij_layout_dir_to = $(PWD)/zellij/layouts $(HOME)/.config/zellij/layouts
-neovim_dir_to = $(PWD)/nvim $(HOME)/.config/nvim
+neovim_dir_to = $(PWD)/nvim/conf $(HOME)/.config/nvim
+wezterm_dir_to = $(PWD)/wezterm/conf $(HOME)/.config/wezterm
 
 # === Calcs ===
 compname:=$(shell hostname)
@@ -42,24 +43,50 @@ else
 	$(error Must pass env variable, run `make help` for more)
 endif
 
+ifeq ($(strip $(env)),wsl2_ubuntu)
 install: checkopts install-base
+else ifeq ($(strip $(env)),rpi_os)
+install: checkopts install-base
+else ifeq ($(strip $(env)),native_ubuntu)
+install: checkopts install-base wezterm
+endif
 
 install-base: checkopts ghcup cargo docker fish
 
-curl:
-	$(SUDO) apt-get -y install curl $(DUMPLOG)
-
-ghcup: curl
+ghcup: checkopts
+ifeq (, $(shell which ghcup))
 	cd ghcup && $(MAKE) 
+else 
+	@echo "ghcup executable found, to reinstall try: $ cd ghcup && $(MAKE)"
+endif
 
-cargo: curl
+cargo: checkopts
+ifeq (, $(shell which cargo))
 	cd cargo && $(MAKE)
+else 
+	@echo "cargo executable found, to reinstall try: $ cd cargo && $(MAKE)"
+endif
 
-docker: curl
+docker: checkopts
+ifeq (, $(shell which docker))
 	cd docker && $(MAKE)
+else 
+	@echo "docker executable found, to reinstall try: $ cd docker && $(MAKE)"
+endif
 
-fish: curl
+fish: checkopts
+ifeq (, $(shell which fish))
 	cd fish && $(MAKE)
+else 
+	@echo "fish executable found, to reinstall try: $ cd fish && $(MAKE)"
+endif
+
+wezterm: checkopts
+ifeq (, $(shell which wezterm))
+	cd wezterm && $(MAKE)
+else 
+	@echo "wezterm executable found, to reinstall try: $ cd wezterm && $(MAKE)"
+endif
 
 link: checkopts
 ifeq ($(strip $(env)),wsl2_ubuntu)
@@ -72,16 +99,20 @@ endif
 	$(LN) $(fish_fr_to) $(DUMPLOG)
 	$(MKTREE) $(word 2,$(fish_funcs_fr_to)) $(DUMPLOG)
 	$(LN) $(fish_funcs_fr_to) $(DUMPLOG)
+	$(MKTREE) $(dir $(word 2,$(gitui_remap_fr_to))) $(DUMPLOG)
 	$(LN) $(gitui_remap_fr_to) $(DUMPLOG)
 	$(LN) $(gitui_theme_fr_to) $(DUMPLOG)
+	$(MKTREE) $(dir $(word 2,$(zellij_conf_fr_to))) $(DUMPLOG)
 	$(LN) $(zellij_conf_fr_to) $(DUMPLOG)
 	$(RMTREE) $(word 2,$(zellij_layout_dir_to)) $(DUMPLOG)
 	$(LNDIR) $(zellij_layout_dir_to) $(DUMPLOG)
 	$(RMTREE) $(word 2,$(neovim_dir_to)) $(DUMPLOG)
 	$(LNDIR) $(neovim_dir_to) $(DUMPLOG)
+	$(RMTREE) $(word 2,$(wezterm_dir_to)) $(DUMPLOG)
+	$(LNDIR) $(wezterm_dir_to) $(DUMPLOG)
 	@echo 'finished linking for env='$(env) $(DUMPLOG)
 
-backup: 
+backup:
 	apt-mark showmanual > backups/aptmanual_$(compname).backup
 	cargo install --list > backups/cargo_$(compname).backup
 
@@ -91,4 +122,4 @@ help:
 	@echo 'optional options:'
 	@echo '  logfile=<filebasename> will append output into `<filebasename>.log`'
 
-.PHONY: all install install-base curl ghcup docker link checkopts backup help fish
+.PHONY: all install install-base curl ghcup docker link checkopts backup help fish wezterm
