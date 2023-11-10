@@ -40,16 +40,20 @@ $(SSHDIR):
 $(HANDK): hsk $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
+	chmod 600 $@
 
 $(HANDK).pub: hskpu $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
+	chmod 600 $@
 
 $(GATK): gsk $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
+	chmod 600 $@
 
 $(GATK).pub: gskpu $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
+	chmod 600 $@
 
