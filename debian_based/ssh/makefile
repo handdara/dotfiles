@@ -32,7 +32,7 @@ gskpu: $(GATK).pub
 	gpg -c --cipher-algo AES256 -o $@ $<
 
 $(SSHDIR): 
-	$(MKTREE) $(dir $@)
+	$(MKTREE) $@
 
 $(HANDK): hsk $(SSHDIR)
 	gpg -d $< > $(notdir $@)
