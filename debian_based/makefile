@@ -19,6 +19,7 @@ zellij_conf_fr_to = $(PWD)/zellij/config.kdl $(HOME)/.config/zellij/config.kdl
 zellij_layout_dir_to = $(PWD)/zellij/layouts $(HOME)/.config/zellij/layouts
 neovim_dir_to = $(PWD)/nvim/conf $(HOME)/.config/nvim
 wezterm_dir_to = $(PWD)/wezterm/conf $(HOME)/.config/wezterm
+spotifytui_fr_to = $(PWD)/spotify-tui/config.yml $(HOME)/.config/spotify-tui/config.yml
 
 # === Calcs ===
 compname:=$(shell hostname)
@@ -31,8 +32,8 @@ endif
 
 # === Recipes ===
 
-# default behaviour is to just refresh configs
-refresh: link
+# default behaviour is to just refresh configs and backup
+refresh: link backup
 
 all: install link checkopts backup 
 
@@ -95,7 +96,10 @@ else ifeq ($(strip $(env)),rpi_os)
 else ifeq ($(strip $(env)),native_ubuntu)
 	$(LN) $(alacritty_fr_to) $(DUMPLOG)
 	$(LN) $(starship_fr_to) $(DUMPLOG)
+	$(MKTREE) $(dir $(word 2,$(spotifytui_fr_to))) $(DUMPLOG)
+	$(LN) $(spotifytui_fr_to) $(DUMPLOG)
 endif
+	$(MKTREE) $(dir $(word 2,$(fish_fr_to))) $(DUMPLOG)
 	$(LN) $(fish_fr_to) $(DUMPLOG)
 	$(MKTREE) $(word 2,$(fish_funcs_fr_to)) $(DUMPLOG)
 	$(LN) $(fish_funcs_fr_to) $(DUMPLOG)

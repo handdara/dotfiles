@@ -21,6 +21,7 @@ avahi-daemon
 baobab
 base-passwd
 bc
+bear
 bluez
 bluez-cups
 branding-ubuntu
@@ -223,6 +224,7 @@ libxcb-xfixes0-dev
 libxcb1-dev
 libxkbcommon-dev
 linux-generic-hwe-22.04
+linux-oem-22.04d
 lldb
 lldb-14
 llvm
@@ -231,6 +233,7 @@ llvm-14-tools
 locales
 login
 lsb-release
+mainline
 mawk
 memtest86+
 mokutil
@@ -381,6 +384,7 @@ python3-xdg
 python3-xkit
 python3-yaml
 python3-zipp
+qt5-style-plugins
 remmina
 rfkill
 rhythmbox
@@ -452,6 +456,7 @@ usrmerge
 variety
 vim-tiny
 vprerex
+wezterm
 whiptail
 whoopsie
 wireless-tools
