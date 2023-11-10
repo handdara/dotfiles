@@ -40,7 +40,7 @@ config.unix_domains = {
 -- `wezterm connect unix` by default, connecting to the unix
 -- domain on startup.
 -- If you prefer to connect manually, leave out this line.
-config.default_gui_startup_args = { 'connect', 'handdara-ubuntu' }
+-- config.default_gui_startup_args = { 'connect', 'handdara-ubuntu' }
 
 
 return config
