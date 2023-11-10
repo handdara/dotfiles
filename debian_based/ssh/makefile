@@ -14,6 +14,9 @@ giturl: dec
 	git remote set-url origin git@github.com:handdara/dotfiles.git
 	git config --global user.name "handdara"
 	git config --global user.email "handdara.core@gmail.com"
+	eval "$(ssh-agent -s)"
+	ssh-add $(HANDK)
+	ssh-add $(GATK)
 
 enc: hsk gsk hskpu gskpu
 
