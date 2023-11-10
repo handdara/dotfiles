@@ -6,7 +6,7 @@ LNDIR := ln -sv
 RMTREE := rm -Rf
 SUDO := sudo
 
-allowed_envs_help := wsl2_ubuntu | native_ubuntu | rpi_os
+allowed_envs_help := wsl2_ubuntu | native_ubuntu | rpi_os | native_pop_os
 allowed_envs := $(filter-out |, $(allowed_envs_help))
 
 alacritty_fr_to = $(PWD)/alacritty/alacritty.yml $(HOME)/.config/alacritty/alacritty.yml
@@ -30,6 +30,8 @@ else
 	DUMPLOG := 
 endif
 
+.PHONY: all install install-base curl ghcup docker link checkopts backup help fish wezterm
+
 # === Recipes ===
 
 # default behaviour is to just refresh configs and backup
@@ -40,8 +42,10 @@ all: install link checkopts backup
 checkopts:
 ifeq ($(strip $(env)),wsl2_ubuntu)
 else ifeq ($(strip $(env)),native_ubuntu)
+else ifeq ($(strip $(env)),native_pop_os)
+else ifeq ($(strip $(env)),rpi_os)
 else
-	$(error Must pass env variable, run `make help` for more)
+	$(error Must pass accepted env variable, run `make help` for more)
 endif
 
 ifeq ($(strip $(env)),wsl2_ubuntu)
@@ -49,6 +53,8 @@ install: checkopts install-base
 else ifeq ($(strip $(env)),rpi_os)
 install: checkopts install-base
 else ifeq ($(strip $(env)),native_ubuntu)
+install: checkopts install-base wezterm
+else ifeq ($(strip $(env)),native_pop_os)
 install: checkopts install-base wezterm
 endif
 
@@ -98,6 +104,11 @@ else ifeq ($(strip $(env)),native_ubuntu)
 	$(LN) $(starship_fr_to) $(DUMPLOG)
 	$(MKTREE) $(dir $(word 2,$(spotifytui_fr_to))) $(DUMPLOG)
 	$(LN) $(spotifytui_fr_to) $(DUMPLOG)
+else ifeq ($(strip $(env)),native_pop_os)
+	$(LN) $(alacritty_fr_to) $(DUMPLOG)
+	$(LN) $(starship_fr_to) $(DUMPLOG)
+	$(MKTREE) $(dir $(word 2,$(spotifytui_fr_to))) $(DUMPLOG)
+	$(LN) $(spotifytui_fr_to) $(DUMPLOG)
 endif
 	$(MKTREE) $(dir $(word 2,$(fish_fr_to))) $(DUMPLOG)
 	$(LN) $(fish_fr_to) $(DUMPLOG)
@@ -125,5 +136,3 @@ help:
 	@echo '  env=($(allowed_envs_help))'
 	@echo 'optional options:'
 	@echo '  logfile=<filebasename> will append output into `<filebasename>.log`'
-
-.PHONY: all install install-base curl ghcup docker link checkopts backup help fish wezterm
