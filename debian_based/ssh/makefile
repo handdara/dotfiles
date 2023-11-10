@@ -11,6 +11,8 @@ all: dec giturl
 
 giturl: dec
 	git remote set-url origin git@github.com:handdara/dotfiles.git
+	git config --global user.name "handdara"
+	git config --global user.email "handdara.core@gmail.com"
 
 enc: hsk gsk hskpu gskpu
 
