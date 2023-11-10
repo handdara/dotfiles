@@ -1,4 +1,5 @@
 MV := mv -f
+MKTREE := mkdir -p
 
 SSHDIR := $(HOME)/.ssh
 
@@ -30,19 +31,22 @@ gsk: $(GATK)
 gskpu: $(GATK).pub
 	gpg -c --cipher-algo AES256 -o $@ $<
 
-$(HANDK): hsk
+$(SSHDIR): 
+	$(MKTREE) $(dir $@)
+
+$(HANDK): hsk $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
 
-$(HANDK).pub: hskpu
+$(HANDK).pub: hskpu $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
 
-$(GATK): gsk
+$(GATK): gsk $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
 
-$(GATK).pub: gskpu
+$(GATK).pub: gskpu $(SSHDIR)
 	gpg -d $< > $(notdir $@)
 	$(MV) $(notdir $@) $@
 
