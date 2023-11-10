@@ -5,9 +5,12 @@ SSHDIR := $(HOME)/.ssh
 HANDK := $(SSHDIR)/id_ed25519
 GATK := $(SSHDIR)/id_ed25519_gt
 
-.PHONY: all encrypt
+.PHONY: all enc dec giturl
 
-all: 
+all: dec giturl
+
+giturl: dec
+	git remote set-url origin git@github.com:handdara/dotfiles.git
 
 enc: hsk gsk hskpu gskpu
 
