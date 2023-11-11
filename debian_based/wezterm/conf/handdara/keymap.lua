@@ -57,7 +57,8 @@ return {
       action = act.SwitchToWorkspace {
         name = 'work-notes',
         spawn = {
-          args = { 'fish', '-c', 'mdh qw' }
+          args = { 'fish', '-c', 'mdh qw' },
+          cwd = '~/ansible',
         },
       },
     },
@@ -81,7 +82,8 @@ return {
       action = act.SwitchToWorkspace {
         name = 'personal-notes',
         spawn = {
-          args = { 'fish', '-c', 'mdh qp' }
+          args = { 'fish', '-c', 'mdh qp' },
+          cwd = '~/ansible',
         },
       },
     },

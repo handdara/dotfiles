@@ -32,6 +32,7 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.local/scripts
 fish_add_path /usr/local/go/bin
 fish_add_path ~/go/bin
+fish_add_path ~/.ghcup/bin
 
 # ------------------ Custom Funcs ------------------
 

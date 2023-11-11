@@ -100,11 +100,13 @@ ifeq ($(strip $(env)),wsl2_ubuntu)
 else ifeq ($(strip $(env)),rpi_os)
 	$(LN) $(starship_fr_to) $(DUMPLOG)
 else ifeq ($(strip $(env)),native_ubuntu)
+	$(MKTREE) $(dir $(word 2,$(alacritty_fr_to))) $(DUMPLOG)
 	$(LN) $(alacritty_fr_to) $(DUMPLOG)
 	$(LN) $(starship_fr_to) $(DUMPLOG)
 	$(MKTREE) $(dir $(word 2,$(spotifytui_fr_to))) $(DUMPLOG)
 	$(LN) $(spotifytui_fr_to) $(DUMPLOG)
 else ifeq ($(strip $(env)),native_pop_os)
+	$(MKTREE) $(dir $(word 2,$(alacritty_fr_to))) $(DUMPLOG)
 	$(LN) $(alacritty_fr_to) $(DUMPLOG)
 	$(LN) $(starship_fr_to) $(DUMPLOG)
 	$(MKTREE) $(dir $(word 2,$(spotifytui_fr_to))) $(DUMPLOG)
@@ -129,7 +131,10 @@ endif
 
 backup:
 	apt-mark showmanual > backups/aptmanual_$(compname).backup
+ifeq (, $(shell which cargo))
+else 
 	cargo install --list > backups/cargo_$(compname).backup
+endif
 
 help:
 	@echo 'mandatory options:'
