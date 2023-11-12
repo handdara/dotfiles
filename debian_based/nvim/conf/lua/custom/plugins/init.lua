@@ -23,4 +23,6 @@ return {
 	'lervag/vimtex',
 
 	'kmonad/kmonad-vim',
+
+	{ 'echasnovski/mini.files', version = false },
 }

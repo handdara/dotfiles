@@ -5,5 +5,6 @@ require("handdara.snippet")
 require("handdara.lsp")
 require("handdara.remap")
 require("handdara.color")
+require("handdara.minifiles")
 
 SetHanddaraColor()
