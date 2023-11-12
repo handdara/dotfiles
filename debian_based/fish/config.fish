@@ -129,9 +129,6 @@ abbr --add fireworks "ssh -p 2223 ssh.caarlos0.dev"
 abbr --add hsi --set-cursor=! "hoogle search --info \"!\"" 
 abbr --add hs  --set-cursor=! "hoogle search \"!\"" 
 
-# file searching in a directory, useful for `hx (allhs)` to open all haskell files in a project
-abbr --add allhs --position anywhere --set-cursor=! "find ! -name \*.hs -not -path \*dist\*"
-
 # porsmo abbreviations, quick timers
 # time minutes
 abbr --add pt --set-cursor=! "porsmo timer (math !\*60)"
@@ -144,8 +141,8 @@ abbr --add vim "nvim"
 abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
-abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
-abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"
+# abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
+# abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"
 
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]

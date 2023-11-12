@@ -1,7 +1,8 @@
 function start-kmonad
     cd ~/.dotfiles/debian_based/kmonad/keymap 
     set -Ux KBD_DEV (find /dev/input/by-path/*kbd* | fzf)
-    set KBDCFG (envsubst < handdara.kbd)
+    set KBD_CONF (fd --glob -tf -d 1 -e kbd | fzf) 
+    set KBDCFG (envsubst < $KBD_CONF)
     # printf "%s\n" $KBDCFG # uncomment to view the file used on startup
     kmonad (printf "%s\n" $KBDCFG | psub) &
     # if using hard coded filepath in the .kbd, usethe following and not the above

@@ -11,7 +11,26 @@ else
 	DUMPLOG := 
 endif
 
-all: install clean
+.PHONY: install-nightly install clean uninstall all
+
+all: install-nightly
+	$(RM) *.deb
+
+ifeq ($(strip $(env)),wsl2_ubuntu)
+uninstall:
+	$(error Install not configured for rpi_os environment)
+else ifeq ($(strip $(env)),rpi_os)
+uninstall:
+	$(error Install not configured for rpi_os environment)
+else ifeq ($(strip $(env)),native_ubuntu)
+uninstall:
+	sudo apt remove wezterm
+else ifeq ($(strip $(env)),native_pop_os)
+uninstall:
+	sudo apt remove wezterm
+else 
+	$(error Didn't recognized env variable, was it passed?)
+endif
 
 ifeq ($(strip $(env)),wsl2_ubuntu)
 install:
@@ -29,6 +48,28 @@ install:
 	curl -LO https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
 	$(SUDO) $(DPKG) ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
 	$(SUDO) apt-get install -f
+else 
+	$(error Didn't recognized env variable, was it passed?)
+endif
+
+ifeq ($(strip $(env)),wsl2_ubuntu)
+install-nightly:
+	$(error Should not be trying to install wezterm in wsl2_ubuntu)
+else ifeq ($(strip $(env)),rpi_os)
+install-nightly:
+	$(error Install not configured for rpi_os environment)
+else ifeq ($(strip $(env)),native_ubuntu)
+install-nightly:
+	curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
+	$(SUDO) $(DPKG) ./wezterm-nightly.Ubuntu22.04.deb
+	$(SUDO) apt-get install -f
+else ifeq ($(strip $(env)),native_pop_os)
+install-nightly:
+	curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
+	$(SUDO) $(DPKG) ./wezterm-nightly.Ubuntu22.04.deb
+	$(SUDO) apt-get install -f
+else 
+	$(error Didn't recognized env variable, was it passed?)
 endif
 
 # $(SUDO) apt install -y ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
@@ -38,6 +79,3 @@ endif
 
 clean:
 	$(RM) *.deb
-
-.PHONY: install build all
-

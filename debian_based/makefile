@@ -9,6 +9,7 @@ SUDO := sudo
 allowed_envs_help := wsl2_ubuntu | native_ubuntu | rpi_os | native_pop_os
 allowed_envs := $(filter-out |, $(allowed_envs_help))
 
+dotfiles_dir_to = $(abspath $(PWD)/..) $(HOME)/.dotfiles
 alacritty_fr_to = $(PWD)/alacritty/alacritty.yml $(HOME)/.config/alacritty/alacritty.yml
 fish_fr_to = $(PWD)/fish/config.fish $(HOME)/.config/fish/config.fish
 fish_funcs_fr_to = $(PWD)/fish/functions/* $(HOME)/.config/fish/functions
@@ -127,6 +128,8 @@ endif
 	$(LNDIR) $(neovim_dir_to) $(DUMPLOG)
 	$(RMTREE) $(word 2,$(wezterm_dir_to)) $(DUMPLOG)
 	$(LNDIR) $(wezterm_dir_to) $(DUMPLOG)
+	$(RM) $(word 2,$(dotfiles_dir_to)) $(DUMPLOG)
+	$(LNDIR) $(dotfiles_dir_to) $(DUMPLOG)
 	@echo 'finished linking for env='$(env) $(DUMPLOG)
 
 backup:
