@@ -1,3 +1,5 @@
+alacritty v0.12.3:
+    alacritty
 bat v0.24.0:
     bat
 exa v0.10.1:
@@ -12,6 +14,8 @@ ripgrep v13.0.0:
     rg
 spotify-tui v0.25.0:
     spt
+spotifyd v0.3.5 (/home/handdara/apps/spotifyd):
+    spotifyd
 starship v1.16.0:
     starship
 taplo-cli v0.8.1:

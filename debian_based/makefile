@@ -21,6 +21,7 @@ zellij_layout_dir_to = $(PWD)/zellij/layouts $(HOME)/.config/zellij/layouts
 neovim_dir_to = $(PWD)/nvim/conf $(HOME)/.config/nvim
 wezterm_dir_to = $(PWD)/wezterm/conf $(HOME)/.config/wezterm
 spotifytui_fr_to = $(PWD)/spotify-tui/config.yml $(HOME)/.config/spotify-tui/config.yml
+spotifyd_fr_to = $(PWD)/spotifyd/spotifyd.conf $(HOME)/.config/spotifyd/spotifyd.conf
 
 # === Calcs ===
 compname:=$(shell hostname)
@@ -96,40 +97,40 @@ else
 	@echo "wezterm executable found, to reinstall try: $ cd wezterm && $(MAKE)"
 endif
 
+define linkfile = 
+	$(MKTREE) $(dir $(word 2,$(1))) $(DUMPLOG)
+	$(LN) $(1) $(DUMPLOG)
+endef
+
+define linkdir = 
+	$(RMTREE) $(word 2,$(1)) $(DUMPLOG)
+	$(LNDIR) $(1) $(DUMPLOG)
+endef
+
 link: checkopts
 ifeq ($(strip $(env)),wsl2_ubuntu)
 else ifeq ($(strip $(env)),rpi_os)
-	$(LN) $(starship_fr_to) $(DUMPLOG)
+	$(call linkfile,$(starship_fr_to))
 else ifeq ($(strip $(env)),native_ubuntu)
-	$(MKTREE) $(dir $(word 2,$(alacritty_fr_to))) $(DUMPLOG)
-	$(LN) $(alacritty_fr_to) $(DUMPLOG)
-	$(LN) $(starship_fr_to) $(DUMPLOG)
-	$(MKTREE) $(dir $(word 2,$(spotifytui_fr_to))) $(DUMPLOG)
-	$(LN) $(spotifytui_fr_to) $(DUMPLOG)
+	$(call linkfile,$(alacritty_fr_to))
+	$(call linkfile,$(starship_fr_to))
+	$(call linkdir,$(spotifytui_fr_to))
+	$(call linkdir,$(spotifyd_fr_to))
 else ifeq ($(strip $(env)),native_pop_os)
-	$(MKTREE) $(dir $(word 2,$(alacritty_fr_to))) $(DUMPLOG)
-	$(LN) $(alacritty_fr_to) $(DUMPLOG)
-	$(LN) $(starship_fr_to) $(DUMPLOG)
-	$(MKTREE) $(dir $(word 2,$(spotifytui_fr_to))) $(DUMPLOG)
-	$(LN) $(spotifytui_fr_to) $(DUMPLOG)
+	$(call linkfile,$(alacritty_fr_to))
+	$(call linkfile,$(starship_fr_to))
+	$(call linkfile,$(spotifytui_fr_to))
+	$(call linkfile,$(spotifyd_fr_to))
 endif
-	$(MKTREE) $(dir $(word 2,$(fish_fr_to))) $(DUMPLOG)
-	$(LN) $(fish_fr_to) $(DUMPLOG)
-	$(MKTREE) $(word 2,$(fish_funcs_fr_to)) $(DUMPLOG)
-	$(LN) $(fish_funcs_fr_to) $(DUMPLOG)
-	$(MKTREE) $(dir $(word 2,$(gitui_remap_fr_to))) $(DUMPLOG)
-	$(LN) $(gitui_remap_fr_to) $(DUMPLOG)
-	$(LN) $(gitui_theme_fr_to) $(DUMPLOG)
-	$(MKTREE) $(dir $(word 2,$(zellij_conf_fr_to))) $(DUMPLOG)
-	$(LN) $(zellij_conf_fr_to) $(DUMPLOG)
-	$(RMTREE) $(word 2,$(zellij_layout_dir_to)) $(DUMPLOG)
-	$(LNDIR) $(zellij_layout_dir_to) $(DUMPLOG)
-	$(RMTREE) $(word 2,$(neovim_dir_to)) $(DUMPLOG)
-	$(LNDIR) $(neovim_dir_to) $(DUMPLOG)
-	$(RMTREE) $(word 2,$(wezterm_dir_to)) $(DUMPLOG)
-	$(LNDIR) $(wezterm_dir_to) $(DUMPLOG)
-	$(RM) $(word 2,$(dotfiles_dir_to)) $(DUMPLOG)
-	$(LNDIR) $(dotfiles_dir_to) $(DUMPLOG)
+	$(call linkfile,$(fish_fr_to))
+	$(call linkfile,$(fish_funcs_fr_to))
+	$(call linkfile,$(gitui_remap_fr_to))
+	$(call linkfile,$(gitui_theme_fr_to))
+	$(call linkfile,$(zellij_conf_fr_to))
+	$(call linkdir,$(zellij_layout_dir_to))
+	$(call linkdir,$(neovim_dir_to))
+	$(call linkdir,$(wezterm_dir_to))
+	$(call linkdir,$(dotfiles_dir_to))
 	@echo 'finished linking for env='$(env) $(DUMPLOG)
 
 backup:
