@@ -15,6 +15,7 @@ local on_attach = function(_, bufnr)
 		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
 	end
 
+
 	nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 	nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -52,6 +53,7 @@ require('which-key').register {
 	['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
 	['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
 	['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+	['<leader>m'] = { name = '[M]arkdown', _ = 'which_key_ignore' },
 }
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -69,11 +71,8 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
 	-- clangd = {},
-	-- gopls = {},
 	-- pyright = {},
 	-- rust_analyzer = {},
-	-- tsserver = {},
-	-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
 	lua_ls = {
 		Lua = {
@@ -124,7 +123,7 @@ lspconf.texlab.setup {
 				-- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
 				-- executable = "latexmk",
 				forwardSearchAfter = true,
-				onSave = true
+				onSave = true,
 			},
 			chktex = {
 				onEdit = false,
@@ -135,8 +134,8 @@ lspconf.texlab.setup {
 			forwardSearch = {
 				-- executable = "wsl_sumatra_wrapper",
 				-- args = { "-reuse-instance", "%p", "-forward-search", "%f", "%l" },
-				executable = "okular",
-				args = {"--unique", "file:%p#src:%l%f"},
+				executable = "flatpak",
+				args = { "run", "org.kde.okular", "--unique", "file:%p#src:%l%f" },
 			},
 			latexFormatter = "latexindent",
 			latexindent = {
@@ -148,7 +147,12 @@ lspconf.texlab.setup {
 
 lspconf.marksman.setup {
 	capabilities = capabilities,
-	on_attach = on_attach,
+	-- on_attach = on_attach,
+	on_attach = function(_, bufnr)
+		on_attach(_, bufnr)
+		vim.keymap.set('n', '<leader>mt', '<CMD>r!today<CR>i#<Space><Esc>_',
+			{ buffer = bufnr, desc = '[Markdown] insert [t]oday\'s date as heading' })
+	end
 }
 
 lspconf.hls.setup {

@@ -20,6 +20,9 @@ end
 # default editor
 set -gx EDITOR nvim
 
+# necessary to make okular dark
+set -Ux QT_QPA_PLATFORMTHEME gtk2 
+
 # miniconda3
 # disable conda autoactivate for now
 set -gx CONDA_AUTO_ACTIVATE_BASE false

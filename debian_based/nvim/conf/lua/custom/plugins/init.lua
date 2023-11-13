@@ -25,4 +25,13 @@ return {
 	'kmonad/kmonad-vim',
 
 	{ 'echasnovski/mini.files', version = false },
+
+	-- 'jakewvincent/mkdnflow.nvim',
+
+	{
+		'NFrid/due.nvim',
+		config = function ()
+			require("due_nvim").setup({})
+		end
+	},
 }
