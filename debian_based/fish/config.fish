@@ -147,6 +147,7 @@ abbr --add conf-r "source ~/.config/fish/config.fish"
 abbr --add okular "flatpak run org.kde.okular"
 # abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
 # abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"
+abbr --add matlab-cli "matlab -nodesktop -nosplash"
 
 abbr --add --set-cursor=! cht "curl cht.sh/!"
 

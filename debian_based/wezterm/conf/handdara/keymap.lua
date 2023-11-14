@@ -95,7 +95,7 @@ return {
       { key = 'c',      action = act.ShowLauncherArgs { flags = 'FUZZY|COMMANDS' } },
       { key = 'd',      action = act.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' } },
       { key = 'f',      action = act.ShowLauncherArgs { flags = 'FUZZY|LAUNCH_MENU_ITEMS' } },
-      -- { key = 't',      action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
+      { key = 't',      action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
       { key = 'w',      action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
       { key = 'Escape', action = 'PopKeyTable' },
     },
