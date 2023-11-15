@@ -9,19 +9,19 @@ SUDO := sudo
 allowed_envs_help := wsl2_ubuntu | native_ubuntu | rpi_os | native_pop_os
 allowed_envs := $(filter-out |, $(allowed_envs_help))
 
-dotfiles_dir_to = $(abspath $(PWD)/..) $(HOME)/.dotfiles
-alacritty_fr_to = $(PWD)/alacritty/alacritty.yml $(HOME)/.config/alacritty/alacritty.yml
-fish_fr_to = $(PWD)/fish/config.fish $(HOME)/.config/fish/config.fish
-fish_funcs_fr_to = $(PWD)/fish/functions/* $(HOME)/.config/fish/functions
-gitui_remap_fr_to = $(PWD)/gitui/key_bindings.ron $(HOME)/.config/gitui/key_bindings.ron 
-gitui_theme_fr_to = $(PWD)/gitui/theme.ron $(HOME)/.config/gitui/theme.ron 
-starship_fr_to = $(PWD)/starship/starship.toml $(HOME)/.config/starship.toml
-zellij_conf_fr_to = $(PWD)/zellij/config.kdl $(HOME)/.config/zellij/config.kdl
-zellij_layout_dir_to = $(PWD)/zellij/layouts $(HOME)/.config/zellij/layouts
-neovim_dir_to = $(PWD)/nvim/conf $(HOME)/.config/nvim
-wezterm_dir_to = $(PWD)/wezterm/conf $(HOME)/.config/wezterm
-spotifytui_fr_to = $(PWD)/spotify-tui/config.yml $(HOME)/.config/spotify-tui/config.yml
-spotifyd_fr_to = $(PWD)/spotifyd/spotifyd.conf $(HOME)/.config/spotifyd/spotifyd.conf
+dotfiles_dir_to := $(abspath $(PWD)/..) $(HOME)/.dotfiles
+alacritty_fr_to := $(PWD)/alacritty/alacritty.yml $(HOME)/.config/alacritty/alacritty.yml
+fish_fr_to := $(PWD)/fish/config.fish $(HOME)/.config/fish/config.fish
+fish_funcs_fr_to := $(PWD)/fish/functions/* $(HOME)/.config/fish/functions
+gitui_remap_fr_to := $(PWD)/gitui/key_bindings.ron $(HOME)/.config/gitui/key_bindings.ron 
+gitui_theme_fr_to := $(PWD)/gitui/theme.ron $(HOME)/.config/gitui/theme.ron 
+starship_fr_to := $(PWD)/starship/starship.toml $(HOME)/.config/starship.toml
+zellij_conf_fr_to := $(PWD)/zellij/config.kdl $(HOME)/.config/zellij/config.kdl
+zellij_layout_dir_to := $(PWD)/zellij/layouts $(HOME)/.config/zellij/layouts
+neovim_dir_to := $(PWD)/nvim/conf $(HOME)/.config/nvim
+wezterm_dir_to := $(PWD)/wezterm/conf $(HOME)/.config/wezterm
+spotifytui_fr_to := $(PWD)/spotify-tui/config.yml $(HOME)/.config/spotify-tui/config.yml
+spotifyd_fr_to := $(PWD)/spotifyd/spotifyd.conf $(HOME)/.config/spotifyd/spotifyd.conf
 
 # === Calcs ===
 compname:=$(shell hostname)
@@ -111,6 +111,7 @@ link: checkopts
 ifeq ($(strip $(env)),wsl2_ubuntu)
 else ifeq ($(strip $(env)),rpi_os)
 	$(call linkfile,$(starship_fr_to))
+	$(call linkfile,$(spotifyd_fr_to))
 else ifeq ($(strip $(env)),native_ubuntu)
 	$(call linkfile,$(alacritty_fr_to))
 	$(call linkfile,$(starship_fr_to))
@@ -123,7 +124,7 @@ else ifeq ($(strip $(env)),native_pop_os)
 	$(call linkfile,$(spotifyd_fr_to))
 endif
 	$(call linkfile,$(fish_fr_to))
-	$(call linkfile,$(fish_funcs_fr_to))
+	$(LN) $(fish_funcs_fr_to) $(DUMPLOG)
 	$(call linkfile,$(gitui_remap_fr_to))
 	$(call linkfile,$(gitui_theme_fr_to))
 	$(call linkfile,$(zellij_conf_fr_to))
