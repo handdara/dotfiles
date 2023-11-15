@@ -83,7 +83,7 @@ else
 	@echo "docker executable found, to reinstall try: $ cd docker && $(MAKE)"
 endif
 
-fish: checkopts
+fish: checkopts cargo
 ifeq (, $(shell which fish))
 	cd fish && $(MAKE)
 else 
