@@ -10,6 +10,8 @@ else
 	DUMPLOG := 
 endif
 
+default: install
+
 $(FISH_SRC_DIR)/fish-shell:
 	cd $(FISH_SRC_DIR) && git clone https://github.com/fish-shell/fish-shell.git
 
