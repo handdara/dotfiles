@@ -14,8 +14,8 @@ install: export DEBIAN_FRONTEND:=noninteractive
 install:
 ifeq ($(strip $(env)),rpi_os) # will have to compile from src
 	$(MKTREE) $(FISH_SRC_DIR) 
-	$(SUDO) $(APT) install cmake
-	$(SUDO) apt-get install clang-format clang-tidy clang-tools clang libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld lldb llvm-dev llvm-runtime llvm 
+	$(SUDO) $(APT) install -y cmake
+	$(SUDO) apt-get install -y clang-format clang-tidy clang-tools clang libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld lldb llvm-dev llvm-runtime llvm 
 	cd $(FISH_SRC_DIR) && git clone https://github.com/fish-shell/fish-shell.git
 	cd $(FISH_SRC_DIR)/fish-shell && cmake . && $(MAKE) && $(SUDO) make install
 else
