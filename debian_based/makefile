@@ -124,7 +124,7 @@ else ifeq ($(strip $(env)),native_pop_os)
 	$(call linkfile,$(spotifyd_fr_to))
 endif
 	$(call linkfile,$(fish_fr_to))
-	$(MKTREE) $(dir $(word 2,$(fish_funcs_fr_to))) $(DUMPLOG)
+	$(MKTREE) $(word 2,$(fish_funcs_fr_to)) $(DUMPLOG)
 	$(LN) $(fish_funcs_fr_to) $(DUMPLOG)
 	$(call linkfile,$(gitui_remap_fr_to))
 	$(call linkfile,$(gitui_theme_fr_to))
