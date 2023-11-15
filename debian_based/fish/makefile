@@ -23,6 +23,6 @@ else
 	sudo apt-get -y update $(DUMPLOG)
 	sudo apt-get -y install fish $(DUMPLOG)
 	fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-end
+endif
 
 .PHONY: install
