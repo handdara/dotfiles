@@ -3,6 +3,7 @@ SH := sh
 RM := rm -f
 REMOVE_PKGS :=
 DPKG := dpkg -i
+CURL := curl -LO
 # BUILD_SH := build.sh
 
 ifneq (,$(strip $(logfile)))
@@ -40,12 +41,12 @@ install:
 	$(error Install not configured for rpi_os environment)
 else ifeq ($(strip $(env)),native_ubuntu)
 install:
-	curl -LO https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
+	$(CURL) https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
 	$(SUDO) $(DPKG) ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
 	$(SUDO) apt-get install -f
 else ifeq ($(strip $(env)),native_pop_os)
 install:
-	curl -LO https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
+	$(CURL) https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
 	$(SUDO) $(DPKG) ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
 	$(SUDO) apt-get install -f
 else 
@@ -60,12 +61,12 @@ install-nightly:
 	$(error Install not configured for rpi_os environment)
 else ifeq ($(strip $(env)),native_ubuntu)
 install-nightly:
-	curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
+	$(CURL) https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
 	$(SUDO) $(DPKG) ./wezterm-nightly.Ubuntu22.04.deb
 	$(SUDO) apt-get install -f
 else ifeq ($(strip $(env)),native_pop_os)
 install-nightly:
-	curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
+	$(CURL) https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
 	$(SUDO) $(DPKG) ./wezterm-nightly.Ubuntu22.04.deb
 	$(SUDO) apt-get install -f
 else 
