@@ -62,18 +62,18 @@ endif
 
 install-base: checkopts ghcup cargo docker fish
 
-ghcup: checkopts
-ifeq (, $(shell which ghcup))
-	cd ghcup && $(MAKE) 
-else 
-	@echo "ghcup executable found, to reinstall try: $ cd ghcup && $(MAKE)"
-endif
-
 cargo: checkopts
 ifeq (, $(shell which cargo))
 	cd cargo && $(MAKE)
 else 
 	@echo "cargo executable found, to reinstall try: $ cd cargo && $(MAKE)"
+endif
+
+conda: checkopts
+ifeq (, $(shell which conda))
+	cd miniconda3 && $(MAKE)
+else 
+	@echo "conda executable found, to reinstall try: $ cd miniconda3 && $(MAKE)"
 endif
 
 docker: checkopts
@@ -88,6 +88,13 @@ ifeq (, $(shell which fish))
 	cd fish && $(MAKE)
 else 
 	@echo "fish executable found, to reinstall try: $ cd fish && $(MAKE)"
+endif
+
+ghcup: checkopts
+ifeq (, $(shell which ghcup))
+	cd ghcup && $(MAKE) 
+else 
+	@echo "ghcup executable found, to reinstall try: $ cd ghcup && $(MAKE)"
 endif
 
 wezterm: checkopts

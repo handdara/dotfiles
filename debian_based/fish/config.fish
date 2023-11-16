@@ -28,6 +28,9 @@ set -Ux QT_QPA_PLATFORMTHEME gtk2
 set -gx CONDA_AUTO_ACTIVATE_BASE false
 # end miniconda3
 
+# matlab needs gtk2
+set -gx GTK_PATH /usr/lib/x86_64-linux-gnu/gtk-2.0
+
 fish_add_path ~/.cargo/bin
 fish_add_path ~/matlab/r2022b/bin
 fish_add_path /usr/local/texlive/2023/bin/x86_64-linux/
@@ -145,6 +148,7 @@ abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
 abbr --add okular "flatpak run org.kde.okular"
+
 abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
 abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"
 # abbr --add matlab-cli "matlab -nodesktop -nosplash"
@@ -186,3 +190,7 @@ end
 # miniconda3
 
 starship init fish | source
+
+# nvm.fish default node version
+set -gx nvm_default_version 18
+nvm use 18 > /dev/null

@@ -2,14 +2,18 @@
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
+  ---@diagnostic disable-next-line: missing-fields
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'haskell', 'matlab', 'fish', 'latex', 'make', 'markdown'},
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'haskell', 'matlab', 'fish', 'latex', 'make', 'markdown', 'markdown_inline' },
 
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = true,
+    -- Autoinstall languages that are not installed. Defaults to false
+    auto_install = false,
 
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = true,
+    },
     indent = { enable = true },
     incremental_selection = {
       enable = true,
@@ -63,7 +67,7 @@ vim.defer_fn(function()
           ['<leader>A'] = '@parameter.inner',
         },
       },
+
     },
   }
 end, 0)
-

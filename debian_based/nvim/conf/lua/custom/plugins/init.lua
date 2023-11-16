@@ -31,7 +31,10 @@ return {
 	{
 		'NFrid/due.nvim',
 		config = function ()
-			require("due_nvim").setup({})
+			require("due_nvim").setup({
+				default_due_time = "noon",
+				date_hi = "String",
+			})
 		end
 	},
 }
