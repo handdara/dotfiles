@@ -1,2 +1,3 @@
 *.log
 debian_based/spotifyd/spotifyd.conf
+debian_based/gitrec/*.txt
