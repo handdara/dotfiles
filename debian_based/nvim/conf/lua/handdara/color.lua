@@ -1,28 +1,28 @@
 function SetHanddaraColor(color)
-	color = color or "rose-pine"
+	color = color or "modus"
 	vim.cmd.colorscheme(color)
 end
 
-require("rose-pine").setup({
-	variant = 'moon',
-	disable_background = true,
-	disable_float_background = true,
+vim.cmd.colorscheme("modus")
 
-	groups = {
-		error = '#ff3333',
-	},
+require("ibl").setup({
+	scope = {enabled = false},
+})
 
-	highlight_groups = {
-		TelescopeBorder = { fg = "highlight_high", bg = "none" },
-		TelescopeNormal = { bg = "none" },
-		TelescopePromptNormal = { bg = "base" },
-		TelescopeResultsNormal = { fg = "subtle", bg = "none" },
-		TelescopeSelection = { fg = "text", bg = "base" },
-		TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
-
-		String = { fg = "love" },
-		Special = { fg = "gold" },
-		['@variable.builtin'] = { fg = "gold" },
-		['@function.builtin'] = { fg = "gold" },
-	},
+require("transparent").setup({ -- Optional, you don't have to run setup.
+  groups = { -- table: default groups
+    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+    'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
+    'EndOfBuffer',
+  },
+  extra_groups = {
+    "NormalFloat",
+    "FloatBorder",
+    "FloatTitle",
+    "TelescopeBorder",
+    "TelescopeNormal",
+  },
+  exclude_groups = {}, -- table: groups you don't want to clear
 })

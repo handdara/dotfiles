@@ -14,7 +14,7 @@ vim.defer_fn(function()
       enable = true,
       additional_vim_regex_highlighting = true,
     },
-    indent = { enable = true },
+    indent = { enable = false },
     incremental_selection = {
       enable = true,
       keymaps = {

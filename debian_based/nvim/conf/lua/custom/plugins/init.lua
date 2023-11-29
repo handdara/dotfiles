@@ -26,8 +26,6 @@ return {
 
 	{ 'echasnovski/mini.files', version = false },
 
-	-- 'jakewvincent/mkdnflow.nvim',
-
 	{
 		'NFrid/due.nvim',
 		config = function ()
@@ -37,4 +35,6 @@ return {
 			})
 		end
 	},
+
+	'xiyaowong/transparent.nvim',
 }

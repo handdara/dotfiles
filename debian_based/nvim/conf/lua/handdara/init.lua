@@ -8,4 +8,3 @@ require("handdara.color")
 require("handdara.minifiles")
 -- require("handdara.mkdnflow")
 
-SetHanddaraColor()
