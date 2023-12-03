@@ -4,7 +4,7 @@ require("handdara.set")
 require("handdara.snippet")
 require("handdara.lsp")
 require("handdara.remap")
-require("handdara.color")
+require("handdara.looks")
 require("handdara.minifiles")
 -- require("handdara.mkdnflow")
 

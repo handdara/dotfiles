@@ -116,7 +116,39 @@ require('lazy').setup({
   },
 
   -- { 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
-  { "miikanissi/modus-themes.nvim", priority = 1000 },
+  -- { "miikanissi/modus-themes.nvim", priority = 1000 },
+  -- {
+  --   "hachy/eva01.vim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme "eva01"
+  --     -- or
+  --     -- vim.cmd.colorscheme "eva01-LCL"
+  --   end,
+  -- },
+  {
+    "mrjones2014/lighthaus.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('lighthaus').setup({
+      -- set true to use dark bg by default
+      bg_dark = true,
+      -- see colors.lua to see colors table, set overrides here to be merged with defaults
+      colors = {},
+      -- set to 'underline' to replace undercurl with underline
+      -- or empty string '' to disable
+      lsp_underline_style = 'undercurl',
+      -- make background transparent, this overrides `bg_dark`
+      transparent = true,
+      -- use an italic font for comments
+      italic_comments = true,
+      -- use an italic font for keywords/conditionals
+      italic_keywords = false,
+    })
+    end,
+  },
 
   {
     -- Set lualine as statusline
