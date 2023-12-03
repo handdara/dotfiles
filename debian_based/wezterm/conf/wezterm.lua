@@ -1,12 +1,13 @@
-local wezterm = require 'wezterm'
+local wezterm  = require 'wezterm'
+local handdara = require 'handdara'
+
 local config = {}
-local hkeys = require 'handdara.keymap'
 
 if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.color_scheme = 'rose-pine'
+config.colors = handdara.colors
 
 config.font = wezterm.font('HasklugNerdFontMono')
 
@@ -27,8 +28,8 @@ config.inactive_pane_hsb = {
 config.default_prog = { 'fish' }
 
 config.disable_default_key_bindings = true
-config.keys = hkeys.keys
-config.key_tables = hkeys.key_tables
+config.keys = handdara.keys
+config.key_tables = handdara.key_tables
 
 config.unix_domains = {
   {
