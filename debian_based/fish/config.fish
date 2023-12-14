@@ -86,8 +86,6 @@ alias eg "exa -Tl --git --git-ignore --no-time --no-permissions --extended"
 abbr --add ed "exa -lTD"
 alias ed "exa -lTD"
 
-abbr --add zdi "zellij --session dothe --layout dothe"
-
 abbr --add batconf "bat (find ~/.config -type f | fzf)"
 abbr --add batcode "bat (find ~/code -type f | fzf)"
 
@@ -147,7 +145,8 @@ abbr --add vim "nvim"
 abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
-abbr --add okular "flatpak run org.kde.okular"
+abbr --add ok "flatpak run org.kde.okular"
+abbr --add okf "flatpak run org.kde.okular (fzf) &"
 
 abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
 abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"

@@ -1,28 +1,30 @@
 format = """
 [░▒▓](cyan)\
 [  ](bg:cyan fg:black)\
-[](bg:green fg:cyan)\
+[](bg:green fg:cyan)\
 $directory\
-[](fg:green bg:blue)\
+[](fg:green bg:blue)\
 $git_branch\
 $git_status\
-[](fg:blue bg:black)\
+[](fg:blue bg:black)\
 $rust\
 $c\
 $golang\
 $haskell\
 $conda\
 ${custom.latex}\
-[](fg:black bg:#1d2230)\
+[](fg:black bg:#1d2230)\
 $time\
-[ ](fg:#1d2230)\
+[](fg:#1d2230)\
 $cmd_duration\
-\n$character"""
+\n\
+$character\
+[](black) """
 
 [directory]
 style = "fg:black bg:green"
-format = "[ $path ]($style)"
-truncation_length = 3
+format = "[ $path]($style)"
+truncation_length = 2
 truncation_symbol = "…/"
 
 [directory.substitutions]
@@ -30,9 +32,17 @@ truncation_symbol = "…/"
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
+"Dropbox" = "󰇣 "
+"code" = "󰘧 "
+
+[character]
+success_symbol = '[ 󰘧 ](fg:blue bg:black) '
+error_symbol = '[ 󰲉 ](bold fg:red bg:black) '
+# error_symbol = '[ 󰚑 ](bold fg:red bg:black) '
+format = '[$symbol](bg:black)'
 
 [git_branch]
-symbol = ""
+symbol = "󰙁 "
 style = "bg:blue"
 format = '[[ $symbol $branch ](fg:black bg:blue)]($style)'
 
@@ -41,28 +51,28 @@ style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:black bg:blue)]($style)'
 
 [rust]
-symbol = ""
+symbol = " "
 style = "bg:black"
 format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
 
 [c]
-symbol = ""
+symbol = " "
 style = "bg:black"
 format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
 
 [haskell]
-symbol = ""
+symbol = " "
 style = "bg:black"
 format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
 
 [custom.latex]
-symbol = "LaTeX 󰎞 "
+symbol = " "
 detect_extensions = ["tex", "bibtex", "bib"]
 style = "bg:black"
 format = '[[ $symbol ](fg:blue bg:black)]($style)'
 
 [golang]
-symbol = ""
+symbol = " "
 style = "bg:black"
 format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
 
@@ -75,7 +85,7 @@ ignore_base = false
 disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
-format = '[[  $time ](fg:green bg:#1d2230)]($style)'
+format = '[[   $time ](fg:green bg:#1d2230)]($style)'
 
 [cmd_duration]
 show_milliseconds = false

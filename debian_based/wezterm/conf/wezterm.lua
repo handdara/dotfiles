@@ -9,14 +9,29 @@ end
 
 config.colors = handdara.colors
 
-config.font = wezterm.font('HasklugNerdFontMono')
+config.font = wezterm.font_with_fallback({
+  -- { family = "JetBrains Mono", weight = "Regular" },
+  { family = "Hasklig", weight = "Regular" },
+  -- { family = "Hasklug Nerd Font", weight = "Regular" },
+  -- { family = "FixedsysTTF", weight = "Regular" },
+  -- { family = "FiraCode Nerd Font", weight = "Regular" },
+  -- { family = "Ubuntu Mono", weight = "Regular" },
+  { family = "Symbols Nerd Font Mono", scale = 1},
+})
+config.font_size = 14.0
 
 config.enable_wayland = true
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
 config.window_frame = {
-  font = wezterm.font('HasklugNerdFontMono'),
+  font = wezterm.font('Hasklig'),
   font_size = 10.0,
+}
+config.window_padding = {
+  left = 4,
+  right = 4,
+  top = 0,
+  bottom = 0,
 }
 
 config.window_background_opacity = 0.75
@@ -33,7 +48,7 @@ config.key_tables = handdara.key_tables
 
 config.unix_domains = {
   {
-    name = 'handdara-ubuntu',
+    name = 'handdara-hpop',
   },
 }
 
@@ -41,7 +56,6 @@ config.unix_domains = {
 -- `wezterm connect unix` by default, connecting to the unix
 -- domain on startup.
 -- If you prefer to connect manually, leave out this line.
--- config.default_gui_startup_args = { 'connect', 'handdara-ubuntu' }
-
+-- config.default_gui_startup_args = { 'connect', 'handdara-hpop' }
 
 return config
