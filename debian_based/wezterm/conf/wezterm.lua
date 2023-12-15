@@ -48,6 +48,14 @@ config.key_tables = handdara.key_tables
 -- domains
 config.unix_domains = handdara.unix_domains
 
-config.default_gui_startup_args = { 'connect', handdara.startup_domain }
+-- startup
+config.default_gui_startup_args = {
+  'connect',
+  handdara.startup_domain,
+  'fish',
+  '-i',
+  '-C',
+  'neofetch',
+}
 
 return config
