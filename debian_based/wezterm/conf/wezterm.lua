@@ -1,26 +1,32 @@
 local wezterm  = require 'wezterm'
 local handdara = require 'handdara'
 
-local config = {}
+local config   = {}
 
+-- recommended by docs
 if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- set theme & opacity
 config.colors = handdara.colors
+config.window_background_opacity = 0.75
+config.inactive_pane_hsb = {
+  saturation = 0.9,
+  brightness = 0.75,
+}
 
-config.font = wezterm.font_with_fallback({
-  { family = "Hasklig", weight = "Regular" },
-  { family = "Symbols Nerd Font Mono", scale = 1},
-})
+-- set general font
+config.font = handdara.font
 config.font_size = 14.0
 
-config.enable_wayland = true
+-- making the window layout simple, 99/100 scaling is handled by the window manager
+--    even in the other cases, i usually just maximize
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
 config.window_frame = {
-  font = wezterm.font('Hasklig'),
-  font_size = 10.0,
+  font = handdara.font,
+  font_size = 12.0,
 }
 config.window_padding = {
   left = 4,
@@ -28,29 +34,20 @@ config.window_padding = {
   top = 0,
   bottom = 0,
 }
+-- i was using a os with wayland, but not atm
+-- config.enable_wayland = true
 
-config.window_background_opacity = 0.75
-config.inactive_pane_hsb = {
-  saturation = 0.9,
-  brightness = 0.75,
-}
-
+-- open to fish
 config.default_prog = { 'fish' }
 
+-- i like to only use my own keymap, i'll add more over time
 config.disable_default_key_bindings = true
 config.keys = handdara.keys
 config.key_tables = handdara.key_tables
 
-config.unix_domains = {
-  {
-    name = 'handdara-hpop',
-  },
-}
+-- domains
+config.unix_domains = handdara.unix_domains
 
--- This causes `wezterm` to act as though it was started as
--- `wezterm connect unix` by default, connecting to the unix
--- domain on startup.
--- If you prefer to connect manually, leave out this line.
--- config.default_gui_startup_args = { 'connect', 'handdara-hpop' }
+config.default_gui_startup_args = { 'connect', handdara.startup_domain }
 
 return config
