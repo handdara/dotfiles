@@ -10,12 +10,7 @@ end
 config.colors = handdara.colors
 
 config.font = wezterm.font_with_fallback({
-  -- { family = "JetBrains Mono", weight = "Regular" },
   { family = "Hasklig", weight = "Regular" },
-  -- { family = "Hasklug Nerd Font", weight = "Regular" },
-  -- { family = "FixedsysTTF", weight = "Regular" },
-  -- { family = "FiraCode Nerd Font", weight = "Regular" },
-  -- { family = "Ubuntu Mono", weight = "Regular" },
   { family = "Symbols Nerd Font Mono", scale = 1},
 })
 config.font_size = 14.0
