@@ -20,8 +20,8 @@ config.inactive_pane_hsb = {
 config.font = handdara.font
 config.font_size = 14.0
 
--- making the window layout simple, 99/100 scaling is handled by the window manager
---    even in the other cases, i usually just maximize
+-- making the window layout simple, 99 times out of 100 scaling is handled 
+--   by my window manager even in the other cases, i usually just maximize
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
 config.window_frame = {
@@ -34,13 +34,13 @@ config.window_padding = {
   top = 0,
   bottom = 0,
 }
--- i was using a os with wayland, but not atm
+-- i was using a os with wayland, but not atm, i'll uncomment if i go back
 -- config.enable_wayland = true
 
 -- open to fish
 config.default_prog = { 'fish' }
 
--- i like to only use my own keymap, i'll add more over time
+-- i like to only use my own keymaps, i'll add more over time but it's pretty minimal rn
 config.disable_default_key_bindings = true
 config.keys = handdara.keys
 config.key_tables = handdara.key_tables

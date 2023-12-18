@@ -1,8 +1,6 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
--- local hDomain = require 'handdara.domain'
-
 return {
   keys = {
     { key = 'F11', mods = 'NONE',       action = act.ToggleFullScreen },
@@ -31,9 +29,7 @@ return {
     {
       key = 'x',
       mods = 'ALT|SHIFT',
-      action = act.SwitchToWorkspace {
-        name = 'miscellaneous',
-      },
+      action = act.SwitchToWorkspace { name = 'miscellaneous' },
     },
     {
       key = 'm',
@@ -79,24 +75,15 @@ return {
     {
       key = 'c',
       mods = 'ALT|SHIFT',
-      action = act.SwitchToWorkspace {
-        name = 'code',
-        -- spawn = {
-        --   args = { 'fish' },
-        --   domain = { DomainName = hDomain.code },
-        --   cwd = '~/code',
-        -- },
-      },
+      action = act.SwitchToWorkspace { name = 'code' },
     },
     {
       key = 'd',
       mods = 'ALT|SHIFT',
-      action = act.SwitchToWorkspace {
-        name = 'default',
-      },
+      action = act.SwitchToWorkspace { name = 'default' },
     },
     {
-      key = 'p',
+      key = 'e',
       mods = 'ALT|SHIFT',
       action = act.SwitchToWorkspace {
         name = 'personal-notes',
