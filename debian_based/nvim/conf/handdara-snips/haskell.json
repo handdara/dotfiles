@@ -1,0 +1,8 @@
+{
+	"definition": {
+		"prefix": "tracer",
+		"body": [
+			"tracer msg x = trace (msg<>show x) x "
+		]
+	}
+}
