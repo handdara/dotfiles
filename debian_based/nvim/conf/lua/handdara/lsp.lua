@@ -50,10 +50,11 @@ require('which-key').register {
 	['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
 	['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
 	['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-	['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+	['<leader>r'] = { name = '[R]ename & [R]epl', _ = 'which_key_ignore' },
 	['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
 	['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 	['<leader>m'] = { name = '[M]arkdown', _ = 'which_key_ignore' },
+	['<leader>p'] = { name = '[P]aste &/or [P]roject', _ = 'which_key_ignore' },
 }
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -155,11 +156,11 @@ lspconf.marksman.setup {
 	end
 }
 
-lspconf.hls.setup {
-	filetypes = { 'haskell', 'lhaskell', 'cabal' },
-	capabilities = capabilities,
-	on_attach = on_attach,
-}
+-- lspconf.hls.setup {
+-- 	filetypes = { 'haskell', 'lhaskell', 'cabal' },
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- }
 
 -- add nicer lsp popup window borders
 local _border = "rounded"
@@ -177,3 +178,50 @@ vim.diagnostic.config {
 	float = { border = _border }
 }
 require('lspconfig.ui.windows').default_options.border = _border
+
+-- local ht = require('haskell-tools')
+
+vim.g.haskell_tools = {
+	hls = {
+		---@param client number The LSP client ID.
+		---@param bufnr number The buffer number
+		---@param ht HaskellTools = require('haskell-tools')
+		on_attach = function(_, bufnr, ht)
+			local nmap = function(keys, func, desc)
+				if desc then
+					desc = 'Haskell: ' .. desc
+				end
+
+				vim.keymap.set('n', keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
+			end
+			-- haskell-language-server relies heavily on codeLenses,
+			-- so auto-refresh (see advanced configuration) is enabled by default
+			nmap('<space>cl', vim.lsp.codelens.run, "Run code lens in current line")
+			-- Hoogle search for the type signature of the definition under the cursor
+			nmap('<space>hs', ht.hoogle.hoogle_signature, "Hoogle search for the type signature of the definition under the cursor")
+			-- Evaluate all code snippets
+			nmap('<space>ce', ht.lsp.buf_eval_all, "Evaluate all code snippets")
+			-- Toggle a GHCi repl for the current package
+			nmap('<leader>rr', ht.repl.toggle, "[R]epl: Toggle for current package")
+			-- Toggle a GHCi repl for the current buffer
+			nmap('<leader>rf', function()
+				ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+			end, "[R]epl: Toggle for current buffer")
+			nmap('<leader>rq', ht.repl.quit, "Quit GHCi repl")
+			on_attach(_, bufnr)
+		end,
+	},
+}
+
+
+-- nmap('<space>cl', vim.lsp.codelens.run, "Run code lens in current line", bufnr, opts)
+-- -- -- Hoogle search for the type signature of the definition under the cursor
+-- nmap('<space>hs', ht.hoogle.hoogle_signature, "", bufnr, opts)
+-- -- -- Evaluate all code snippets
+-- nmap('<space>ea', ht.lsp.buf_eval_all, "", bufnr, opts)
+-- nmap('<leader>rr', ht.repl.toggle, "Toggle a GHCi repl for the current package", bufnr, opts)
+-- -- Toggle a GHCi repl for the current buffer
+-- nmap('<leader>rf', function()
+--   ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+-- end, "", bufnr, opts)
+-- nmap('<leader>rq', ht.repl.quit, "", bufnr, opts)

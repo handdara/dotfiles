@@ -103,20 +103,26 @@ return {
     priority = 1000,
     config = function()
       require('lighthaus').setup({
-      -- set true to use dark bg by default
-      bg_dark = true,
-      -- see colors.lua to see colors table, set overrides here to be merged with defaults
-      colors = {},
-      -- set to 'underline' to replace undercurl with underline
-      -- or empty string '' to disable
-      lsp_underline_style = 'undercurl',
-      -- make background transparent, this overrides `bg_dark`
-      transparent = true,
-      -- use an italic font for comments
-      italic_comments = true,
-      -- use an italic font for keywords/conditionals
-      italic_keywords = false,
-    })
+        -- set true to use dark bg by default
+        bg_dark = false,
+        -- see colors.lua to see colors table, set overrides here to be merged with defaults
+        colors = {},
+        -- set to 'underline' to replace undercurl with underline
+        -- or empty string '' to disable
+        lsp_underline_style = 'undercurl',
+        -- make background transparent, this overrides `bg_dark`
+        transparent = true,
+        -- use an italic font for comments
+        italic_comments = true,
+        -- use an italic font for keywords/conditionals
+        italic_keywords = false,
+      })
+      -- local lu = require("lighthaus.utils")
+      -- vim.cmd('hi link hsImportModuleName LspInlayHint')
+      -- vim.cmd('hi link hsTodo LspInlayHint')
+      -- vim.cmd('hi link hsImportList LspInlayHint')
+      -- vim.cmd('hi link hsImportGroup LspInlayHint')
+      vim.cmd('hi link LspCodeLens LspInlayHint')
     end,
   },
 
@@ -225,37 +231,43 @@ return {
 
   -- below added after kickstart
 
-	'nvim-treesitter/playground',
+  'nvim-treesitter/playground',
 
-	'mbbill/undotree',
+  'mbbill/undotree',
 
-	{
-		"kylechui/nvim-surround",
+  {
+    "kylechui/nvim-surround",
 
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end
-	},
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
 
-	'lervag/vimtex',
+  'lervag/vimtex',
 
-	'kmonad/kmonad-vim',
+  'kmonad/kmonad-vim',
 
-	{ 'echasnovski/mini.files', version = false },
+  { 'echasnovski/mini.files', version = false },
 
-	{
-		'NFrid/due.nvim',
-		config = function ()
-			require("due_nvim").setup({
-				default_due_time = "noon",
-				date_hi = "String",
-			})
-		end
-	},
+  {
+    'NFrid/due.nvim',
+    config = function()
+      require("due_nvim").setup({
+        default_due_time = "noon",
+        date_hi = "String",
+      })
+    end
+  },
 
-	'xiyaowong/transparent.nvim',
+  'xiyaowong/transparent.nvim',
+
+  {
+    'mrcjkb/haskell-tools.nvim',
+    version = '^3', -- Recommended
+    ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
+  }
 }
