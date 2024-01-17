@@ -1,0 +1,30 @@
+layout {
+    tab name="term" {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        pane split_direction="vertical" {
+            pane
+            pane
+        }
+    }
+    tab name="vim" {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        pane name="neovim" {
+            // command "cd"
+            // args "(find ~ -type d | fzf)"
+        }
+    }
+    tab name="misc" {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        pane {
+            command "spt"
+        }
+    }
+}
+
+theme "catppuccin-mocha"

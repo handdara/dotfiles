@@ -1,1 +1,6 @@
 *.log
+debian_based/spotifyd/spotifyd.conf
+debian_based/gitrec/*.txt
+debian_based/nvim/conf/lua/handdara/plugins
+debian_based/nvim/conf/lua/handdara/plugins
+debian_based/nvim/conf/lua/handdara/plugins

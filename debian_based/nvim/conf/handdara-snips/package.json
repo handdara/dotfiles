@@ -1,0 +1,19 @@
+{
+	"name": "handdara-snips",
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"tex",
+					"latex",
+					"markdown"
+				],
+				"path": "./latex.json"
+			},
+			{
+				"language": ["haskell"],
+				"path": "./haskell.json"
+			}
+		]
+	}
+}

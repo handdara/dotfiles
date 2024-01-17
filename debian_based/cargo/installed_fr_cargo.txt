@@ -1,0 +1,2 @@
+bat exa fd-find gitui porsmo ripgrep spotify-tui starship taplo-cli tokei wiki-tui zellij
+zoxide --locked
