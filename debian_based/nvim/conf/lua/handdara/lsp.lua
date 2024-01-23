@@ -162,7 +162,12 @@ lspconf.marksman.setup {
 -- 	on_attach = on_attach,
 -- }
 
--- add nicer lsp popup window borders
+lspconf.matlab_ls.setup {
+	{ "matlab-language-server", "--stdio" },
+	capabilities = capabilities,
+	on_attach = on_attach,
+}
+
 local _border = "rounded"
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 	vim.lsp.handlers.hover, {

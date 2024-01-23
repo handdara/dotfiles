@@ -116,6 +116,7 @@ endef
 
 link: checkopts
 ifeq ($(strip $(env)),wsl2_ubuntu)
+	$(call linkfile,$(starship_fr_to))
 else ifeq ($(strip $(env)),rpi_os)
 	$(call linkfile,$(starship_fr_to))
 	$(call linkfile,$(spotifyd_fr_to))
