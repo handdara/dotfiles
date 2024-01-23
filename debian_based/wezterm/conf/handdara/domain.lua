@@ -10,4 +10,5 @@ return {
     startup_domain = startup_domain,
     default_unix = default_unix,
     code = startup_domain,
+    wsl = 'WSL:Ubuntu-20.04',
 }

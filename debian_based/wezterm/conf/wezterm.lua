@@ -20,7 +20,7 @@ config.inactive_pane_hsb = {
 config.font = handdara.font
 config.font_size = 14.0
 
--- making the window layout simple, 99 times out of 100 scaling is handled 
+-- making the window layout simple, 99 times out of 100 scaling is handled
 --   by my window manager even in the other cases, i usually just maximize
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
@@ -48,14 +48,26 @@ config.key_tables = handdara.key_tables
 -- domains
 config.unix_domains = handdara.unix_domains
 
--- startup
-config.default_gui_startup_args = {
-  'connect',
-  handdara.startup_domain,
-  'fish',
-  '-i',
-  '-C',
-  'neofetch',
-}
+-- startup: are we on windows/wsl2 or linux?
+local function getOperatingSystem()
+  if package.config:sub(1, 1) == '\\' then
+    return "Windows"
+  else
+    return "Unix"
+  end
+end
+
+if getOperatingSystem() == "Windows" then
+  config.default_domain = handdara.wsl_domain
+else
+  config.default_gui_startup_args = {
+    'connect',
+    handdara.startup_domain,
+    'fish',
+    '-i',
+    '-C',
+    'neofetch',
+  }
+end
 
 return config
