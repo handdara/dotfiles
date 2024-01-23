@@ -85,7 +85,28 @@ return {
     },
   },
 
-  -- { 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
+  -- {
+  --   'fcpg/vim-orbital',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'orbital'
+  --   end
+  -- },
+  -- {
+  --   'fcpg/vim-fahrenheit',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'fahrenheit'
+  --   end
+  -- },
+  -- {
+  --   'rose-pine/neovim',
+  --   name = 'rose-pine',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'rose-pine'
+  --   end,
+  -- },
   -- { "miikanissi/modus-themes.nvim", priority = 1000 },
   -- {
   --   "hachy/eva01.vim",
@@ -98,33 +119,48 @@ return {
   --   end,
   -- },
   {
-    "mrjones2014/lighthaus.nvim",
+    "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require('lighthaus').setup({
-        -- set true to use dark bg by default
-        bg_dark = false,
-        -- see colors.lua to see colors table, set overrides here to be merged with defaults
-        colors = {},
-        -- set to 'underline' to replace undercurl with underline
-        -- or empty string '' to disable
-        lsp_underline_style = 'undercurl',
-        -- make background transparent, this overrides `bg_dark`
+      require("cyberdream").setup({
+        -- Recommended - see "Configuring" below for more config options
         transparent = true,
-        -- use an italic font for comments
         italic_comments = true,
-        -- use an italic font for keywords/conditionals
-        italic_keywords = false,
+        hide_fillchars = true,
+        borderless_telescope = true,
       })
-      -- local lu = require("lighthaus.utils")
-      -- vim.cmd('hi link hsImportModuleName LspInlayHint')
-      -- vim.cmd('hi link hsTodo LspInlayHint')
-      -- vim.cmd('hi link hsImportList LspInlayHint')
-      -- vim.cmd('hi link hsImportGroup LspInlayHint')
-      vim.cmd('hi link LspCodeLens LspInlayHint')
+      vim.cmd("colorscheme cyberdream")   -- set the colorscheme
     end,
   },
+  -- {
+  --   "mrjones2014/lighthaus.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('lighthaus').setup({
+  --       -- set true to use dark bg by default
+  --       bg_dark = false,
+  --       -- see colors.lua to see colors table, set overrides here to be merged with defaults
+  --       colors = {},
+  --       -- set to 'underline' to replace undercurl with underline
+  --       -- or empty string '' to disable
+  --       lsp_underline_style = 'undercurl',
+  --       -- make background transparent, this overrides `bg_dark`
+  --       transparent = true,
+  --       -- use an italic font for comments
+  --       italic_comments = true,
+  --       -- use an italic font for keywords/conditionals
+  --       italic_keywords = false,
+  --     })
+  --     -- local lu = require("lighthaus.utils")
+  --     -- vim.cmd('hi link hsImportModuleName LspInlayHint')
+  --     -- vim.cmd('hi link hsTodo LspInlayHint')
+  --     -- vim.cmd('hi link hsImportList LspInlayHint')
+  --     -- vim.cmd('hi link hsImportGroup LspInlayHint')
+  --     vim.cmd('hi link LspCodeLens LspInlayHint')
+  --   end,
+  -- },
 
   {
     -- Set lualine as statusline
