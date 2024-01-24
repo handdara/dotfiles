@@ -133,30 +133,30 @@ return {
       vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   },
-  {
-    "mrjones2014/lighthaus.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('lighthaus').setup({
-        -- set true to use dark bg by default
-        bg_dark = false,
-        -- see colors.lua to see colors table, set overrides here to be merged with defaults
-        colors = {},
-        -- set to 'underline' to replace undercurl with underline
-        -- or empty string '' to disable
-        lsp_underline_style = 'undercurl',
-        -- make background transparent, this overrides `bg_dark`
-        transparent = true,
-        -- use an italic font for comments
-        italic_comments = true,
-        -- use an italic font for keywords/conditionals
-        italic_keywords = false,
-      })
-      -- local lu = require("lighthaus.utils")
-      vim.cmd('hi link LspCodeLens LspInlayHint')
-    end,
-  },
+  -- {
+  --   "mrjones2014/lighthaus.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('lighthaus').setup({
+  --       -- set true to use dark bg by default
+  --       bg_dark = false,
+  --       -- see colors.lua to see colors table, set overrides here to be merged with defaults
+  --       colors = {},
+  --       -- set to 'underline' to replace undercurl with underline
+  --       -- or empty string '' to disable
+  --       lsp_underline_style = 'undercurl',
+  --       -- make background transparent, this overrides `bg_dark`
+  --       transparent = true,
+  --       -- use an italic font for comments
+  --       italic_comments = true,
+  --       -- use an italic font for keywords/conditionals
+  --       italic_keywords = false,
+  --     })
+  --     -- local lu = require("lighthaus.utils")
+  --     vim.cmd('hi link LspCodeLens LspInlayHint')
+  --   end,
+  -- },
 
   {
     -- Set lualine as statusline
@@ -301,5 +301,12 @@ return {
     'mrcjkb/haskell-tools.nvim',
     version = '^3', -- Recommended
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
-  }
+  },
+
+  -- {
+  --   'mrcjkb/rustaceanvim',
+  --   version = '^3', -- Recommended
+  --   ft = { 'rust' },
+  -- },
+
 }
