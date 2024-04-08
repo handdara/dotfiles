@@ -55,6 +55,7 @@ require('which-key').register {
 	['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 	['<leader>m'] = { name = '[M]arkdown', _ = 'which_key_ignore' },
 	['<leader>p'] = { name = '[P]aste &/or [P]roject', _ = 'which_key_ignore' },
+	['<leader>n'] = { name = '[N]otes', _ = 'which_key_ignore' },
 }
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -106,6 +107,8 @@ mason_lspconfig.setup_handlers {
 			filetypes = (servers[server_name] or {}).filetypes,
 		}
 	end,
+	["rust_analyzer"] = function()
+	end
 }
 
 -- [[handdara]]
@@ -151,8 +154,8 @@ lspconf.marksman.setup {
 	-- on_attach = on_attach,
 	on_attach = function(_, bufnr)
 		on_attach(_, bufnr)
-		vim.keymap.set('n', '<leader>mt', '<CMD>r!today<CR>i#<Space><Esc>_',
-			{ buffer = bufnr, desc = '[Markdown] insert [t]oday\'s date as heading' })
+		vim.keymap.set('n', '<leader>nt', '<CMD>r!today<CR>i#<Space><Esc>_',
+			{ buffer = bufnr, desc = '[N]otes insert [t]oday\'s date as heading' })
 	end
 }
 
@@ -203,7 +206,8 @@ vim.g.haskell_tools = {
 			-- so auto-refresh (see advanced configuration) is enabled by default
 			nmap('<space>cl', vim.lsp.codelens.run, "Run code lens in current line")
 			-- Hoogle search for the type signature of the definition under the cursor
-			nmap('<space>hs', ht.hoogle.hoogle_signature, "Hoogle search for the type signature of the definition under the cursor")
+			nmap('<space>hs', ht.hoogle.hoogle_signature,
+				"Hoogle search for the type signature of the definition under the cursor")
 			-- Evaluate all code snippets
 			nmap('<space>ce', ht.lsp.buf_eval_all, "Evaluate all code snippets")
 			-- Toggle a GHCi repl for the current package
@@ -218,15 +222,28 @@ vim.g.haskell_tools = {
 	},
 }
 
-
--- nmap('<space>cl', vim.lsp.codelens.run, "Run code lens in current line", bufnr, opts)
--- -- -- Hoogle search for the type signature of the definition under the cursor
--- nmap('<space>hs', ht.hoogle.hoogle_signature, "", bufnr, opts)
--- -- -- Evaluate all code snippets
--- nmap('<space>ea', ht.lsp.buf_eval_all, "", bufnr, opts)
--- nmap('<leader>rr', ht.repl.toggle, "Toggle a GHCi repl for the current package", bufnr, opts)
--- -- Toggle a GHCi repl for the current buffer
--- nmap('<leader>rf', function()
---   ht.repl.toggle(vim.api.nvim_buf_get_name(0))
--- end, "", bufnr, opts)
--- nmap('<leader>rq', ht.repl.quit, "", bufnr, opts)
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {
+  },
+  -- LSP configuration
+  server = {
+    on_attach = function(_,bufnr)
+			local nmap = function(keys, func, desc)
+				if desc then
+					desc = 'Rust: ' .. desc
+				end
+				vim.keymap.set('n', keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
+			end
+    	on_attach(_,bufnr)
+    end,
+    -- settings = {
+    --   -- rust-analyzer language server configuration
+    --   ['rust-analyzer'] = {
+    --   },
+    -- },
+  },
+  -- DAP configuration
+  -- dap = {
+  -- },
+}

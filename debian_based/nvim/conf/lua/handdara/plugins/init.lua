@@ -303,10 +303,15 @@ return {
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
   },
 
-  -- {
-  --   'mrcjkb/rustaceanvim',
-  --   version = '^3', -- Recommended
-  --   ft = { 'rust' },
-  -- },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    ft = { 'rust' },
+  },
+
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' }
+  },
 
 }
