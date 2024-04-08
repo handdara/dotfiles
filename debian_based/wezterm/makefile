@@ -6,6 +6,12 @@ DPKG := dpkg -i
 CURL := curl -LO
 # BUILD_SH := build.sh
 
+# current download link: https://github.com/wez/wezterm/releases/download/20240128-202157-1e552d76/wezterm-20240128-202157-1e552d76.Ubuntu22.04.deb
+CURRENT_VERSION := 20240128-202157-1e552d76
+
+# current nightly download link:
+# https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
+
 ifneq (,$(strip $(logfile)))
 	DUMPLOG := >> $(logfile).log
 else
@@ -14,7 +20,7 @@ endif
 
 .PHONY: install-nightly install clean uninstall all
 
-all: install-nightly
+all: install
 	$(RM) *.deb
 
 ifeq ($(strip $(env)),wsl2_ubuntu)
@@ -41,13 +47,13 @@ install:
 	$(error Install not configured for rpi_os environment)
 else ifeq ($(strip $(env)),native_ubuntu)
 install:
-	$(CURL) https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
-	$(SUDO) $(DPKG) ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
+	$(CURL) https://github.com/wez/wezterm/releases/download/$(CURRENT_VERSION)/wezterm-$(CURRENT_VERSION).Ubuntu22.04.deb
+	$(SUDO) $(DPKG) ./wezterm-$(CURRENT_VERSION).Ubuntu22.04.deb
 	$(SUDO) apt-get install -f
 else ifeq ($(strip $(env)),native_pop_os)
 install:
-	$(CURL) https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
-	$(SUDO) $(DPKG) ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
+	$(CURL) https://github.com/wez/wezterm/releases/download/$(CURRENT_VERSION)/wezterm-$(CURRENT_VERSION).Ubuntu22.04.deb
+	$(SUDO) $(DPKG) ./wezterm-$(CURRENT_VERSION).Ubuntu22.04.deb
 	$(SUDO) apt-get install -f
 else 
 	$(error Didn't recognized env variable, was it passed?)
@@ -72,11 +78,6 @@ install-nightly:
 else 
 	$(error Didn't recognized env variable, was it passed?)
 endif
-
-# $(SUDO) apt install -y ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
-
-# build:
-# 	$(SH) $(BUILD_SH) $(DUMPLOG)
 
 clean:
 	$(RM) *.deb
