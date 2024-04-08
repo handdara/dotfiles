@@ -39,6 +39,7 @@ fish_add_path ~/.local/scripts
 fish_add_path /usr/local/go/bin
 fish_add_path ~/go/bin
 fish_add_path ~/.ghcup/bin
+fish_add_path ~/apps/lexifer
 
 # ------------------ Custom Funcs ------------------
 
