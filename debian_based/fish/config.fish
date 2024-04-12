@@ -139,6 +139,7 @@ abbr --add hs  --set-cursor=! "hoogle search \"!\""
 abbr --add pt --set-cursor=! "porsmo timer (math !\*60)"
 # time hours
 abbr --add pt-hr --set-cursor=! "porsmo timer (math !\*3600)"
+abbr --add pts "porsmo stopwatch"
 
 abbr --add vi "nvim"
 abbr --add vim "nvim"
@@ -147,7 +148,7 @@ abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
 abbr --add ok "flatpak run org.kde.okular"
-abbr --add okf "flatpak run org.kde.okular (fzf) &"
+abbr --add okf "flatpak run org.kde.okular (find ./ -type f -name \"*.pdf\" -not -path '*/.*'| fzf) &"
 
 abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
 abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"
