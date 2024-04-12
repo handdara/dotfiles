@@ -60,7 +60,7 @@
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   del  ins
   grv  @w1  @w2  @w3  @w4  @w5  6    7    8    @lwk @rwk _    _     XX
   -    q    w    e    r    t    y    u    i    o    p    bspc del   esc
-  lctl a    s    d    f    g    h    j    k    l    S-;  '          @shn
+  lctl a    s    d    f    g    h    j    k    l    ;    '          @shn
   @shn z    x    c    v    b    n    m    ,    .    =               tab
   caps lmet lalt           @stl1          @to2 sys rctl pgdn up    pgup
                                                          left down  rght
@@ -71,7 +71,7 @@
   _    @mw1 @mw2 @mw3 @mw4 _    _    _    _    _    _    _     _    _
   grv  !    @    #    $    [    ]    %    ^    &    *    _     _    _
   0    1    2    3    4    S-[  S-]  5    6    7    8    9          ret
-  @shn ;    \    |    S-9  S-/  S-0  /    ,    .    =               tab
+  @shn S-;  \    |    S-9  S-/  S-0  /    ,    .    =               tab
   @to2 _    spc           XX              _    _    _    _     _    _   
                                                          _     _    _   
 )

@@ -31,6 +31,8 @@
   to0  (layer-toggle l0) ;; Bind num to a button that switches to a layer
   to1  (layer-toggle l1)
   to2  (layer-toggle l2)
+  to3  (layer-toggle l3)
+  to4  (layer-toggle l4)
   stl1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1))
   shn  (tap-hold-next 200 (around ret (pause 35)) lsft)
   rwk  M-pgdn
@@ -59,9 +61,9 @@
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  prnt ins  del  home
   grv  @w1  @w2  @w3  @w4  @w5  6    7    8    @lwk @rwk S-'  _    XX
   -    q    w    e    r    t    y    u    i    o    p    bspc del  esc
-  lctl a    s    d    f    g    h    j    k    l    S-;  '    @shn
+  lctl a    s    d    f    g    h    j    k    l    ;    '    @shn
   @shn z    x    c    v    b    n    m    ,    .    =    tab  up
-  caps wkup lmet lalt           @stl1     @to2 sys  rctl left down rght
+  caps wkup lmet lalt           @stl1     ralt sys  @to4 left down rght
 )
 
 (deflayer l1
@@ -69,7 +71,7 @@
   _    @mw1 @mw2 @mw3 @mw4 _    _    _    _    _    _    _    _    _
   grv  !    @    #    $    [    ]    %    ^    &    *    _    _    _
   0    1    2    3    4    S-[  S-]  5    6    7    8    9    @shn
-  @shn ;    \    |    S-9  S-/  S-0  /    ,    .    =    tab  _
+  @shn S-;  \    |    S-9  S-/  S-0  /    ,    .    =    tab  _
   @to2 wkup _    spc           XX         _    _    -    _    _    _   
 )
 
@@ -90,3 +92,13 @@
   lalt _    _    _    _    _    _    _    _    _    _    _     _
   _    _    _    _           _            _    _    _    _     _    _
 )
+
+(deflayer l4
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _ 
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _  
+  _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    _    _    _    _    _    _    _    _    _    _    _    _ 
+  _    _    _    _              _         _    _    _    _    _    _   
+)
+

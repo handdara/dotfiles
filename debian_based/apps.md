@@ -1,6 +1,8 @@
 Base installs:
 - alacritty
+- matlab
 - fish
+- kmonad
 - cargo/rust analyzer
   - zellij
   - wiki-tui
@@ -16,7 +18,6 @@ Base installs:
   - watchexec? [repo](https://github.com/watchexec/watchexec)
   - nu? (another rusty shell, works wherever cargo does)
   - irust? (repl and dbg)
-- helix
 - zotero
 - firefox
 - gatech vpn
@@ -27,7 +28,6 @@ Base installs:
   - hoogle
   - Hasklig (font)
   - gen-hie
-- matlab
 - parsec/teamviewer
 - vscode 
 - texlive
@@ -38,4 +38,3 @@ Base installs:
 - miniconda3
 - maybe: json/yaml/toml converter? [yj](https://github.com/sclevine/yj)
 - neovim
-- kmonad
