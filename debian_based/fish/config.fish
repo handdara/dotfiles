@@ -148,7 +148,8 @@ abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
 abbr --add ok "flatpak run org.kde.okular"
-abbr --add okf "flatpak run org.kde.okular (find ./ -type f -name \"*.pdf\" -not -path '*/.*'| fzf) &"
+abbr --add okf "flatpak run org.kde.okular (find -L ./ -type f -name \"*.pdf\" -not -path '*/.*'| fzf) &"
+abbr --add mkpdf "md2pdf.hs (find . -maxdepth 1 -name '*.md' -type f -not -path '*/.*'| fzf)"
 
 abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
 abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"
