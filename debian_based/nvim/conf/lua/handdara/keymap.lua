@@ -107,3 +107,4 @@ vim.keymap.set('n', '<leader>nb', tk.toggle_todo, { desc = 'Look at [B]acklinks'
 vim.keymap.set('n', '<leader>ng', tk.show_tags, { desc = 'Show Ta[g]s' })
 vim.keymap.set('n', '<leader>nf', tk.find_notes, { desc = '[F]ind notes' })
 vim.keymap.set('n', '<leader>nv', tk.switch_vault, { desc = 'Switch [V]ault' })
+vim.keymap.set('n', '<leader>ni', tk.insert_link, { desc = '[I]nsert link' })

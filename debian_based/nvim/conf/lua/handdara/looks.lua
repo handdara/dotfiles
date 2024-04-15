@@ -19,3 +19,6 @@ require("transparent").setup({ -- Optional, you don't have to run setup.
   },
   exclude_groups = {}, -- table: groups you don't want to clear
 })
+
+vim.api.nvim_command("hi tkTag ctermfg=LightGreen guifg=LightGreen")
+-- hi tkTag ctermfg=LightGreen guifg=LightGreen
