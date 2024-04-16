@@ -17,7 +17,7 @@ return {
     { key = 't',   mods = 'ALT|SHIFT',  action = act.SpawnTab 'CurrentPaneDomain' },
     { key = 'd',   mods = 'ALT',        action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
     { key = 'r',   mods = 'ALT',        action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    { key = 'w',   mods = 'ALT',        action = act.CloseCurrentPane { confirm = false } },
+    { key = 'w',   mods = 'ALT|CTRL',        action = act.CloseCurrentPane { confirm = false } },
     -- navigation
     { key = 'l',   mods = 'ALT|SHIFT',  action = act.ActivateTabRelative(1) },
     { key = 'h',   mods = 'ALT|SHIFT',  action = act.ActivateTabRelative(-1) },
