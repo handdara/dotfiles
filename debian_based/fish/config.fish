@@ -111,11 +111,14 @@ abbr --add oc "z (find ~/code -mindepth 1 -type d \
 -not -path '*.vscode*' \
 | fzf)"
 
-# "open scripts"
+# "open scripts sub-directory"
 abbr --add oscr "z ~/.local/scripts"
 
-# "open config directory"
+# "open config sub-directory"
 abbr --add oconf "z (find ~/.config -type d | fzf)"
+
+# "open mega sub-directory"
+abbr --add omeg "z (find ~/MEGA -type d | fzf)"
 
 # open editor with fuzzy find in common directories
 abbr --add efc "$EDITOR (find ~/code -mindepth 1 | fzf)"
@@ -148,7 +151,9 @@ abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
 abbr --add ok "flatpak run org.kde.okular"
-abbr --add okf "flatpak run org.kde.okular (find -L ./ -type f -name \"*.pdf\" -not -path '*/.*'| fzf) &"
+abbr --add okf "okular-file (find -L ./ -type f -name \"*.pdf\" -o -name \"*.jpg\" -not -path '*/.*'| fzf)"
+abbr --add okm "okular-file (find -L ~/MEGA -type f -name \"*.pdf\" -o -name \"*.jpg\" -not -path '*/.*'| fzf)"
+abbr --add okd "okular-file (find -L ~/MEGA/docs -type f -name \"*.pdf\" -o -name \"*.jpg\" -not -path '*/.*'| fzf)"
 abbr --add mkpdf "md2pdf.hs (find . -maxdepth 1 -name '*.md' -type f -not -path '*/.*'| fzf)"
 
 abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
@@ -156,6 +161,11 @@ abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -n
 # abbr --add matlab-cli "matlab -nodesktop -nosplash"
 
 abbr --add --set-cursor=! cht "curl cht.sh/!"
+
+# dice rolling
+abbr --add rd "rolldice -s"
+
+abbr --add ydl --set-cursor=! "python3 ~/apps/youtube-dl/youtube-dl '!'"
 
 # ------------------ IS WSL? ------------------
 if set -q WSL_DISTRO_NAME[1]
