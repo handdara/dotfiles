@@ -14,3 +14,5 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+-- Load media files
+require('telescope').load_extension('media_files')

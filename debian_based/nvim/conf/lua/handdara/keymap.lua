@@ -30,7 +30,7 @@ vim.keymap.set('n', '<leader>tJ', '<C-w>J', { desc = 'Move window [T]o down' })
 vim.keymap.set('n', '<leader>tK', '<C-w>K', { desc = 'Move window [T]o up' })
 vim.keymap.set('n', '<leader>tH', '<C-w>H', { desc = 'Move window [T]o left' })
 vim.keymap.set('n', '<leader>tL', '<C-w>L', { desc = 'Move window [T]o right' })
-vim.keymap.set('t', '<C-Esc>', '<C-\\><C-n>', { desc = 'Close and exit [T]erminal', silent = true })
+vim.keymap.set('t', '<C-Esc>', '<C-\\><C-n>', { desc = 'Close and exit [T]erminal mode', silent = true })
 wk.register(
 	{ t = { name = "+[T]o window", } },
 	{ prefix = "<leader>" }
@@ -93,18 +93,27 @@ vim.api.nvim_create_user_command('Wq','wq',{})
 vim.api.nvim_create_user_command('Q','quit',{})
 vim.api.nvim_create_user_command('Qa','qall',{})
 vim.api.nvim_create_user_command('Wqa','wqall',{})
+vim.api.nvim_create_user_command('FO','Fo',{})
 
 -- open up gitui
 vim.api.nvim_create_user_command('Vtg','vert term gitui',{})
 
 -- telekasten
 local tk = require('telekasten')
-vim.keymap.set('n', '<leader>ns', '<CMD>Telekasten<CR>', { desc = 'Telekasten [S]earch' })
+vim.keymap.set('n', '<leader>n', '<CMD>Telekasten<CR>', { desc = 'Telekasten [S]earch' })
 vim.keymap.set('n', '<leader>nw', tk.goto_thisweek, { desc = 'Open Telekaste[n]' })
 vim.keymap.set('n', '<leader>nc', tk.toggle_todo, { desc = 'Toggle [C]heckbox `- [ ]`' })
 vim.keymap.set('n', '<leader>nd', tk.follow_link, { desc = 'Go [d]own link' })
-vim.keymap.set('n', '<leader>nb', tk.toggle_todo, { desc = 'Look at [B]acklinks' })
+vim.keymap.set('n', '<leader>nb', tk.show_backlinks, { desc = 'Look at [B]acklinks' })
 vim.keymap.set('n', '<leader>ng', tk.show_tags, { desc = 'Show Ta[g]s' })
 vim.keymap.set('n', '<leader>nf', tk.find_notes, { desc = '[F]ind notes' })
 vim.keymap.set('n', '<leader>nv', tk.switch_vault, { desc = 'Switch [V]ault' })
 vim.keymap.set('n', '<leader>ni', tk.insert_link, { desc = '[I]nsert link' })
+vim.keymap.set('n', '<leader>sn', tk.search_notes, { desc = '[S]earch [N]otes' })
+vim.keymap.set('n', '<leader>nr', tk.rename_note, { desc = '[N]ote: [R]ename' })
+
+-- decisive
+vim.keymap.set('n', '<leader>cv', '<CMD>lua require("decisive").align_csv({})<cr>,', { desc = 'Align [C]S[V]' })
+vim.keymap.set('n', '<leader>cc', '<CMD>lua require("decisive").align_csv_clear({})<cr>', { desc = '[C]lear [C]SV Align' })
+vim.keymap.set('n', '<leader>cp', '<CMD>lua require("decisive").align_csv_prev_col()<cr>', { desc = '[C]SV [P]rev Col' })
+vim.keymap.set('n', '<leader>cn', '<CMD>lua require("decisive").align_csv_next_col()<cr>', { desc = '[C]SV [N]ext Col' })
