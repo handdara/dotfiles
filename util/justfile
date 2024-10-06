@@ -1,4 +1,3 @@
-
 dotfiles_dir := parent_directory(justfile_directory())
 
 default: core secondary
