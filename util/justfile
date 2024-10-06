@@ -1,0 +1,18 @@
+
+dotfiles_dir := parent_directory(justfile_directory())
+
+default: core secondary
+
+init-submodules:
+  git submodule init
+  git submodule update
+
+core: init-submodules
+  just {{dotfiles_dir}}/core/him/util/
+  just {{dotfiles_dir}}/core/hez/util/
+  just {{dotfiles_dir}}/core/hish/util/
+
+secondary:
+  just {{dotfiles_dir}}/secondary/gitui/
+  just {{dotfiles_dir}}/secondary/matlab/
+  just {{dotfiles_dir}}/secondary/starship/
