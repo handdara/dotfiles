@@ -1,0 +1,11 @@
+ln_file := 'ln -svf'
+
+starship_toml := 'starship.toml'
+starship_to := env_var('HOME') / '.config' / starship_toml
+starship_fr := justfile_directory() / starship_toml
+
+default: link-starship
+
+# symlink starship configuration toml
+link-starship:
+    {{ln_file}} {{starship_fr}} {{starship_to}}

@@ -1,0 +1,21 @@
+ln_file := 'ln -svf'
+
+# gitui_remap_fr_to := $(PWD)/gitui/key_bindings.ron $(HOME)/.config/gitui/key_bindings.ron 
+# gitui_theme_fr_to := $(PWD)/gitui/theme.ron $(HOME)/.config/gitui/theme.ron 
+gitui_config_dir := env_var('HOME') / '.config' / 'gitui'
+gitui_main_dir := justfile_directory()
+
+gitui_remap := 'key_bindings.ron'
+gitui_theme := 'theme.ron'
+
+gitui_remap_to := gitui_config_dir / gitui_remap
+gitui_remap_fr := gitui_main_dir / gitui_remap
+gitui_theme_to := gitui_config_dir / gitui_theme
+gitui_theme_fr := gitui_main_dir / gitui_theme
+
+default: link-gitui-main
+
+# symlink main gitui configuration
+link-gitui-main:
+    {{ln_file}} {{gitui_remap_fr}} {{gitui_remap_to}}
+    {{ln_file}} {{gitui_theme_fr}} {{gitui_theme_to}}
