@@ -1,16 +1,21 @@
-dotfiles_dir := parent_directory(justfile_directory())
+dotfiles_dir := justfile_directory()
 
+# runs: core, secondary
 default: core secondary
 
-init-submodules:
+# init/update core git submodules
+core-submodules:
   git submodule init
   git submodule update
 
-core: init-submodules
+# run core/tool justfiles
+core: core-submodules
   just {{dotfiles_dir}}/core/him/util/
   just {{dotfiles_dir}}/core/hez/util/
   just {{dotfiles_dir}}/core/hish/util/
+  just {{dotfiles_dir}}/core/hix/util/
 
+# run secondary/tool justfiles
 secondary:
   just {{dotfiles_dir}}/secondary/gitui/
   just {{dotfiles_dir}}/secondary/matlab/
