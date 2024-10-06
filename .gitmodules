@@ -1,0 +1,9 @@
+[submodule "core/him"]
+	path = core/him
+	url = git@github.com:handdara/him.git
+[submodule "core/hez"]
+	path = core/hez
+	url = git@github.com:handdara/hez.git
+[submodule "core/hish"]
+	path = core/hish
+	url = git@github.com:handdara/hish.git
