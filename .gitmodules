@@ -7,3 +7,6 @@
 [submodule "core/hish"]
 	path = core/hish
 	url = git@github.com:handdara/hish.git
+[submodule "core/hix"]
+	path = core/hix
+	url = git@github.com:handdara/hix.git
