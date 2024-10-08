@@ -1,15 +1,17 @@
+alias ms := merge-submodules
+
 dotfiles_dir := justfile_directory()
 
 # runs: core, secondary
 default: core secondary
 
 # init/update core git submodules
-core-submodules:
+pull-core-submodules:
   git submodule init
-  git submodule update
+  git submodule update --init --recursive
 
 # run core/tool justfiles
-core: core-submodules
+core: pull-core-submodules
   just {{dotfiles_dir}}/core/him/util/
   just {{dotfiles_dir}}/core/hez/util/
   just {{dotfiles_dir}}/core/hish/util/
@@ -20,3 +22,8 @@ secondary:
   just {{dotfiles_dir}}/secondary/gitui/
   just {{dotfiles_dir}}/secondary/matlab/
   just {{dotfiles_dir}}/secondary/starship/
+
+# update submodules with remote merge opts
+merge-submodules:
+  git submodule update --remote --merge
+
