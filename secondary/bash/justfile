@@ -1,0 +1,5 @@
+default: nothing
+
+nothing:
+    @echo "Nothing to do yet..."
+
