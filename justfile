@@ -1,4 +1,6 @@
 alias ms := merge-submodules
+alias ps := pull-core-submodules
+alias snd := secondary
 
 dotfiles_dir := justfile_directory()
 
@@ -22,6 +24,7 @@ secondary:
   just {{dotfiles_dir}}/secondary/gitui/
   just {{dotfiles_dir}}/secondary/matlab/
   just {{dotfiles_dir}}/secondary/starship/
+  just {{dotfiles_dir}}/secondary/bash/
 
 # update submodules with remote merge opts
 merge-submodules:

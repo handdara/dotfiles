@@ -1,5 +1,6 @@
-default: nothing
+bashrc_to := env_var('HOME') / '.bashrc'
+bashrc_fr := justfile_directory() / '.bashrc'
 
-nothing:
-    @echo "Nothing to do yet..."
-
+# symlink .bashrc
+link-bash:
+    ln -svf {{bashrc_fr}} {{bashrc_to}}
