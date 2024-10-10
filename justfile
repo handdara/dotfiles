@@ -1,5 +1,6 @@
 alias ms := merge-submodules
 alias ps := pull-core-submodules
+alias r := rebuild
 alias snd := secondary
 
 dotfiles_dir := justfile_directory()
@@ -18,6 +19,11 @@ core: pull-core-submodules
   just {{dotfiles_dir}}/core/hez/util/
   just {{dotfiles_dir}}/core/hish/util/
   just {{dotfiles_dir}}/core/hix/util/
+  just {{dotfiles_dir}}/core/git/
+
+# re-link nixos configs and rebuild OS
+rebuild: pull-core-submodules
+  just {{dotfiles_dir}}/core/hix/util/ rebuild
 
 # run secondary/tool justfiles
 secondary:
