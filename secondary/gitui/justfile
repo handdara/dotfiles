@@ -13,6 +13,11 @@ gitui_remap_fr := gitui_main_dir / gitui_remap
 gitui_theme_to := gitui_config_dir / gitui_theme
 gitui_theme_fr := gitui_main_dir / gitui_theme
 
+inactive-alert:
+    @echo "=========================================="
+    @echo "ALERT: gitui is not currently being used"
+    @echo "=========================================="
+
 default: link-gitui-main
 
 # symlink main gitui configuration
