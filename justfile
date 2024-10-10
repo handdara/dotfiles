@@ -35,4 +35,3 @@ secondary:
 # update submodules with remote merge opts
 merge-submodules:
   git submodule update --remote --merge
-
