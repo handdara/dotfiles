@@ -43,6 +43,10 @@ secondary:
 clean-bash:
   just {{dotfiles_dir}}/secondary/bash/ clean
 
+# clean fish config
+clean-fish:
+  just {{dotfiles_dir}}/core/hish/ clean-fish-cfg
+
 # update submodules with remote merge opts
 merge-submodules:
   git submodule update --remote --merge
