@@ -4,3 +4,7 @@ bashrc_fr := justfile_directory() / '.bashrc'
 # symlink .bashrc
 link-bash:
     ln -svf {{bashrc_fr}} {{bashrc_to}}
+
+# delete linked .bashrc
+clean:
+    rm -f {{bashrc_to}}
