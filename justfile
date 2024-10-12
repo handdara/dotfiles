@@ -17,7 +17,7 @@ pull-core-submodules:
 # git add core, commit and push
 update-core-commits:
   git add core
-  git commit
+  git commit -m "update core submodules' commit ptrs"
   git push
 
 # run core/tool justfiles
