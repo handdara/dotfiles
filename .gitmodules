@@ -1,9 +1,0 @@
-[submodule "fst/him"]
-	path = fst/him
-	url = git@github.com:handdara/him.git
-[submodule "fst/hish"]
-	path = fst/hish
-	url = git@github.com:handdara/hish.git
-[submodule "fst/hez"]
-	path = fst/hez
-	url = git@github.com:handdara/hez.git
