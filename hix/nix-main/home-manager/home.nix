@@ -39,17 +39,12 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-    # ".config/fish/config.fish".source = ../../../hish/fish-main/config.fish;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    ".tmp".source = ../../../fst/hish/README.md;
+    # ".config/fish/config.fish".source = ../../../fst/hish/fish-main/config.fish;
+    # ".config/fish/functions" = {
+    #   source = ../../../fst/hish/fish-main/functions;
+    #   recursive = true;
+    # };
   };
 
   # Home Manager can also manage your environment variables through

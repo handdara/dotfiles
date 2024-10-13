@@ -35,7 +35,7 @@ snd:
   just {{dotfiles_dir}}/snd/gitui/
   just {{dotfiles_dir}}/snd/matlab/
   just {{dotfiles_dir}}/snd/starship/
-  just {{dotfiles_dir}}/snd/bash/
+  # just {{dotfiles_dir}}/snd/bash/ # bashrc now being handled by home manager
   
 # clean bash config
 clean-bash:
