@@ -1,0 +1,39 @@
+# quick rebuilding aliases, builds using most up to date method
+alias r := rebuild-flake
+alias h := rebuild-home-mngr-flake
+
+nixconf_filename := 'configuration.nix'
+hw_conf_filename := 'hardware-configuration.nix'
+homemngr_dirname := 'home-manager'
+
+nix_main_dir := justfile_directory() / 'nix-main'
+
+nixconf_fr := nix_main_dir / nixconf_filename
+nixconf_to := / 'etc' / 'nixos' / nixconf_filename
+
+hw_conf_fr := nix_main_dir / hw_conf_filename
+hw_conf_to := / 'etc' / 'nixos' / hw_conf_filename
+
+homemngr_dir_fr := nix_main_dir / homemngr_dirname
+homemngr_dir_to := env_var('HOME') / '.config' / homemngr_dirname
+
+default: 
+    @echo "hix justfile does not link by default"
+    @just -l
+
+# snd rebuild mth; flake-based from nixos-main directory
+rebuild-flake:
+    cd {{nix_main_dir}} && sudo nixos-rebuild switch --flake .
+
+# fst rebuild mth; rebuild by linking files to /etc/nixos and running nixos-rebuild from there
+rebuild-etc: link-etc-confs
+    cd /etc/nixos && sudo nixos-rebuild switch
+
+# link files to /etc/nixos
+link-etc-confs:
+    sudo ln -svf {{nixconf_fr}} {{nixconf_to}}
+    sudo ln -svf {{hw_conf_fr}} {{hw_conf_to}}
+
+# link and then rebuild and switch home-manager
+rebuild-home-mngr-flake: 
+    cd {{nix_main_dir}} && home-manager switch --flake .
