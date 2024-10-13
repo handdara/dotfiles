@@ -1,0 +1,125 @@
+{
+	"definition": {
+		"prefix": "DEF",
+		"body": [
+			"\\begin{defn}",
+			"\t$1",
+			"\\end{defn}"
+		]
+	},
+	"proof": {
+		"prefix": "PROOF",
+		"body": [
+			"\\ifthenelse{\\equal{\\showproofs}{1}}{",
+			"\\begin{proof}",
+			"\t$1",
+			"\\end{proof}",
+			"}{}"
+		]
+	},
+	"example": {
+		"prefix": "EXMP",
+		"body": [
+			"\\ifthenelse{\\equal{\\showexamples}{1}}{",
+			"\\begin{exmp}",
+			"\t$1",
+			"\\end{exmp}",
+			"}{}"
+		]
+	},
+	"theorem": {
+		"prefix": "THM",
+		"body": [
+			"\\begin{thm}",
+			"\t$1",
+			"\\end{thm}"
+		]
+	},
+	"prop": {
+		"prefix": "PROP",
+		"body": [
+			"\\begin{prop}",
+			"\t$1",
+			"\\end{prop}"
+		]
+	},
+	"corollary": {
+		"prefix": "COR",
+		"body": [
+			"\\begin{corollary}",
+			"\t$1",
+			"\\end{corollary}"
+		]
+	},
+	"lemma": {
+		"prefix": "LEM",
+		"body": [
+			"\\begin{lemma}",
+			"\t$1",
+			"\\end{lemma}"
+		]
+	},
+	"note": {
+		"prefix": "NOTE",
+		"body": [
+			"\\begin{note}",
+			"\t$1",
+			"\\end{note}"
+		]
+	},
+	"remark": {
+		"prefix": "REMK",
+		"body": [
+			"\\begin{remk}",
+			"\t$1",
+			"\\end{remk}"
+		]
+	},
+	"fact": {
+		"prefix": "FACT",
+		"body": [
+			"\\begin{fact}",
+			"\t$1",
+			"\\end{fact}"
+		]
+	},
+	"alignedequation" : {
+		"prefix": "BEQAL",
+		"body": [
+			"\\begin{equation}",
+			"\t\\begin{aligned}",
+			"\t\t$1",
+			"\t\\end{aligned}",
+			"\\end{equation}"
+		]
+	},
+	"starredalignedequation" : {
+		"prefix": "BSEQAL",
+		"body": [
+			"\\begin{equation*}",
+			"\t\\begin{aligned}",
+			"\t\t$1",
+			"\t\\end{aligned}",
+			"\\end{equation*}"
+		]
+	},
+	"img": {
+		"prefix": "IMG",
+		"body": [
+			"\\begin{figure}[H]",
+			"\t\\centering",
+			"\t\\includegraphics[width=0.75\\textwidth]{$1}",
+			"\t\\caption{$2}",
+			"\t\\label{fig:$1}",
+			"\\end{figure}",
+			"$3"
+		]
+	},
+	"set": {
+		"prefix": "SET",
+		"body": [
+			"\\{ $1 \\\\}"
+		]
+	}
+	
+}

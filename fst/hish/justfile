@@ -1,0 +1,16 @@
+ln_dir := 'ln -sv'
+rm_tree := 'rm -Rf'
+
+fish_config_dir := env_var('HOME') / '.config' / 'fish'
+fish_main_dir := justfile_directory() / 'fish-main'
+fish_cfg_file := fish_config_dir / 'config.fish'
+
+default: link-fish-main
+
+# symlink main fish configuration
+link-fish-main:
+    {{rm_tree}} {{fish_config_dir}}
+    {{ln_dir}} {{fish_main_dir}} {{fish_config_dir}}
+
+clean-fish-cfg:
+    rm -f {{fish_cfg_file}}

@@ -1,0 +1,12 @@
+ln_dir := 'ln -sv'
+rm_tree := 'rm -Rf'
+
+wez_config_dir := env_var('HOME') / '.config' / 'wezterm'
+wez_main_dir := parent_directory(justfile_directory()) / 'wezterm-main'
+
+default: link-wez-main
+
+# symlink main wezterm configuration
+link-wez-main:
+    {{rm_tree}} {{wez_config_dir}}
+    {{ln_dir}} {{wez_main_dir}} {{wez_config_dir}}

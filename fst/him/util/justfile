@@ -1,0 +1,16 @@
+ln_dir := 'ln -sv'
+rm_tree := 'rm -Rf'
+
+nvim_config_dir := env_var('HOME') / '.config' / 'nvim'
+nvim_main_dir := parent_directory(justfile_directory()) / 'nvim-main'
+
+default: link-nvim-main
+
+# symlink main nvim configuration
+link-nvim-main:
+    {{rm_tree}} {{nvim_config_dir}}
+    {{ln_dir}} {{nvim_main_dir}} {{nvim_config_dir}}
+
+link-vim:
+    @echo "nothing to do..."
+

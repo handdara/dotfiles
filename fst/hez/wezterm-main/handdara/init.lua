@@ -1,0 +1,61 @@
+local wezterm = require('wezterm')
+
+local hColors = require('handdara.colors')
+local hKeymap = require('handdara.keymap')
+local hDomain = require('handdara.domain')
+local hLaunch = require('handdara.launch')
+local hFonts  = require('handdara.fonts')
+-- local hMachines = require('handdara.machines')
+
+local config = {}
+if wezterm.config_builder then
+  config = wezterm.config_builder()
+end
+
+-- set theme & opacity
+config.colors = hColors.colors
+config.window_background_opacity = 0.75
+config.inactive_pane_hsb = {
+  saturation = 0.9,
+  brightness = 0.75,
+}
+
+-- fonts and window settings
+local default_font = hFonts.jetbrains
+config.font = default_font
+config.font_size = 14.0
+config.enable_tab_bar = false -- making the window layout simple, 99 times out of 100 scaling is handled
+config.window_decorations = "RESIZE" -- by my window manager even in the other cases, i usually just maximize
+config.window_frame = {
+  font = hFonts.jetbrains,
+  font_size = 12.0,
+}
+config.window_padding = {
+  left = 4,
+  right = 4,
+  top = 0,
+  bottom = 0,
+}
+config.enable_wayland = true -- i was using a os with wayland, but not atm, i'll uncomment if i go back
+
+config.disable_default_key_bindings = true -- i like to only use my own keymaps, i'll add more over time but it's pretty minimal rn
+config.keys = hKeymap.keys
+config.key_tables = hKeymap.key_tables
+
+config.default_prog = hLaunch.shells.bash
+config.unix_domains = hDomain.unix_domains
+config.launch_menu = hLaunch.launch_menu
+if wezterm.target_triple == "x86_64-windows-msvc" then
+  config.default_domain = hDomain.wsl_domain
+else
+  config.default_gui_startup_args = {
+    'connect',
+    hDomain.startup_domain,
+    'fish',
+    '-i',
+    '-C',
+    'neofetch',
+  }
+end
+
+return config
