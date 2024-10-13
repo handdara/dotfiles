@@ -22,30 +22,29 @@ update-core-commits:
 
 # run core/tool justfiles
 core: pull-core-submodules
-  just {{dotfiles_dir}}/core/him/util/
-  just {{dotfiles_dir}}/core/hez/util/
-  just {{dotfiles_dir}}/core/hish/util/
-  just {{dotfiles_dir}}/core/hix/util/
-  just {{dotfiles_dir}}/core/git/
+  just {{dotfiles_dir}}/fst/him/util/
+  just {{dotfiles_dir}}/fst/hez/util/
+  just {{dotfiles_dir}}/fst/hish/util/
+  just {{dotfiles_dir}}/fst/git/
 
 # re-link nixos configs and rebuild OS, builds using most up to date method
 rebuild: pull-core-submodules
-  just {{dotfiles_dir}}/core/hix/util/ r
+  just {{dotfiles_dir}}/hix/ r
 
 # run secondary/tool justfiles
 secondary:
-  just {{dotfiles_dir}}/secondary/gitui/
-  just {{dotfiles_dir}}/secondary/matlab/
-  just {{dotfiles_dir}}/secondary/starship/
-  just {{dotfiles_dir}}/secondary/bash/
+  just {{dotfiles_dir}}/snd/gitui/
+  just {{dotfiles_dir}}/snd/matlab/
+  just {{dotfiles_dir}}/snd/starship/
+  just {{dotfiles_dir}}/snd/bash/
   
 # clean bash config
 clean-bash:
-  just {{dotfiles_dir}}/secondary/bash/ clean
+  just {{dotfiles_dir}}/snd/bash/ clean
 
 # clean fish config
 clean-fish:
-  just {{dotfiles_dir}}/core/hish/ clean-fish-cfg
+  just {{dotfiles_dir}}/fst/hish/ clean-fish-cfg
 
 # update submodules with remote merge opts
 merge-submodules:

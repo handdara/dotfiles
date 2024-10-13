@@ -1,6 +1,6 @@
-# quick rebuilding aliases, builds using most up to date method
-alias r := rebuild-flake
-alias h := rebuild-home-mngr-flake
+# quick rebuilding aliases, 
+alias r := rebuild
+alias h := rebuild-home-mngr
 
 nixconf_filename := 'configuration.nix'
 hw_conf_filename := 'hardware-configuration.nix'
@@ -20,6 +20,12 @@ homemngr_dir_to := env_var('HOME') / '.config' / homemngr_dirname
 default: 
     @echo "hix justfile does not link by default"
     @just -l
+
+# builds using most up to date method
+rebuild: rebuild-flake
+
+# home manager: builds using most up to date method
+rebuild-home-mngr: rebuild-home-mngr-flake
 
 # snd rebuild mth; flake-based from nixos-main directory
 rebuild-flake:
