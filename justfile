@@ -1,26 +1,25 @@
 alias ms := merge-submodules
 alias su := submod-update
 alias r := rebuild
-alias snd := secondary
-alias ucc := update-core-commits
+alias ufc := update-fst-commits
 
 dotfiles_dir := justfile_directory()
 
 # no default at the moment
 default:
 
-# init/update core git submodules
+# init/update fst git submodules
 submod-update:
   git submodule init
   git submodule update --init --recursive
 
-# git add core, commit and push
-update-core-commits:
-  git add core
-  git commit -m "update core submodules' commit ptrs"
+# git add fst, commit and push
+update-fst-commits:
+  git add fst
+  git commit -m "update fst submodules' commit ptrs"
   git push
 
-# run core/tool justfiles
+# run fst/tool justfiles
 fst: submod-update
   just {{dotfiles_dir}}/fst/him/util/
   just {{dotfiles_dir}}/fst/hez/util/
@@ -32,7 +31,7 @@ rebuild: submod-update
   just {{dotfiles_dir}}/hix/ r
 
 # run secondary/tool justfiles
-secondary:
+snd:
   just {{dotfiles_dir}}/snd/gitui/
   just {{dotfiles_dir}}/snd/matlab/
   just {{dotfiles_dir}}/snd/starship/
