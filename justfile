@@ -1,5 +1,5 @@
 alias ms := merge-submodules
-alias ps := pull-core-submodules
+alias su := submod-update
 alias r := rebuild
 alias snd := secondary
 alias ucc := update-core-commits
@@ -10,7 +10,7 @@ dotfiles_dir := justfile_directory()
 default:
 
 # init/update core git submodules
-pull-core-submodules:
+submod-update:
   git submodule init
   git submodule update --init --recursive
 
@@ -21,14 +21,14 @@ update-core-commits:
   git push
 
 # run core/tool justfiles
-core: pull-core-submodules
+fst: submod-update
   just {{dotfiles_dir}}/fst/him/util/
   just {{dotfiles_dir}}/fst/hez/util/
   just {{dotfiles_dir}}/fst/hish/util/
   just {{dotfiles_dir}}/fst/git/
 
 # re-link nixos configs and rebuild OS, builds using most up to date method
-rebuild: pull-core-submodules
+rebuild: submod-update
   just {{dotfiles_dir}}/hix/ r
 
 # run secondary/tool justfiles
