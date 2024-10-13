@@ -39,7 +39,7 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".tmp".source = ../../../fst/hish/README.md;
+    # ".tmp".source = ../../../fst/hish/README.md;
     # ".config/fish/config.fish".source = ../../../fst/hish/fish-main/config.fish;
     # ".config/fish/functions" = {
     #   source = ../../../fst/hish/fish-main/functions;

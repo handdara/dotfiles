@@ -6,16 +6,13 @@ nixconf_filename := 'configuration.nix'
 hw_conf_filename := 'hardware-configuration.nix'
 homemngr_dirname := 'home-manager'
 
-nix_main_dir := justfile_directory() / 'nix-main'
+nix_main_dir := justfile_directory()
 
 nixconf_fr := nix_main_dir / nixconf_filename
 nixconf_to := / 'etc' / 'nixos' / nixconf_filename
 
 hw_conf_fr := nix_main_dir / hw_conf_filename
 hw_conf_to := / 'etc' / 'nixos' / hw_conf_filename
-
-homemngr_dir_fr := nix_main_dir / homemngr_dirname
-homemngr_dir_to := env_var('HOME') / '.config' / homemngr_dirname
 
 default: 
     @echo "hix justfile does not link by default"
