@@ -1,6 +1,0 @@
-git_config_to := env_var('HOME') / '.gitconfig'
-git_config_fr := justfile_directory() / '.gitconfig'
-
-# symlink .gitconfig
-link-gitconfig:
-    ln -svf {{git_config_fr}} {{git_config_to}}
