@@ -2,7 +2,7 @@ ln_dir := 'ln -sv'
 rm_tree := 'rm -Rf'
 
 wez_config_dir := env_var('HOME') / '.config' / 'wezterm'
-wez_main_dir := parent_directory(justfile_directory()) / 'wezterm-main'
+wez_main_dir := justfile_directory() / 'wezterm-main'
 
 default: link-wez-main
 

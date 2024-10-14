@@ -2,7 +2,7 @@ ln_dir := 'ln -sv'
 rm_tree := 'rm -Rf'
 
 nvim_config_dir := env_var('HOME') / '.config' / 'nvim'
-nvim_main_dir := parent_directory(justfile_directory()) / 'nvim-main'
+nvim_main_dir := justfile_directory() / 'nvim-main'
 
 default: link-nvim-main
 
