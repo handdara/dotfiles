@@ -25,7 +25,7 @@
     homeConfigurations = {
       handdara = hmlib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home-manager/home.nix ];
+        modules = [ ./home.nix ];
       };
     };
   };
