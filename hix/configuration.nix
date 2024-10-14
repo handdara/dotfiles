@@ -3,7 +3,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./machines/sha76/hardware-configuration.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

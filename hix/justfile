@@ -1,4 +1,4 @@
-# quick rebuilding aliases, 
+# quick rebuilding aliases
 alias r := rebuild
 alias h := rebuild-home-mngr
 
@@ -11,7 +11,7 @@ nix_main_dir := justfile_directory()
 nixconf_fr := nix_main_dir / nixconf_filename
 nixconf_to := / 'etc' / 'nixos' / nixconf_filename
 
-hw_conf_fr := nix_main_dir / hw_conf_filename
+hw_conf_fr := nix_main_dir / 'machines' / 'sha76' / hw_conf_filename
 hw_conf_to := / 'etc' / 'nixos' / hw_conf_filename
 
 default: 
