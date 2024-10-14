@@ -39,22 +39,22 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/fish/config.fish".source = ../../fst/hish/fish-main/config.fish;
+    ".config/fish/config.fish".source = ../fst/hish/fish-main/config.fish;
     ".config/fish/functions" = {
-      source = ../../fst/hish/fish-main/functions;
+      source = ../fst/hish/fish-main/functions;
       recursive = true;
     };
     ".config/nvim" = {
-      source = ../../fst/him/nvim-main;
+      source = ../fst/him/nvim-main;
       recursive = true;
     };
     ".config/wezterm" = {
-      source = ../../fst/hez/wezterm-main;
+      source = ../fst/hez/wezterm-main;
       recursive = true;
     };
-    ".config/starship.toml".source = ../../snd/starship/starship.toml;
-    ".config/gitui/key_bindings.ron".source = ../../snd/gitui/key_bindings.ron;
-    ".config/gitui/theme.ron".source = ../../snd/gitui/theme.ron;
+    ".config/starship.toml".source = ../snd/starship/starship.toml;
+    ".config/gitui/key_bindings.ron".source = ../snd/gitui/key_bindings.ron;
+    ".config/gitui/theme.ron".source = ../snd/gitui/theme.ron;
   };
 
   # Home Manager can also manage your environment variables through
