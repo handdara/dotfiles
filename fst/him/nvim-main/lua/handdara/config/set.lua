@@ -9,7 +9,7 @@ vim.wo.relativenumber = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
-vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. See `:help 'clipboard'`
+-- vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. See `:help 'clipboard'`
 
 vim.o.breakindent = true -- Enable break indent
 
@@ -37,7 +37,7 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
-vim.o.shell = "/usr/bin/fish"
+vim.o.shell = "fish"
 
 vim.o.splitright = true
 vim.o.splitbelow = true

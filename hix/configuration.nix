@@ -3,8 +3,20 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix")
-    ];
+      (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix") 
+    ] ++ 
+    ( if sysSettings.useDisplayLink
+        then [ ./system/hardware/displaylink/displaylink.nix ]
+        else [] 
+    );
+
+  # imports =
+  #   [ # Include the results of the hardware scan.
+  #     ( if sysSettings.hostname == "sha76"
+  #         then ./machines/sha76/hardware-configuration.nix
+  #         else abort "unrecognized sysSettings.hostname"
+  #     )
+  #   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -40,18 +52,18 @@
     LC_TIME = sysSettings.locale;
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services.xserver = {
+    enable = true; # Enable the X11 windowing system.
+    displayManager.gdm.enable = true; # Enable the GNOME Desktop Environment.
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.wayland = !sysSettings.useDisplayLink; # displaylink driver set up for x11
+    xkb = { # Configure keymap in X11
+      layout = "us";
+      variant = "";
+    };
   };
+
+  services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -71,9 +83,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userSettings.username} = {
@@ -96,7 +105,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile.
+  # base system packages
   environment.systemPackages = with pkgs; [
     nvi
     vim
@@ -105,6 +114,8 @@
     git
     just
     wezterm
+    unzip
+    xclip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

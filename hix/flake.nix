@@ -15,6 +15,7 @@
         hostname = "sha76";
         timezone = "America/New_York";
         locale = "en_US.UTF-8";
+        useDisplayLink = true;
       };
       # USER SETTINGS
       userSettings = rec {
@@ -35,6 +36,7 @@
           ./configuration.nix
         ];
         specialArgs = {
+          inherit lib;
           inherit sysSettings;
           inherit userSettings;
         };
