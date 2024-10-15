@@ -2,11 +2,10 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix") 
+    [ (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix") 
     ] ++ 
     ( if sysSettings.useDisplayLink
-        then [ ./system/hardware/displaylink/displaylink.nix ]
+        then [ ./system/hardware/displaylink/default.nix ]
         else [] 
     );
 
