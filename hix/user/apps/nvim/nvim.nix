@@ -6,4 +6,8 @@
       recursive = true;
     };
   };
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+  };
 }

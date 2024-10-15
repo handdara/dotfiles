@@ -63,8 +63,4 @@
   };
 
   programs.home-manager.enable = true; # Let Home Manager install and manage itself.
-
-  programs.neovim = {
-    viAlias = true;
-  };
 }
