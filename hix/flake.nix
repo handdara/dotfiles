@@ -36,7 +36,6 @@
           ./configuration.nix
         ];
         specialArgs = {
-          inherit lib;
           inherit sysSettings;
           inherit userSettings;
         };

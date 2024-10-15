@@ -3,6 +3,7 @@ rm_tree := 'rm -Rf'
 
 nvim_config_dir := env_var('HOME') / '.config' / 'nvim'
 nvim_main_dir := justfile_directory() / 'nvim-main'
+lazylock_file := nvim_config_dir / 'lazy-lock.json'
 
 default: link-nvim-main
 
@@ -10,6 +11,10 @@ default: link-nvim-main
 link-nvim-main:
     {{rm_tree}} {{nvim_config_dir}}
     {{ln_dir}} {{nvim_main_dir}} {{nvim_config_dir}}
+
+# retrieve the lazy lockfile
+get-lazylock:
+    cp -f {{lazylock_file}} {{nvim_main_dir}}
 
 link-vim:
     @echo "nothing to do..."

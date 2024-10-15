@@ -10,9 +10,9 @@ default:
 
 # run core/tool justfiles
 fst:
-  # just {{dotfiles_dir}}/fst/him/util/
-  # just {{dotfiles_dir}}/fst/hez/util/
-  # just {{dotfiles_dir}}/fst/hish/util/
+  # just {{dotfiles_dir}}/fst/him/
+  # just {{dotfiles_dir}}/fst/hez/
+  # just {{dotfiles_dir}}/fst/hish/
   # just {{dotfiles_dir}}/fst/git/
 
 # run secondary/tool justfiles
@@ -39,3 +39,7 @@ clean-bash:
 # clean fish config
 clean-fish:
   just {{dotfiles_dir}}/fst/hish/ clean-fish-cfg
+
+# retrieve the lazy.vim lock-file
+get-lazylock:
+  just {{dotfiles_dir}}/fst/him/ get-lazylock
