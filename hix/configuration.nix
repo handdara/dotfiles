@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, sysSettings, userSettings, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./machines/sha76/hardware-configuration.nix
+      (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix")
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -12,7 +12,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "sha76"; # Define your hostname.
+  networking.hostName = sysSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -23,21 +23,21 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = sysSettings.timezone;
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = sysSettings.locale;
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS = sysSettings.locale;
+    LC_IDENTIFICATION = sysSettings.locale;
+    LC_MEASUREMENT = sysSettings.locale;
+    LC_MONETARY = sysSettings.locale;
+    LC_NAME = sysSettings.locale;
+    LC_NUMERIC = sysSettings.locale;
+    LC_PAPER = sysSettings.locale;
+    LC_TELEPHONE = sysSettings.locale;
+    LC_TIME = sysSettings.locale;
   };
 
   # Enable the X11 windowing system.
@@ -76,9 +76,9 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.handdara = {
+  users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = "handdara";
+    description = userSettings.name;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird

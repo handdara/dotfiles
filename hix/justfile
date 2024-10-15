@@ -1,6 +1,9 @@
 # quick rebuilding aliases
 alias r := rebuild
 alias h := rebuild-home-mngr
+alias trf := test-rebuild-flake
+alias thf := test-rebuild-home-mngr-flake
+alias tf := test-flake
 
 nixconf_filename := 'configuration.nix'
 hw_conf_filename := 'hardware-configuration.nix'
@@ -40,3 +43,14 @@ link-etc-confs:
 # link and then rebuild and switch home-manager
 rebuild-home-mngr-flake: 
     cd {{nix_main_dir}} && home-manager switch --flake .
+
+# test system rebuild
+test-rebuild-flake:
+    cd {{nix_main_dir}} && sudo nixos-rebuild test --flake .
+
+# test home-manager rebuild
+test-rebuild-home-mngr-flake: 
+    cd {{nix_main_dir}} && home-manager -n switch --flake .
+
+# test system & home-manager rebuild
+test-flake: test-rebuild-flake test-rebuild-home-mngr-flake 

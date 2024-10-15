@@ -9,23 +9,45 @@
 
   outputs = {self, nixpkgs, home-manager, ...}: 
     let
-      system = "x86_64-linux";
+      # SYSTEM SETTINGS
+      sysSettings = rec {
+        system = "x86_64-linux";
+        hostname = "sha76";
+        timezone = "America/New_York";
+        locale = "en_US.UTF-8";
+      };
+      # USER SETTINGS
+      userSettings = rec {
+        username = "handdara";
+        name = "handdara";
+        email = "handdara.core@proton.me";
+        browser = "firefox";
+        editor = "nvim";
+      };
       lib = nixpkgs.lib;
       hmlib = home-manager.lib;
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = nixpkgs.legacyPackages.${sysSettings.system};
     in {
     nixosConfigurations = {
       sha76 = lib.nixosSystem {
-        inherit system;
+        system = sysSettings.system;
         modules = [
           ./configuration.nix
         ];
+        specialArgs = {
+          inherit sysSettings;
+          inherit userSettings;
+        };
       };
     };
     homeConfigurations = {
       handdara = hmlib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home.nix ];
+        extraSpecialArgs = {
+          inherit sysSettings;
+          inherit userSettings;
+        };
       };
     };
   };
