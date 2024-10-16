@@ -89,18 +89,18 @@ abbr --add oc "z (find ~/code -mindepth 1 -type d \
 | fzf)"
 
 abbr --add oscr "z ~/.local/scripts" # "open scripts sub-directory"
-
 abbr --add oconf "z (find ~/.config -type d | fzf)" # "open config sub-directory"
-
 abbr --add od "z (find . -type d | fzf)" # "open sub-directory"
-
 abbr --add omeg "z (find ~/MEGA -type d | fzf)" # "open mega sub-directory"
 
-abbr --add efc "$EDITOR (find ~/code -mindepth 1 | fzf)" # open editor with fuzzy find in common directories
+abbr --add qe --set-cursor=! "$EDITOR (find ! -mindepth 1 | fzf)" # [Q]uick [E]dit a file
+abbr --add qec --set-cursor=! "$EDITOR (find ~/code -mindepth 1 | fzf)" # [Q]uick [E]dit a code file
 
-# command line clipboard
-abbr --add xc "xclip"
-abbr --add xp "xclip -o"
+# command line/clipboard interop help
+abbr --add xc --position anywhere "xclip -selection clipboard"
+abbr --add xp --position anywhere "xclip -selection clipboard -o"
+abbr --add xcv --position anywhere "xclip"
+abbr --add xpv --position anywhere "xclip -o"
 
 # porsmo abbreviations, quick timers
 abbr --add pt --set-cursor=! "porsmo timer (math !\*60)" # time in minutes
@@ -109,21 +109,12 @@ abbr --add pts "porsmo stopwatch"
 
 abbr --add vi "nvim"
 
+# command I wrote for managing my fish stuff, can reload my config as well
 abbr --add mg "manage"
-abbr --add config-refresh "source ~/.config/fish/config.fish"
-abbr --add conf-r "source ~/.config/fish/config.fish"
-
-# abbr --add ok "flatpak run org.kde.okular"
-# abbr --add okf "okular-file (find -L ./ -type f -name \"*.pdf\" -o -name \"*.jpg\" -not -path '*/.*'| fzf)"
-# abbr --add okm "okular-file (find -L ~/MEGA -type f -name \"*.pdf\" -o -name \"*.jpg\" -not -path '*/.*'| fzf)"
-# abbr --add okd "okular-file (find -L ~/MEGA/docs -type f -name \"*.pdf\" -o -name \"*.jpg\" -not -path '*/.*'| fzf)"
-# abbr --add mkpdf "md2pdf.hs (find . -maxdepth 1 -name '*.md' -type f -not -path '*/.*'| fzf)"
-
-# abbr --add matlab "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab"
-# abbr --add matlab-cli "LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 matlab -nodesktop -nosplash"
-# abbr --add matlab-cli "matlab -nodesktop -nosplash"
 
 abbr --add --set-cursor=! m "math '(!)'"
+
+# CLI inits
 
 zoxide init fish | source
 
