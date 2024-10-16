@@ -3,14 +3,26 @@ rm_tree := 'rm -Rf'
 
 fish_config_dir := env_var('HOME') / '.config' / 'fish'
 fish_main_dir := justfile_directory() / 'fish-main'
+fish_func_dir := fish_main_dir / 'functions'
 fish_cfg_file := fish_config_dir / 'config.fish'
 
-default: link-fish-main
+# lists available commands
+default:
+    @just --list
 
 # symlink main fish configuration
 link-fish-main:
     {{rm_tree}} {{fish_config_dir}}
     {{ln_dir}} {{fish_main_dir}} {{fish_config_dir}}
 
+# copy fish functions for use, skips collisions
+cp-fish-funcs:
+    cp -vrn {{fish_func_dir}} {{fish_config_dir}}/functions
+
+# cleans out the fish config dir
+clean-fish-dir:
+    {{rm_tree}} {{fish_config_dir}}
+
+# cleans out the fish config file
 clean-fish-cfg:
     rm -f {{fish_cfg_file}}

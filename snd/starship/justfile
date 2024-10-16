@@ -4,7 +4,13 @@ starship_toml := 'starship.toml'
 starship_to := env_var('HOME') / '.config' / starship_toml
 starship_fr := justfile_directory() / starship_toml
 
-default: link-starship
+# list cmds
+default: 
+    @just --list
+
+# clean starship configuration toml
+clean-starship:
+    rm -f {{starship_to}}
 
 # symlink starship configuration toml
 link-starship:

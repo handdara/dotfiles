@@ -1,6 +1,6 @@
 format = """
 [░▒▓](cyan)\
-[  ](bg:cyan fg:black)\
+[  ](bg:cyan fg:black)\
 [](bg:green fg:cyan)\
 $directory\
 [](fg:green bg:blue)\
@@ -32,11 +32,14 @@ truncation_symbol = "…/"
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
-"Dropbox" = "󰇣 "
-"code" = "󰘧 "
+"code" = " "
+"MEGA" = "󰰐 "
 
 [character]
-success_symbol = '[ 󰘧 ](fg:blue bg:black) '
+success_symbol = '[ 󱞪 ](fg:cyan bg:black) '
+vimcmd_symbol = '[  ](fg:blue bg:black) '
+vimcmd_visual_symbol = '[  ](fg:purple bg:black) '
+vimcmd_replace_symbol = '[  ](fg:yellow bg:black) '
 error_symbol = '[ 󰲉 ](bold fg:red bg:black) '
 # error_symbol = '[ 󰚑 ](bold fg:red bg:black) '
 format = '[$symbol](bg:black)'
@@ -51,7 +54,7 @@ style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:black bg:blue)]($style)'
 
 [rust]
-symbol = " "
+symbol = " "
 style = "bg:black"
 format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
 
@@ -61,7 +64,7 @@ style = "bg:black"
 format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
 
 [haskell]
-symbol = " "
+symbol = " "
 style = "bg:black"
 format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
 

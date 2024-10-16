@@ -53,10 +53,6 @@ abbr --add e "eza"
 abbr --add ea "eza -a"
 abbr --add el "eza -l"
 abbr --add ela "eza -la"
-
-# fish just abbrs
-abbr --add j "just"
-
 abbr --add et "eza -T --group-directories-first"
 alias et "eza -T --group-directories-first"
 alias e2 "eza -T --group-directories-first -L2"
@@ -68,13 +64,18 @@ alias eg "eza -Tl --git --git-ignore --no-time --no-permissions --extended"
 abbr --add ed "eza -lTD"
 alias ed "eza -lTD"
 
-abbr --add batconf "bat (find ~/.config -type f | fzf)"
-abbr --add batcode "bat (find ~/code -type f | fzf)"
-
+# dir and subdirectory abbrs
+abbr --add zd --set-cursor=! 'z (find .! -type d | fzf)'
 abbr --add fdir --set-cursor=! "find ~! -type d -not -path '*/.*'| fzf" # find directory
 abbr --add fdira --set-cursor=! "find ! -type d | fzf" # find directory including `.___` dirs 
 abbr --add ff --set-cursor=! "find ~! -type f -not -path '*/.*'| fzf" # find file
 abbr --add ffa --set-cursor=! "find ! -type f | fzf" # find file including `.___` dirs 
+
+abbr --add batconf "bat (find ~/.config -type f | fzf)"
+abbr --add batcode "bat (find ~/code -type f | fzf)"
+
+# fish just abbrs
+abbr --add j "just"
 
 abbr --add op "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)" # "open project"
 

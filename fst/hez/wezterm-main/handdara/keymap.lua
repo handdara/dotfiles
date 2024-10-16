@@ -25,6 +25,7 @@ local function mkKeyTbls(wkspTbl)
       { key = 'g',      action = act.ScrollToTop },
       { key = 'g',      mods = 'SHIFT',                 action = act.ScrollToBottom },
       { key = 'Escape', action = 'PopKeyTable' },
+      { key = 'q',      action = 'PopKeyTable' },
     },
     -- search_mode = {
     --   { key = 'Enter',  mods = 'NONE', action = act.CopyMode 'PriorMatch' },
@@ -78,17 +79,17 @@ local function mkKeys(wkspTbl)
     {
       key = 'x',
       mods = 'ALT|SHIFT',
-      action = act.SwitchToWorkspace( wkspTbl.misc ),
+      action = act.SwitchToWorkspace(wkspTbl.misc),
     },
     {
       key = 'm',
       mods = 'ALT|SHIFT',
-      action = act.SwitchToWorkspace( wkspTbl.monitoring ),
+      action = act.SwitchToWorkspace(wkspTbl.monitoring),
     },
     {
       key = 's',
       mods = 'ALT|SHIFT',
-      action = act.SwitchToWorkspace( wkspTbl.spotify ),
+      action = act.SwitchToWorkspace(wkspTbl.spotify),
     },
     {
       key = 'r',

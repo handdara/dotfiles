@@ -29,13 +29,14 @@ local function mkConfig(xclipFound)
 
   -- fonts and window settings
   local default_font = hFonts.hasklug
+  local default_font_size = 13.0
   config.font = default_font
-  config.font_size = 12.0
-  config.enable_tab_bar = false -- making the window layout simple, 99 times out of 100 scaling is handled
+  config.font_size = default_font_size
+  config.enable_tab_bar = false        -- making the window layout simple, 99 times out of 100 scaling is handled
   config.window_decorations = "RESIZE" -- by my window manager even in the other cases, i usually just maximize
   config.window_frame = {
     font = hFonts.hasklug,
-    font_size = 12.0,
+    font_size = default_font_size,
   }
   config.window_padding = {
     left = 4,
@@ -43,7 +44,7 @@ local function mkConfig(xclipFound)
     top = 0,
     bottom = 0,
   }
-  config.enable_wayland = true -- i was using a os with wayland, but not atm, i'll uncomment if i go back
+  config.enable_wayland = true               -- i was using a os with wayland, but not atm, i'll uncomment if i go back
 
   config.disable_default_key_bindings = true -- i like to only use my own keymaps, i'll add more over time but it's pretty minimal rn
   config.keys = keys

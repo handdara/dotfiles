@@ -1,5 +1,6 @@
 alias test := test-rebuild-nixos-home
 alias switch := rebuild-switch-nixos-home
+alias home := rebuild-switch-home
 
 dotfiles_dir := justfile_directory()
 
@@ -32,13 +33,17 @@ rebuild-switch-nixos-home:
   just {{dotfiles_dir}}/hix/ rebuild
   just {{dotfiles_dir}}/hix/ rebuild-home-mngr
 
-# clean bash config
-clean-bash:
-  just {{dotfiles_dir}}/snd/bash/ clean
+# rebuild only home-manager using most up-to-date method and switch
+rebuild-switch-home:
+  just {{dotfiles_dir}}/hix/ rebuild-home-mngr
 
 # clean fish config
 clean-fish:
   just {{dotfiles_dir}}/fst/hish/ clean-fish-cfg
+
+# clean starship config
+clean-starship:
+  just {{dotfiles_dir}}/snd/starship/ clean-starship
 
 # retrieve the lazy.vim lock-file
 get-lazylock:
