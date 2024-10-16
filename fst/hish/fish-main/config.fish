@@ -109,6 +109,7 @@ abbr --add pts "porsmo stopwatch"
 
 abbr --add vi "nvim"
 
+abbr --add mg "manage"
 abbr --add config-refresh "source ~/.config/fish/config.fish"
 abbr --add conf-r "source ~/.config/fish/config.fish"
 
