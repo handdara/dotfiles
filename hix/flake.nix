@@ -5,9 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    kmonad = {
+      url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {self, nixpkgs, home-manager, ...}: 
+  outputs = {self, nixpkgs, home-manager, kmonad, ...}: 
     let
       # SYSTEM SETTINGS
       sysSettings = rec {
@@ -34,6 +38,7 @@
         system = sysSettings.system;
         modules = [
           ./configuration.nix
+          kmonad.nixosModules.default
         ];
         specialArgs = {
           inherit sysSettings;

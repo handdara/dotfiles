@@ -11,6 +11,8 @@
     ./user/apps/zoxide/default.nix
     ./user/apps/eza/default.nix
     ./user/apps/bat/default.nix
+    ./user/apps/megasync/default.nix
+    ./user/apps/kmonad/default.nix
   ];
 
   home.username = userSettings.username;
@@ -20,6 +22,8 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
+
+  nixpkgs.config.allowUnfree = true;
 
   home.sessionVariables = {
     EDITOR = userSettings.editor;

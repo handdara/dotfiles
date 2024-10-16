@@ -1,5 +1,5 @@
 function start-kmonad
-    cd ~/.dotfiles/debian_based/kmonad/keymap 
+    cd ~/.config/kmonad
     set -Ux KBD_DEV (find /dev/input/by-path/*kbd* | fzf)
     set KBD_CONF (fd --glob -tf -d 1 -e kbd | fzf) 
     set KBDCFG (envsubst < $KBD_CONF)

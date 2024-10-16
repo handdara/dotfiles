@@ -4,6 +4,7 @@
   imports =
     [ (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix") 
       ./system/fonts/nerdfonts/default.nix 
+      ./system/hardware/kmonad/default.nix
     ] ++ 
     ( if sysSettings.useDisplayLink
         then [ ./system/hardware/displaylink/default.nix ]
