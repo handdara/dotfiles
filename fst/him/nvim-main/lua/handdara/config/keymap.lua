@@ -1,11 +1,7 @@
 local wk = require("which-key")
 
--- [[ Basic Keymaps ]]
-
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 vim.keymap.set('n', 'Q', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
@@ -17,6 +13,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- vim.keymap.set("n", "<leader>ph", vim.cmd.Hex, { desc = "Handdara: `:Hex`" })
 vim.keymap.set('n', '<leader>pf', '<CMD>lua MiniFiles.open()<CR>', { desc = 'MiniFiles.open()' })
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Handdara: Open undo tree" })
+vim.keymap.set('n', '<leader>o', '<CMD>Oil<CR>', { desc = "Handdara: Open Oil" })
 
 -- Better feeling exit insert mode
 vim.keymap.set('i', "jk", "<Esc>")
@@ -64,6 +61,9 @@ vim.keymap.set('n', '<leader>sw', tbi.grep_string, { desc = '[S]earch current [W
 vim.keymap.set('n', '<leader>sg', tbi.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', tbi.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', tbi.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sm', tbi.marks, { desc = '[S]earch [M]arks' })
+vim.keymap.set('n', '<leader>sj', tbi.jumplist, { desc = '[S]earch [J]umplist' })
+vim.keymap.set('n', '<leader>st', '<CMD>Telescope<CR>', { desc = '[S]earch [T]elescope' })
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', tbi.oldfiles, { desc = '[?] Find recently opened files' })

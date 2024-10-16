@@ -2,7 +2,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.opt.shortmess:append({ I = true }) -- disable startup screen
+vim.opt.shortmess:append({ I = true })                      -- disable startup screen
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim' -- Install package manager
 if not vim.loop.fs_stat(lazypath) then
@@ -18,4 +18,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup("handdara.plugins", {}) -- load my plugins
-require("handdara.config") -- do configuration
+require("handdara.config")                    -- do configuration
