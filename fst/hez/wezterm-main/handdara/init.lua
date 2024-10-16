@@ -5,6 +5,7 @@ local hKeymap = require('handdara.keymap')
 local hDomain = require('handdara.domain')
 local hLaunch = require('handdara.launch')
 local hFonts  = require('handdara.fonts')
+local hWksp   = require('handdara.workspaces')
 -- local hMachines = require('handdara.machines')
 
 local function mkConfig(xclipFound)
@@ -14,6 +15,9 @@ local function mkConfig(xclipFound)
   end
 
   local launchTable = hLaunch.mkLaunchTable(xclipFound)
+  local wkspTbl = hWksp.mkWkspTbl(launchTable)
+  local keys = hKeymap.mkKeys(wkspTbl)
+  local keyTbls = hKeymap.mkKeyTbls(wkspTbl)
 
   -- set theme & opacity
   config.colors = hColors.colors
@@ -24,13 +28,13 @@ local function mkConfig(xclipFound)
   }
 
   -- fonts and window settings
-  local default_font = hFonts.jetbrains
+  local default_font = hFonts.hasklug
   config.font = default_font
   config.font_size = 12.0
   config.enable_tab_bar = false -- making the window layout simple, 99 times out of 100 scaling is handled
   config.window_decorations = "RESIZE" -- by my window manager even in the other cases, i usually just maximize
   config.window_frame = {
-    font = hFonts.jetbrains,
+    font = hFonts.hasklug,
     font_size = 12.0,
   }
   config.window_padding = {
@@ -42,8 +46,8 @@ local function mkConfig(xclipFound)
   config.enable_wayland = true -- i was using a os with wayland, but not atm, i'll uncomment if i go back
 
   config.disable_default_key_bindings = true -- i like to only use my own keymaps, i'll add more over time but it's pretty minimal rn
-  config.keys = hKeymap.keys
-  config.key_tables = hKeymap.key_tables
+  config.keys = keys
+  config.key_tables = keyTbls
 
   config.default_prog = launchTable.shells.fish.args
   config.unix_domains = hDomain.unix_domains
