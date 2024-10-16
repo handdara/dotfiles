@@ -1,10 +1,6 @@
 {config, pkgs, ... }:
 {
-  home.file = {
-    ".config/starship.toml".source = ../../../../snd/starship/starship.toml;
-  };
-
-  programs.starship = {
+  programs.eza = {
     enable = true;
     enableFishIntegration = true;
     enableBashIntegration = true;

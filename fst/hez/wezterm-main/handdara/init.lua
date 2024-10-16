@@ -23,7 +23,7 @@ config.inactive_pane_hsb = {
 -- fonts and window settings
 local default_font = hFonts.jetbrains
 config.font = default_font
-config.font_size = 14.0
+config.font_size = 12.0
 config.enable_tab_bar = false -- making the window layout simple, 99 times out of 100 scaling is handled
 config.window_decorations = "RESIZE" -- by my window manager even in the other cases, i usually just maximize
 config.window_frame = {
@@ -42,7 +42,7 @@ config.disable_default_key_bindings = true -- i like to only use my own keymaps,
 config.keys = hKeymap.keys
 config.key_tables = hKeymap.key_tables
 
-config.default_prog = hLaunch.shells.bash
+config.default_prog = hLaunch.shells.fish.args
 config.unix_domains = hDomain.unix_domains
 config.launch_menu = hLaunch.launch_menu
 if wezterm.target_triple == "x86_64-windows-msvc" then

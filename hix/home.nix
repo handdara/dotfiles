@@ -7,6 +7,10 @@
     ./user/apps/nvim/default.nix
     ./user/apps/starship/default.nix
     ./user/apps/gitui/default.nix
+    ./user/apps/btop/default.nix
+    ./user/apps/zoxide/default.nix
+    ./user/apps/eza/default.nix
+    ./user/apps/bat/default.nix
   ];
 
   home.username = userSettings.username;

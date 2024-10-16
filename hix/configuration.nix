@@ -3,6 +3,7 @@
 {
   imports =
     [ (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix") 
+      ./system/fonts/nerdfonts/default.nix 
     ] ++ 
     ( if sysSettings.useDisplayLink
         then [ ./system/hardware/displaylink/default.nix ]
@@ -110,11 +111,13 @@
     vim
     neovim
     wget
+    fzf
     git
     just
     wezterm
     unzip
     xclip
+    neofetch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

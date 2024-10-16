@@ -41,11 +41,21 @@ abbr --erase (abbr --list)
 
 abbr --add cat "bat"
 
+# fish git abbrs
+abbr --add gs "git status"
+abbr --add ga "git add"
+abbr --add gc "git commit"
+abbr --add gco "git checkout"
+
+# fish eza abbrs
 abbr --add ls "eza"
 abbr --add e "eza"
 abbr --add ea "eza -a"
 abbr --add el "eza -l"
 abbr --add ela "eza -la"
+
+# fish just abbrs
+abbr --add j "just"
 
 abbr --add et "eza -T --group-directories-first"
 alias et "eza -T --group-directories-first"
@@ -113,6 +123,6 @@ abbr --add conf-r "source ~/.config/fish/config.fish"
 
 abbr --add --set-cursor=! m "math '(!)'"
 
-# zoxide init fish | source
+zoxide init fish | source
 
-# starship init fish | source
+starship init fish | source

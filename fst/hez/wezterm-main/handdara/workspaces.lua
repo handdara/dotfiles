@@ -1,4 +1,5 @@
 local hDir = require 'handdara.dirs'
+local hLaunch = require 'handdara.launch'
 
 local workspaces = {
   config = { name = 'config' },
@@ -18,9 +19,7 @@ local workspaces = {
   },
   monitoring = {
     name = 'monitoring',
-    spawn = {
-      args = { 'btop' },
-    },
+    spawn = hLaunch.default_monitor,
   },
   work_notes = {
     name = 'work-notes',
