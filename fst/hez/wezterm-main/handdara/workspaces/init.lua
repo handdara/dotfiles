@@ -58,4 +58,5 @@ return {
       domain = hd.dev_domain,
     },
   },
+  mega = require('handdara.workspaces.mega'),
 }

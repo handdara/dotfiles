@@ -82,6 +82,7 @@ local keys = {
   { key = 'c',   mods = 'ALT|SHIFT',  action = act.SwitchToWorkspace(hWksp.config), },
   { key = 'd',   mods = 'ALT|SHIFT',  action = act.SwitchToWorkspace(hWksp.development), },
   { key = 'e',   mods = 'ALT|SHIFT',  action = act.SwitchToWorkspace(hWksp.personal_notes), },
+  { key = 's',   mods = 'ALT|SHIFT',  action = act.SwitchToWorkspace(hWksp.mega), },
   -- { key = 's',   mods = 'ALT|SHIFT',  action = act.SwitchToWorkspace(hWksp.spotify), },
   -- { key = 'r',   mods = 'ALT|SHIFT',  action = act.SwitchToWorkspace(hWksp.hpi), },
 }
