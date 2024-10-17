@@ -37,10 +37,19 @@ rebuild-switch-nixos-home:
 rebuild-switch-home:
   just {{dotfiles_dir}}/hix/ rebuild-home-mngr
 
+# unlink directories needed to switch home-manager
+unlink:
+  just {{dotfiles_dir}}/fst/him/ unlink
+  just {{dotfiles_dir}}/fst/hez/ unlink
+  just {{dotfiles_dir}}/fst/hish/ unlink
+
 # purge directories needed to switch home-manager
 purge:
   just {{dotfiles_dir}}/fst/hish/ purge
   just {{dotfiles_dir}}/snd/starship/ purge
+  just {{dotfiles_dir}}/fst/him/ purge
+  just {{dotfiles_dir}}/fst/hez/ purge
+  just {{dotfiles_dir}}/fst/hish/ purge
 
 # retrieve the lazy.vim lock-file
 get-lazylock:
