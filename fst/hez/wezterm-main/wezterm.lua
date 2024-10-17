@@ -1,11 +1,21 @@
-local wezterm = require 'wezterm'
+local wezterm       = require('wezterm')
+local target_triple = wezterm.target_triple
 
-local function check_for_xclip()
-  local success, stdout, stderr = wezterm.run_child_process({ "which", "xclip" })
-  return success
+local config        = {}
+if wezterm.config_builder then
+  config = wezterm.config_builder()
 end
 
-local xclipFound = check_for_xclip()
--- wezterm.log_info('xclipFound',xclipFound) -- debugging
+require('handdara.looks').apply_to_config(config)
 
-return require('handdara').mkConfig(xclipFound)
+require('handdara.launch').apply_to_config(config, target_triple)
+
+require('handdara.keymap').apply_to_config(config)
+
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():toggle_fullscreen()
+  -- window:gui_window():toast_notification('wezterm', 'started!', nil, 4000)
+end)
+
+return config

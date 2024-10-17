@@ -15,6 +15,6 @@ unlink:
     rm -f {{wez_config_ln}}
 
 # purge main wezterm configuration directory recursively
-purge: unlink
+purge:
     rm -rf {{wez_config_ln}}
 

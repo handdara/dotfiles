@@ -44,6 +44,7 @@ in
     tree-sitter
     lua-language-server # lua lang server
     rust-analyzer-unwrapped # rust lang server
+    marksman
     nil # nix lang server
   ];
 
