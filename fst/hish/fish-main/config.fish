@@ -71,8 +71,8 @@ abbr --add fdira --set-cursor=! "find ! -type d | fzf" # find directory includin
 abbr --add ff --set-cursor=! "find ~! -type f -not -path '*/.*'| fzf" # find file
 abbr --add ffa --set-cursor=! "find ! -type f | fzf" # find file including `.___` dirs 
 
-abbr --add batconf "bat (find ~/.config -type f | fzf)"
-abbr --add batcode "bat (find ~/code -type f | fzf)"
+abbr --add batconf "bat (find -L ~/.config -type f | fzf)"
+abbr --add batcode "bat (find -L ~/code -type f | fzf)"
 
 # fish just abbrs
 abbr --add j "just"

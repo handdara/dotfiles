@@ -1,21 +1,43 @@
 ln_dir := 'ln -sv'
 rm_tree := 'rm -Rf'
-
+tmp_dir := `mktemp -d`
 nvim_config_dir := env_var('HOME') / '.config' / 'nvim'
 nvim_main_dir := justfile_directory() / 'nvim-main'
 lazylock_file := nvim_config_dir / 'lazy-lock.json'
 
-default: link-nvim-main
+# list commands
+default: 
+    @just --list
 
 # symlink main nvim configuration
-link-nvim-main:
-    {{rm_tree}} {{nvim_config_dir}}
+link:
     {{ln_dir}} {{nvim_main_dir}} {{nvim_config_dir}}
+
+# purge main nvim configuration directory
+purge:
+    {{rm_tree}} {{nvim_config_dir}}
+
+_sv_cfg_init:
+    cp {{nvim_config_dir}}/lua/handdara/config/init.lua {{tmp_dir}}/config_init.lua
+
+_ld_cfg_init:
+    cp {{tmp_dir}}/config_init.lua {{nvim_config_dir}}/lua/handdara/config/init.lua
+
+_purge_nix: _sv_cfg_init
+    {{rm_tree}} {{nvim_config_dir}}
+
+# replace nix loaded config with symlink to nvim-main here
+replace-nix: _purge_nix && link _ld_cfg_init
+
+# unlink main nvim configuration directory symlink
+unlink:
+    rm -f {{nvim_config_dir}}
 
 # retrieve the lazy lockfile
 get-lazylock:
     cp -f {{lazylock_file}} {{nvim_main_dir}}
 
+# not yet implemented...
 link-vim:
     @echo "nothing to do..."
 

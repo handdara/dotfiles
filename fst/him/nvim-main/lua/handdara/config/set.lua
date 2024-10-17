@@ -3,7 +3,7 @@
 
 vim.o.hlsearch = false -- highlight on search
 
-vim.wo.number = true -- Make line numbers default and relative
+vim.wo.number = true   -- Make line numbers default and relative
 vim.wo.relativenumber = true
 
 -- Enable mouse mode
@@ -24,13 +24,15 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'no'
 
+vim.opt.colorcolumn = { 100 }
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
-vim.o.completeopt = 'menuone,noselect' -- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect' -- Set for a better completion experience
 
-vim.o.termguicolors = true -- NOTE: You should make sure your terminal supports this
+vim.o.termguicolors = true             -- NOTE: make sure your terminal supports this
 
 vim.o.tabstop = 2
 vim.o.softtabstop = 2

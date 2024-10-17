@@ -9,6 +9,7 @@ local key_tables = {
     { key = 'f',      action = act.ShowLauncherArgs { flags = 'FUZZY|LAUNCH_MENU_ITEMS' } },
     { key = 'w',      action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
     { key = 'Escape', action = 'PopKeyTable' },
+    { key = 'q',      action = 'PopKeyTable' },
   },
   resize_pane = {
     { key = 'h',      action = act.AdjustPaneSize { 'Left', 1 } },
@@ -16,6 +17,7 @@ local key_tables = {
     { key = 'k',      action = act.AdjustPaneSize { 'Up', 1 } },
     { key = 'j',      action = act.AdjustPaneSize { 'Down', 1 } },
     { key = 'Escape', action = 'PopKeyTable' },
+    { key = 'q',      action = 'PopKeyTable' },
   },
   scroll_mode = {
     { key = 'k',      action = act.ScrollByLine(-1) },

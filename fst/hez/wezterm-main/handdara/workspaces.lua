@@ -8,11 +8,14 @@ table.insert(note_args, '-c')
 table.insert(note_args, 'nvim .')
 
 return {
-  config = { name = 'config' },
+  config = {
+    name = 'config',
+    spawn = { cwd = hDirs.home_dir .. '/code/dotfiles' }
+  },
   development = {
     name = 'development',
     spawn = {
-      domain = { DomainName = hd.dev_domain },
+      domain = hd.dev_domain,
     },
   },
   misc = { name = 'miscellaneous' },
@@ -34,7 +37,7 @@ return {
     name = 'monitoring',
     spawn = {
       args = hl.default_monitor.args,
-      domain = { DomainName = hd.monitor_domain },
+      domain = hd.monitor_domain,
     },
   },
   work_notes = {
@@ -42,7 +45,8 @@ return {
     spawn = {
       args = note_args,
       cwd = hDirs.ansible_dir .. '/work',
-      domain = 'DefaultDomain',
+      -- domain = hd.notes_domain, -- debugging issue with separate domains
+      domain = hd.dev_domain,
     },
   },
   personal_notes = {
@@ -50,7 +54,8 @@ return {
     spawn = {
       args = note_args,
       cwd = hDirs.ansible_dir .. '/personal',
-      domain = 'DefaultDomain',
+      -- domain = hd.notes_domain,
+      domain = hd.dev_domain,
     },
   },
 }
