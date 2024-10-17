@@ -41,9 +41,10 @@ in
   home.packages = with pkgs; [
     ripgrep
     fd
-    lua-language-server
-    rust-analyzer-unwrapped
     tree-sitter
+    lua-language-server # lua lang server
+    rust-analyzer-unwrapped # rust lang server
+    nil # nix lang server
   ];
 
   home.file = {

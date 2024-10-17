@@ -218,3 +218,10 @@ vim.g.rustaceanvim = {
   -- dap = {
   -- },
 }
+
+-- nix lsp config
+require 'lspconfig'.nil_ls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {},
+}

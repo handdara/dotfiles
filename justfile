@@ -37,13 +37,10 @@ rebuild-switch-nixos-home:
 rebuild-switch-home:
   just {{dotfiles_dir}}/hix/ rebuild-home-mngr
 
-# clean fish config
-clean-fish:
-  just {{dotfiles_dir}}/fst/hish/ clean-fish-cfg
-
-# clean starship config
-clean-starship:
-  just {{dotfiles_dir}}/snd/starship/ clean-starship
+# purge directories needed to switch home-manager
+purge:
+  just {{dotfiles_dir}}/fst/hish/ purge
+  just {{dotfiles_dir}}/snd/starship/ purge
 
 # retrieve the lazy.vim lock-file
 get-lazylock:

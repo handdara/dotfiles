@@ -1,4 +1,4 @@
-ln_file := 'ln -svf'
+alias purge := unlink
 
 starship_toml := 'starship.toml'
 starship_to := env_var('HOME') / '.config' / starship_toml
@@ -9,9 +9,10 @@ default:
     @just --list
 
 # clean starship configuration toml
-clean-starship:
-    rm -f {{starship_to}}
+unlink:
+    rm {{starship_to}}
 
 # symlink starship configuration toml
-link-starship:
-    {{ln_file}} {{starship_fr}} {{starship_to}}
+link:
+    ln -svf {{starship_fr}} {{starship_to}}
+

@@ -11,7 +11,7 @@
     ./user/apps/zoxide/default.nix
     ./user/apps/eza/default.nix
     ./user/apps/bat/default.nix
-    ./user/apps/megasync/default.nix
+    # ./user/apps/megasync/default.nix
     ./user/apps/kmonad/default.nix
   ];
 

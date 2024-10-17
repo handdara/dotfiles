@@ -1,28 +1,27 @@
 ln_dir := 'ln -sv'
 rm_tree := 'rm -Rf'
 
-fish_config_dir := env_var('HOME') / '.config' / 'fish'
+fish_config_ln := env_var('HOME') / '.config' / 'fish'
 fish_main_dir := justfile_directory() / 'fish-main'
 fish_func_dir := fish_main_dir / 'functions'
-fish_cfg_file := fish_config_dir / 'config.fish'
+fish_cfg_file := fish_config_ln / 'config.fish'
 
 # lists available commands
 default:
     @just --list
 
 # symlink main fish configuration
-link-fish-main:
-    {{rm_tree}} {{fish_config_dir}}
-    {{ln_dir}} {{fish_main_dir}} {{fish_config_dir}}
+link: purge
+    {{ln_dir}} {{fish_main_dir}} {{fish_config_ln}}
 
 # copy fish functions for use, skips collisions
 cp-fish-funcs:
-    cp -vrn {{fish_func_dir}} {{fish_config_dir}}/functions
+    cp -vrn {{fish_func_dir}} {{fish_config_ln}}/functions
 
-# cleans out the fish config dir
-clean-fish-dir:
-    {{rm_tree}} {{fish_config_dir}}
+# unlinks the fish config dir symlink
+unlink:
+    rm {{fish_config_ln}}
 
-# cleans out the fish config file
-clean-fish-cfg:
-    rm -f {{fish_cfg_file}}
+# purge the fish config dir
+purge:
+    {{rm_tree}} {{fish_config_ln}}
