@@ -120,7 +120,8 @@ vim.keymap.set('n', '<leader>cp', '<CMD>lua require("decisive").align_csv_prev_c
 vim.keymap.set('n', '<leader>cn', '<CMD>lua require("decisive").align_csv_next_col()<cr>', { desc = '[C]SV [N]ext Col' })
 
 -- formatting text
-vim.keymap.set('v', '<leader>s', '!sort<CR>', { desc = '[Sort] highlighted' })
+vim.keymap.set('v', '<leader>s', '!sort<CR>', { desc = '[S]ort highlighted' })
+vim.keymap.set('v', '<leader>gs', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
 vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' }) -- markdown tables
 -- vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
 --
