@@ -88,15 +88,15 @@ vim.keymap.set('n', 'g]', '<C-]>', { desc = 'CTRL-], or go down in help' })
 -- # Command "remaps"
 
 -- because i always do these
-vim.api.nvim_create_user_command('W','write',{})
-vim.api.nvim_create_user_command('Wq','wq',{})
-vim.api.nvim_create_user_command('Q','quit',{})
-vim.api.nvim_create_user_command('Qa','qall',{})
-vim.api.nvim_create_user_command('Wqa','wqall',{})
-vim.api.nvim_create_user_command('FO','Fo',{})
+vim.api.nvim_create_user_command('W', 'write', {})
+vim.api.nvim_create_user_command('Wq', 'wq', {})
+vim.api.nvim_create_user_command('Q', 'quit', {})
+vim.api.nvim_create_user_command('Qa', 'qall', {})
+vim.api.nvim_create_user_command('Wqa', 'wqall', {})
+vim.api.nvim_create_user_command('FO', 'Fo', {})
 
 -- open up gitui
-vim.api.nvim_create_user_command('Vtg','vert term gitui',{})
+vim.api.nvim_create_user_command('Vtg', 'vert term gitui', {})
 
 -- telekasten
 local tk = require('telekasten')
@@ -114,6 +114,14 @@ vim.keymap.set('n', '<leader>nr', tk.rename_note, { desc = '[N]ote: [R]ename' })
 
 -- decisive
 vim.keymap.set('n', '<leader>cv', '<CMD>lua require("decisive").align_csv({})<cr>,', { desc = 'Align [C]S[V]' })
-vim.keymap.set('n', '<leader>cc', '<CMD>lua require("decisive").align_csv_clear({})<cr>', { desc = '[C]lear [C]SV Align' })
+vim.keymap.set('n', '<leader>cc', '<CMD>lua require("decisive").align_csv_clear({})<cr>',
+	{ desc = '[C]lear [C]SV Align' })
 vim.keymap.set('n', '<leader>cp', '<CMD>lua require("decisive").align_csv_prev_col()<cr>', { desc = '[C]SV [P]rev Col' })
 vim.keymap.set('n', '<leader>cn', '<CMD>lua require("decisive").align_csv_next_col()<cr>', { desc = '[C]SV [N]ext Col' })
+
+-- formatting text
+vim.keymap.set('v', '<leader>s', '!sort<CR>', { desc = '[Sort] highlighted' })
+vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' }) -- markdown tables
+-- vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
+--
+vim.keymap.set('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })

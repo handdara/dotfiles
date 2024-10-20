@@ -103,9 +103,13 @@ abbr --add xcv --position anywhere "xclip"
 abbr --add xpv --position anywhere "xclip -o"
 
 # porsmo abbreviations, quick timers
-abbr --add pt --set-cursor=! "porsmo timer (math !\*60)" # time in minutes
-abbr --add pt-hr --set-cursor=! "porsmo timer (math !\*3600)" # time in hours
-abbr --add pts "porsmo stopwatch"
+# abbr --add pt --set-cursor=! "porsmo timer (math !\*60)" # time in minutes
+# abbr --add pt-hr --set-cursor=! "porsmo timer (math !\*3600)" # time in hours
+# abbr --add pts "porsmo stopwatch"
+abbr --add porsmo --set-cursor=! "nix-shell -p porsmo --run porsmo" # time in minutes
+abbr --add pt --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !m\"" # time in minutes
+abbr --add pth --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !h\"" # time in hours
+abbr --add pts "nix-shell -p porsmo --run \"porsmo stopwatch\""
 
 abbr --add vi "nvim"
 

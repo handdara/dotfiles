@@ -5,7 +5,8 @@ local hd = require 'handdara.domains'
 local note_args = {}
 table.insert(note_args, hl.system_shell.args[1])
 table.insert(note_args, '-c')
-table.insert(note_args, 'nvim .')
+-- table.insert(note_args, 'nvim .')
+table.insert(note_args, 'nvim quicklinks.md')
 
 return {
   config = {

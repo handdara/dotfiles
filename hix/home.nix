@@ -13,6 +13,7 @@
     ./user/apps/bat/default.nix
     # ./user/apps/megasync/default.nix
     ./user/apps/kmonad/default.nix
+    ./user/apps/pandoc/default.nix
   ];
 
   home.username = userSettings.username;
