@@ -64,6 +64,7 @@ vim.keymap.set('n', '<leader>sr', tbi.resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sm', tbi.marks, { desc = '[S]earch [M]arks' })
 vim.keymap.set('n', '<leader>sj', tbi.jumplist, { desc = '[S]earch [J]umplist' })
 vim.keymap.set('n', '<leader>st', '<CMD>Telescope<CR>', { desc = '[S]earch [T]elescope' })
+vim.keymap.set('n', '<leader>sc', tbi.commands, { desc = '[S]earch [C]ommands' })
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', tbi.oldfiles, { desc = '[?] Find recently opened files' })
@@ -95,9 +96,6 @@ vim.api.nvim_create_user_command('Qa', 'qall', {})
 vim.api.nvim_create_user_command('Wqa', 'wqall', {})
 vim.api.nvim_create_user_command('FO', 'Fo', {})
 
--- open up gitui
-vim.api.nvim_create_user_command('Vtg', 'vert term gitui', {})
-
 -- telekasten
 local tk = require('telekasten')
 vim.keymap.set('n', '<leader>n', '<CMD>Telekasten<CR>', { desc = 'Telekasten [S]earch' })
@@ -128,3 +126,15 @@ vim.keymap.set('n', '<leader>gt', 'vip!pandoc -t ')
 -- vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
 --
 vim.keymap.set('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })
+
+-- user defined commands
+-- vim.api.nvim_create_user_command('Vtg', 'vert term gitui', {}) -- open up gitui
+vim.keymap.set('n', '<leader>fc',
+	'<CMD>tabnew<CR><CMD>term bat (find -L ~/code -type f | fzf) > ~/.local/share/nvim/TMP_CODE<CR>',
+	{ desc = '[F]ind [C]ode file' })
+vim.keymap.set('n', '<leader>fg',
+	'<CMD>tabnew<CR><CMD>term bat (find -L ~/.config -type f | fzf) > ~/.local/share/nvim/TMP_CONFIG<CR>',
+	{ desc = '[F]ind confi[G] file' })
+vim.keymap.set('n', '<leader>pc', '<CMD>read ~/.local/share/nvim/TMP_CODE<CR>', { desc = '[P]aste found [C]ode file' })
+vim.keymap.set('n', '<leader>pg', '<CMD>read ~/.local/share/nvim/TMP_CONFIG<CR>',
+	{ desc = '[P]aste found confi[G] file' })
