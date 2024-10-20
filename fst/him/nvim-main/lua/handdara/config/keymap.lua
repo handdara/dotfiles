@@ -119,10 +119,12 @@ vim.keymap.set('n', '<leader>cc', '<CMD>lua require("decisive").align_csv_clear(
 vim.keymap.set('n', '<leader>cp', '<CMD>lua require("decisive").align_csv_prev_col()<cr>', { desc = '[C]SV [P]rev Col' })
 vim.keymap.set('n', '<leader>cn', '<CMD>lua require("decisive").align_csv_next_col()<cr>', { desc = '[C]SV [N]ext Col' })
 
--- formatting text
+-- formatting text (maybe move these into the marksman on_attach?
 vim.keymap.set('v', '<leader>s', '!sort<CR>', { desc = '[S]ort highlighted' })
 vim.keymap.set('v', '<leader>gs', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
-vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' }) -- markdown tables
+vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })                          -- markdown tables
+vim.keymap.set('v', '<leader>T', '!pandoc -t markdown_strict+grid_tables-<CR>', { desc = 'format highlighted [T]able' }) -- markdown tables
+vim.keymap.set('n', '<leader>gt', 'vip!pandoc -t ')
 -- vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
 --
 vim.keymap.set('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })
