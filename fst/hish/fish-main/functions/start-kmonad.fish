@@ -13,4 +13,3 @@ function start-kmonad
     disown $KMONAD_PID
     cd -
 end
-
