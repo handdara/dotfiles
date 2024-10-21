@@ -28,5 +28,6 @@ require('telekasten').setup({
     tadok = subvault_config("tadok", "2-build/dnd/"),
     finance = subvault_config("finance", "2-build/"),
     what_we_owe = subvault_config("what_we_owe", "2-build/dnd/"),
+    stashlog = subvault_config("stashlog", "3-inventory/"),
   },
 })

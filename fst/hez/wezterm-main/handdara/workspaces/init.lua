@@ -45,7 +45,7 @@ return {
     name = 'work-notes',
     spawn = {
       args = note_args,
-      cwd = hDirs.ansible_dir .. '2-areas/work',
+      cwd = hDirs.ansible_dir .. '/2-areas/work',
       -- domain = hd.notes_domain, -- debugging issue with separate domains
       domain = hd.dev_domain,
     },
@@ -54,7 +54,7 @@ return {
     name = 'personal-notes',
     spawn = {
       args = note_args,
-      cwd = hDirs.ansible_dir .. '/personal',
+      cwd = hDirs.ansible_dir,
       -- domain = hd.notes_domain,
       domain = hd.dev_domain,
     },
