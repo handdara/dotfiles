@@ -57,9 +57,18 @@ local oxocarbon = {
   config = function()
     vim.opt.background = "dark"
     vim.cmd("colorscheme oxocarbon") -- set the colorscheme
-    -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+    vim.cmd("hi link markdownH1Delimiter markdownH1")
+    vim.cmd("hi link markdownH2Delimiter markdownH2")
+    vim.cmd("hi link markdownH3Delimiter markdownH3")
+    vim.cmd("hi link markdownH4Delimiter markdownH4")
+    vim.cmd("hi link markdownH5Delimiter markdownH5")
+    vim.cmd("hi link markdownH6Delimiter markdownH6")
+    vim.cmd("hi! link markdownH1 StatusInsert")
+    vim.cmd("hi link markdownH2 StatusReplace")
+    vim.cmd("hi link markdownH3 StatusVisual")
+    vim.cmd("hi link markdownH4 StatusTerminal")
+    vim.cmd("hi link markdownH5 StatusNormal")
+    vim.cmd("hi link markdownH6 StatusCommand")
   end,
   priority = 1000,
 }
