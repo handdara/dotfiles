@@ -15,12 +15,12 @@ return {
   },
 
   {
-    'hrsh7th/nvim-cmp', -- Autocompletion
+    'hrsh7th/nvim-cmp',   -- Autocompletion
     dependencies = {
       'L3MON4D3/LuaSnip', -- Snippet Engine & its associated nvim-cmp source
       'saadparwaiz1/cmp_luasnip',
 
-      'hrsh7th/cmp-nvim-lsp', -- Adds LSP completion capabilities
+      'hrsh7th/cmp-nvim-lsp',         -- Adds LSP completion capabilities
 
       'rafamadriz/friendly-snippets', -- Adds a number of user-friendly snippets
     },
@@ -31,7 +31,7 @@ return {
   {
     'lewis6991/gitsigns.nvim', -- Adds git related signs to the gutter, as well as utilities for managing changes
     opts = {
-      signs = { -- See `:help gitsigns.txt`
+      signs = {                -- See `:help gitsigns.txt`
         add = { text = '+' },
         change = { text = '~' },
         delete = { text = '_' },
@@ -63,6 +63,8 @@ return {
       end,
     },
   },
+
+  require('handdara.config.theme'),
 
   {
     'nvim-lualine/lualine.nvim', -- Set lualine as statusline
@@ -116,7 +118,7 @@ return {
 
   {
     'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines
-    main = 'ibl', -- See `:help ibl`
+    main = 'ibl',                          -- See `:help ibl`
     opts = {},
   },
 

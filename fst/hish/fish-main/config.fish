@@ -96,6 +96,8 @@ abbr --add omeg "z (find ~/MEGA -type d | fzf)" # "open mega sub-directory"
 abbr --add qe --set-cursor=! "$EDITOR (find ! -mindepth 1 | fzf)" # [Q]uick [E]dit a file
 abbr --add qec --set-cursor=! "$EDITOR (find ~/code -mindepth 1 | fzf)" # [Q]uick [E]dit a code file
 
+abbr --add nvs "nvim -S ~/.local/share/nvim/sessions/(eza ~/.local/share/nvim/sessions | fzf)"
+
 # command line/clipboard interop help
 abbr --add xc --position anywhere "xclip -selection clipboard"
 abbr --add xp --position anywhere "xclip -selection clipboard -o"

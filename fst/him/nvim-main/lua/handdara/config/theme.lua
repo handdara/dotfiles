@@ -52,6 +52,18 @@ local cyberdream = {
   end,
 }
 
+local oxocarbon = {
+  "nyoom-engineering/oxocarbon.nvim",
+  config = function()
+    vim.opt.background = "dark"
+    vim.cmd("colorscheme oxocarbon") -- set the colorscheme
+    -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+  end,
+  priority = 1000,
+}
+
 local lighthaus = {
   "mrjones2014/lighthaus.nvim",
   lazy = false,
@@ -77,4 +89,4 @@ local lighthaus = {
   end,
 }
 
-return cyberdream
+return oxocarbon

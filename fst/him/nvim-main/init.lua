@@ -1,6 +1,8 @@
 -- WARNING: Setting the leader key must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,terminal,options,localoptions"
+
 
 vim.opt.shortmess:append({ I = true })                      -- disable startup screen
 

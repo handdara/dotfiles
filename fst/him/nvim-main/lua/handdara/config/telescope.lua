@@ -10,6 +10,7 @@ require('telescope').setup {
         ['<C-s>'] = require('telescope.actions').select_vertical,
       },
     },
+    border = true,
   },
 }
 
