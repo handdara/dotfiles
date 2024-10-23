@@ -5,7 +5,7 @@ local function apply_to_config(config)
     -- set theme & opacity
     -- config.colors = hc.default_colors
     config.color_scheme = 'Oxocarbon Dark'
-    config.window_background_opacity = 0.75
+    config.window_background_opacity = 0.6
     config.inactive_pane_hsb = {
         saturation = 0.9,
         brightness = 0.75,

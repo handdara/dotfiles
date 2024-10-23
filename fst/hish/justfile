@@ -1,6 +1,3 @@
-ln_dir := 'ln -sv'
-rm_tree := 'rm -Rf'
-
 fish_config_ln := env_var('HOME') / '.config' / 'fish'
 fish_main_dir := justfile_directory() / 'fish-main'
 fish_func_dir := fish_main_dir / 'functions'
@@ -12,7 +9,7 @@ default:
 
 # symlink main fish configuration
 link: purge
-    {{ln_dir}} {{fish_main_dir}} {{fish_config_ln}}
+    ln -sv {{fish_main_dir}} {{fish_config_ln}}
 
 # copy fish functions for use, skips collisions
 cp-fish-funcs:
@@ -20,8 +17,8 @@ cp-fish-funcs:
 
 # unlinks the fish config dir symlink
 unlink:
-    rm {{fish_config_ln}}
+    -rm {{fish_config_ln}}
 
 # purge the fish config dir
 purge:
-    {{rm_tree}} {{fish_config_ln}}
+    -rm -Rf {{fish_config_ln}}

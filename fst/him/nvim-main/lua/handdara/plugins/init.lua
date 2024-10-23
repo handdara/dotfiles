@@ -89,16 +89,30 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { {
-          'filename',
-          file_status = true,
-          newfile_status = true,
-          path = 1,
-        } },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' }
+        lualine_b = {
+          {
+            'tabs',
+            mode = 2,
+            -- separator = '',
+            tabs_color = { -- these colors are for the using with the oxocarbon theme
+              active = { fg = '#78a9ff', gui = 'bold' },
+              --   inactive = { fg = '#d0d0d0', bg = '#161616' },
+            },
+          },
+          'branch', 'diff', 'diagnostics',
+        },
+        lualine_c = {
+          {
+            'filename',
+            file_status = true,
+            newfile_status = true,
+            path = 1,
+          },
+        },
+        lualine_x = {
+        },
+        lualine_y = { 'encoding', 'fileformat', 'filetype' },
+        lualine_z = { 'progress', 'location' }
       },
       inactive_sections = {
         lualine_a = {},

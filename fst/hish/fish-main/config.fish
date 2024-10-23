@@ -65,11 +65,10 @@ abbr --add ed "eza -lTD"
 alias ed "eza -lTD"
 
 # dir and subdirectory abbrs
-abbr --add zd --set-cursor=! 'z (find .! -type d | fzf)'
-abbr --add fdir --set-cursor=! "find ~! -type d -not -path '*/.*'| fzf" # find directory
-abbr --add fdira --set-cursor=! "find ! -type d | fzf" # find directory including `.___` dirs 
-abbr --add ff --set-cursor=! "find ~! -type f -not -path '*/.*'| fzf" # find file
-abbr --add ffa --set-cursor=! "find ! -type f | fzf" # find file including `.___` dirs 
+abbr --add fdirh --set-cursor=! "find -L ~! -type d -not -path '*/.*'| fzf" # find directory, exclude .dirs
+abbr --add fdir --set-cursor=! "find -L ! -type d | fzf" # find directory including `.___` dirs 
+abbr --add ffh --set-cursor=! "find -L ~! -type f -not -path '*/.*'| fzf" # find file, exclude .dirs
+abbr --add ff --set-cursor=! "find -L ! -type f | fzf" # find file including `.___` dirs 
 
 abbr --add batconf "bat (find -L ~/.config -type f | fzf)"
 abbr --add batcode "bat (find -L ~/code -type f | fzf)"
@@ -77,26 +76,18 @@ abbr --add batcode "bat (find -L ~/code -type f | fzf)"
 # fish just abbrs
 abbr --add j "just"
 
-abbr --add op "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)" # "open project"
-
 # "open code subdirectory"
-abbr --add oc "z (find ~/code -mindepth 1 -type d \
--not -path '*/.git*' \
--not -path '*/target*' \
--not -path '*dist-newstyle*' \
--not -path '*.stack*' \
--not -path '*.vscode*' \
-| fzf)"
-
-abbr --add oscr "z ~/.local/scripts" # "open scripts sub-directory"
-abbr --add oconf "z (find ~/.config -type d | fzf)" # "open config sub-directory"
-abbr --add od "z (find . -type d | fzf)" # "open sub-directory"
-abbr --add omeg "z (find ~/MEGA -type d | fzf)" # "open mega sub-directory"
+abbr --add zc "z (find ~/code -mindepth 1 -type d -not -path '*/.git*' -not -path '*/target*' -not -path '*dist-newstyle*' -not -path '*.stack*' -not -path '*.vscode*' | fzf)"
+abbr --add zs "z ~/.local/scripts" # "open scripts"
+abbr --add zcfg "z (find ~/.config -type d | fzf)" # "open config sub-directory"
+abbr --add zd --set-cursor=! 'z (find .! -type d | fzf)' # open subdirectory of current dir
+abbr --add zm "z (find ~/MEGA -type d | fzf)" # "open mega sub-directory"
+abbr --add zp "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)" # "open project"
 
 abbr --add qe --set-cursor=! "$EDITOR (find ! -mindepth 1 | fzf)" # [Q]uick [E]dit a file
 abbr --add qec --set-cursor=! "$EDITOR (find ~/code -mindepth 1 | fzf)" # [Q]uick [E]dit a code file
 
-abbr --add nvs "nvim -S ~/.local/share/nvim/sessions/(eza ~/.local/share/nvim/sessions | fzf)"
+abbr --add vis "nvim -S (begin; fd -e vim . ; fd -e vim . ~/.local/share/nvim/sessions ; end | fzf)"
 
 # command line/clipboard interop help
 abbr --add xc --position anywhere "xclip -selection clipboard"

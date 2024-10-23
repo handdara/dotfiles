@@ -133,7 +133,7 @@ lspconf.marksman.setup {
   -- on_attach = on_attach,
   on_attach = function(_, bufnr)
     on_attach(_, bufnr)
-    vim.keymap.set('n', '<leader>nt', '<CMD>r!today<CR>i#<Space><Esc>_',
+    vim.keymap.set('n', '<leader>nt', '<CMD>r!today<CR>i##<Space><Esc>_',
       { buffer = bufnr, desc = '[N]otes insert [t]oday\'s date as heading' })
   end
 }

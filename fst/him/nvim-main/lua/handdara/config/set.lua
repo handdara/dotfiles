@@ -6,6 +6,8 @@ vim.o.hlsearch = false -- highlight on search
 vim.wo.number = true   -- Make line numbers default and relative
 vim.wo.relativenumber = true
 
+vim.o.showtabline = 0
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 

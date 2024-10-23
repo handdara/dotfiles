@@ -7,14 +7,14 @@ default:
 
 # symlink main wezterm configuration
 link:
-    rm -Rf {{wez_config_ln}}
+    -rm -Rf {{wez_config_ln}}
     ln -sv {{wez_main_dir}} {{wez_config_ln}}
 
 # unlink main wezterm configuration symlink
 unlink:
-    rm -f {{wez_config_ln}}
+    -rm -f {{wez_config_ln}}
 
 # purge main wezterm configuration directory recursively
-purge:
+purge: unlink
     rm -rf {{wez_config_ln}}
 

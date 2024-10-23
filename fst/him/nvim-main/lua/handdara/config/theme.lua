@@ -69,6 +69,8 @@ local oxocarbon = {
     vim.cmd("hi link markdownH4 StatusTerminal")
     vim.cmd("hi link markdownH5 StatusNormal")
     vim.cmd("hi link markdownH6 StatusCommand")
+    vim.cmd("hi link markdownUrl @text.uri")
+    vim.cmd("hi link tkHighlight DiffText")
   end,
   priority = 1000,
 }
