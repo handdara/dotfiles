@@ -99,10 +99,9 @@
   programs.firefox.enable = true;
 
   # Install and set default shell to fish
-  environment.shells = with pkgs; [ fish bash zsh ];
+  environment.shells = with pkgs; [ fish bash zsh dash ];
   programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
-
+  users.defaultUserShell = pkgs.bash;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

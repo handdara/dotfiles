@@ -48,7 +48,7 @@ abbr --add gc "git commit"
 abbr --add gco "git checkout"
 
 # fish eza abbrs
-abbr --add ls "eza"
+alias ls "eza"
 abbr --add e "eza"
 abbr --add ea "eza -a"
 abbr --add el "eza -l"
