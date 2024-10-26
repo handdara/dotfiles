@@ -17,7 +17,6 @@ vim.keymap.set('n', '<leader>o', '<CMD>Oil<CR>', { desc = "Handdara: Open Oil" }
 
 -- Better feeling exit insert mode
 vim.keymap.set('i', 'kk', '<Esc>')
-print('hi from keymap.lua')
 
 -- Moving around windows
 vim.keymap.set('n', '<leader>tj', '<C-w>j', { desc = 'Move [T]o window down' })

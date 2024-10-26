@@ -27,7 +27,6 @@
         name = username;
         email = "${username}.core@proton.me";
         browser = "firefox";
-        editor = "nvim";
       };
       lib = nixpkgs.lib;
       hmlib = home-manager.lib;
@@ -39,6 +38,17 @@
         modules = [
           ./configuration.nix
           kmonad.nixosModules.default
+        ];
+        specialArgs = {
+          inherit sysSettings;
+          inherit userSettings;
+        };
+      };
+      nixvm = lib.nixosSystem {
+        system = sysSettings.system;
+        modules = [
+          ./configuration.nix
+          # kmonad.nixosModules.default
         ];
         specialArgs = {
           inherit sysSettings;

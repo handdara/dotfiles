@@ -5,6 +5,7 @@
     ./user/shells/fish/default.nix
     ./user/apps/wezterm/default.nix
     ./user/apps/nvim/default.nix
+    ./user/apps/fzf/default.nix
     ./user/apps/starship/default.nix
     ./user/apps/gitui/default.nix
     ./user/apps/btop/default.nix
@@ -21,16 +22,12 @@
   home.username = userSettings.username;
   home.homeDirectory = "/home/"+userSettings.username;
 
+  nixpkgs.config.allowUnfree = true;
+
+  programs.home-manager.enable = true; # Let Home Manager install and manage itself.
+
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
-
-  nixpkgs.config.allowUnfree = true;
-
-  home.sessionVariables = {
-    EDITOR = userSettings.editor;
-  };
-
-  programs.home-manager.enable = true; # Let Home Manager install and manage itself.
 }
