@@ -1,4 +1,4 @@
-{ /* config, lib, */ pkgs, ... }:
+{ /* config, lib, */ inputs, pkgs, ... }:
 
 let
   treesitterWithGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
@@ -59,6 +59,7 @@ in
       recursive = true;
     };
     ".config/nvim/init.lua".source = ../../../../fst/him/nvim-main/init.lua;
+    ".config/nvim/lazy-lock.json".source = ../../../../fst/him/nvim-main/lazy-lock.json;
     ".config/nvim/lua/handdara/config/init.lua".text = ''
       require("handdara.config.telescope")
       require("handdara.config.treesitter")
@@ -92,6 +93,7 @@ in
     plugins = [
      treesitterWithGrammars
     ];
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
   };
 
   home.sessionVariables = {

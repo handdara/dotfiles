@@ -9,9 +9,10 @@
       url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = {/* self, */ nixpkgs, home-manager, kmonad, ...}: 
+  outputs = {/* self, */ nixpkgs, home-manager, kmonad, ...}@inputs: 
     let
       # SYSTEM SETTINGS
       sysSettings = {
@@ -59,10 +60,13 @@
     homeConfigurations = {
       handdara = hmlib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [ 
+          ./home.nix
+        ];
         extraSpecialArgs = {
           inherit sysSettings;
           inherit userSettings;
+          inherit inputs;
         };
       };
     };
