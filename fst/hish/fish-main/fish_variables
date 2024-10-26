@@ -1,5 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export KBD_DEV:/dev/input/by\x2dpath/pci\x2d0000\x3a00\x3a14\x2e0\x2dusb\x2d0\x3a1\x2e2\x2e2\x3a1\x2e0\x2devent\x2dkbd
+SETUVAR --export KMONAD_PID:54690
 SETUVAR --export QT_QPA_PLATFORMTHEME:gtk2
 SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:brblack

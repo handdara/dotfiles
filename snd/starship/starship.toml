@@ -95,4 +95,3 @@ show_milliseconds = false
 disabled = false
 style = "italic #394260"
 format = "[$duration]($style)"
-

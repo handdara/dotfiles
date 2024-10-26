@@ -71,7 +71,9 @@ abbr --add ffh --set-cursor=! "find -L ~! -type f -not -path '*/.*'| fzf" # find
 abbr --add ff --set-cursor=! "find -L ! -type f | fzf" # find file including `.___` dirs 
 
 abbr --add batconf "bat (find -L ~/.config -type f | fzf)"
+alias batconf "bat (find -L ~/.config -type f | fzf)"
 abbr --add batcode "bat (find -L ~/code -type f | fzf)"
+alias batcode "bat (find -L ~/code -type f | fzf)"
 
 # fish just abbrs
 abbr --add j "just"

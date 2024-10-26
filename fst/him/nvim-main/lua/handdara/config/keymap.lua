@@ -16,7 +16,7 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Handdara: Ope
 vim.keymap.set('n', '<leader>o', '<CMD>Oil<CR>', { desc = "Handdara: Open Oil" })
 
 -- Better feeling exit insert mode
-vim.keymap.set('i', "jk", "<Esc>")
+vim.keymap.set('i', "kk", "<Esc>")
 
 -- Moving around windows
 vim.keymap.set('n', '<leader>tj', '<C-w>j', { desc = 'Move [T]o window down' })
