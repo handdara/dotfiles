@@ -1,4 +1,4 @@
-{ config, lib, pkgs, sysSettings, userSettings, ... }:
+{ /* config, lib, */ pkgs, sysSettings, userSettings, ... }:
 
 {
   imports =
@@ -90,9 +90,6 @@
     isNormalUser = true;
     description = userSettings.name;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
 
   # Install firefox.
@@ -109,15 +106,11 @@
   environment.systemPackages = with pkgs; [
     nvi
     vim
-    neovim
     wget
-    fzf
     git
     just
-    wezterm
     unzip
     xclip
-    megacmd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

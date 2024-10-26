@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ /* config, lib, */ pkgs, ... }:
 
 let
   treesitterWithGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
@@ -23,6 +23,7 @@ let
     p.lua
     p.make
     p.markdown
+    p.markdown_inline
     p.nix
     p.python
     p.rust

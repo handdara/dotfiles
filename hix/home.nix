@@ -1,4 +1,4 @@
-{ userSettings, ... }:
+{ /* config, pkgs, sysSettings, */ userSettings, ... }:
 {
   imports = [
     ./user/shells/bash/default.nix

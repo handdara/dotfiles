@@ -1,6 +1,6 @@
-{pkgs}:
+{pkgs, ...}:
 {
-  environment.systemPackages = [
+  home.packages = [
     pkgs.megacmd
   ];
 }

@@ -11,10 +11,10 @@
     };
   };
 
-  outputs = {self, nixpkgs, home-manager, kmonad, ...}: 
+  outputs = {/* self, */ nixpkgs, home-manager, kmonad, ...}: 
     let
       # SYSTEM SETTINGS
-      sysSettings = rec {
+      sysSettings = {
         system = "x86_64-linux";
         hostname = "sha76";
         timezone = "America/New_York";
@@ -24,8 +24,8 @@
       # USER SETTINGS
       userSettings = rec {
         username = "handdara";
-        name = "handdara";
-        email = "handdara.core@proton.me";
+        name = username;
+        email = "${username}.core@proton.me";
         browser = "firefox";
         editor = "nvim";
       };
