@@ -117,7 +117,6 @@
     wezterm
     unzip
     xclip
-    neofetch
     megacmd
   ];
 

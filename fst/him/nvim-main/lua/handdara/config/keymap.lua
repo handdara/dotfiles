@@ -16,7 +16,8 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Handdara: Ope
 vim.keymap.set('n', '<leader>o', '<CMD>Oil<CR>', { desc = "Handdara: Open Oil" })
 
 -- Better feeling exit insert mode
-vim.keymap.set('i', "kk", "<Esc>")
+vim.keymap.set('i', 'kk', '<Esc>')
+print('hi from keymap.lua')
 
 -- Moving around windows
 vim.keymap.set('n', '<leader>tj', '<C-w>j', { desc = 'Move [T]o window down' })
@@ -116,9 +117,6 @@ vim.keymap.set('n', '<leader>cc', '<CMD>lua require("decisive").align_csv_clear(
 	{ desc = '[C]lear [C]SV Align' })
 vim.keymap.set('n', '<leader>cp', '<CMD>lua require("decisive").align_csv_prev_col()<cr>', { desc = '[C]SV [P]rev Col' })
 vim.keymap.set('n', '<leader>cn', '<CMD>lua require("decisive").align_csv_next_col()<cr>', { desc = '[C]SV [N]ext Col' })
-vim.keymap.set('n', '<leader>tr', function()
-
-end, { desc = '[T]avb [R]ename' })
 
 -- formatting text (NVIM/CONFIG/TODO: maybe move these into the marksman on_attach?
 vim.keymap.set('v', '<leader>s', '!sort<CR>', { desc = '[S]ort highlighted' })

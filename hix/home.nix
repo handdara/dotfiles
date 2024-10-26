@@ -1,4 +1,4 @@
-{ config, pkgs, sysSettings, userSettings, ... }:
+{ userSettings, ... }:
 {
   imports = [
     ./user/shells/bash/default.nix
@@ -12,6 +12,8 @@
     ./user/apps/eza/default.nix
     ./user/apps/bat/default.nix
     # ./user/apps/megasync/default.nix
+    ./user/apps/megacmd/default.nix
+    ./user/apps/neofetch/default.nix
     ./user/apps/kmonad/default.nix
     ./user/apps/pandoc/default.nix
   ];
