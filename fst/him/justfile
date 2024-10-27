@@ -37,6 +37,9 @@ unlink:
 get-lazylock:
     cp -f {{lazylock_file}} {{nvim_main_dir}}
 
+place-lazylock:
+    cp {{nvim_main_dir}}/lazy-lock.json {{lazylock_file}}
+
 # not yet implemented...
 link-vim:
     @echo "nothing to do..."
