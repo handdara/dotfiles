@@ -128,6 +128,11 @@ lspconf.texlab.setup {
   }
 }
 
+require 'lspconfig'.zls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 lspconf.marksman.setup {
   capabilities = capabilities,
   -- on_attach = on_attach,

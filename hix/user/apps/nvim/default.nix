@@ -48,6 +48,7 @@ in
     rust-analyzer-unwrapped # rust lang server
     marksman # markdown lang server
     nil # nix lang server
+    zls # zig lang server
   ];
 
   home.file = {
