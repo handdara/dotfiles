@@ -11,7 +11,15 @@
 				"path": "./latex.json"
 			},
 			{
-				"language": ["haskell"],
+				"language": [
+					"markdown"
+				],
+				"path": "./markdown.json"
+			},
+			{
+				"language": [
+					"haskell"
+				],
 				"path": "./haskell.json"
 			}
 		]
