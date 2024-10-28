@@ -2,10 +2,8 @@
 
 let
   treesitterWithGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-    p.c
-    p.vim
-    p.vimdoc
     p.bash
+    p.c
     p.comment
     p.css
     p.dockerfile
@@ -18,8 +16,8 @@ let
     p.hcl
     p.javascript
     p.jq
-    p.json5
     p.json
+    p.json5
     p.lua
     p.make
     p.markdown
@@ -29,8 +27,11 @@ let
     p.rust
     p.toml
     p.typescript
+    p.vim
+    p.vimdoc
     p.vue
     p.yaml
+    p.zig
   ]));
 
   treesitter-parsers = pkgs.symlinkJoin {

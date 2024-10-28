@@ -1,0 +1,15 @@
+{
+	"definition": {
+		"prefix": "dailies",
+		"body": [
+			"### quests",
+			"#### daily adventure",
+			"- [ ] :incomplete: ...",
+			"#### side-quests",
+			"- [ ] :work: ...",
+			"- [ ] :ppl: ...",
+			"- [ ] :health: ...",
+			"### log"
+		]
+	}
+}
