@@ -1,4 +1,4 @@
-{ /* config, lib, */ inputs, pkgs, ... }:
+{ /* config, lib, */ pkgs, ... }:
 
 let
   treesitterWithGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
@@ -93,7 +93,6 @@ in
     plugins = [
      treesitterWithGrammars
     ];
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
   };
 
   home.sessionVariables = {

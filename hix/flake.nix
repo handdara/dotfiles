@@ -9,10 +9,9 @@
       url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = {/* self, */ nixpkgs, home-manager, kmonad, ...}@inputs: 
+  outputs = {/* self, */ nixpkgs, home-manager, kmonad, ...}: 
     let
       # SYSTEM SETTINGS
       sysSettings = {
@@ -66,7 +65,6 @@
         extraSpecialArgs = {
           inherit sysSettings;
           inherit userSettings;
-          inherit inputs;
         };
       };
     };
