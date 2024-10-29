@@ -4,6 +4,9 @@ let
   #   tartan.nix 
   #   navy-and-ivory.nix
   #   oxocarbon.nix
+  #   kasugano.nix
+  #   count-von-count.nix
+  #   dark-ocean.nix
   c = import ./../../../util/color/oxocarbon.nix; 
   custom_latex = "\${custom.latex}";
   # COLORS
