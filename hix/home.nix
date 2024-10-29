@@ -17,6 +17,8 @@
     ./user/apps/neofetch/default.nix
     ./user/apps/kmonad/default.nix
     ./user/apps/pandoc/default.nix
+    ./user/apps/vim/default.nix
+    ./user/apps/gpg/default.nix
   ];
 
   home.username = userSettings.username;
