@@ -5,7 +5,9 @@ vi-mode-off
 reload-config
 show-user-fish-keybinds
 show-user-insert-mode-fish-keybinds
-search-all-fish-keybinds'
+search-all-fish-keybinds
+start-kmonad
+kill-kmonad'
 set -l choice ( echo $options | fzf )
 switch $choice
     case 'vi-mode-on'
@@ -38,6 +40,10 @@ switch $choice
             | sed -n 's/-/ /gp'                 \
             | sed    's/\\\\c/CTRL\+/'          \
             | sed    's/\\\\e/ ALT\+/'
+    case 'start-kmonad'
+        start-kmonad
+    case 'kill-kmonad'
+        start-kmonad
     case '*'
         echo "error: unreachable"
         return 1
