@@ -4,6 +4,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- inital looks
+local inital_colorscheme = 'lunaperche'
 vim.opt.shortmess:append({ I = true }) -- disable startup screen
 
 -- Bootstrap lazy.nvim
@@ -25,7 +27,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = { import = "handdara.plugins" },
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { inital_colorscheme } },
 })
 
--- require 'handdara.config'
+vim.cmd('colorscheme ' .. inital_colorscheme)
+require 'handdara.config'

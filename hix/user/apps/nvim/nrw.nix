@@ -15,6 +15,9 @@ in
     withPython3 = true;
     viAlias = true;
     package = pkgs_unstable.neovim-unwrapped;
+    extraPackages = with pkgs; [
+      python3
+    ];
   };
 
   home.sessionVariables = {
@@ -33,5 +36,6 @@ in
       recursive = true;
     };
     ".config/nvim/lua/handdara/plugins/init.lua".source = get_plugin_path "init.lua";
+    ".config/nvim/lua/handdara/plugins/telescope.lua".source = get_plugin_path "telescope.lua";
   };
 }
