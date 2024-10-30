@@ -3,6 +3,7 @@ rm_tree := 'rm -Rf'
 tmp_dir := `mktemp -d`
 nvim_config_dir := env_var('HOME') / '.config' / 'nvim'
 nvim_main_dir := justfile_directory() / 'nvim-main'
+nvim_nrw_dir := justfile_directory() / 'nvim-nrw'
 lazylock_file := nvim_config_dir / 'lazy-lock.json'
 
 # list commands
@@ -36,6 +37,10 @@ unlink:
 # retrieve the lazy lockfile
 get-lazylock:
     cp -f {{lazylock_file}} {{nvim_main_dir}}
+
+# retrieve the lazy lockfile
+get-lazylock-nrw:
+    cp -f {{lazylock_file}} {{nvim_nrw_dir}}
 
 place-lazylock:
     cp {{nvim_main_dir}}/lazy-lock.json {{lazylock_file}}

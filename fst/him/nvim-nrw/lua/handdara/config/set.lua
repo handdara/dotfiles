@@ -1,0 +1,15 @@
+vim.o.breakindent = true -- Enable break indent
+vim.o.expandtab = true
+vim.o.hlsearch = false   -- highlight on search
+vim.o.ignorecase = true  -- Case-insensitive searching UNLESS \C or capital in search
+vim.opt.colorcolumn = { 100 }
+vim.o.shiftwidth = 2
+vim.o.showtabline = 0
+vim.o.smartcase = true
+vim.o.softtabstop = 2
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.tabstop = 2
+vim.wo.number = true     -- Make line numbers default and relative
+vim.wo.relativenumber = true
+vim.wo.signcolumn = 'no' -- Keep signcolumn on by default
