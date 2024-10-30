@@ -66,6 +66,7 @@ in
       require("handdara.config.telescope")
       require("handdara.config.treesitter")
       require("handdara.config.set")
+      require("handdara.config.luasnip")
       require("handdara.config.snippet")
       require("handdara.config.lsp")
       require("handdara.config.keymap")

@@ -43,7 +43,7 @@ switch $choice
     case 'start-kmonad'
         start-kmonad
     case 'kill-kmonad'
-        start-kmonad
+        kill-kmonad
     case '*'
         echo "error: unreachable"
         return 1

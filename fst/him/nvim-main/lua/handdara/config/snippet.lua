@@ -1,15 +1,10 @@
-local handdara_snip_path = vim.fn.expand("~/.config/nvim/handdara-snips")
-
--- [[ Configure nvim-cmp ]] See `:help cmp`
 local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-require('luasnip.loaders.from_vscode').lazy_load()
-require('luasnip.loaders.from_vscode').lazy_load({ paths = handdara_snip_path})
+local ls = require 'luasnip'
 
 cmp.setup {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      ls.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert {
@@ -25,8 +20,8 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
+      elseif ls.expand_or_locally_jumpable() then
+        ls.expand_or_jump()
       else
         fallback()
       end
@@ -34,8 +29,8 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
+      elseif ls.locally_jumpable(-1) then
+        ls.jump(-1)
       else
         fallback()
       end
@@ -46,5 +41,3 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
-

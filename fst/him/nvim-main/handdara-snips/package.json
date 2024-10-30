@@ -12,7 +12,8 @@
 			},
 			{
 				"language": [
-					"markdown"
+					"markdown",
+					"telekasten"
 				],
 				"path": "./markdown.json"
 			},

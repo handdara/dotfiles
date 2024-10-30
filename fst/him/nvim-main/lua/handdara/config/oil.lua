@@ -10,43 +10,12 @@ require("oil").setup({
     "size",
     -- "mtime",
   },
-  -- Buffer-local options to use for oil buffers
-  -- buf_options = {
-  --   buflisted = false,
-  --   bufhidden = "hide",
-  -- },
-  -- Window-local options to use for oil buffers
-  -- win_options = {
-  --   wrap = false,
-  --   signcolumn = "no",
-  --   cursorcolumn = false,
-  --   foldcolumn = "0",
-  --   spell = false,
-  --   list = false,
-  --   conceallevel = 3,
-  --   concealcursor = "nvic",
-  -- },
-  -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
   delete_to_trash = true,
-  -- > Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
-  -- skip_confirm_for_simple_edits = false,
-  -- > Selecting a new/moved/renamed file or directory will prompt you to save changes first
-  -- (:help prompt_save_on_select_new_entry)
-  -- prompt_save_on_select_new_entry = true,
+  skip_confirm_for_simple_edits = true,
   -- > Oil will automatically delete hidden buffers after this delay
   -- You can set the delay to false to disable cleanup entirely
   -- Note that the cleanup process only starts when none of the oil buffers are currently displayed
   -- cleanup_delay_ms = 2000,
-  -- lsp_file_methods = {
-  --   -- Time to wait for LSP file operations to complete before skipping
-  --   timeout_ms = 1000,
-  --   -- Set to true to autosave buffers that are updated with LSP willRenameFiles
-  --   -- Set to "unmodified" to only save unmodified buffers
-  --   autosave_changes = false,
-  -- },
-  -- > Constrain the cursor to the editable parts of the oil buffer
-  -- Set to `false` to disable, or "name" to keep it on the file names
-  -- constrain_cursor = "editable",
   -- > Set to true to watch the filesystem for changes and reload oil
   watch_for_changes = true,
   -- > Keymaps in oil buffer. Can be any value that `vim.keymap.set` accepts OR a table of keymap
@@ -84,7 +53,7 @@ require("oil").setup({
     end,
     -- This function defines what will never be shown, even when `show_hidden` is set
     is_always_hidden = function(name, bufnr)
-      return false
+      return name == '..' or name == '.git'
     end,
     -- Sort file names in a more intuitive order for humans. Is less performant,
     -- so you may want to set to false if you work with large directories.
@@ -160,7 +129,7 @@ require("oil").setup({
   -- progress = {
   --   max_width = 0.9,
   --   min_width = { 40, 0.4 },
-  --   width = nil,
+  --   width = nilfalse,
   --   max_height = { 10, 0.9 },
   --   min_height = { 5, 0.1 },
   --   height = nil,
