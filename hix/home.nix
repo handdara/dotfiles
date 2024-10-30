@@ -4,8 +4,8 @@
     ./user/shells/bash/default.nix
     ./user/shells/fish/default.nix
     ./user/apps/wezterm/default.nix
-    # ./user/apps/nvim/default.nix
-    ./user/apps/nvim/nrw.nix # nixos rewrite #1
+    ./user/apps/nvim/default.nix
+    # ./user/apps/nvim/nrw.nix # nixos rewrite #1
     ./user/apps/fzf/default.nix
     ./user/apps/starship/default.nix
     ./user/apps/gitui/default.nix
