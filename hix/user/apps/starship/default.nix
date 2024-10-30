@@ -4,29 +4,29 @@ let
   # COLOR OPTIONS: 
   # c = import ./../../../util/color/tartan.nix;
   # c = import ./../../../util/color/navy-and-ivory.nix;
-  # c = import ./../../../util/color/oxocarbon.nix;
+  c = import ./../../../util/color/oxocarbon.nix;
   # c = import ./../../../util/color/kasugano.nix;
-  c = import ./../../../util/color/count-von-count.nix;
+  # c = import ./../../../util/color/count-von-count.nix;
 
   st = {
     fg1 = c.black; # os
-    # bg1 = c.blue;
+    bg1 = c.blue;
     fg2 = c.black; # directory
     bg2 = c.red;
-    # fg3 = c.red; # git
+    fg3 = c.red; # git
     bg3 = c.black;
     fg4 = c.black; # lang/env
     bg4 = c.cyan;
-    # fg5 = c.cyan; # time
-    # bg5 = c.black;
+    fg5 = c.cyan; # time
+    bg5 = c.black;
     bgchar = c.black;
   };
 
-  # count von count overrides
-  st.bg1 = c.white;
-  st.fg3 = c.green;
-  st.fg5 = c.red;
-  st.bg5 = c.bright_black;
+  # # count von count overrides
+  # st.bg1 = c.white;
+  # st.fg3 = c.green;
+  # st.fg5 = c.red;
+  # st.bg5 = c.bright_black;
 
   # SYMBOLS
   os_sym = " ";
