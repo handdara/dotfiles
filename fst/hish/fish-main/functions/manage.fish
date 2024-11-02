@@ -7,7 +7,8 @@ show-user-fish-keybinds
 show-user-insert-mode-fish-keybinds
 search-all-fish-keybinds
 start-kmonad
-kill-kmonad'
+kill-kmonad
+get-proc-id'
 set -l choice ( echo $options | fzf )
 switch $choice
     case 'vi-mode-on'
@@ -44,6 +45,8 @@ switch $choice
         start-kmonad
     case 'kill-kmonad'
         kill-kmonad
+    # case 'get-get-proc-id'
+    #     set -gx LAST_PROC_ID (ps -e | fzf | )
     case '*'
         echo "error: unreachable"
         return 1
