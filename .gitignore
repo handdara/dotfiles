@@ -1,2 +1,3 @@
 *.zip
 fst/him/nvim-main/lua/handdara/config/init.lua
+*.bz2
