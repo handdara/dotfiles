@@ -14,3 +14,13 @@ vim.wo.number = true     -- Make line numbers default and relative
 vim.wo.relativenumber = true
 vim.wo.signcolumn = 'no' -- Keep signcolumn on by default
 vim.o.shell = "fish"
+vim.o.termguicolors = true -- NOTE: make sure your terminal supports this
+--[[
+[!IMPORTANT]  
+The next line is a wezterm/neovim display update bug workaround for using nvim in a wezterm mux server.
+see [this issue](https://github.com/wez/wezterm/issues/4607 ) for more info.
+Also look at `.../ansible/1-active-quests/hix/nvim-nix-rewrite.md` for more info as well.
+The bug should be fixed when the fix linked in issue 4607 above is merged into main, and I believe
+the nightly version of wezterm already includes it.
+]]
+vim.opt.termsync = false
