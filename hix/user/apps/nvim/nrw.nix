@@ -37,5 +37,6 @@ in
     };
     ".config/nvim/lua/handdara/plugins/init.lua".source = get_plugin_path "init.lua";
     ".config/nvim/lua/handdara/plugins/telescope.lua".source = get_plugin_path "telescope.lua";
+    ".config/nvim/lua/handdara/plugins/mini_files.lua".source = get_plugin_path "mini_files.lua";
   };
 }

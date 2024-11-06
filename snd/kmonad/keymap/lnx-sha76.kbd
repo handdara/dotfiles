@@ -39,18 +39,16 @@
 (defalias
   to0 (layer-toggle l0)
   to1 (layer-toggle l1)
-  ;; tp4 (around-next-timeout 500 (layer-toggle l4) XX)
-  so1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1))
-                                                 ;; \->    s:space    t:or  1:layer1
-  shn (tap-hold-next 200 (around ret (pause 35)) lsft) ;;  sh:shift         n:enter
-  foc (tap-hold-next 200 (around f (pause 35)) lctl)   ;;  f:f        o:or  c:control
-  joc (tap-hold-next 200 (around j (pause 35)) lctl)   ;;  j:j        o:or  c:control
-  gom (tap-hold-next 200 (around g (pause 35)) lmet)   ;;  g:g        o:or  m:meta/super
-  hom (tap-hold-next 200 (around h (pause 35)) lmet)   ;;  h:h        o:or  m:meta/super
-  doa (tap-hold-next 200 (around d (pause 35)) lalt)   ;;  d:d        o:or  a:alt
-  koa (tap-hold-next 200 (around k (pause 35)) lalt)   ;;  k:k        o:or  a:alt
-  gvc (tap-hold-next 200 (around grv (pause 35)) lctl) ;;  g:grave    v:or  c:control
-  coe (tap-hold-next 200 (around esc (pause 35)) lctl) ;;  c:control  o:or  e:escape
+  so1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1)) ;; s:space    t:or  1:layer1
+  shn (tap-hold-next-release 200 (around ret (pause 35)) lsft)              ;; sh:shift         n:enter
+  foc (tap-hold-next-release 200 (around f   (pause 35)) lctl)              ;; f:f        o:or  c:control
+  joc (tap-hold-next-release 200 (around j   (pause 35)) lctl)              ;; j:j        o:or  c:control
+  gom (tap-hold-next-release 200 (around g   (pause 35)) lmet)              ;; g:g        o:or  m:meta/super
+  hom (tap-hold-next-release 200 (around h   (pause 35)) lmet)              ;; h:h        o:or  m:meta/super
+  doa (tap-hold-next-release 200 (around d   (pause 35)) lalt)              ;; d:d        o:or  a:alt
+  koa (tap-hold-next-release 200 (around k   (pause 35)) lalt)              ;; k:k        o:or  a:alt
+  gvc (tap-hold-next-release 200 (around grv (pause 35)) lctl)              ;; g:grave    v:or  c:control
+  coe (tap-hold-next-release 200 (around esc (pause 35)) lctl)              ;; c:control  o:or  e:escape
   at S-2
 )
 
