@@ -13,3 +13,4 @@ vim.o.tabstop = 2
 vim.wo.number = true     -- Make line numbers default and relative
 vim.wo.relativenumber = true
 vim.wo.signcolumn = 'no' -- Keep signcolumn on by default
+vim.o.shell = "fish"

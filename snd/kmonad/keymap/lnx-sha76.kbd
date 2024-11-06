@@ -39,8 +39,8 @@
 (defalias
   to0 (layer-toggle l0)
   to1 (layer-toggle l1)
+  shn (tap-hold-next         200 (around ret (pause 35)) lsft)              ;; sh:shift         n:enter
   so1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1)) ;; s:space    t:or  1:layer1
-  shn (tap-hold-next-release 200 (around ret (pause 35)) lsft)              ;; sh:shift         n:enter
   foc (tap-hold-next-release 200 (around f   (pause 35)) lctl)              ;; f:f        o:or  c:control
   joc (tap-hold-next-release 200 (around j   (pause 35)) lctl)              ;; j:j        o:or  c:control
   gom (tap-hold-next-release 200 (around g   (pause 35)) lmet)              ;; g:g        o:or  m:meta/super
