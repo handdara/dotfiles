@@ -1,0 +1,3 @@
+[submodule "fst/him/kickstart.nvim"]
+	path = fst/him/kickstart.nvim
+	url = https://github.com/nvim-lua/kickstart.nvim.git
