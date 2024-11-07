@@ -24,3 +24,5 @@ The bug should be fixed when the fix linked in issue 4607 above is merged into m
 the nightly version of wezterm already includes it.
 ]]
 vim.opt.termsync = false
+vim.o.updatetime = 250 -- Decrease update time
+vim.o.timeoutlen = 300
