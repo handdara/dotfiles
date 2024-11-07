@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd('User', {
   callback = function(args)
     local win_id = args.data.win_id
     local config = vim.api.nvim_win_get_config(win_id)
-    vim.wo[win_id].winblend = 50 -- Customize window-local settings
+    vim.wo[win_id].winblend = 70 -- Customize window-local settings
     vim.api.nvim_win_set_config(win_id, { border = 'double' })
   end,
 })
