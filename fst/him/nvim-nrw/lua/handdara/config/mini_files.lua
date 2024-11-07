@@ -43,9 +43,17 @@ vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniFilesWindowOpen',
   callback = function(args)
     local win_id = args.data.win_id
-    vim.wo[win_id].winblend = 30 -- Customize window-local settings
+    local config = vim.api.nvim_win_get_config(win_id)
+    vim.wo[win_id].winblend = 50 -- Customize window-local settings
+    vim.api.nvim_win_set_config(win_id, { border = 'double' })
+  end,
+})
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesWindowUpdate',
+  callback = function(args)
+    local win_id = args.data.win_id
     vim.wo[win_id].number = true
     vim.wo[win_id].relativenumber = true
-    vim.api.nvim_win_set_config(win_id, { border = 'double' })
   end,
 })
