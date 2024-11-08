@@ -8,10 +8,10 @@ require('mini.files').setup({
 
   mappings = { -- Module mappings created only inside explorer.
     close       = 'q',
-    go_in       = 'L',
+    go_in       = 'l', -- Use `''` (empty string) to not create one.
     go_in_plus  = '<CR>',
-    go_out      = 'H',
-    go_out_plus = '', -- Use `''` (empty string) to not create one.
+    go_out      = 'h',
+    go_out_plus = 'H',
     mark_goto   = "'",
     mark_set    = 'm',
     reset       = '<BS>',
@@ -30,9 +30,9 @@ require('mini.files').setup({
   windows = { -- Customization of explorer windows
     max_number = math.huge, -- Maximum number of windows to show side by side
     preview = true,
-    width_focus = 25, -- Width of focused window
-    width_nofocus = 25, -- Width of non-focused window
-    width_preview = 100, -- Width of preview window
+    width_focus = 40, -- Width of focused window
+    width_nofocus = 30, -- Width of non-focused window
+    width_preview = 90, -- Width of preview window
   },
 })
 
@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd('User', {
   callback = function(args)
     local win_id = args.data.win_id
     local config = vim.api.nvim_win_get_config(win_id)
-    vim.wo[win_id].winblend = 70 -- Customize window-local settings
+    vim.wo[win_id].winblend = 0 -- mini.files window transparency
     vim.api.nvim_win_set_config(win_id, { border = 'double' })
   end,
 })
