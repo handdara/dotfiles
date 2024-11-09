@@ -3,7 +3,6 @@ return {
   build = ":TSUpdate",
   config = function () 
     local configs = require("nvim-treesitter.configs")
-
     configs.setup({
       ensure_installed = {
         'bash',
@@ -19,7 +18,21 @@ return {
         'vimdoc',
         'cpp',
         'rust',
-        'matlab'
+        'matlab',
+        'latex',
+        'fish',
+        'haskell',
+        'json',
+        'json5',
+        'make',
+        'gitignore',
+        'yaml',
+        'toml',
+        'just',
+        'python',
+        'regex',
+        'xml',
+        'zig',
       },
       sync_install = false,
       highlight = { enable = true },
