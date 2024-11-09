@@ -17,6 +17,9 @@ in
     package = pkgs_unstable.neovim-unwrapped;
     extraPackages = with pkgs; [
       python3
+      gcc
+      gnumake
+      pkg-config
     ];
   };
 
@@ -27,6 +30,7 @@ in
   home.packages = with pkgs; [
     ripgrep
     fd
+    tree-sitter
   ];
 
   home.file = {

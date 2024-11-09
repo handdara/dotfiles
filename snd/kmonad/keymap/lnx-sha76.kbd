@@ -40,6 +40,7 @@
   to0 (layer-toggle l0)
   to1 (layer-toggle l1)
   shn (tap-hold-next         200 (around ret (pause 35)) lsft)              ;; sh:shift         n:enter
+  she (tap-hold-next         200 (around esc (pause 35)) lsft)              ;; sh:shift         e:esc
   so1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1)) ;; s:space    t:or  1:layer1
   foc (tap-hold-next-release 200 (around f   (pause 35)) lctl)              ;; f:f        o:or  c:control
   joc (tap-hold-next-release 200 (around j   (pause 35)) lctl)              ;; j:j        o:or  c:control
@@ -66,15 +67,15 @@
   grv       1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab       q    w    e    r    t    y    u    i    o    p    [    ]    \
   @gvc      a    s    @doa @foc @gom @hom @joc @koa l    ;    '    @shn
-  @shn      z    x    c    v    b    n    m    ,    .    /    @at  up
+  @shn      z    x    c    v    b    n    m    ,    .    /    @she up
   @coe _    lmet lalt           @so1           ralt rctl left down rght
 )
 
 (deflayer l1
   _         _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _         f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  _    _    _
-  _         _    _    _    _    _    _    _    _    _    _    _    _    _
-  _         _    _    _    _    _    _    _    _    _    _    _    _ 
+  _         f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
+  _         !    @    #    $    %    ^    &    *    -    =    _    _    _
+  _         1    2    3    4    5    6    7    8    9    0    _    _ 
   _         _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _              _              _    _    _    _    _
 )
