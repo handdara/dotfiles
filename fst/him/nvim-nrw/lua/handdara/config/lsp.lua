@@ -54,3 +54,7 @@ lspconf.marksman.setup { -- markdown lsp config
 require 'lspconfig'.nil_ls.setup { -- nix lsp config
   on_attach = on_attach,
 }
+
+require'lspconfig'.lua_ls.setup {
+  on_attach = on_attach,
+}
