@@ -45,5 +45,6 @@ in
     ".config/nvim/lua/handdara/plugins/treesitter.lua".source = get_plugin_path "treesitter.lua";
     ".config/nvim/lua/handdara/plugins/mini_files.lua".source = get_plugin_path "mini_files.lua";
     ".config/nvim/lua/handdara/plugins/surround.lua".source = get_plugin_path "surround.lua";
+    ".config/nvim/lua/handdara/plugins/whichkey.lua".source = get_plugin_path "whichkey.lua";
   };
 }

@@ -32,6 +32,7 @@ return {
         'python',
         'regex',
         'xml',
+        'nix',
         'zig',
       },
       sync_install = false,
