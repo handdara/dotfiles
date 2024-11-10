@@ -53,5 +53,6 @@ in
     ".config/nvim/lua/handdara/plugins/whichkey.lua".source = get_plugin_path "whichkey.lua";
     ".config/nvim/lua/handdara/plugins/lazydev.lua".source = get_plugin_path "lazydev.lua";
     ".config/nvim/lua/handdara/plugins/lspconfig.lua".source = get_plugin_path "lspconfig.lua";
+    ".config/nvim/lua/handdara/plugins/undotree.lua".source = get_plugin_path "undotree.lua";
   };
 }
