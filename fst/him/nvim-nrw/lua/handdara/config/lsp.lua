@@ -51,8 +51,6 @@ lspconf.marksman.setup { -- markdown lsp config
   end
 }
 
-require 'lspconfig'.nixd.setup { -- nix lsp config
-  capabilities = capabilities,
+require 'lspconfig'.nil_ls.setup { -- nix lsp config
   on_attach = on_attach,
-  settings = {},
 }

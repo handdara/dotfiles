@@ -34,7 +34,7 @@ in
     lua-language-server # lua lang server
     marksman # markdown lang server
     rust-analyzer-unwrapped # rust lang server
-    nixd # nix lang server
+    nil # nix lang server
     zls # zig lang server
   ];
 
