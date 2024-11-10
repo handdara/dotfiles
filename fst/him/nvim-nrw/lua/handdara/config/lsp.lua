@@ -1,5 +1,10 @@
 local lspconf = require 'lspconfig'
 local tbi = require('telescope.builtin')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- TODO: uncomment this!
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
@@ -37,6 +42,17 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
-require'lspconfig'.marksman.setup{} -- markdown lsp
+lspconf.marksman.setup { -- markdown lsp config
+  -- capabilities = capabilities,
+  on_attach = function(_, bufnr)
+    on_attach(_, bufnr)
+    vim.keymap.set('n', '<leader>nt', '<CMD>r!today<CR>i##<Space><Esc>_',
+      { buffer = bufnr, desc = '[N]otes insert [t]oday\'s date as heading' })
+  end
+}
 
-require'lspconfig'.nixd.setup{} -- nix lsp
+require 'lspconfig'.nixd.setup { -- nix lsp config
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {},
+}
