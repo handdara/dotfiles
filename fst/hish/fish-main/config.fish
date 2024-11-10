@@ -45,7 +45,7 @@ abbr --add cat "bat"
 abbr --add gs "git status"
 abbr --add ga "git add"
 abbr --add gc "git commit"
-abbr --add gc "git push"
+abbr --add gp "git push"
 abbr --add gco "git checkout"
 
 # fish eza abbrs
