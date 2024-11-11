@@ -14,8 +14,8 @@ end
 require('telekasten').setup({
   -- home vault
   home = ansible_path,
-  dailies = ansible_path .. '/0-quest-board',
-  weeklies = ansible_path .. '/0-quest-board',
+  dailies = ansible_path .. '/0-quest-board/dailies',
+  weeklies = ansible_path .. '/0-quest-board/weeklies',
   templates = ansible_path .. "/misc/templates",
   tag_notation = ":tag:",
   subdirs_in_links = false,
@@ -42,7 +42,7 @@ require('telekasten').setup({
 local tk = require('telekasten')
 vim.keymap.set('n', '<leader>n', '<CMD>Telekasten<CR>', { desc = 'Telekasten [S]earch' })
 vim.keymap.set('n', '<leader>nw', tk.goto_thisweek, { desc = 'Open Telekaste[n]' })
-vim.keymap.set('n', '<leader>nc', tk.show_calendar, { desc = 'Toggle [C]heckbox `- [ ]`' })
+vim.keymap.set('n', '<leader>nc', tk.show_calendar, { desc = 'Show [C]alendar' })
 vim.keymap.set('n', '<leader>nd', tk.follow_link, { desc = 'Go [d]own link' })
 vim.keymap.set('n', '<leader>nb', tk.show_backlinks, { desc = 'Look at [B]acklinks' })
 vim.keymap.set('n', '<leader>ng', tk.show_tags, { desc = 'Show Ta[g]s' })
