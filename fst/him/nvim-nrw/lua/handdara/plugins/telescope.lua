@@ -13,5 +13,6 @@ return {
     'nvim-telescope/telescope-ui-select.nvim',
     'nvim-telescope/telescope-media-files.nvim',
     {'nvim-tree/nvim-web-devicons', enabled = true},
+    'nvim-lua/popup.nvim',
   },
 }

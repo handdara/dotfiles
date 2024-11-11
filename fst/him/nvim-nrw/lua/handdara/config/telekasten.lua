@@ -14,10 +14,18 @@ end
 require('telekasten').setup({
   -- home vault
   home = ansible_path,
+  dailies = ansible_path .. '/0-quest-board',
+  weeklies = ansible_path .. '/0-quest-board',
   templates = ansible_path .. "/misc/templates",
   tag_notation = ":tag:",
   subdirs_in_links = false,
   command_palette_theme = "dropdown",
+  plug_into_calendar = true,
+  media_previewer = "telescope-media-files",
+  calendar_opts = {
+    weeknm = 1,
+  },
+  clipboard_program = "xclip",
   -- sub-vaults
   vaults = {
     work = subvault_config("work", "2-build/"),
@@ -30,3 +38,20 @@ require('telekasten').setup({
     stashlog = subvault_config("stashlog", "3-inventory/"),
   },
 })
+
+local tk = require('telekasten')
+vim.keymap.set('n', '<leader>n', '<CMD>Telekasten<CR>', { desc = 'Telekasten [S]earch' })
+vim.keymap.set('n', '<leader>nw', tk.goto_thisweek, { desc = 'Open Telekaste[n]' })
+vim.keymap.set('n', '<leader>nc', tk.show_calendar, { desc = 'Toggle [C]heckbox `- [ ]`' })
+vim.keymap.set('n', '<leader>nd', tk.follow_link, { desc = 'Go [d]own link' })
+vim.keymap.set('n', '<leader>nb', tk.show_backlinks, { desc = 'Look at [B]acklinks' })
+vim.keymap.set('n', '<leader>ng', tk.show_tags, { desc = 'Show Ta[g]s' })
+vim.keymap.set('n', '<leader>nf', tk.find_notes, { desc = '[F]ind notes' })
+vim.keymap.set('n', '<leader>nv', tk.switch_vault, { desc = 'Switch [V]ault' })
+vim.keymap.set('n', '<leader>ni', tk.insert_link, { desc = '[I]nsert link' })
+vim.keymap.set('n', '<leader>sn', tk.search_notes, { desc = '[S]earch [N]otes' })
+vim.keymap.set('n', '<leader>nr', tk.rename_note, { desc = '[N]ote: [R]ename' })
+vim.keymap.set('n', '<C-c>', tk.toggle_todo, { desc = '[N]ote: [R]ename' })
+
+-- trying to fix treesitter parsing of telekasten files
+vim.treesitter.language.register('markdown', 'telekasten')

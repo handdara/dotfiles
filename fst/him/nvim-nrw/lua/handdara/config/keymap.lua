@@ -6,3 +6,8 @@ vim.keymap.set({ 'n', 'v' }, "<leader>y", [["+y]])                  -- Access sy
 vim.keymap.set('n', "<leader>Y", [["+Y]])
 vim.keymap.set('n', "<leader>pp", [["+p]], { desc = '[P]aste system clipboard' })
 vim.keymap.set('v', "<leader>p", [["_dP]]) -- Dont overwrite after pasting over text
+
+vim.keymap.set('v', '<leader>s', '!sort<CR>', { desc = '[S]ort highlighted' })
+vim.keymap.set('v', '<leader>gs', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
+vim.keymap.set('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })
+

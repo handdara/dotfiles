@@ -48,6 +48,9 @@ lspconf.marksman.setup { -- markdown lsp config
     on_attach(_, bufnr)
     vim.keymap.set('n', '<leader>nt', '<CMD>r!today<CR>i##<Space><Esc>_',
       { buffer = bufnr, desc = '[N]otes insert [t]oday\'s date as heading' })
+      vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
+      vim.keymap.set('v', '<leader>T', '!pandoc -t markdown_strict+grid_tables<CR>', { desc = 'format highlighted [T]able' })
+      vim.keymap.set('n', '<leader>gt', 'vip!pandoc -t ')
   end
 }
 
