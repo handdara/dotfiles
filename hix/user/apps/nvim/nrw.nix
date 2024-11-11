@@ -36,6 +36,9 @@ in
     rust-analyzer-unwrapped # rust lang server
     nil # nix lang server
     zls # zig lang server
+    chafa # terminal graphics dependency for telescope-media-files.nvim
+    imagemagick # telescope-media-files.nvim dependency
+    poppler_utils # telescope-media-files.nvim optional dependency
   ];
 
   home.file = {

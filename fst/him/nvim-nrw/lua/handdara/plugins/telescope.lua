@@ -11,7 +11,7 @@ return {
       end,
     },
     'nvim-telescope/telescope-ui-select.nvim',
-    {'nvim-tree/nvim-web-devicons', enabled = true},
     'nvim-telescope/telescope-media-files.nvim',
+    {'nvim-tree/nvim-web-devicons', enabled = true},
   },
 }
