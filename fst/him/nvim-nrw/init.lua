@@ -1,11 +1,9 @@
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = ' '
+vim.g.mapleader = ' ' -- I like space as my leader key
 vim.g.maplocalleader = ' '
 
--- inital looks
-local inital_colorscheme = 'lunaperche'
+local inital_colorscheme = 'lunaperche' -- inital looks
 vim.opt.shortmess:append({ I = true }) -- disable startup screen
 
 -- Bootstrap lazy.nvim
@@ -31,4 +29,5 @@ require("lazy").setup({
 })
 
 vim.cmd('colorscheme ' .. inital_colorscheme)
+
 require 'handdara.config'

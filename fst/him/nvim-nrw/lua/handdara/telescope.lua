@@ -4,7 +4,8 @@ require('telescope').setup {
     mappings = {
       i = {
         ['<C-v>'] = false,
-        ['<CR>'] = ta.select_vertical,
+        ['<C-s>'] = ta.select_vertical,
+        -- ['<CR>'] = ta.select_vertical,
       },
     },
     border = true,

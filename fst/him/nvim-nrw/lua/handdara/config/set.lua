@@ -26,4 +26,3 @@ the nightly version of wezterm already includes it.
 vim.opt.termsync = false
 vim.o.updatetime = 250 -- Decrease update time
 vim.o.timeoutlen = 300
-vim.wo.conceallevel = 2

@@ -15,4 +15,7 @@ return {
     {'nvim-tree/nvim-web-devicons', enabled = true},
     'nvim-lua/popup.nvim',
   },
+  config = function()
+    require 'handdara.telescope'
+  end
 }

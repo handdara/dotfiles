@@ -4,4 +4,7 @@ return {
   opts = { },
   keys = { },
   dependencies = { 'echasnovski/mini.icons', version = false },
+  -- config = function()
+  --   require 'handdara.whichkey'
+  -- end,
 }

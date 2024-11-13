@@ -26,6 +26,9 @@ require('telekasten').setup({
     weeknm = 1,
   },
   clipboard_program = "xclip",
+  auto_set_filetype = true,
+  auto_set_syntax = true,
+  -- template_new_weekly = ,
   -- sub-vaults
   vaults = {
     work = subvault_config("work", "2-build/"),
@@ -56,7 +59,3 @@ vim.keymap.set('n', '<C-c>', tk.toggle_todo, { desc = '[N]ote: [R]ename' })
 
 -- trying to fix treesitter parsing of telekasten files
 vim.treesitter.language.register('markdown', 'telekasten')
-
--- custom highlights
-vim.cmd [[hi link tkTag Constant]]
-vim.cmd [[hi link tkHighlight Constant]]

@@ -42,6 +42,10 @@ purge: unlink-all
 get-lazylock:
   just {{dotfiles_dir}}/fst/him/ get-lazylock
 
+# retrieve the lazy.vim lock-files
+place-lazylock:
+  just {{dotfiles_dir}}/fst/him/ place-lazylock
+
 # "dev mode", i.e. replace the nix home manager controlled cfgs with a symlink for fast dev
 dev:
   just {{dotfiles_dir}}/fst/him/ replace-nix
