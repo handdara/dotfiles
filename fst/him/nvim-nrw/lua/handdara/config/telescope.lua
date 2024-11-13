@@ -1,11 +1,10 @@
+local ta = require 'telescope.actions'
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
         ['<C-v>'] = false,
-        ['<C-s>'] = require('telescope.actions').select_vertical,
+        ['<CR>'] = ta.select_vertical,
       },
     },
     border = true,

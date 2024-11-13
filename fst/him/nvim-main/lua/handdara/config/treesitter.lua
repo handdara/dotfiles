@@ -12,7 +12,7 @@ vim.defer_fn(function()
 
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = true,
     },
     indent = { enable = false },
     incremental_selection = {
