@@ -1,10 +1,11 @@
 local lspconf = require 'lspconfig'
-local tbi = require('telescope.builtin')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local tbi = require 'telescope.builtin'
+local hcmp = require 'handdara.cmp'
 
--- TODO: uncomment this!
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
--- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = hcmp.update_capabilities(capabilities)
+-- TODO: add this `vim.opt.completeopt = { "menu", "menuone", "noselect" }`
 
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
@@ -48,9 +49,10 @@ lspconf.marksman.setup { -- markdown lsp config
     on_attach(_, bufnr)
     vim.keymap.set('n', '<leader>nt', '<CMD>r!today<CR>i##<Space><Esc>_',
       { buffer = bufnr, desc = '[N]otes insert [t]oday\'s date as heading' })
-      vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
-      vim.keymap.set('v', '<leader>T', '!pandoc -t markdown_strict+grid_tables<CR>', { desc = 'format highlighted [T]able' })
-      vim.keymap.set('n', '<leader>gt', 'vip!pandoc -t ')
+    vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
+    vim.keymap.set('v', '<leader>T', '!pandoc -t markdown_strict+grid_tables<CR>',
+      { desc = 'format highlighted [T]able' })
+    vim.keymap.set('n', '<leader>gt', 'vip!pandoc -t ')
   end
 }
 
@@ -58,6 +60,6 @@ require 'lspconfig'.nil_ls.setup { -- nix lsp config
   on_attach = on_attach,
 }
 
-require'lspconfig'.lua_ls.setup {
+require 'lspconfig'.lua_ls.setup {
   on_attach = on_attach,
 }

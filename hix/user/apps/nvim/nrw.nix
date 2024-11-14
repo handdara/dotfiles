@@ -80,5 +80,6 @@ in
     // inc_plugin "treesitter"
     // inc_plugin "surround"
     // inc_plugin "lazydev"
+    // inc_plugin "cmp"
     // inc_plugin "telescope";
 }

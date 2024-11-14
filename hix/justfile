@@ -1,3 +1,5 @@
+set fallback
+
 # quick rebuilding aliases
 alias r := rebuild
 alias h := rebuild-home-mngr
