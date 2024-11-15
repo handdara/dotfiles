@@ -1,3 +1,4 @@
 return {
-  'kmonad/kmonad-vim',
+    'kmonad/kmonad-vim',
+    'jbyuki/carrot.nvim',
 }
