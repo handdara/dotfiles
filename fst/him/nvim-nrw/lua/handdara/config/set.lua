@@ -13,7 +13,7 @@ return function()
     vim.o.tabstop = 4
     vim.wo.number = true     -- Make line numbers default and relative
     vim.wo.relativenumber = true
-    vim.wo.signcolumn = 'no' -- Keep signcolumn on by default
+    vim.wo.signcolumn = 'yes'
     vim.o.shell = "fish"
     vim.o.termguicolors = true -- NOTE: make sure your terminal supports this
     --[[
