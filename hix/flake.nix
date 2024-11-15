@@ -55,6 +55,7 @@
         specialArgs = {
           inherit sysSettings;
           inherit userSettings;
+          inherit pkgs_unstable;
         };
       };
     };
