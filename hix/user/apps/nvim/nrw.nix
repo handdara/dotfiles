@@ -78,6 +78,7 @@ in
     ".config/nvim/lua/handdara/init.lua".source = get_handdara_path "init.lua";
   }
     // inc_plugin "mini_files"
+    // inc_plugin "lualine"
     // inc_plugin "telekasten"
     // inc_plugin "undotree"
     // inc_plugin "whichkey"
