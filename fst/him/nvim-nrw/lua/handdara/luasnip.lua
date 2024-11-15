@@ -38,14 +38,23 @@ end
 
 vim.snippet.stop = luasnip.unlink_current
 
-vim.keymap.set({ "i", "s" }, "<C-j>", function()
+vim.keymap.set({ "i", "s" }, '<C-j>', function()
   return vim.snippet.active { direction = 1 } and vim.snippet.jump(1)
 end, { silent = true })
 
-vim.keymap.set({ "i", "s" }, "<C-k>", function()
+vim.keymap.set({ "i", 's' }, '<C-k>', function()
   return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, '<C-L>', function()
+    if luasnip.choice_active() then
+        luasnip.change_choice(1)
+    end
 end, { silent = true })
 
 -- snippets for all files
 require 'handdara.snippets.all'
-
+require 'handdara.snippets.tex'
+require 'handdara.snippets.lua'
+require 'handdara.snippets.markdown'
+require 'handdara.snippets.matlab'

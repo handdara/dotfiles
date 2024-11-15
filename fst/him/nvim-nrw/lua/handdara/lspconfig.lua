@@ -45,14 +45,16 @@ local on_attach = function(_, bufnr)
 end
 
 lspconf.marksman.setup { -- markdown lsp config
-  -- capabilities = capabilities,
+  capabilities = capabilities,
   on_attach = on_attach,
 }
 
 require 'lspconfig'.nil_ls.setup { -- nix lsp config
+  capabilities = capabilities,
   on_attach = on_attach,
 }
 
 require 'lspconfig'.lua_ls.setup {
+  capabilities = capabilities,
   on_attach = on_attach,
 }

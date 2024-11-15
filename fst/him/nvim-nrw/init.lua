@@ -31,4 +31,8 @@ require("lazy").setup({
 
 vim.cmd('colorscheme ' .. inital_colorscheme)
 
-require 'handdara'.setup { colorscheme = "lunaperche" }
+require 'handdara'.setup {
+  colorscheme = "rose-pine-moon",
+  -- colorscheme = "darkrose",
+  -- colorscheme = "lunaperche",
+}
