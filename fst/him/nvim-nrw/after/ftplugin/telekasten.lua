@@ -1,4 +1,8 @@
-vim.keymap.set('n', '<Tab>', [[/\(\[\[.*\]\]\|\[\](.*)\)<CR>]], { desc = 'go to next link', buffer = true })
+local wikilink_regex = '\\[\\[.*\\]\\]'
+local mdlink_regex = '\\[.*\\](.*)'
+local link_regex = [[\(]].. wikilink_regex ..[[\|]].. mdlink_regex ..[[\)]]
+vim.keymap.set('n', '<Tab>', '/'.. link_regex ..'<CR>', { desc = 'go to next link', buffer = true })
+vim.keymap.set('n', '<S-Tab>', '?'.. link_regex ..'<CR>', { desc = 'go to prev link', buffer = true })
 vim.keymap.set('n', '<leader>nt', function()
   local lc = vim.api.nvim_get_option_value('conceallevel', {})
   if lc == 0 then
