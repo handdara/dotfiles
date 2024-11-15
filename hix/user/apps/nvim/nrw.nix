@@ -70,6 +70,10 @@ in
       source = handdara_dir + /snippets;
       recursive = true;
     };
+    ".config/nvim/lua/handdara/util" = {
+      source = handdara_dir + /util;
+      recursive = true;
+    };
     ".config/nvim/after" = {
       source = nvim_dir + /after;
       recursive = true;
@@ -79,6 +83,7 @@ in
   }
     // inc_plugin "mini_files"
     // inc_plugin "lualine"
+    // inc_plugin "git"
     // inc_plugin "telekasten"
     // inc_plugin "undotree"
     // inc_plugin "whichkey"

@@ -9,7 +9,7 @@ local f = ls.function_node
 local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
-local u = require 'handdara.snippets.util'
+local u = require 'handdara.util'
 
 -- local bchoose = [[Choose your weapon: {}]]
 -- local weapons = {

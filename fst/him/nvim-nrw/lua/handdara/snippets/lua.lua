@@ -12,7 +12,7 @@ local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
-local u = require 'handdara.snippets.util'
+local u = require 'handdara.util'
 
 local bsnipfile = [[
 ---@diagnostic disable: unused-local
@@ -29,7 +29,7 @@ local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
-local u = require 'handdara.snippets.util'
+local u = require 'handdara.util'
 
 ls.add_snippets("{}", {{
     {},
