@@ -1,5 +1,6 @@
 ---@diagnostic disable: unused-local
 require('luasnip.session.snippet_collection').clear_snippets "markdown"
+require('luasnip.session.snippet_collection').clear_snippets "telekasten"
 local ls = require 'luasnip'
 local s = ls.snippet
 local t = ls.text_node
@@ -12,8 +13,17 @@ local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local u = require 'handdara.snippets.util'
 
-
-
-ls.add_snippets("markdown", {
-    -- s,
+local sdateheader = s('dateheader', {
+    f(function()
+        local ts = u.timestamp()
+        return '## ' .. ts.dy .. ts.mo .. ts.yr .. ', ' .. ts.wd
+    end),
+    -- t(""),
 })
+
+local snips = {
+    sdateheader,
+}
+
+ls.add_snippets("markdown", snips)
+ls.add_snippets("telekasten", snips)

@@ -1,7 +1,8 @@
+---@diagnostic disable: unused-local
 require('luasnip.session.snippet_collection').clear_snippets "tex"
-
 local ls = require 'luasnip'
 local s = ls.snippet
+local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local extras = require 'luasnip.extras'

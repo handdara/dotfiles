@@ -29,6 +29,7 @@ require('telekasten').setup({
   auto_set_filetype = true,
   auto_set_syntax = true,
   -- template_new_weekly = ,
+  journal_auto_open = true,
   -- sub-vaults
   vaults = {
     work = subvault_config("work", "2-build/"),

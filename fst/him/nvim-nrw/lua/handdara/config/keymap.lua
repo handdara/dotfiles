@@ -3,7 +3,8 @@ local map = vim.keymap.set
 return function()
     map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- space is my leader key
     map('n', 'Q', '<Nop>', { silent = true })
-    map('i', 'kk', '<Esc>')                                -- Better feeling exit insert mode
+    map('i', 'jk', '<Esc>')                                -- Better feeling exit insert mode
+    map('i', 'kj', '<Esc>')                                -- Better feeling exit insert mode
     map('t', '<C-/><C-/>', '<C-\\><C-n>')                  -- Better feeling exit term mode
     map({ 'n', 'v' }, "<leader>y", [["+y]])                -- Access system clipboard
     map('n', "<leader>Y", [["+Y]])
