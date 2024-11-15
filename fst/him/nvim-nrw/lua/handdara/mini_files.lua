@@ -57,3 +57,15 @@ vim.api.nvim_create_autocmd('User', {
     vim.wo[win_id].relativenumber = true
   end,
 })
+
+local set_mark = function (id, path, desc)
+    MiniFiles.set_bookmark(id, path, {desc = desc})
+end
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesExplorerOpen',
+    callback = function ()
+        set_mark('c', vim.fn.stdpath('config'), 'Neovim cfg dir')
+        set_mark('c', vim.fn.getcwd, 'Working dir')
+        set_mark('~', '~', 'Home dir')
+    end,
+})

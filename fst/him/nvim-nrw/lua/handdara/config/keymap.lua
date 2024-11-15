@@ -13,7 +13,7 @@ return function()
 
     -- sorting paragraphs
     map('v', '<leader>s', '!sort<CR>', { desc = '[S]ort highlighted' })
-    map('v', '<leader>gs', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
+    map('v', '<leader>S', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
 
     map('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })
 

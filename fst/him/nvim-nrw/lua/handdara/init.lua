@@ -4,13 +4,18 @@ local hcmds = require 'handdara.config.commands'
 local hlooks = require 'handdara.config.looks'
 
 local function setup(opts)
-  hset()
-  hkeymap()
-  hcmds()
-  hlooks.init_looks(opts.colorscheme)
+    hset()
+    hkeymap()
+    hcmds()
+    hlooks.init_looks(opts.colorscheme)
+end
+
+local function mkHUtil()
+    HUtil = require 'handdara.util'
 end
 
 return {
-  setup = setup,
-  set_looks = hlooks.set_looks,
+    setup = setup,
+    set_looks = hlooks.set_looks,
+    mkHUtil = mkHUtil,
 }

@@ -6,7 +6,10 @@ return {
             "sindrets/diffview.nvim",        -- optional - Diff integration
             "nvim-telescope/telescope.nvim", -- optional
         },
-        config = true
+        opts = {},
+        config = function ()
+            require 'handdara.git'
+        end
     },
     {
         'lewis6991/gitsigns.nvim',

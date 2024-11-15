@@ -92,6 +92,7 @@ in
     // inc_plugin "surround"
     // inc_plugin "lazydev"
     // inc_plugin "colors"
+    // inc_plugin "carrot"
     // inc_plugin "completion" // inc_plugin "luasnip"
     // inc_plugin "telescope";
 }
