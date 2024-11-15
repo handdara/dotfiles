@@ -1,11 +1,12 @@
 local lspconf = require 'lspconfig'
 local tbi = require 'telescope.builtin'
-local hcmp = require 'handdara.cmp'
+local hcmp = require 'handdara.completion'
+
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 capabilities = hcmp.update_capabilities(capabilities)
--- TODO: add this `vim.opt.completeopt = { "menu", "menuone", "noselect" }`
 
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
@@ -17,7 +18,7 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>cA', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', tbi.lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', tbi.lsp_references, '[G]oto [R]eferences')
@@ -27,7 +28,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', tbi.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation') -- See `:help K` for why this keymap
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -45,15 +46,7 @@ end
 
 lspconf.marksman.setup { -- markdown lsp config
   -- capabilities = capabilities,
-  on_attach = function(_, bufnr)
-    on_attach(_, bufnr)
-    vim.keymap.set('n', '<leader>nt', '<CMD>r!today<CR>i##<Space><Esc>_',
-      { buffer = bufnr, desc = '[N]otes insert [t]oday\'s date as heading' })
-    vim.keymap.set('v', '<leader>t', '!pandoc -t gfm<CR>', { desc = 'format highlighted [T]able' })
-    vim.keymap.set('v', '<leader>T', '!pandoc -t markdown_strict+grid_tables<CR>',
-      { desc = 'format highlighted [T]able' })
-    vim.keymap.set('n', '<leader>gt', 'vip!pandoc -t ')
-  end
+  on_attach = on_attach,
 }
 
 require 'lspconfig'.nil_ls.setup { -- nix lsp config

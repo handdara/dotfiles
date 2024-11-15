@@ -51,4 +51,5 @@ dev:
   just {{dotfiles_dir}}/fst/him/ replace-nix
 
 # replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
-stable: purge rebuild-switch-home
+stable: purge && rebuild-switch-home
+  git add .

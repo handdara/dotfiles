@@ -43,10 +43,11 @@ require('telekasten').setup({
 })
 
 local tk = require('telekasten')
-vim.keymap.set('n', '<leader>n', '<CMD>Telekasten<CR>', { desc = 'Telekasten [S]earch' })
-vim.keymap.set('n', '<leader>nw', tk.goto_thisweek, { desc = 'Open Telekaste[n]' })
+vim.keymap.set('n', '<leader>nn', '<CMD>Telekasten<CR>', { desc = 'Telekasten [S]earch' })
+vim.keymap.set('n', '<leader>nw', tk.goto_thisweek, { desc = 'This [w]eek' })
+vim.keymap.set('n', '<leader>na', tk.goto_today, { desc = 'This [w]eek' })
 vim.keymap.set('n', '<leader>nc', tk.show_calendar, { desc = 'Show [C]alendar' })
-vim.keymap.set('n', '<leader>nC', '<CMD>CalendarT<CR>', { desc = 'Show [C]alendar' })
+vim.keymap.set('n', '<leader>gnc', '<CMD>CalendarT<CR>', { desc = 'Show lar[g]e [C]alendar' })
 vim.keymap.set('n', '<leader>nd', tk.follow_link, { desc = 'Go [d]own link' })
 vim.keymap.set('n', '<leader>nb', tk.show_backlinks, { desc = 'Look at [B]acklinks' })
 vim.keymap.set('n', '<leader>ng', tk.show_tags, { desc = 'Show Ta[g]s' })
@@ -55,7 +56,7 @@ vim.keymap.set('n', '<leader>nv', tk.switch_vault, { desc = 'Switch [V]ault' })
 vim.keymap.set('n', '<leader>ni', tk.insert_link, { desc = '[I]nsert link' })
 vim.keymap.set('n', '<leader>sn', tk.search_notes, { desc = '[S]earch [N]otes' })
 vim.keymap.set('n', '<leader>nr', tk.rename_note, { desc = '[N]ote: [R]ename' })
-vim.keymap.set('n', '<C-c>', tk.toggle_todo, { desc = '[N]ote: [R]ename' })
+vim.keymap.set('n', '<C-c>', tk.toggle_todo, { desc = 'Toggle Check Box' })
 
 -- trying to fix treesitter parsing of telekasten files
 vim.treesitter.language.register('markdown', 'telekasten')

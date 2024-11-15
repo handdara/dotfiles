@@ -5,7 +5,10 @@ require('telescope').setup {
       i = {
         ['<C-v>'] = false,
         ['<C-s>'] = ta.select_vertical,
-        -- ['<CR>'] = ta.select_vertical,
+      },
+      n = {
+        ['<C-v>'] = false,
+        ['<C-s>'] = ta.select_vertical,
       },
     },
     border = true,

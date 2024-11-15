@@ -78,6 +78,7 @@ alias batcode "bat (find -L ~/code -type f | fzf)"
 
 # fish just abbrs
 abbr --add j "just"
+alias j "just"
 
 # "open code subdirectory"
 abbr --add zc "z (find ~/code -mindepth 1 -type d -not -path '*/.git*' -not -path '*/target*' -not -path '*dist-newstyle*' -not -path '*.stack*' -not -path '*.vscode*' | fzf)"

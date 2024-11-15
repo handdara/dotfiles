@@ -9,7 +9,7 @@ let
       fs = "${ps}/${f}";
     in
       builtins.toPath fs;
-  get_config_path = f:
+  get_handdara_path = f:
     let
       hs = toString handdara_dir;
       fs = "${hs}/${f}";
@@ -18,7 +18,7 @@ let
   inc_plugin = f:
     let
       fext = f + ".lua";
-      cpath = get_config_path fext;
+      cpath = get_handdara_path fext;
     in
       { ".config/nvim/lua/handdara/plugins/${fext}".source = get_plugin_path fext; }
     // ( if pkgs.lib.pathExists cpath
@@ -66,11 +66,16 @@ in
       source = handdara_dir + /config;
       recursive = true;
     };
+    ".config/nvim/lua/handdara/snippets" = {
+      source = handdara_dir + /snippets;
+      recursive = true;
+    };
     ".config/nvim/after" = {
       source = nvim_dir + /after;
       recursive = true;
     };
     ".config/nvim/lua/handdara/plugins/init.lua".source = get_plugin_path "init.lua";
+    ".config/nvim/lua/handdara/init.lua".source = get_handdara_path "init.lua";
   }
     // inc_plugin "mini_files"
     // inc_plugin "telekasten"
@@ -80,6 +85,6 @@ in
     // inc_plugin "treesitter"
     // inc_plugin "surround"
     // inc_plugin "lazydev"
-    // inc_plugin "cmp"
+    // inc_plugin "completion" // inc_plugin "luasnip"
     // inc_plugin "telescope";
 }

@@ -1,10 +1,8 @@
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
-  opts = { },
-  keys = { },
+  opts = {
+    preset = "helix",
+  },
   dependencies = { 'echasnovski/mini.icons', version = false },
-  -- config = function()
-  --   require 'handdara.whichkey'
-  -- end,
 }

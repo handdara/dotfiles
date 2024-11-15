@@ -4,10 +4,11 @@ vim.g.mapleader = ' ' -- I like space as my leader key
 vim.g.maplocalleader = ' '
 
 local inital_colorscheme = 'lunaperche' -- inital looks
-vim.opt.shortmess:append({ I = true }) -- disable startup screen
+vim.opt.shortmess:append({ I = true })  -- disable startup screen
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -30,4 +31,4 @@ require("lazy").setup({
 
 vim.cmd('colorscheme ' .. inital_colorscheme)
 
-require 'handdara.config'
+require 'handdara'.setup { colorscheme = "lunaperche" }
