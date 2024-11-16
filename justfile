@@ -16,16 +16,13 @@ test:
     just {{dotfiles_dir}}/hix/ test-rebuild-flake
     just {{dotfiles_dir}}/hix/ test-rebuild-home-mngr-flake
 
-git-add:
-    git add .
-
 # rebuild nixos and home-manager using most up-to-date method and switch
-rebuild-switch-nixos-home: git-add
+rebuild-switch-nixos-home:
     just {{dotfiles_dir}}/hix/ rebuild
     just {{dotfiles_dir}}/hix/ rebuild-home-mngr
 
 # rebuild only home-manager using most up-to-date method and switch
-rebuild-switch-home: git-add
+rebuild-switch-home:
     just {{dotfiles_dir}}/hix/ rebuild-home-mngr
 
 # unlink directories needed to switch home-manager

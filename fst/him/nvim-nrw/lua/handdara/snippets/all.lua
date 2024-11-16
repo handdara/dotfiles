@@ -32,7 +32,7 @@ local sdate = s("date", {
 local sdatetime = s("datetime", {
     f(function()
         local ts = u.timestamp()
-        return ts.dy .. ts.mo .. ts.yr .. ' ' .. ts.hr .. ts.mi
+        return ts.dy .. ts.mo .. ts.yr .. ' ' .. ts.hr .. ':' .. ts.mi
     end),
 })
 
