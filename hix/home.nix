@@ -1,25 +1,24 @@
 { userSettings, ... }:
 {
   imports = [
-    ./user/shells/bash/default.nix
-    ./user/shells/fish/default.nix
-    ./user/apps/wezterm/default.nix
-    # ./user/apps/nvim/default.nix
-    ./user/apps/nvim/nrw.nix # nixos rewrite #1
-    ./user/apps/fzf/default.nix
-    ./user/apps/starship/default.nix
-    ./user/apps/gitui/default.nix
-    ./user/apps/btop/default.nix
-    ./user/apps/zoxide/default.nix
-    ./user/apps/eza/default.nix
-    ./user/apps/bat/default.nix
-    # ./user/apps/megasync/default.nix
-    ./user/apps/megacmd/default.nix
-    ./user/apps/neofetch/default.nix
-    ./user/apps/kmonad/default.nix
-    ./user/apps/pandoc/default.nix
-    ./user/apps/vim/default.nix
-    ./user/apps/gpg/default.nix
+    ./user/shells/bash
+    ./user/shells/fish
+    ./user/apps/wezterm
+    ./user/apps/nvim/nrw.nix
+    ./user/apps/fzf
+    ./user/apps/starship
+    ./user/apps/gitui
+    ./user/apps/btop
+    ./user/apps/zoxide
+    ./user/apps/eza
+    ./user/apps/bat
+    # ./user/apps/megasync
+    ./user/apps/megacmd
+    ./user/apps/neofetch
+    ./user/apps/kmonad
+    ./user/apps/pandoc
+    ./user/apps/vim
+    ./user/apps/gpg
   ];
 
   home.username = userSettings.username;

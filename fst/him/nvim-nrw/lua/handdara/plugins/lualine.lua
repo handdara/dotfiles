@@ -25,7 +25,7 @@ return {
             lualine_b = {
                 {
                     'tabs',
-                    mode = 2,
+                    mode = 0,
                     -- separator = '',
                     tabs_color = { -- these colors are for the using with the oxocarbon theme
                         -- active = { fg = '#78a9ff', gui = 'bold' },

@@ -7,3 +7,7 @@ end, { desc = 'Open neo[g]it' })
 map('n', '<leader>gs', function()
     neogit.open({ kind = 'vsplit' })
 end, { desc = 'Open neo[g]it in vertical [s]plit' })
+
+map('n', '<leader>gb', function()
+    vim.cmd [[Gitsigns toggle_current_line_blame]]
+end, { desc = 'Toggle [g]it [b]lame' })

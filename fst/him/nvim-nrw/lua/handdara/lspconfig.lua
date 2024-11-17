@@ -54,7 +54,12 @@ require 'lspconfig'.nil_ls.setup { -- nix lsp config
   on_attach = on_attach,
 }
 
-require 'lspconfig'.lua_ls.setup {
+require 'lspconfig'.lua_ls.setup { -- lua lsp config
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+require 'lspconfig'.zls.setup { -- zig lsp config
   capabilities = capabilities,
   on_attach = on_attach,
 }

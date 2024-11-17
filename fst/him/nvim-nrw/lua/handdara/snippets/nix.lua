@@ -14,6 +14,38 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local u = require 'handdara.util'
 
+local bMod = [[
+{1}:
+{2}
+]]
+
+local argList = {
+    sn(1, { t '{', i(1, '...'), t '}' }),
+    sn(1, { t '{', i(1, 'pkgs, ...'), t '}' }),
+    sn(1, { t '{', i(1, 'pkgs, lib, ...'), t '}' }),
+    sn(1, { t '{', i(1, 'config, pkgs, lib, ...'), t '}' }),
+}
+local bodyList = {
+    fmt('{{\n    {}\n}}', i(1)),
+    sn(1, {
+        t { 'let', '    ' }, i(1),
+        t { '', 'in', '{', '    ' }, i(2), t { '', '}' },
+    }),
+}
+local sMod = s('mod', fmt(bMod, {
+    sn(1, { c(1, argList), i(2, '@inputs') }),
+    c(2, bodyList),
+}))
+
+local sImp = s('import', fmt('import {} {{{}}};', {
+    c(1, {
+        fmt('<{}>', i(1, 'nixpkgs')),
+        fmt('./{}', i(1, 'module.nix')),
+    }),
+    i(2, 'args'),
+}))
+
 ls.add_snippets("nix", {
-    -- snips-here(...),
+    sMod,
+    sImp,
 })
