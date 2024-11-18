@@ -56,6 +56,9 @@ local function init_looks(colorscheme)
         end,
     })
     set_looks(colorscheme)
+    if colorscheme == 'marrissa' then
+        vim.cmd [[highlight TelescopeMatching gui=bold guifg=#823f8f]]
+    end
 end
 
 return {

@@ -1,51 +1,55 @@
 {/* config, pkgs, */ ... }:
 let 
 
-  # COLOR OPTIONS: 
-  # c = import ./../../../util/color/tartan.nix;
-  # c = import ./../../../util/color/navy-and-ivory.nix;
-  c = import ./../../../util/color/oxocarbon.nix;
-  # c = import ./../../../util/color/kasugano.nix;
-  # c = import ./../../../util/color/count-von-count.nix;
+    # COLOR OPTIONS: 
+    # c = import ./../../../util/color/tartan.nix;
+    # c = import ./../../../util/color/oxocarbon.nix;
+    # c = import ./../../../util/color/kasugano.nix;
+    # c = import ./../../../util/color/count-von-count.nix;
+    # c = import ./../../../util/color/navy-and-ivory.nix;
+    c = import ./../../../util/color/marrissa-term.nix;
 
-  st = {
-    fg1 = c.black; # os
-    bg1 = c.blue;
-    fg2 = c.black; # directory
-    bg2 = c.red;
-    fg3 = c.red; # git
-    bg3 = c.black;
-    fg4 = c.black; # lang/env
-    bg4 = c.cyan;
-    fg5 = c.cyan; # time
-    bg5 = c.black;
-    bgchar = c.black;
-  };
+    st = {
+        fg1 = c.black; # os
+        bg1 = c.blue;
+        fg2 = c.black; # directory
+        bg2 = c.magenta;
+        fg3 = c.black; # git
+        bg3 = c.bright_blue;
+        fg4 = c.black; # lang/env
+        bg4 = c.cyan;
+        # fg5 = c.magenta; # time
+        bg5 = c.black;
+        bgchar = c.black;
+    };
 
-  # # count von count overrides
-  # st.bg1 = c.white;
-  # st.fg3 = c.green;
-  # st.fg5 = c.red;
-  # st.bg5 = c.bright_black;
+    # # count von count overrides
+    # st.bg1 = c.white;
+    # st.fg3 = c.green;
+    # st.fg5 = c.red;
+    # st.bg5 = c.bright_black;
 
-  # SYMBOLS
-  os_sym = " ";
-  trunc_sym = "󱑼 /"; # other opts:    
-  err_sym = "󰲉 "; # other opts: 󰚑 
-  time_sym = " ";
-  home_sym = " ";
-  custom_latex = "\${custom.latex}";
+    # marrissa-term overrides
+    st.fg5 = "#75507B";
+
+    # SYMBOLS
+    os_sym = " ";
+    trunc_sym = "󱑼 /"; # other opts:    
+    err_sym = "󰲉 "; # other opts: 󰚑 
+    time_sym = " ";
+    home_sym = " ";
+    custom_latex = "\${custom.latex}";
 in
-{
-  programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
+    {
+    programs.starship = {
+        enable = true;
+        enableFishIntegration = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+    };
 
-  home.file = {
-    ".config/starship.toml".text = ''
+    home.file = {
+        ".config/starship.toml".text = ''
       format = """
       [░▒▓](${st.bg1})\
       [ ${os_sym} ](bg:${st.bg1} fg:${st.fg1})\
@@ -64,7 +68,7 @@ in
       $conda\
       $lua\
       $nix_shell\
-      ${custom_latex}\
+            ${custom_latex}\
       [](bg:${st.bg5} fg:${st.bg4})\
       $time\
       $cmd_duration\
@@ -114,7 +118,7 @@ in
       vimcmd_symbol = '[  ](fg:${c.bright_blue} bg:${st.bgchar}) '
       vimcmd_visual_symbol = '[  ](fg:${c.magenta} bg:${st.bgchar}) '
       vimcmd_replace_symbol = '[  ](fg:${c.yellow} bg:${st.bgchar}) '
-      error_symbol = '[ ${err_sym}](bold fg:${c.red} bg:${st.bgchar}) '
+      error_symbol = '[ ${err_sym}](bold fg:${c.bright_red} bg:${st.bgchar}) '
       format = '[$symbol](bg:${st.bgchar})'
 
       [git_branch]
@@ -184,6 +188,6 @@ in
       disabled = false
       style = "italic #394260"
       format = "[$duration]($style)"
-    '';
-  };
+        '';
+    };
 }

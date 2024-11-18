@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 
 return {
     hasklug   = wezterm.font_with_fallback({
-        { family = 'Hasklug Nerd Font Mono', weight = 'Regular' },
+        { family = 'Hasklug Nerd Font', weight = 'Regular' },
         { family = 'Symbols Nerd Font Mono', scale = 1 },
     }),
     monofur   = wezterm.font_with_fallback({

@@ -14,4 +14,5 @@ vim.keymap.set('n', '<leader>nt', function()
   end
 end, { desc = '[n]otes [t]oggle conceal' , buffer = true})
 vim.cmd [[hi link tkTag Constant]] -- custom highlights
-vim.cmd [[hi link tkHighlight @comment.note]]
+-- vim.cmd [[hi link tkHighlight @comment.note]]
+vim.cmd [[hi link tkHighlight Visual]]

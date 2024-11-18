@@ -10,10 +10,13 @@ if status is-interactive
         # ------------------ IS WSL? ------------------
         if set -q WSL_DISTRO_NAME[1]
             printf "I think you are working in %sWSL%s.\n" (set_color green) (set_color normal)
-        else    
+        else
             # printf "I think you are %snot%s working in WSL.\n" (set_color green) (set_color normal)  
         end
     end
+
+    #fish_config theme choose "Snow Day"
+    fish_config theme choose "Just a Touch"
 end
 
 # matlab needs gtk2
@@ -21,6 +24,7 @@ end
 
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/scripts
+fish_add_path ~/.yarn/bin
 
 # ------------------ Custom Funcs ------------------
 
@@ -39,7 +43,7 @@ end
 # ------------------ ALIASes / ABBRs ------------------
 abbr --erase (abbr --list)
 
-abbr --add cat "bat"
+abbr --add cat bat
 
 # fish git abbrs
 abbr --add gs "git status"
@@ -48,9 +52,8 @@ abbr --add gc "git commit"
 abbr --add gp "git push"
 abbr --add gco "git checkout"
 
-# fish eza abbrs
-alias ls "eza"
-abbr --add e "eza"
+alias ls eza # fish eza abbrs
+abbr --add e eza
 abbr --add ea "eza -a"
 abbr --add el "eza -l"
 abbr --add ela "eza -la"
@@ -77,8 +80,8 @@ abbr --add batcode "bat (find -L ~/code -type f | fzf)"
 alias batcode "bat (find -L ~/code -type f | fzf)"
 
 # fish just abbrs
-abbr --add j "just"
-alias j "just"
+abbr --add j just
+alias j just
 
 # "open code subdirectory"
 abbr --add zc "z (find ~/code -mindepth 1 -type d -not -path '*/.git*' -not -path '*/target*' -not -path '*dist-newstyle*' -not -path '*.stack*' -not -path '*.vscode*' | fzf)"
@@ -96,7 +99,7 @@ abbr --add vis "nvim -S (begin; fd -e vim . ; fd -e vim . ~/.local/share/nvim/se
 # command line/clipboard interop help
 abbr --add xc --position anywhere "xclip -selection clipboard"
 abbr --add xp --position anywhere "xclip -selection clipboard -o"
-abbr --add xcv --position anywhere "xclip"
+abbr --add xcv --position anywhere xclip
 abbr --add xpv --position anywhere "xclip -o"
 
 # porsmo abbreviations, quick timers
@@ -108,11 +111,10 @@ abbr --add pt --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !m\"" # t
 abbr --add pth --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !h\"" # time in hours
 abbr --add pts "nix-shell -p porsmo --run \"porsmo stopwatch\""
 
-abbr --add vi "nvim"
+abbr --add vi nvim
 
 # command I wrote for managing my fish stuff, can reload my config as well
-abbr --add mg "manage"
-
+abbr --add mg manage
 abbr --add --set-cursor=! m "math '(!)'"
 
 # CLI inits

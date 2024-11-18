@@ -63,3 +63,8 @@ require 'lspconfig'.zls.setup { -- zig lsp config
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+require 'lspconfig'.fish_lsp.setup { -- fish lsp config
+  capabilities = capabilities,
+  on_attach = on_attach,
+}

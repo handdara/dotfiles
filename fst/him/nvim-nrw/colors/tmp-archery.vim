@@ -50,7 +50,7 @@ hi Comment cterm=italic ctermfg=7 ctermbg=NONE gui=italic guifg=#535B6F guibg=NO
 hi Constant cterm=NONE ctermfg=14 ctermbg=NONE gui=NONE guifg=#25B8A5 guibg=NONE
 
 " Minor groups
-hi String cterm=NONE ctermfg=15 ctermbg=NONE gui=NONE guifg=#446f89 guibg=NONE
+hi String cterm=NONE ctermfg=15 ctermbg=NONE gui=NONE guifg=#0088CC guibg=NONE
 
 hi link Character Constant
 hi link Number    Constant
@@ -72,7 +72,7 @@ hi link Function Identifier
 " -----------------------------
 
 " Preferred group
-hi Statement cterm=bold ctermfg=4 ctermbg=NONE gui=bold guifg=#0088CC guibg=NONE
+hi Statement cterm=bold ctermfg=4 ctermbg=NONE gui=bold guifg=#747F3A guibg=NONE
 
 " Minor groups
 hi link Conditional Statement
@@ -100,7 +100,7 @@ hi link PreCondit PreProc
 " -----------------------------
 
 " Preferred group
-hi Type cterm=NONE ctermfg=4 ctermbg=NONE gui=NONE guifg=#0088CC guibg=NONE
+hi Type cterm=NONE ctermfg=4 ctermbg=NONE gui=NONE guifg=#747F3A guibg=NONE
 
 " Minor groups
 hi link StorageClass Type

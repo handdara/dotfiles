@@ -5,14 +5,14 @@ local function apply_to_config(config)
     -- set theme & opacity
     -- config.colors = hc.default_colors
     config.color_scheme = 'Oxocarbon Dark'
-    config.window_background_opacity = 0.93
+    config.window_background_opacity = 0.90
     config.inactive_pane_hsb = {
         saturation = 0.9,
         brightness = 0.75,
     }
 
     -- fonts and window settings
-    local default_font = hf.hasklug
+    local default_font = hf.spacemono
     local default_font_size = 15.0
     config.font = default_font
     config.font_size = default_font_size
