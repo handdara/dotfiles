@@ -1,4 +1,8 @@
 #!/usr/bin/fish
+
+# Interactive shell setup
+# -------------------------------------------------------------------------------------------------
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     function fish_prompt
@@ -19,14 +23,15 @@ if status is-interactive
     fish_config theme choose "Just a Touch"
 end
 
-# matlab needs gtk2
-# set -gx GTK_PATH /usr/lib/x86_64-linux-gnu/gtk-2.0
+# Adding to path
+# -------------------------------------------------------------------------------------------------
 
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/scripts
 fish_add_path ~/.yarn/bin
 
-# ------------------ Custom Funcs ------------------
+# Custom Funcs
+# -------------------------------------------------------------------------------------------------
 
 function today-onlydate
     date +'%d%b%Y'
@@ -40,7 +45,9 @@ function today-time
     date +'%d%b%Y,  %a,  %H:%M'
 end
 
-# ------------------ ALIASes / ABBRs ------------------
+# ALIASes / ABBRs 
+# -------------------------------------------------------------------------------------------------
+
 abbr --erase (abbr --list)
 
 abbr --add cat bat
@@ -69,32 +76,27 @@ abbr --add ed "eza -lTD"
 alias ed "eza -lTD"
 
 # dir and subdirectory abbrs
-abbr --add fdirh --set-cursor=! "find -L ~! -type d -not -path '*/.*'| fzf" # find directory, exclude .dirs
-abbr --add fdir --set-cursor=! "find -L ! -type d | fzf" # find directory including `.___` dirs 
-abbr --add ffh --set-cursor=! "find -L ~! -type f -not -path '*/.*'| fzf" # find file, exclude .dirs
-abbr --add ff --set-cursor=! "find -L ! -type f | fzf" # find file including `.___` dirs 
+abbr --add fdirh --set-cursor=! "fd --type d -HI . ~! | fzf" # find directory, exclude .dirs
+abbr --add ffh --set-cursor=! "fd --type f -HI . ~! | fzf" # find file, exclude .dirs
+abbr --add fdir --set-cursor=! "fd --type d -HIL . ! | fzf" # find directory including `.___` dirs 
+abbr --add ff --set-cursor=! "fd --type f -HIL . ! | fzf" # find file including `.___` dirs 
 
-abbr --add batconf "bat (find -L ~/.config -type f | fzf)"
-alias batconf "bat (find -L ~/.config -type f | fzf)"
-abbr --add batcode "bat (find -L ~/code -type f | fzf)"
-alias batcode "bat (find -L ~/code -type f | fzf)"
+abbr --add batconf "bat (fd -LHI --type f . ~/.config | fzf)"
+abbr --add batcode "bat (fd -LHI --type f . ~/code | fzf)"
 
 # fish just abbrs
 abbr --add j just
 alias j just
-
 # "open code subdirectory"
-abbr --add zc "z (find ~/code -mindepth 1 -type d -not -path '*/.git*' -not -path '*/target*' -not -path '*dist-newstyle*' -not -path '*.stack*' -not -path '*.vscode*' | fzf)"
+abbr --add zc "z (fd --type d . ~/code | fzf)"
 abbr --add zs "z ~/.local/scripts" # "open scripts"
-abbr --add zcfg "z (find ~/.config -type d | fzf)" # "open config sub-directory"
-abbr --add zd --set-cursor=! 'z (find .! -type d | fzf)' # open subdirectory of current dir
-abbr --add zm "z (find ~/MEGA -type d | fzf)" # "open mega sub-directory"
-abbr --add zp "z (find ~/code -mindepth 1 -maxdepth 1 -type d | fzf)" # "open project"
+abbr --add zx "z (fd --type d . ~/.config | fzf)" # "open config sub-directory"
+abbr --add zd --set-cursor=! 'z (fd --type d .! | fzf)' # open subdirectory of current dir
+abbr --add zm "z (fd --type d -HI . ~/MEGA | fzf)" # "open mega sub-directory"
+abbr --add zp "z (fd --min-depth 1 --max-depth 1 --type d . ~/code | fzf)" # "open project"
 
-abbr --add qe --set-cursor=! "$EDITOR (find ! -mindepth 1 | fzf)" # [Q]uick [E]dit a file
-abbr --add qec --set-cursor=! "$EDITOR (find ~/code -mindepth 1 | fzf)" # [Q]uick [E]dit a code file
-
-abbr --add vis "nvim -S (begin; fd -e vim . ; fd -e vim . ~/.local/share/nvim/sessions ; end | fzf)"
+abbr --add qe --set-cursor=! "$EDITOR (fd --min-depth 1 . ! | fzf)" # [Q]uick [E]dit a file
+abbr --add qec --set-cursor=! "$EDITOR (fd --min-depth 1 . ~/code | fzf)" # [Q]uick [E]dit a code file
 
 # command line/clipboard interop help
 abbr --add xc --position anywhere "xclip -selection clipboard"
@@ -104,9 +106,6 @@ abbr --add xpv --position anywhere "xclip -o"
 
 # porsmo abbreviations, quick timers
 # abbr --add pt --set-cursor=! "porsmo timer (math !\*60)" # time in minutes
-# abbr --add pt-hr --set-cursor=! "porsmo timer (math !\*3600)" # time in hours
-# abbr --add pts "porsmo stopwatch"
-abbr --add porsmo --set-cursor=! "nix-shell -p porsmo --run porsmo" # time in minutes
 abbr --add pt --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !m\"" # time in minutes
 abbr --add pth --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !h\"" # time in hours
 abbr --add pts "nix-shell -p porsmo --run \"porsmo stopwatch\""
@@ -115,9 +114,11 @@ abbr --add vi nvim
 
 # command I wrote for managing my fish stuff, can reload my config as well
 abbr --add mg manage
+
 abbr --add --set-cursor=! m "math '(!)'"
 
 # CLI inits
+# -------------------------------------------------------------------------------------------------
 
 zoxide init fish | source
 
