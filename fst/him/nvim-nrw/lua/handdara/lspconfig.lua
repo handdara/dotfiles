@@ -68,3 +68,8 @@ require 'lspconfig'.fish_lsp.setup { -- fish lsp config
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+require 'lspconfig'.pyright.setup { -- fish lsp config
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
