@@ -75,3 +75,12 @@ hi StatusLineNC gui=NONE guibg=#020003 guifg=#dadada
 hi Search guibg=#928a92 guifg=#dadada
 hi VertSplit gui=NONE guifg=#130114 guibg=NONE
 hi Visual gui=NONE guifg=#130114 guibg=#828a7b
+
+" markdown treesitter stuff
+hi @markup.heading.1 gui=bold guibg=#f5d6fc guifg=#130114
+hi @markup.heading.2 gui=bold guibg=#616097 guifg=#130114
+hi @markup.heading.3 gui=bold guibg=#823f8f guifg=#130114
+hi @markup.heading.4 gui=bold guibg=#828a7b guifg=#130114
+hi @markup.heading.5 gui=bold guibg=#76507e guifg=#130114
+hi @markup.heading.6 gui=bold guibg=#928a92 guifg=#130114
+

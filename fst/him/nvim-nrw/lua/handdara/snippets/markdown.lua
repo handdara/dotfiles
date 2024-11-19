@@ -88,7 +88,7 @@ local friSched = [[
 |  2330-0000 |   No more screens!   |]]
 local satSched = 'No schedule made yet.'
 local sunSched = 'No schedule made yet.'
-local daySchedules = { monSched, tueSched, wedSched, thuSched, friSched, satSched, sunSched }
+local daySchedules = { sunSched, monSched, tueSched, wedSched, thuSched, friSched, satSched, }
 local sDaily = s('daily', d(1, function()
     local ts = u.timestamp()
     return sn(nil, fmt(bDaily, {
