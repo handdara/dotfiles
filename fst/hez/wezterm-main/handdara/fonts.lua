@@ -23,7 +23,7 @@ return {
     }),
     spacemono = wezterm.font_with_fallback({
         { family = 'SpaceMono Nerd Font', weight = 'Regular' },
-        -- { family = 'Symbols Nerd Font Mono',    scale = 1 },
+        { family = 'Symbols Nerd Font Mono',    scale = 1 },
     }),
     firacode  = wezterm.font 'Fira Code',
     jetbrains = wezterm.font 'JetBrains Mono',

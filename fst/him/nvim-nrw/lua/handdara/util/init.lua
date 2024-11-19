@@ -16,7 +16,9 @@ local function timestamp()
         yr = tostring(ts.year),
         dy = tostring(ts.day),
         mo = months[ts.month],
+        mo_num = ts.month,
         wd = weekdays[ts.wday],
+        wd_num = ts.wday,
         hr = dtnum2str(ts.hour),
         mi = dtnum2str(ts.min),
     }
