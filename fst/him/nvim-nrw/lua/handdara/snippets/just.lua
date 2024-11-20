@@ -15,5 +15,6 @@ local fmta = require("luasnip.extras.fmt").fmta
 local u = require 'handdara.util'
 
 ls.add_snippets("just", {
-    s("jd", t([[jd := justfile_directory()]]))
+    s("jd", t([[jd := justfile_directory()]])),
+    s("def", t({'# list recipes', 'default:', '    @just --list', ''})),
 })
