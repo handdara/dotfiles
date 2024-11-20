@@ -49,6 +49,7 @@ place-lazylock:
 # "dev mode", i.e. replace the nix home manager controlled cfgs with a symlink for fast dev
 dev:
     just {{dotfiles_dir}}/fst/him/ replace-nix
+    just {{dotfiles_dir}}/fst/hez/ replace-nix
 
 # replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
 stable: purge && rebuild-switch-home
