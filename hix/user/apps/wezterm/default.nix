@@ -1,5 +1,9 @@
 {/* config, */ pkgs, ... }:
+let
+    c = import ./../../../util/color/marrissa-term.nix;
+in
 {
+
     home.packages = [ pkgs.wezterm ];
     home.file = {
         ".config/wezterm" = {
@@ -34,7 +38,7 @@
                 -- The color of the split lines between panes
                 split = '#444444',
 
-                ansi = { '#373C45', '#FF5050', '#44B273', '#ED722E', '#1D918B', '#D16BB7', '#00BFA4', '#8E8D8D' },
+                ansi = { '#373C45', '#000000', '#44B273', '#ED722E', '#1D918B', '#D16BB7', '#00BFA4', '#8E8D8D' },
                 brights = { '#CCCCCC', '#FF4D00', '#10B981', '#FFFF00', '#0DB9D7', '#D68EB2', '#5AD1AA', '#FFFADE' },
 
                 -- -- Arbitrary colors of the palette in the range from 16 to 255
@@ -47,5 +51,67 @@
                 compose_cursor = '#1D918B',
             }
         '';
+        ".config/wezterm/colors/marrissa-term.toml".text = ''
+            [colors]
+            background = '${c.bg}'
+            foreground = '${c.fg}'
+            cursor_bg = '#ffffff'
+            cursor_border = '#ffffff'
+            cursor_fg = '#161616'
+
+            ansi = [
+                '${c.black   }',
+                '${c.red     }',
+                '${c.green   }',
+                '${c.yellow  }',
+                '${c.blue    }',
+                '${c.magenta }',
+                '${c.cyan    }',
+                '${c.white   }',
+            ]
+            brights = [
+                '${c.bright_black   }',
+                '${c.bright_red     }',
+                '${c.bright_green   }',
+                '${c.bright_yellow  }',
+                '${c.bright_blue    }',
+                '${c.bright_magenta }',
+                '${c.bright_cyan    }',
+                '${c.bright_white   }',
+            ]
+
+            [colors.tab_bar]
+            background = "#262626"
+
+            [colors.tab_bar.active_tab]
+            bg_color = '#161616'
+            fg_color = '#ffffff'
+            intensity = 'Normal'
+            italic = false
+            strikethrough = false
+            underline = 'None'
+
+            [colors.tab_bar.inactive_tab]
+            bg_color = '#262626'
+            fg_color = '#ffffff'
+            intensity = 'Normal'
+            italic = false
+            strikethrough = false
+            underline = 'None'
+
+            [colors.tab_bar.new_tab]
+            bg_color = '#262626'
+            fg_color = '#ffffff'
+            intensity = 'Normal'
+            italic = false
+            strikethrough = false
+            underline = 'None'
+
+
+            [metadata]
+            name = 'marrissa-term'
+            origin_url = 'https://github.com/nyoom-engineering/oxocarbon'
+        '';
+
     };
 }

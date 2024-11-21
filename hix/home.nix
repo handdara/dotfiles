@@ -19,6 +19,7 @@
     ./user/apps/pandoc
     ./user/apps/vim
     ./user/apps/gpg
+    ./user/apps/vivaldi
   ];
 
   home.username = userSettings.username;
