@@ -17,10 +17,10 @@
     # SYSTEM SETTINGS
     sysSettings = {
       system = "x86_64-linux";
-      hostname = "sha76";
+      hostname = "theseus";
       timezone = "America/New_York";
       locale = "en_US.UTF-8";
-      useDisplayLink = true;
+      useDisplayLink = false;
     };
     # USER SETTINGS
     userSettings = rec {
@@ -37,6 +37,17 @@
   {
     nixosConfigurations = {
       sha76 = lib.nixosSystem {
+        system = sysSettings.system;
+        modules = [
+          ./configuration.nix
+          inputs.kmonad.nixosModules.default
+        ];
+        specialArgs = {
+          inherit sysSettings;
+          inherit userSettings;
+        };
+      };
+      theseus = lib.nixosSystem {
         system = sysSettings.system;
         modules = [
           ./configuration.nix
