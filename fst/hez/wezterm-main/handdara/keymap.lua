@@ -18,7 +18,6 @@ for k, v in pairs(key_wksps) do
     else
         wksp = v
     end
-    print('k', k, 'v', v, 'wksp', wksp)
     key_wksps[k] = wksp -- key_wksps is used later
     table.insert(wksp_keytable, { key = k, action = act.SwitchToWorkspace(wksp), })
 end
@@ -103,6 +102,11 @@ local keys = {
     { key = '8',   mods = 'CTRL',       action = act.ActivateTab(7), },
     { key = '9',   mods = 'CTRL',       action = act.ActivateTab(8), },
 }
+
+for i = 1, 9, 1 do
+    local k = tostring(i)
+    table.insert(keys, { key = k, mods = 'CTRL', action = act.ActivateTab(i - 1) })
+end
 
 for _, value in ipairs({'x', 'm', 'w', 'c', 'e', 'a', 's', 'd', 'f', 'g'}) do
     table.insert(keys,

@@ -11,6 +11,7 @@ table.insert(note_args, 'nvim quicklinks.md')
 ---@param key string which key (a through z) to id the wksp with
 ---@return table
 local function mk_dev_wksp(key)
+    assert(type(key) == 'string')
     local key_lower = string.lower(key)
     local key_num = string.byte(key_lower, 1, 1)
     local isalpha = (97 <= key_num and key_num <= 122) -- a:97 z:122 A:65 Z:90
