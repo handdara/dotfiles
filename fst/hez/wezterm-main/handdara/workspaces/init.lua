@@ -5,24 +5,22 @@ local hd = require 'handdara.domains'
 local note_args = {}
 table.insert(note_args, hl.system_shell.args[1])
 table.insert(note_args, '-c')
--- table.insert(note_args, 'nvim .')
 table.insert(note_args, 'nvim quicklinks.md')
 
 ---makes a development workspace based on alphabetic key
----@param key string
+---@param key string which key (a through z) to id the wksp with
 ---@return table
 local function mk_dev_wksp(key)
-    -- assert()
-    local key_num = string.byte(key,1,1)
-    -- local isalpha = (key_num 
-    local x = (string.len(key) == 1) && (key[1] )
-    local dev_wksp = {
-        name = 'dev' .. key,
+    local key_lower = string.lower(key)
+    local key_num = string.byte(key_lower, 1, 1)
+    local isalpha = (97 <= key_num and key_num <= 122) -- a:97 z:122 A:65 Z:90
+    assert((string.len(key_lower) == 1) and isalpha)
+    return {
+        name = 'dev-' .. key_lower,
         spawn = {
             domain = hd.dev_domain,
         },
     }
-    return dev_wksp
 end
 
 return {
@@ -77,4 +75,5 @@ return {
         },
     },
     mega = require('handdara.workspaces.mega'),
+    mk_dev_wksp = mk_dev_wksp,
 }
