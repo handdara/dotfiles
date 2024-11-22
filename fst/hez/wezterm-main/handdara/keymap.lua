@@ -2,6 +2,32 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local ws = require 'handdara.workspaces'
 
+local keys = {
+    { key = 'F11', mods = 'NONE',       action = act.ToggleFullScreen },
+    { key = '-',   mods = 'ALT',        action = act.DecreaseFontSize },
+    { key = '=',   mods = 'ALT',        action = act.IncreaseFontSize },
+    { key = 'p',   mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
+    { key = 'v',   mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
+    { key = 'c',   mods = 'CTRL|SHIFT', action = act.CopyTo 'Clipboard' },
+    -- key tables
+    { key = 'p',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'pane_mode', one_shot = false } },
+    { key = 'f',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'launch_mode', one_shot = true } },
+    { key = 'u',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'scroll_mode', one_shot = false } },
+    { key = 's',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'wksp_mode', one_shot = true } },
+    { key = 'q',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'quit_mode', one_shot = true } },
+    { key = 't',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'tab_mode', one_shot = true } },
+    -- navigation
+    { key = 'h',   mods = 'ALT',        action = act.ActivatePaneDirection 'Left' },
+    { key = 'l',   mods = 'ALT',        action = act.ActivatePaneDirection 'Right' },
+    { key = 'k',   mods = 'ALT',        action = act.ActivatePaneDirection 'Up' },
+    { key = 'j',   mods = 'ALT',        action = act.ActivatePaneDirection 'Down' },
+}
+
+for i = 1, 9, 1 do
+    local k = tostring(i)
+    table.insert(keys, { key = k, mods = 'CTRL', action = act.ActivateTab(i - 1) })
+end
+
 local key_wksps = {
     ['q'] = false, ['w'] = false, ['e'] = ws.personal_notes, ['r'] = ws.monitoring, ['t'] = false, ['y'] = false, ['u'] = false, ['i'] = false, ['o'] = false, ['p'] = false,
         ['a'] = false, ['s'] = false, ['d'] = false, ['f'] = false, ['g'] = ws.mega, ['h'] = false, ['j'] = false, ['k'] = false, ['l'] = false,
@@ -15,8 +41,12 @@ for k, v in pairs(key_wksps) do
     local wksp
     if v == false then
         wksp = ws.mk_dev_wksp(k)
+    elseif v == true then
+        wksp = ws.mk_dev_wksp(k)
+        table.insert(keys, { key = k,   mods = 'ALT|CTRL',   action = act.SwitchToWorkspace(wksp) })
     else
         wksp = v
+        table.insert(keys, { key = k,   mods = 'ALT|CTRL',   action = act.SwitchToWorkspace(wksp) })
     end
     key_wksps[k] = wksp -- key_wksps is used later
     table.insert(wksp_keytable, { key = k, action = act.SwitchToWorkspace(wksp), })
@@ -70,49 +100,8 @@ local key_tables = {
         { key = 'g', action = act.ScrollToTop },
         { key = 'g', mods = 'SHIFT',                 action = act.ScrollToBottom },
     },
-    test_mode = wksp_keytable,
+    wksp_mode = wksp_keytable,
 }
-
-local keys = {
-    { key = 'F11', mods = 'NONE',       action = act.ToggleFullScreen },
-    { key = '-',   mods = 'ALT',        action = act.DecreaseFontSize },
-    { key = '=',   mods = 'ALT',        action = act.IncreaseFontSize },
-    { key = 'p',   mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
-    { key = 'v',   mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
-    { key = 'c',   mods = 'CTRL|SHIFT', action = act.CopyTo 'Clipboard' },
-    -- key tables
-    { key = 'p',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'pane_mode', one_shot = false } },
-    { key = 'f',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'launch_mode', one_shot = true } },
-    { key = 'u',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'scroll_mode', one_shot = false } },
-    { key = 's',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'test_mode', one_shot = true } },
-    { key = 'q',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'quit_mode', one_shot = true } },
-    { key = 't',   mods = 'ALT',        action = act.ActivateKeyTable { name = 'tab_mode', one_shot = true } },
-    -- navigation
-    { key = 'h',   mods = 'ALT',        action = act.ActivatePaneDirection 'Left' },
-    { key = 'l',   mods = 'ALT',        action = act.ActivatePaneDirection 'Right' },
-    { key = 'k',   mods = 'ALT',        action = act.ActivatePaneDirection 'Up' },
-    { key = 'j',   mods = 'ALT',        action = act.ActivatePaneDirection 'Down' },
-    { key = '1',   mods = 'CTRL',       action = act.ActivateTab(0), },
-    { key = '2',   mods = 'CTRL',       action = act.ActivateTab(1), },
-    { key = '3',   mods = 'CTRL',       action = act.ActivateTab(2), },
-    { key = '4',   mods = 'CTRL',       action = act.ActivateTab(3), },
-    { key = '5',   mods = 'CTRL',       action = act.ActivateTab(4), },
-    { key = '6',   mods = 'CTRL',       action = act.ActivateTab(5), },
-    { key = '7',   mods = 'CTRL',       action = act.ActivateTab(6), },
-    { key = '8',   mods = 'CTRL',       action = act.ActivateTab(7), },
-    { key = '9',   mods = 'CTRL',       action = act.ActivateTab(8), },
-}
-
-for i = 1, 9, 1 do
-    local k = tostring(i)
-    table.insert(keys, { key = k, mods = 'CTRL', action = act.ActivateTab(i - 1) })
-end
-
-for _, value in ipairs({'x', 'm', 'w', 'c', 'e', 'a', 's', 'd', 'f', 'g'}) do
-    table.insert(keys,
-        { key = value,   mods = 'ALT|CTRL',   action = act.SwitchToWorkspace(key_wksps[value]), }
-    )
-end
 
 local function apply_to_config(config)
     config.disable_default_key_bindings = true -- i like to only use my own keymaps, i'll add more over time but it's pretty minimal rn

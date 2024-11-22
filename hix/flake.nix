@@ -17,10 +17,10 @@
     # SYSTEM SETTINGS
     sysSettings = {
       system = "x86_64-linux";
-      hostname = "theseus";
+      hostname = "sha76";
       timezone = "America/New_York";
       locale = "en_US.UTF-8";
-      useDisplayLink = false;
+      useDisplayLink = true;
     };
     # USER SETTINGS
     userSettings = rec {
