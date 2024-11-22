@@ -30,7 +30,7 @@ end
 
 local key_wksps = {
     ['q'] = false, ['w'] = false, ['e'] = ws.personal_notes, ['r'] = ws.monitoring, ['t'] = false, ['y'] = false, ['u'] = false, ['i'] = false, ['o'] = false, ['p'] = false,
-        ['a'] = false, ['s'] = false, ['d'] = false, ['f'] = false, ['g'] = ws.mega, ['h'] = false, ['j'] = false, ['k'] = false, ['l'] = false,
+        ['a'] = true, ['s'] = true, ['d'] = true, ['f'] = true, ['g'] = ws.mega, ['h'] = false, ['j'] = false, ['k'] = false, ['l'] = false,
             ['z'] = false, ['x'] = ws.misc, ['c'] = ws.config, ['v'] = false, ['b'] = false, ['n'] = false, ['m'] = false,
 }
 
