@@ -8,7 +8,7 @@ MICRO: 1
 -->
 # handdara's dotfiles
 
-![Version Badge](https://img.shields.io/badge/version-24.11.2.1-a47daa?style=for-the-badge&logoColor=white&labelColor=616097)
+[![Version Badge][]](https://github.com/handdara/dotfiles/releases/latest )
 
 `hix`: NixOS configuration files
 
@@ -61,3 +61,7 @@ MICRO: 1
     };
     ```
 1.  run `just purge && just switch`
+
+---
+
+[Version Badge]:https://img.shields.io/badge/version-24.11.2.1-a47daa?style=for-the-badge&labelColor=616097
