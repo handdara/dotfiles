@@ -24,7 +24,7 @@ MICRO: 1
 ## usage
 
 1.  install NixOS 
-1.  enable flakes set hostname
+1.  enable flakes and set hostname
     1.  add `nix.settings.experimental-features = [ "nix-command" "flakes" ];` to `/etc/nixos/configuration.nix`
         and change the hostname on the line `networking.hostName = "<HOSTNAME-GOES-HERE>"; # Define your hostname.`
     1.  save and rebuild with `sudo nixos-rebuild switch`. then reboot
