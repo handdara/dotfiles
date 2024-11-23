@@ -2,13 +2,13 @@
 ---
 YY: 24
 0M: 11
-MINOR: 0
+MINOR: 2
 MICRO: 1
 ---
 -->
 # handdara's dotfiles
 
-![Version Badge](https://img.shields.io/badge/version-24.11.0.1-a47daa?style=for-the-badge&logoColor=white&labelColor=616097)
+![Version Badge](https://img.shields.io/badge/version-24.11.2.1-a47daa?style=for-the-badge&logoColor=white&labelColor=616097)
 
 `hix`: NixOS configuration files
 
