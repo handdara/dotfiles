@@ -11,4 +11,3 @@
 
 `snd`: secondary layer: tools that don't fit into core. their dotfiles are here
 
-- the `gitui` command is not in current use, so it's justfile has an empty default
