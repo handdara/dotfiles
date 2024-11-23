@@ -3,6 +3,7 @@
 {
   imports =
     [ (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix") 
+      (./. + "/machines"+("/"+sysSettings.hostname)+"/bootloader.nix") 
       ./system/fonts/nerdfonts/default.nix 
       ./system/hardware/kmonad/default.nix
     ] ++ 
@@ -20,10 +21,6 @@
   #   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = sysSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
