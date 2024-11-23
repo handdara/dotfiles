@@ -10,4 +10,3 @@
 - `hish`: fish config
 
 `snd`: secondary layer: tools that don't fit into core. their dotfiles are here
-
