@@ -11,7 +11,7 @@ local programs = {
   top = require('handdara.launch.top'),
   -- htop = require('handdara.launch.htop'),
   btop = require('handdara.launch.btop'),
-  gitui = require('handdara.launch.gitui'),
+  -- gitui = require('handdara.launch.gitui'),
 }
 
 local commands = {

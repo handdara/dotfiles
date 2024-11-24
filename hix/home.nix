@@ -7,7 +7,6 @@
     ./user/apps/nvim/nrw.nix
     ./user/apps/fzf
     ./user/apps/starship
-    ./user/apps/gitui
     ./user/apps/btop
     ./user/apps/zoxide
     ./user/apps/eza

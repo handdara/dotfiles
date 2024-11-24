@@ -126,7 +126,6 @@ vim.keymap.set('n', '<leader>gt', 'vip!pandoc -t ')
 vim.keymap.set('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })
 
 -- user defined commands
--- vim.api.nvim_create_user_command('Vtg', 'vert term gitui', {}) -- open up gitui
 vim.keymap.set('n', '<leader>fc',
 	'<CMD>tabnew<CR><CMD>term bat (find -L ~/code -type f | fzf) > ~/.local/share/nvim/TMP_CODE<CR>',
 	{ desc = '[F]ind [C]ode file' })
