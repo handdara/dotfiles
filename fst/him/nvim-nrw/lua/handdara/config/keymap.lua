@@ -3,10 +3,10 @@ local map = vim.keymap.set
 return function()
     map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- space is my leader key
     map('n', 'Q', '<Nop>', { silent = true })
-    map('i', 'jk', '<Esc>')                                -- Better feeling exit insert mode
-    map('i', 'kj', '<Esc>')                                -- Better feeling exit insert mode
-    map('t', '<C-/><C-/>', '<C-\\><C-n>')                  -- Better feeling exit term mode
-    map({ 'n', 'v' }, "<leader>y", [["+y]])                -- Access system clipboard
+    map('i', 'jk', '<Esc>')                                  -- Better feeling exit insert mode
+    map('i', 'kj', '<Esc>')                                  -- Better feeling exit insert mode
+    map('t', '<C-/><C-/>', '<C-\\><C-n>')                    -- Better feeling exit term mode
+    map({ 'n', 'v' }, "<leader>y", [["+y]])                  -- Access system clipboard
     map('n', "<leader>Y", [["+Y]])
     map('n', "<leader>pp", [["+p]], { desc = '[P]aste system clipboard' })
     map('v', "<leader>p", [["_dP]]) -- Dont overwrite after pasting over text
@@ -33,4 +33,8 @@ return function()
     map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
     map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
     map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+    -- working with views
+    map('n', 'zl', '<CMD>loadview<CR>', { desc = 'load [v]iew for current file' })
+    map('n', 'zk', '<CMD>mkview<CR>', { desc = 'ma[k]e view for current file' })
 end
