@@ -1,139 +1,129 @@
-{ /* config, lib, */ pkgs, sysSettings, userSettings, ... }:
-
+{ pkgs, opts, ... }:
 {
-  imports =
-    [ (./. + "/machines"+("/"+sysSettings.hostname)+"/hardware-configuration.nix") 
-      (./. + "/machines"+("/"+sysSettings.hostname)+"/bootloader.nix") 
-      ./system/fonts/nerdfonts/default.nix 
-      ./system/hardware/kmonad/default.nix
-    ] ++ 
-    ( if sysSettings.useDisplayLink
-        then [ ./system/hardware/displaylink/default.nix ]
+    imports =
+        [ (./. + "/machines"+("/"+opts.sys.hostname)+"/hardware-configuration.nix") 
+            (./. + "/machines"+("/"+opts.sys.hostname)+"/bootloader.nix") 
+            ./system/fonts/nerdfonts
+            ./system/hardware/kmonad
+        ] ++ 
+        ( if opts.sys.useDisplayLink
+            then [ ./system/hardware/displaylink ]
         else [] 
-    );
+        );
 
-  # imports =
-  #   [ # Include the results of the hardware scan.
-  #     ( if sysSettings.hostname == "sha76"
-  #         then ./machines/sha76/hardware-configuration.nix
-  #         else abort "unrecognized sysSettings.hostname"
-  #     )
-  #   ];
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    networking.hostName = opts.sys.hostname;
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.hostName = sysSettings.hostname;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # Enable networking
+    networking.networkmanager.enable = true;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+    # Set your time zone.
+    time.timeZone = opts.sys.timezone;
 
-  # Set your time zone.
-  time.timeZone = sysSettings.timezone;
+    # Select internationalisation properties.
+    i18n.defaultLocale = opts.sys.locale;
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = sysSettings.locale;
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = sysSettings.locale;
-    LC_IDENTIFICATION = sysSettings.locale;
-    LC_MEASUREMENT = sysSettings.locale;
-    LC_MONETARY = sysSettings.locale;
-    LC_NAME = sysSettings.locale;
-    LC_NUMERIC = sysSettings.locale;
-    LC_PAPER = sysSettings.locale;
-    LC_TELEPHONE = sysSettings.locale;
-    LC_TIME = sysSettings.locale;
-  };
-
-  services.xserver = {
-    enable = true; # Enable the X11 windowing system.
-    displayManager.gdm.enable = true; # Enable the GNOME Desktop Environment.
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.wayland = !sysSettings.useDisplayLink; # displaylink driver set up for x11
-    xkb = { # Configure keymap in X11
-      layout = "us";
-      variant = "";
+    i18n.extraLocaleSettings = {
+        LC_ADDRESS = opts.sys.locale;
+        LC_IDENTIFICATION = opts.sys.locale;
+        LC_MEASUREMENT = opts.sys.locale;
+        LC_MONETARY = opts.sys.locale;
+        LC_NAME = opts.sys.locale;
+        LC_NUMERIC = opts.sys.locale;
+        LC_PAPER = opts.sys.locale;
+        LC_TELEPHONE = opts.sys.locale;
+        LC_TIME = opts.sys.locale;
     };
-  };
 
-  services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+    services.xserver = {
+        enable = true; # Enable the X11 windowing system.
+        displayManager.gdm.enable = true; # Enable the GNOME Display Manager
+        desktopManager.gnome.enable = true;
+        displayManager.gdm.wayland = opts.sys.useWayland; # displaylink driver set up for x11
+        xkb = { # Configure keymap in X11
+            layout = "us";
+            variant = "";
+        };
+    };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+    services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    # Enable CUPS to print documents.
+    services.printing.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+    # Enable sound with pipewire.
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        # If you want to use JACK applications, uncomment this
+        #jack.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${userSettings.username} = {
-    isNormalUser = true;
-    description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
+        # use the example session manager (no others are packaged yet so this is enabled by default,
+        # no need to redefine it in your config for now)
+        #media-session.enable = true;
+    };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.${opts.user.username} = {
+        isNormalUser = true;
+        description = opts.user.name;
+        extraGroups = [ "networkmanager" "wheel" ];
+    };
 
-  # Install and set default shell to fish
-  environment.shells = with pkgs; [ fish bash zsh dash ];
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.bash;
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+    # Install firefox for all users
+    programs.firefox.enable = true;
 
-  # base system packages
-  environment.systemPackages = with pkgs; [
-    nvi
-    vim
-    wget
-    git
-    just
-    unzip
-    xclip
-  ];
+    environment.shells = with pkgs; [ fish bash zsh dash ];
+    programs.fish.enable = true;
+    users.defaultUserShell = pkgs.bash;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
 
-  # List services that you want to enable:
+    # base system packages
+    environment.systemPackages = with pkgs; [
+        nvi
+        vim
+        wget
+        git
+        unzip
+        xclip
+    ];
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # programs.mtr.enable = true;
+    # programs.gnupg.agent = {
+    #   enable = true;
+    #   enableSSHSupport = true;
+    # };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    # List services that you want to enable:
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+    # Enable the OpenSSH daemon.
+    # services.openssh.enable = true;
+
+    # Open ports in the firewall.
+    # networking.firewall.allowedTCPPorts = [ ... ];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # networking.firewall.enable = false;
+
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "24.05"; # Did you read the comment?
 }

@@ -4,6 +4,7 @@
   home.file.".vimrc".text = ''
     set relativenumber
     set number
-    inoremap kk <esc>
+    inoremap jk <esc>
+    inoremap kj <esc>
   '';
 }

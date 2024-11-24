@@ -1,58 +1,34 @@
 set fallback
 
 # quick rebuilding aliases
-alias r := rebuild
+alias s := switch
 alias h := rebuild-home-mngr
-alias trf := test-rebuild-flake
-alias thf := test-rebuild-home-mngr-flake
-alias tf := test-flake
+alias t := test-flake
+alias tr := test-rebuild-flake
+alias th := test-rebuild-home-mngr-flake
 
-nixconf_filename := 'configuration.nix'
-hw_conf_filename := 'hardware-configuration.nix'
-homemngr_dirname := 'home-manager'
-
-nix_main_dir := justfile_directory()
-
-nixconf_fr := nix_main_dir / nixconf_filename
-nixconf_to := / 'etc' / 'nixos' / nixconf_filename
-
-hw_conf_fr := nix_main_dir / 'machines' / 'sha76' / hw_conf_filename
-hw_conf_to := / 'etc' / 'nixos' / hw_conf_filename
-
+# just list justs
 default: 
-    @echo "hix justfile does not link by default"
     @just -l
-
-# builds using most up to date method
-rebuild: rebuild-flake
 
 # home manager: builds using most up to date method
 rebuild-home-mngr: rebuild-home-mngr-flake
 
 # snd rebuild mth; flake-based from nixos-main directory
-rebuild-flake:
-    cd {{nix_main_dir}} && sudo nixos-rebuild switch --flake .
-
-# fst rebuild mth; rebuild by linking files to /etc/nixos and running nixos-rebuild from there
-rebuild-etc: link-etc-confs
-    cd /etc/nixos && sudo nixos-rebuild switch
-
-# link files to /etc/nixos
-link-etc-confs:
-    sudo ln -svf {{nixconf_fr}} {{nixconf_to}}
-    sudo ln -svf {{hw_conf_fr}} {{hw_conf_to}}
+switch:
+    sudo nixos-rebuild switch --flake .
 
 # link and then rebuild and switch home-manager
-rebuild-home-mngr-flake: 
-    cd {{nix_main_dir}} && home-manager switch --flake .
+rebuild-home-mngr: 
+    home-manager switch --flake .
 
 # test system rebuild
-test-rebuild-flake:
-    cd {{nix_main_dir}} && sudo nixos-rebuild test --flake .
+test-rebuild:
+    sudo nixos-rebuild test --flake .
 
 # test home-manager rebuild
-test-rebuild-home-mngr-flake: 
-    cd {{nix_main_dir}} && home-manager -n switch --flake .
+test-rebuild-home-mngr: 
+    home-manager -n switch --flake .
 
 # test system & home-manager rebuild
-test-flake: test-rebuild-flake test-rebuild-home-mngr-flake 
+test: test-rebuild test-rebuild-home-mngr 

@@ -1,28 +1,28 @@
-{ userSettings, ... }:
+{ opts, ... }:
 {
   imports = [
-    ./user/shells/bash
-    ./user/shells/fish
-    ./user/apps/wezterm
-    ./user/apps/nvim/nrw.nix
-    ./user/apps/fzf
-    ./user/apps/starship
-    ./user/apps/btop
-    ./user/apps/zoxide
-    ./user/apps/eza
     ./user/apps/bat
-    # ./user/apps/megasync
+    ./user/apps/btop
+    ./user/apps/eza
+    ./user/apps/fzf
+    ./user/apps/gpg
+    ./user/apps/just
+    ./user/apps/kmonad
     ./user/apps/megacmd
     ./user/apps/neofetch
-    ./user/apps/kmonad
+    ./user/apps/nvim/nrw.nix
     ./user/apps/pandoc
+    ./user/apps/starship
     ./user/apps/vim
-    ./user/apps/gpg
     ./user/apps/vivaldi
+    ./user/apps/wezterm
+    ./user/apps/zoxide
+    ./user/shells/bash
+    ./user/shells/fish
   ];
 
-  home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  home.username = opts.user.username;
+  home.homeDirectory = "/home/"+opts.user.username;
 
   nixpkgs.config.allowUnfree = true;
 
