@@ -20,6 +20,7 @@
         ./user/shells/bash
         ./user/shells/fish
         ./user/apps/kitty
+        ./user/apps/zellij
     ];
 
     home.username = opts.user.username;

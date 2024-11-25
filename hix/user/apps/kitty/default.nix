@@ -20,6 +20,8 @@
             "ctrl+shift+c" = "copy_to_clipboard";
             "f11" = "toggle_fullscreen";
             "ctrl+shift+p" = "kitty_shell overlay";
+            "ctrl+equal" = "change_font_size all +1.0";
+            "ctrl+minus" = "change_font_size all -1.0";
         };
     };
 }
