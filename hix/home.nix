@@ -12,7 +12,6 @@
         ./user/apps/neofetch
         ./user/apps/nvim/nrw.nix
         ./user/apps/pandoc
-        ./user/apps/proton-mail-bridge
         ./user/apps/starship
         ./user/apps/vim
         ./user/apps/vivaldi
