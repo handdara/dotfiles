@@ -1,31 +1,28 @@
 set fallback
 
 # quick rebuilding aliases
-alias s := switch
-alias h := rebuild-home-mngr
-alias t := test
-alias tr := test-rebuild
-alias th := test-rebuild-home-mngr
+alias n := switch-nixos
+alias h := switch-home-mngr
 
 # just list justs
 default: 
     @just -l
 
 # rebuild NixOS system (flake-based)
-switch:
+switch-nixos:
     sudo nixos-rebuild switch --flake .
 
 # rebuild and switch home-manager (flake-based)
-rebuild-home-mngr: 
+switch-home-mngr: 
     home-manager switch --flake .
 
 # test NixOS system rebuild
-test-rebuild:
+test-nixos:
     sudo nixos-rebuild test --flake .
 
 # test home-manager rebuild
-test-rebuild-home-mngr: 
+test-home-mngr: 
     home-manager -n switch --flake .
 
 # test system & home-manager rebuild
-test: test-rebuild test-rebuild-home-mngr 
+test: test-nixos test-home-mngr 

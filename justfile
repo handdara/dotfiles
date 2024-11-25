@@ -1,5 +1,4 @@
-alias switch := rebuild-switch-nixos-home
-alias home := rebuild-switch-home
+alias home := switch-home
 
 dotfiles_dir := justfile_directory()
 
@@ -13,16 +12,16 @@ _matlab:
 
 # test rebuild nixos and home-manager
 test:
-    just {{dotfiles_dir}}/hix/ test-rebuild-flake
-    just {{dotfiles_dir}}/hix/ test-rebuild-home-mngr-flake
+    just {{dotfiles_dir}}/hix/ test-nixos
+    just {{dotfiles_dir}}/hix/ test-home-mngr
 
 # rebuild nixos and home-manager using most up-to-date method and switch
-rebuild-switch-nixos-home:
-    just {{dotfiles_dir}}/hix/ rebuild
-    just {{dotfiles_dir}}/hix/ rebuild-home-mngr
+switch:
+    just {{dotfiles_dir}}/hix/ switch-nixos
+    just {{dotfiles_dir}}/hix/ switch-home-mngr
 
 # rebuild only home-manager using most up-to-date method and switch
-rebuild-switch-home:
+switch-home:
     just {{dotfiles_dir}}/hix/ rebuild-home-mngr
 
 # unlink directories needed to switch home-manager
@@ -52,5 +51,5 @@ dev:
     just {{dotfiles_dir}}/fst/hez/ replace-nix
 
 # replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
-stable: purge && rebuild-switch-home
+stable: purge && switch-home
     git add .
