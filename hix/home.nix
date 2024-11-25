@@ -19,6 +19,7 @@
         ./user/apps/zoxide
         ./user/shells/bash
         ./user/shells/fish
+        ./user/apps/kitty
     ];
 
     home.username = opts.user.username;
