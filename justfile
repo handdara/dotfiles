@@ -16,13 +16,12 @@ test:
     just {{dotfiles_dir}}/hix/ test-home-mngr
 
 # rebuild nixos and home-manager using most up-to-date method and switch
-switch:
+switch: && switch-home
     just {{dotfiles_dir}}/hix/ switch-nixos
-    just {{dotfiles_dir}}/hix/ switch-home-mngr
 
 # rebuild only home-manager using most up-to-date method and switch
 switch-home:
-    just {{dotfiles_dir}}/hix/ rebuild-home-mngr
+    just {{dotfiles_dir}}/hix/ switch-home-mngr
 
 # unlink directories needed to switch home-manager
 unlink-all:

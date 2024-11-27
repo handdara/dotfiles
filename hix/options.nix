@@ -6,7 +6,7 @@
         timezone = "America/New_York";
         locale = "en_US.UTF-8";
         useDisplayLink = true;
-        useWayland = true;
+        useWayland = false;
     };
     user = rec {
         username = "handdara";

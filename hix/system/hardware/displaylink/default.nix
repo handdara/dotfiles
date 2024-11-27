@@ -1,4 +1,4 @@
-{config, pkgs, lib, ... }:
+{pkgs, lib, ... }:
 {
   # ALERT: This uses unfree software, here is a helpful log report:
   # ***

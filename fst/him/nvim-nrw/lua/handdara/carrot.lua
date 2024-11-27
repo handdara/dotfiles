@@ -10,3 +10,13 @@ vim.keymap.set('n', '<leader>ce', function ()
         vim.cmd 'edit'
     end
 end, { desc = '[c]arrot: [e]val code block' })
+vim.keymap.set('n', '<leader>cE', function ()
+    local prev_ft = vim.bo.filetype
+    if prev_ft == "telekasten" then
+        vim.bo.filetype = "markdown"
+        c.execute_all()
+        vim.bo.filetype = prev_ft
+        vim.cmd 'write'
+        vim.cmd 'edit'
+    end
+end, { desc = '[c]arrot: [E]val all code block' })

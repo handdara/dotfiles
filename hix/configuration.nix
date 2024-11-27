@@ -42,10 +42,10 @@
     };
 
     services.xserver = {
-        enable = true; # Enable the X11 windowing system.
+        enable = true; # Enable the X11 windowing system. displaylink driver set up for x11
         displayManager.gdm.enable = true; # Enable the GNOME Display Manager
         desktopManager.gnome.enable = true;
-        displayManager.gdm.wayland = opts.sys.useWayland; # displaylink driver set up for x11
+        displayManager.gdm.wayland = opts.sys.useWayland;
         xkb = { # Configure keymap in X11
             layout = "us";
             variant = "";
