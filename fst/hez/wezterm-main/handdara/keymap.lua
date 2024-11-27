@@ -43,10 +43,10 @@ for k, v in pairs(key_wksps) do
         wksp = ws.mk_dev_wksp(k)
     elseif v == true then
         wksp = ws.mk_dev_wksp(k)
-        table.insert(keys, { key = k,   mods = 'ALT|CTRL',   action = act.SwitchToWorkspace(wksp) })
+        table.insert(keys, { key = k, mods = 'ALT|CTRL', action = act.SwitchToWorkspace(wksp) })
     else
         wksp = v
-        table.insert(keys, { key = k,   mods = 'ALT|CTRL',   action = act.SwitchToWorkspace(wksp) })
+        table.insert(keys, { key = k, mods = 'ALT|CTRL', action = act.SwitchToWorkspace(wksp) })
     end
     key_wksps[k] = wksp -- key_wksps is used later
     table.insert(wksp_keytable, { key = k, action = act.SwitchToWorkspace(wksp), })
@@ -54,13 +54,13 @@ end
 
 local key_tables = {
     launch_mode = {
-        { key = 'q', action = 'PopKeyTable' },
+        { key = 'q',      action = 'PopKeyTable' },
         { key = 'Escape', action = 'PopKeyTable' },
-        { key = 'c', action = act.ShowLauncherArgs { flags = 'FUZZY|COMMANDS' } },
-        { key = 'd', action = act.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' } },
-        { key = 'f', action = act.ShowLauncherArgs { flags = 'FUZZY|LAUNCH_MENU_ITEMS' } },
-        { key = 'w', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
-        { key = 't', action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
+        { key = 'c',      action = act.ShowLauncherArgs { flags = 'FUZZY|COMMANDS' } },
+        { key = 'd',      action = act.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' } },
+        { key = 'f',      action = act.ShowLauncherArgs { flags = 'FUZZY|LAUNCH_MENU_ITEMS' } },
+        { key = 'w',      action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+        { key = 't',      action = act.ShowLauncherArgs { flags = 'FUZZY|TABS' } },
     },
     quit_mode = {
         { key = 'q',      action = 'PopKeyTable' },
@@ -69,36 +69,48 @@ local key_tables = {
         { key = 'q',      mods = 'ALT',          action = act.QuitApplication },
     },
     pane_mode = {
-        { key = 'q', action = 'PopKeyTable' },
+        { key = 'q',      action = 'PopKeyTable' },
         { key = 'Escape', action = 'PopKeyTable' },
-        { key = 'h', action = act.AdjustPaneSize { 'Left', 10 } },
-        { key = 'l', action = act.AdjustPaneSize { 'Right', 10 } },
-        { key = 'k', action = act.AdjustPaneSize { 'Up', 4 } },
-        { key = 'j', action = act.AdjustPaneSize { 'Down', 4 } },
-        { key = 'H', action = act.AdjustPaneSize { 'Left', 1 } },
-        { key = 'L', action = act.AdjustPaneSize { 'Right', 1 } },
-        { key = 'K', action = act.AdjustPaneSize { 'Up', 1 } },
-        { key = 'J', action = act.AdjustPaneSize { 'Down', 1 } },
-        { key = 'd', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-        { key = 'r', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-        { key = 'r', mods = 'SHIFT', action = act.RotatePanes 'Clockwise' },
+        { key = 'h',      action = act.AdjustPaneSize { 'Left', 10 } },
+        { key = 'l',      action = act.AdjustPaneSize { 'Right', 10 } },
+        { key = 'k',      action = act.AdjustPaneSize { 'Up', 4 } },
+        { key = 'j',      action = act.AdjustPaneSize { 'Down', 4 } },
+        { key = 'H',      action = act.AdjustPaneSize { 'Left', 1 } },
+        { key = 'L',      action = act.AdjustPaneSize { 'Right', 1 } },
+        { key = 'K',      action = act.AdjustPaneSize { 'Up', 1 } },
+        { key = 'J',      action = act.AdjustPaneSize { 'Down', 1 } },
+        {
+            key = 'd',
+            action = act.Multiple {
+                act.SplitVertical { domain = 'CurrentPaneDomain' },
+                act.PopKeyTable,
+            },
+        },
+        {
+            key = 'r',
+            action = act.Multiple {
+                act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+                act.PopKeyTable,
+            },
+        },
+        { key = 'r', mods = 'SHIFT',                                               action = act.RotatePanes 'Clockwise' },
     },
     tab_mode = {
-        { key = 'q', action = 'PopKeyTable' },
+        { key = 'q',      action = 'PopKeyTable' },
         { key = 'Escape', action = 'PopKeyTable' },
-        { key = 't', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
-        { key = 'l', action = act.ActivateTabRelative(1) },
-        { key = 'h', action = act.ActivateTabRelative(-1) },
+        { key = 't',      mods = 'ALT',                        action = act.SpawnTab 'CurrentPaneDomain' },
+        { key = 'l',      action = act.ActivateTabRelative(1) },
+        { key = 'h',      action = act.ActivateTabRelative(-1) },
     },
     scroll_mode = {
-        { key = 'q', action = 'PopKeyTable' },
+        { key = 'q',      action = 'PopKeyTable' },
         { key = 'Escape', action = 'PopKeyTable' },
-        { key = 'k', action = act.ScrollByLine(-1) },
-        { key = 'j', action = act.ScrollByLine(1) },
-        { key = 'u', action = act.ScrollByPage(-0.5) },
-        { key = 'd', action = act.ScrollByPage(0.5) },
-        { key = 'g', action = act.ScrollToTop },
-        { key = 'g', mods = 'SHIFT',                 action = act.ScrollToBottom },
+        { key = 'k',      action = act.ScrollByLine(-1) },
+        { key = 'j',      action = act.ScrollByLine(1) },
+        { key = 'u',      action = act.ScrollByPage(-0.5) },
+        { key = 'd',      action = act.ScrollByPage(0.5) },
+        { key = 'g',      action = act.ScrollToTop },
+        { key = 'g',      mods = 'SHIFT',                 action = act.ScrollToBottom },
     },
     wksp_mode = wksp_keytable,
 }
