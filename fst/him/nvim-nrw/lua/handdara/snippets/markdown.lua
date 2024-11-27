@@ -147,7 +147,7 @@ local ssuSched = [[
 | 0730 |    :    |          | 1530 |           |          | 2330 | :no-screens: |          |
 | 0745 |    V    |          | 1545 |           |          | 2345 |      V       |          |]]
 local daySchedules = { ssuSched, mwfSched, tthSched, mwfSched, tthSched, mwfSched, ssuSched, }
-local sDaily = s('daily', d(1, function()
+local sdaily = s('daily', d(1, function()
     local ts = u.timestamp()
     return sn(nil, fmt(bDaily, {
         t('[[p' .. u.dtnum2str(ts.mo_num) .. '-' .. ts.mo .. '-' .. ts.yr .. ']]'),
@@ -159,9 +159,30 @@ local sDaily = s('daily', d(1, function()
     }))
 end))
 
+local btask = [[
+---
+tag: {1}/quest{2}
+desc: {3}
+repo: handdara/{4}
+branch: {5}
+---
+# :{6}/quest{7}:
+
+]]
+local stask = s('task', fmt(btask, {
+    i(1, 'project'),
+    i(2, '#'),
+    i(3, 'description'),
+    i(4, 'repository'),
+    i(5, '~'),
+    rep(1),
+    rep(2),
+}))
+
 local snips = {
     sdateheader,
-    sDaily,
+    sdaily,
+    stask,
 }
 
 ls.add_snippets("markdown", snips)
