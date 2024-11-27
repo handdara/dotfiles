@@ -1,5 +1,6 @@
-local function set_looks(colorscheme)
+local function set_looks(colorscheme, is_light)
     local c = colorscheme or "lunaperche" -- default is lunaperche b/c it's my favorite builtin colorscheme
+    local light = is_light or false;
     vim.cmd("colorscheme " .. c)
     vim.cmd [[hi link GitSignsCurrentLineBlame Comment]]
     local groups = {
@@ -42,11 +43,13 @@ local function set_looks(colorscheme)
             vim.cmd('highlight ' .. value .. " cterm=none")
         end
     end
-    apply(groups)
-    apply(extra_groups)
+    if not light then
+        apply(groups)
+        apply(extra_groups)
+    end
 end
 
-local function init_looks(colorscheme)
+local function init_looks(colorscheme, is_light)
     -- Highlight when yanking (copying) text
     vim.api.nvim_create_autocmd('TextYankPost', {
         desc = 'Highlight when yanking (copying) text',
@@ -55,7 +58,7 @@ local function init_looks(colorscheme)
             vim.highlight.on_yank()
         end,
     })
-    set_looks(colorscheme)
+    set_looks(colorscheme, is_light)
     if colorscheme == 'marrissa' then
         vim.cmd [[highlight TelescopeMatching gui=bold guifg=#823f8f]]
     end

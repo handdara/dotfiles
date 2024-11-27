@@ -1,2 +1,4 @@
-{...}@inputs:
-import ./nrw.nix inputs
+{opts, ...}:
+{
+    imports = [./${opts.user.which_nvim}.nix];
+}

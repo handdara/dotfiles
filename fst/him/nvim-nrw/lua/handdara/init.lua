@@ -7,7 +7,12 @@ local function setup(opts)
     hset()
     hkeymap()
     hcmds()
-    hlooks.init_looks(opts.colorscheme)
+    local col = opts.colorscheme
+    if type(col) == 'string'  then
+        hlooks.init_looks(col)
+    else
+        hlooks.init_looks(col.name, col.is_light)
+    end
 end
 
 local function mkHUtil()

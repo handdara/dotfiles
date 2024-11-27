@@ -12,5 +12,6 @@
         username = "handdara";
         name = username;
         email = "${username}.core@proton.me";
+        which_nvim = "nrw";
     };
 }

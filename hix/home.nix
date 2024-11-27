@@ -10,7 +10,7 @@
         ./user/apps/kmonad
         ./user/apps/megacmd
         ./user/apps/neofetch
-        ./user/apps/nvim/nrw.nix
+        ./user/apps/nvim
         ./user/apps/pandoc
         ./user/apps/starship
         ./user/apps/vim
