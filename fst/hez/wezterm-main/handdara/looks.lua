@@ -12,13 +12,12 @@ local function apply_to_config(config)
     }
 
     -- fonts and window settings
-    local default_font = hf.spacemono
-    local default_font_size = 15.0
-    config.font = default_font
+    local default_font_size = 13.0
+    config.font = hf.agave
     config.font_size = default_font_size
     config.enable_tab_bar = false -- making the window layout simple, 99 times out of 100 scaling is handled
     config.window_frame = {
-        font = hf.hasklug,
+        font = hf.agave,
         font_size = default_font_size - 1,
     }
 

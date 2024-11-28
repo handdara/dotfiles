@@ -8,6 +8,8 @@ vim.keymap.set('n', '<leader>ce', function ()
         vim.bo.filetype = prev_ft
         vim.cmd 'write'
         vim.cmd 'edit'
+    elseif prev_ft == "markdown" then
+        c.execute_normal()
     end
 end, { desc = '[c]arrot: [e]val code block' })
 vim.keymap.set('n', '<leader>cE', function ()
@@ -18,5 +20,7 @@ vim.keymap.set('n', '<leader>cE', function ()
         vim.bo.filetype = prev_ft
         vim.cmd 'write'
         vim.cmd 'edit'
+    elseif prev_ft == "markdown" then
+        c.execute_all()
     end
 end, { desc = '[c]arrot: [E]val all code block' })

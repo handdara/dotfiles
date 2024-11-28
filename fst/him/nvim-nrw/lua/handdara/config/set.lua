@@ -1,4 +1,5 @@
 return function()
+    vim.o.conceallevel = 1
     vim.o.breakindent = true -- Enable break indent
     vim.o.expandtab = true
     vim.o.hlsearch = false -- highlight on search
