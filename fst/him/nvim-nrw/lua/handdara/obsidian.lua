@@ -28,5 +28,4 @@ local maps = {
 }
 for combos, dat in pairs(maps) do
     map(dat.modes, combos, dat.action, dat.opts )
-    print(combos, dat)
 end
