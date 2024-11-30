@@ -13,6 +13,7 @@ local function setup(opts)
     else
         hlooks.init_looks(col.name, col.is_light)
     end
+    require 'handdara.obsidian'
 end
 
 local function mkHUtil()

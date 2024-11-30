@@ -70,9 +70,6 @@ return {
         },
         'rcarriga/nvim-notify', -- for pomo.nvim, optional, but highly recommended if you want to use the "Default" timer
     },
-    init = function()
-        require 'handdara.obsidian'
-    end,
     opts = {
         workspaces = {
             { name = "ansible", path = ansible_path },
@@ -127,10 +124,11 @@ return {
         ---@param spec { id: string, dir: obsidian.Path, title: string|? }
         ---@return string|obsidian.Path The full path to the new note.
         note_path_func = function(spec)
+            local path
             if spec.title then
-                local path = spec.dir / tostring(spec.title)
+                path = spec.dir / tostring(spec.title)
             else
-                local path = spec.dir / tostring(spec.id)
+                path = spec.dir / tostring(spec.id)
             end
             return path:with_suffix(".md")
         end,

@@ -1,4 +1,3 @@
--- THIS IS CALLED ON VIM INIT, NOT LAZY CONFIG!
 local map = vim.keymap.set
 local maps = {
     ["<leader>nx"] = {
@@ -29,4 +28,5 @@ local maps = {
 }
 for combos, dat in pairs(maps) do
     map(dat.modes, combos, dat.action, dat.opts )
+    print(combos, dat)
 end
