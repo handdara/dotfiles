@@ -19,9 +19,6 @@ local pomo_opts = {
                 -- Configure the display icons:
                 title_icon = "",
                 text_icon = "",
-                -- Replace the above with these if you don't have a patched font:
-                -- title_icon = "⏳",
-                -- text_icon = "⏱️",
             },
         },
         -- The "System" notifier sends a system notification when the timer is finished.
@@ -228,7 +225,7 @@ return {
                 ObsidianExtLinkIcon = { fg = "#c792ea" },
                 ObsidianTag = { italic = true, fg = "#89ddff" },
                 ObsidianBlockID = { italic = true, fg = "#89ddff" },
-                ObsidianHighlightText = { bg = "#75662e" },
+                ObsidianHighlightText = { bg = "#fc0782" },
             },
         },
 
