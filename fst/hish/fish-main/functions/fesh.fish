@@ -11,7 +11,9 @@ function fesh
         return 1
     else
         cd (string replace '~' $HOME $projdir)
-        if test -e Session.vim
+        if test -e justfile
+            just edit
+        else if test -e Session.vim
             nvim -S Session.vim
         else
             nvim
