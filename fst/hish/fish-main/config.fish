@@ -19,8 +19,7 @@ if status is-interactive
         end
     end
 
-    #fish_config theme choose "Snow Day"
-    fish_config theme choose "Just a Touch"
+    fish_config theme choose '@fish_theme@'
 end
 
 # Adding to path

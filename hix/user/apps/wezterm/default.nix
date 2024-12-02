@@ -1,9 +1,7 @@
-{/* config, */ pkgs, ... }:
+{pkgs, opts, ... }:
 let
     c = import ./../../../util/color/marrissa-term.nix;
-in
-{
-
+in {
     home.packages = [ pkgs.wezterm ];
     home.file = {
         ".config/wezterm" = {
@@ -53,11 +51,11 @@ in
         '';
         ".config/wezterm/colors/marrissa-term.toml".text = ''
             [colors]
-            background = '${c.bg}'
-            foreground = '${c.fg}'
-            cursor_bg = '#ffffff'
-            cursor_border = '#ffffff'
-            cursor_fg = '#161616'
+            background = '${if opts.user.term_invert or false then c.fg else c.bg}'
+            foreground = '${if opts.user.term_invert or false then c.bg else c.fg}'
+            cursor_bg = '${if opts.user.term_invert then c.black else c.white}'
+            cursor_border = '${if opts.user.term_invert then c.black else c.white}'
+            cursor_fg = '${if opts.user.term_invert then c.white else c.black}'
 
             ansi = [
                 '${c.black   }',
@@ -110,8 +108,7 @@ in
 
             [metadata]
             name = 'marrissa-term'
-            origin_url = 'https://github.com/nyoom-engineering/oxocarbon'
-        '';
-
+            # origin_url = '''
+            '';
     };
 }

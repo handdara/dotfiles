@@ -1,4 +1,4 @@
-{/* config, pkgs, */ ... }:
+{opts, ... }:
 let 
 
     # COLOR OPTIONS: 
@@ -9,19 +9,23 @@ let
     # c = import ./../../../util/color/navy-and-ivory.nix;
     c = import ./../../../util/color/marrissa-term.nix;
 
-    st = {
-        fg1 = c.black; # os
-        bg1 = c.blue;
-        fg2 = c.black; # directory
-        bg2 = c.magenta;
-        fg3 = c.black; # git
-        bg3 = c.bright_blue;
-        fg4 = c.black; # lang/env
-        bg4 = c.cyan;
-        # fg5 = c.magenta; # time
-        bg5 = c.black;
-        bgchar = c.black;
-    };
+    # marrissa-term overrides
+    st_overrides = {
+        fg5 = "#75507B";
+    } // (if opts.user.term_invert 
+            then rec { # marrissa-term light mode overrides
+                fg1 = c.bright_black; # os
+                bg1 = c.bright_blue;
+                fg2 = c.bright_black; # directory
+                bg2 = c.bright_magenta;
+                fg3 = c.bright_black; # git
+                bg3 = c.bright_blue;
+                fg4 = c.bright_black; # lang/env
+                bg4 = c.bright_cyan;
+                bg5 = c.white;
+                bgchar = bg5;
+            }
+            else {});
 
     # # count von count overrides
     # st.bg1 = c.white;
@@ -29,8 +33,19 @@ let
     # st.fg5 = c.red;
     # st.bg5 = c.bright_black;
 
-    # marrissa-term overrides
-    st.fg5 = "#75507B";
+    st = {
+        fg1 = st_overrides.fg1 or c.black; # os
+        bg1 = st_overrides.bg1 or c.blue;
+        fg2 = st_overrides.fg2 or c.black; # directory
+        bg2 = st_overrides.bg2 or c.magenta;
+        fg3 = st_overrides.fg3 or c.black; # git
+        bg3 = st_overrides.bg3 or c.bright_blue;
+        fg4 = st_overrides.fg4 or c.black; # lang/env
+        bg4 = st_overrides.bg4 or c.cyan;
+        fg5 = st_overrides.fg5 or c.magenta; # time
+        bg5 = st_overrides.bg5 or c.black;
+        bgchar = st_overrides.bgchar or c.black;
+    };
 
     # SYMBOLS
     os_sym = " ";
