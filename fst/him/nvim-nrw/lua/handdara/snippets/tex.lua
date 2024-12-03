@@ -45,4 +45,5 @@ ls.add_snippets("tex", {
     s("sss-star", { t "\\subsubsection*{", i(1), t { '}', '' }, i(0) }),
     s("ss3", { t "\\subsubsubsection{", i(1), t { '}', '' }, i(0) }),
     s("ss3-star", { t "\\subsubsubsection*{", i(1), t { '}', '' }, i(0) }),
+    s('lab', {t"\\label{", i(1), t"}"}),
 })
