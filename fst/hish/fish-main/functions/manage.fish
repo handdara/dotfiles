@@ -1,30 +1,31 @@
 function manage
-set -l options \
-'vi-mode-on
-vi-mode-off
-reload-config
-show-user-fish-keybinds
-show-user-insert-mode-fish-keybinds
-search-all-fish-keybinds
-start-kmonad
-kill-kmonad
-search-procs
-cheatsheet'
-set -l choice ( echo $options | fzf )
+set -l options {\
+'vi-on: turn fish\'s vi mode on',\
+'vi-off: turn fish\'s vi mode off',\
+'rlconf: reload config.fish',\
+'binds: search all fish keybinds',\
+'ubinds: show user fish keybinds',\
+'uibinds: show user insert mode fish keybinds',\
+'kbd-on: start kmonad',\
+'kbd-off: kill kmonad',\
+'fd-proc: search through procs',\
+'cheatsheet: search through cheatsheet'}
+set -l choice ( for o in $options; echo $o; end | fzf | awk -F: '{print $1}' )
+
 switch $choice
-    case 'vi-mode-on'
+    case 'vi-on'
         fish_vi_key_bindings
-    case 'vi-mode-off'
+    case 'vi-off'
         fish_default_key_bindings
-    case 'reload-config'
+    case 'rlconf'
         if source ~/.config/fish/config.fish
         else
             echo "error: fish config reload unsuccessful"
             return 1
         end
-    case 'search-all-fish-keybinds'
+    case 'binds'
         bind | fzf
-    case 'show-user-fish-keybinds'
+    case 'ubinds'
         # show non preset bindings
         bind                                          \
             | grep -v preset                          \
@@ -33,7 +34,7 @@ switch $choice
             # | sed -n 's/-/ /gp'                       \
             | sed    's/\\\\c/CTRL\+/'                \
             | sed    's/\\\\e/ ALT\+/'
-    case 'show-user-insert-mode-fish-keybinds'
+    case 'uibinds'
         # show non preset insert-mode bindings
         bind -M insert                          \
             | grep -v preset                    \
@@ -42,11 +43,11 @@ switch $choice
             | sed -n 's/-/ /gp'                 \
             | sed    's/\\\\c/CTRL\+/'          \
             | sed    's/\\\\e/ ALT\+/'
-    case 'start-kmonad'
+    case 'kbd-on'
         start-kmonad
-    case 'kill-kmonad'
+    case 'kbd-off'
         kill-kmonad
-    case 'search-procs'
+    case 'fd-proc'
         set -gx MG_LAST_PROC_ID (ps -e | fzf | sed 's/\( \+\)\([0-9]*\)\( \+.*\)/\\2/' )
         echo $MG_LAST_PROC_ID | xclip -selection clipboard
     case '*'

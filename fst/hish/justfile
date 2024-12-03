@@ -1,3 +1,5 @@
+set fallback
+
 fish_config_ln := env_var('HOME') / '.config' / 'fish'
 fish_main_dir := justfile_directory() / 'fish-main'
 fish_func_dir := fish_main_dir / 'functions'

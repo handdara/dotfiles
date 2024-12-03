@@ -36,7 +36,7 @@ require 'handdara'.setup {
   -- colorscheme = { name = "rose-pine-dawn", is_light = true },
   -- colorscheme = "darkrose",
   -- colorscheme = "lunaperche",
-  -- colorscheme = "archery",
+  colorscheme = "archery",
   -- colorscheme = "tmp-archery",
-  colorscheme = "marrissa",
+  -- colorscheme = "marrissa",
 }
