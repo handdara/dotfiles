@@ -3,7 +3,7 @@ local hf = require 'handdara.fonts'
 local function apply_to_config(config)
     -- set theme & opacity
     config.color_scheme = 'marrissa-term'
-    -- config.window_background_opacity = 0.90
+    config.window_background_opacity = 0.90
     config.inactive_pane_hsb = {
         saturation = 0.9,
         brightness = 0.75,

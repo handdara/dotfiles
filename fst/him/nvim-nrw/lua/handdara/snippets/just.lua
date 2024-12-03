@@ -14,7 +14,19 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local u = require 'handdara.util'
 
+local bBash = [[
+{1}:
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    hello='Yo'
+    echo "$hello from Bash!"
+]]
+local sBash = s('bash-recipe', fmt(bBash, {
+    i(1, 'name'),
+}))
+
 ls.add_snippets("just", {
     s("jd", t([[jd := justfile_directory()]])),
     s("def", t({'# list recipes', 'default:', '    @just --list', ''})),
+    sBash,
 })

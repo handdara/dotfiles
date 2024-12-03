@@ -11,17 +11,6 @@ local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local u = require 'handdara.util'
 
--- local bchoose = [[Choose your weapon: {}]]
--- local weapons = {
---     t('sword'),
---     t('gun'),
---     t('spell'),
---     t('beer'),
--- }
--- local schoose = s("choose",
---     fmt(bchoose, { c(1, weapons) })
--- )
-
 local sdate = s("date", {
     f(function()
         local ts = u.timestamp()

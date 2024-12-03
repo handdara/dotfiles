@@ -4,6 +4,10 @@ return {
     build = ":TSUpdate",
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        {
+            'IndianBoy42/tree-sitter-just',
+            opts = {},
+        },
     },
     config = function()
         local configs = require("nvim-treesitter.configs")

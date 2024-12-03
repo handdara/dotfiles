@@ -10,13 +10,6 @@ if status is-interactive
     end
 
     function fish_greeting
-        printf "This machine is %s%s%s. Lets fish...\n" (set_color green) $hostname (set_color normal)
-        # ------------------ IS WSL? ------------------
-        if set -q WSL_DISTRO_NAME[1]
-            printf "I think you are working in %sWSL%s.\n" (set_color green) (set_color normal)
-        else
-            # printf "I think you are %snot%s working in WSL.\n" (set_color green) (set_color normal)  
-        end
     end
 
     fish_config theme choose '@fish_theme@'
@@ -80,8 +73,8 @@ abbr --add ffh --set-cursor=! "fd --type f -HI . ~! | fzf" # find file, exclude 
 abbr --add fdir --set-cursor=! "fd --type d -HIL . ! | fzf" # find directory including `.___` dirs 
 abbr --add ff --set-cursor=! "fd --type f -HIL . ! | fzf" # find file including `.___` dirs 
 
-abbr --add batconf "bat (fd -LHI --type f . ~/.config | fzf)"
-abbr --add batcode "bat (fd -LHI --type f . ~/code | fzf)"
+abbr --add bx "bat (fd -LHI --type f . ~/.config | fzf)"
+abbr --add bc "bat (fd -LHI --type f . ~/code | fzf)"
 
 # fish just abbrs
 abbr --add j just
@@ -105,6 +98,7 @@ abbr --add xpv --position anywhere "xclip -o"
 
 # porsmo abbreviations, quick timers
 # abbr --add pt --set-cursor=! "porsmo timer (math !\*60)" # time in minutes
+abbr --add p nix-shell -p porsmo --run porsmo # time in minutes
 abbr --add pt --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !m\"" # time in minutes
 abbr --add pth --set-cursor=! "nix-shell -p porsmo --run \"porsmo timer !h\"" # time in hours
 abbr --add pts "nix-shell -p porsmo --run \"porsmo stopwatch\""

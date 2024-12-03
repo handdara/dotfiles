@@ -13,6 +13,6 @@
         name = username;
         email = "${username}.core@proton.me";
         which_nvim = "nrw";
-        term_invert = true;
+        term_invert = false;
     };
 }
