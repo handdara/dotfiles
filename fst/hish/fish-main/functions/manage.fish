@@ -9,7 +9,7 @@ set -l options {\
 'kbd-on: start kmonad',\
 'kbd-off: kill kmonad',\
 'fd-proc: search through procs',\
-'cheatsheet: search through cheatsheet'}
+'cheatsheet: NOT IMPLEMENTED YET search through cheatsheet'}
 set -l choice ( for o in $options; echo $o; end | fzf | awk -F: '{print $1}' )
 
 switch $choice
