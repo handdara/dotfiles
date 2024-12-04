@@ -12,6 +12,7 @@
         ./user/apps/neofetch
         ./user/apps/nvim
         ./user/apps/pandoc
+        # ./user/apps/r
         ./user/apps/starship
         ./user/apps/vim
         ./user/apps/vivaldi

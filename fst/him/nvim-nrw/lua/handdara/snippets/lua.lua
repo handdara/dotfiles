@@ -16,7 +16,7 @@ local u = require 'handdara.util'
 
 local bsnipfile = [[
 ---@diagnostic disable: unused-local
-require('luasnip.session.snippet_collection').clear_snippets "{}"
+require('luasnip.session.snippet_collection').clear_snippets "{1}"
 local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
@@ -31,12 +31,24 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local u = require 'handdara.util'
 
-ls.add_snippets("{}", {{
-    {},
-}})
+local S = {{}}
+local function use(snip)
+    table.insert(S, snip)
+end
+
+-- snips go here
+{3}
+
+ls.add_snippets("{2}", S)
 ]]
 
-ls.add_snippets("lua", {
-    s("luasnipfile", fmt(bsnipfile, {i(1), rep(1), i(0)} ))
-})
+local S = {}
+local function use(snip)
+    table.insert(S, snip)
+end
 
+local bAutoSnip = [[use(s({{ trig = '{1}', snippetType = 'autosnippet', wordTrig = false }}, {2} ))]]
+use(s('autosnip', fmt(bAutoSnip, { i(1, 'trigger'), i(2, "t('text')") })))
+use(s("luasnipfile", fmt(bsnipfile, { i(1), rep(1), i(0) })))
+
+ls.add_snippets("lua", S)
