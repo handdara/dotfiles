@@ -9,32 +9,49 @@ local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 
-local bbeg = [[
-\begin{{{2}{1}}}
-    {3}
-\end{{{4}{5}}}
-]]
-local function mkBegEnd(trigger, env, useStar, env2)
-    local tStar
-    if useStar or false then
-        tStar = t '*';
+local function mkBegEnd(args)
+    local bbeg = [[
+        \begin{{{1}{2}}}
+            {3}
+        \end{{{4}{5}}}
+        ]]
+    local e1, e2, body
+    if args.env then
+        e1 = t(args.env)
+        body = i(1)
+        e2 = t(args.env)
     else
-        tStar = t '';
+        e1 = i(1)
+        body = i(2)
+        e2 = rep(1)
     end
-    return s(trigger, fmt(bbeg, { tStar, env, i(0), env2 or env, tStar }))
+    local star
+    if args.starred == true then star = '*'; else star = ''; end
+    return s(args.trig, fmt(bbeg, { e1, t(star), body, e2, t(star) }))
 end
 
 local bNewCmd = [[\newcommand{{\{1}}}{{{2}}}]]
-
 local bNomen = [[\nomenclature{{${1}$}}{{{2}}}]]
 
 ls.add_snippets("tex", {
-    mkBegEnd('beg', i(1), false, rep(1)),
-    mkBegEnd('equ', t "equation"),
-    mkBegEnd('sequ', t "equation", true),
-    mkBegEnd('ali', t "align"),
-    mkBegEnd('sali', t "align", true),
-    mkBegEnd('lem', t "lemma"),
+    mkBegEnd { trig = 'beg', },
+    mkBegEnd { trig = 'equ', env = "equation" },
+    mkBegEnd { trig = 'sequ', env = "equation", starred = true },
+    mkBegEnd { trig = 'ali', env = "align" },
+    mkBegEnd { trig = 'sali', env = "align", starred = true },
+    mkBegEnd { trig = 'lem', env = "lemma" },
+    mkBegEnd { trig = 'def', env = "defn" },
+    mkBegEnd { trig = 'sdef', env = "defn", starred = true },
+    mkBegEnd { trig = 'thm', env = "corollary" },
+    mkBegEnd { trig = 'cor', env = "theorem" },
+    mkBegEnd { trig = 'prop', env = "prop" },
+    mkBegEnd { trig = 'sprop', env = "prop", starred = true },
+    mkBegEnd { trig = 'note', env = "note" },
+    mkBegEnd { trig = 'snote', env = "note", starred = true },
+    mkBegEnd { trig = 'remk', env = "remk" },
+    mkBegEnd { trig = 'sremk', env = "remk", starred = true },
+    mkBegEnd { trig = 'exmp', env = "exmp" },
+    mkBegEnd { trig = 'sexmp', env = "exmp", starred = true },
     s("newcommand", fmt(bNewCmd, { i(1, 'cmd_name'), i(2) })),
     s("nomencl-item", fmt(bNomen, { i(1), i(2, 'Description') })),
     s("sec", { t "\\section{", i(1), t { '}', '' }, i(0) }),
@@ -45,5 +62,5 @@ ls.add_snippets("tex", {
     s("sss-star", { t "\\subsubsection*{", i(1), t { '}', '' }, i(0) }),
     s("ss3", { t "\\subsubsubsection{", i(1), t { '}', '' }, i(0) }),
     s("ss3-star", { t "\\subsubsubsection*{", i(1), t { '}', '' }, i(0) }),
-    s('lab', {t"\\label{", i(1), t"}"}),
+    s('lab', { t "\\label{", i(1), t "}" }),
 })
