@@ -52,3 +52,6 @@ dev:
 # replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
 stable: purge && switch-home
     git add .
+
+edit:
+    nvim

@@ -3,7 +3,7 @@ local maps = {
     ["<leader>nx"] = {
         modes = 'v',
         action = ":ObsidianExtractNote<CR>",
-        opts = { buffer = true },
+        opts = {},
     },
     ["<leader>nln"] = {
         modes = 'v',
@@ -13,7 +13,7 @@ local maps = {
     ["<leader>nll"] = {
         modes = 'v',
         action = ":ObsidianLink<CR>",
-        opts = { buffer = true },
+        opts = {},
     },
     ["<leader>na"] = {
         modes = 'n',
