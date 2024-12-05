@@ -21,6 +21,8 @@ MICRO: 0
 
 `snd`: secondary layer: tools that don't fit into core. their dotfiles are here
 
+-   `kmonad`: an amazing keyboard remapping utility! also, it's written in haskell :)
+
 ## usage
 
 1.  install NixOS 
