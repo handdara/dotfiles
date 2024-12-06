@@ -66,4 +66,4 @@ MICRO: 0
 
 ---
 
-[Version Badge]:https://img.shields.io/badge/version-23.12.0.0-a47daa?style=for-the-badge&labelColor=616097
+[Version Badge]:https://img.shields.io/badge/version-24.12.0.0-a47daa?style=for-the-badge&labelColor=616097
