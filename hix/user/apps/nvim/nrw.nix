@@ -90,6 +90,7 @@ in
         // inc_plugin "git"
         # // inc_plugin "telekasten"
         // inc_plugin "obsidian"
+        // inc_plugin "colorizer"
         // inc_plugin "undotree"
         // inc_plugin "whichkey"
         // inc_plugin "lspconfig"

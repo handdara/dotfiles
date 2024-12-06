@@ -394,3 +394,11 @@ hi link javaDocParam     Comment
 hi link javaDocTags      Comment
 hi link javaExternal     Statement
 hi link javaScopeDecl    Statement
+
+" markdown treesitter stuff
+hi @markup.heading.1.markdown gui=bold guibg=#f5d6fc guifg=#130114
+hi @markup.heading.2.markdown gui=bold guibg=#616097 guifg=#130114
+hi @markup.heading.3.markdown gui=bold guibg=#823f8f guifg=#130114
+hi @markup.heading.4.markdown gui=bold guibg=#828a7b guifg=#130114
+hi @markup.heading.5.markdown gui=bold guibg=#76507e guifg=#130114
+hi @markup.heading.6.markdown gui=bold guibg=#928a92 guifg=#130114
