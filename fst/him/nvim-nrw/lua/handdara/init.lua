@@ -2,11 +2,13 @@ local hset = require 'handdara.config.set'
 local hkeymap = require 'handdara.config.keymap'
 local hcmds = require 'handdara.config.commands'
 local hlooks = require 'handdara.config.looks'
+local hautocmds = require 'handdara.config.autocommands'
 
 local function setup(opts)
     hset()
     hkeymap()
     hcmds()
+    hautocmds()
     local col = opts.colorscheme
     if type(col) == 'string'  then
         hlooks.init_looks(col)
