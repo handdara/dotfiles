@@ -1,8 +1,8 @@
 <!--
 ---
 YY: 24
-0M: 11
-MINOR: 5
+0M: 12
+MINOR: 0
 MICRO: 0
 ---
 -->
@@ -66,4 +66,4 @@ MICRO: 0
 
 ---
 
-[Version Badge]:https://img.shields.io/badge/version-23.11.5.0-a47daa?style=for-the-badge&labelColor=616097
+[Version Badge]:https://img.shields.io/badge/version-23.12.0.0-a47daa?style=for-the-badge&labelColor=616097

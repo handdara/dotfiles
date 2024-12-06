@@ -396,9 +396,9 @@ hi link javaExternal     Statement
 hi link javaScopeDecl    Statement
 
 " markdown treesitter stuff
-hi @markup.heading.1.markdown gui=bold guibg=#f5d6fc guifg=#130114
-hi @markup.heading.2.markdown gui=bold guibg=#616097 guifg=#130114
-hi @markup.heading.3.markdown gui=bold guibg=#823f8f guifg=#130114
-hi @markup.heading.4.markdown gui=bold guibg=#828a7b guifg=#130114
-hi @markup.heading.5.markdown gui=bold guibg=#76507e guifg=#130114
-hi @markup.heading.6.markdown gui=bold guibg=#928a92 guifg=#130114
+hi @markup.heading.1.markdown gui=bold guibg=#0088CC guifg=#130114
+hi @markup.heading.2.markdown gui=bold guibg=#6ffcf0 guifg=#130114
+hi @markup.heading.3.markdown gui=bold guibg=#5c5cFF guifg=#130114
+hi @markup.heading.4.markdown          guibg=#25b8a5 guifg=#130114
+hi @markup.heading.5.markdown          guibg=#f9f9fc guifg=#404040
+hi @markup.heading.6.markdown          guibg=#535b6f guifg=#f9f9f9

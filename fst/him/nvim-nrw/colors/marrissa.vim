@@ -24,7 +24,7 @@ hi Repeat guifg=#a47daa guibg=NONE
 hi DiffAdd guifg=#a47daa guibg=NONE
 hi GitGutterAdd guifg=#a47daa guibg=NONE
 hi cssIncludeKeyword guifg=#a47daa guibg=NONE
-hi Keyword guifg=#a47daa guibg=NONE
+hi Keyword guifg=#ff56d2 guibg=NONE
 "hi IncSearch guifg=#828a7b guibg=NONE
 hi link IncSearch Visual
 hi Title guifg=#828a7b guibg=NONE
@@ -41,7 +41,7 @@ hi CursorLineNR guifg=#828a7b guibg=NONE
 hi Define guifg=#828a7b guibg=NONE
 hi MoreMsg guifg=#828a7b guibg=NONE
 hi Tag guifg=#828a7b guibg=NONE
-hi String guifg=#828a7b guibg=NONE
+hi String guifg=#355b47 guibg=NONE
 hi MatchParen guifg=#828a7b guibg=NONE
 hi Macro guifg=#828a7b guibg=NONE
 hi DiffChange guifg=#828a7b guibg=NONE
