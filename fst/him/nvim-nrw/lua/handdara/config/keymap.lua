@@ -25,8 +25,19 @@ return function()
     map('n', "<C-,>", "<c-w>5<") -- split resizing
     map('n', "<C-.>", "<c-w>5>")
     map('n', "<C-t>", "<C-W>+")
-    map('n', "<C-s>", "<C-W>-")
+    map('n', "<C-b>", "<C-W>-")
     map('n', "<C-=>", "<C-W>=")
+
+    map('n', "<C-a>", "mz'A`z") -- "quick-use" global marks
+    map('n', "<C-s>", "mz'S`z")
+    map('n', "<C-d>", "mz'D`z")
+    map('n', "<C-f>", "mz'F`z")
+    map('n', "<C-g>", "mz'G`z")
+    map('n', "<C-S-a>", "mA")
+    map('n', "<C-S-s>", "mS")
+    map('n', "<C-S-d>", "mD")
+    map('n', "<C-S-f>", "mF")
+    map('n', "<C-S-g>", "mG")
 
     -- Diagnostic keymaps
     map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
