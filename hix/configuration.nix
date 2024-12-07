@@ -9,6 +9,8 @@
         ( if opts.sys.useDisplayLink
             then [ ./system/hardware/displaylink ]
         else [] 
+        ) ++ ( 
+            if opts.sys.useNginx then [ ./system/hardware/nginx ] else []
         );
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

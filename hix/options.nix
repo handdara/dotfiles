@@ -7,6 +7,7 @@
         locale = "en_US.UTF-8";
         useDisplayLink = true;
         useWayland = false;
+        useNginx = false;
     };
     user = rec {
         username = "handdara";
