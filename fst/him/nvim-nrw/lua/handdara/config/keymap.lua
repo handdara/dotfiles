@@ -34,11 +34,15 @@ return function()
     map('n', "<C-S-f>", "'F`z")
     map('n', "<C-S-g>", "'G`z")
 
-    -- Diagnostic keymaps
+    -- Diagnostic, quickfix, location, keymaps
     map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
     map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
     map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
     map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+    map('n', ']q', ':cnext<CR>', { desc = 'next in [q]uickfix list' })
+    map('n', '[q', ':cprev<CR>', { desc = 'prev in [q]uickfix list' })
+    map('n', ']f', ':lnext<CR>', { desc = 'next in [l]ocation list' })
+    map('n', '[f', ':lprev<CR>', { desc = 'prev in [l]ocation list' })
 
     -- working with views
     map('n', 'zl', '<CMD>loadview<CR>', { desc = 'load [v]iew for current file' })
