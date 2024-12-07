@@ -2,7 +2,7 @@ local hf = require 'handdara.fonts'
 
 local function apply_to_config(config)
     -- set theme & opacity
-    config.color_scheme = 'marrissa-term'
+    -- config.color_scheme = 'marrissa-term'
     config.window_background_opacity = 0.90
     config.inactive_pane_hsb = {
         saturation = 0.9,
@@ -10,13 +10,12 @@ local function apply_to_config(config)
     }
 
     -- fonts and window settings
-    local default_font_size = 13.0
-    config.font = hf.agave
-    config.font_size = default_font_size
+    config.font = hf.hurmit
+    config.font_size = 13.0
     config.enable_tab_bar = false -- making the window layout simple, 99 times out of 100 scaling is handled
     config.window_frame = {
-        font = hf.agave,
-        font_size = default_font_size - 1,
+        font = config.font,
+        font_size = config.font_size - 1,
     }
 
     config.window_decorations = "RESIZE" -- by my window manager even in the other cases, i usually just maximize

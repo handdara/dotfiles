@@ -201,7 +201,8 @@ return {
                 ["."] = { char = "", hl_group = "ObsidianInProg" },
             },
             -- Use bullet marks for non-checkbox lists.
-            bullets = { char = "󰾡", hl_group = "ObsidianBullet" },
+            -- bullets = { char = "󰾡", hl_group = "ObsidianBullet" },
+            bullets = { char = "", hl_group = "ObsidianBullet" },
             external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
             -- Replace the above with this if you don't have a patched font:
             -- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },

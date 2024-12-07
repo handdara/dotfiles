@@ -49,9 +49,11 @@ dev:
     just {{dotfiles_dir}}/fst/him/ replace-nix
     just {{dotfiles_dir}}/fst/hez/ replace-nix
 
-# replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
-stable: purge && switch-home
+_git_add:
     git add .
+
+# replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
+stable: _git_add purge && switch-home place-lazylock
 
 edit:
     nvim

@@ -4,6 +4,8 @@ target := 'nrw'
 
 tmp_dir := `mktemp -d`
 nvim_cfg_dir := env_var('HOME') / '.config' / 'nvim'
+nvim_share_dir := env_var('HOME') / '.local' / 'share' / 'nvim'
+nvim_lazy_dir := nvim_share_dir / 'lazy'
 jd := justfile_directory()
 lazylock_file := nvim_cfg_dir / 'lazy-lock.json'
 
@@ -22,10 +24,18 @@ purge: unlink
     -rm -Rf {{nvim_cfg_dir}}
 
 _sv_cfg_init:
-    -cp {{nvim_cfg_dir}}/lua/handdara/config/init.lua {{tmp_dir}}/config_init.lua
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    if [ {{target}} = "main" ]; then
+        cp {{nvim_cfg_dir}}/lua/handdara/config/init.lua {{tmp_dir}}/config_init.lua
+    fi
 
 _ld_cfg_init:
-    -cp {{tmp_dir}}/config_init.lua {{nvim_cfg_dir}}/lua/handdara/config/init.lua
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    if [ {{target}} = "main" ]; then
+        cp {{tmp_dir}}/config_init.lua {{nvim_cfg_dir}}/lua/handdara/config/init.lua
+    fi
 
 _purge_nix: _sv_cfg_init unlink
     -rm -Rf {{nvim_cfg_dir}}
@@ -48,6 +58,11 @@ _place-lazylock ptgt:
 
 place-lazylock: (_place-lazylock target)
 
-# not yet implemented...
-_link-vim:
-    @echo "nothing to do..."
+clean-lazy-plugins:
+    rm -rf {{nvim_lazy_dir}}
+
+_update-lazylock utgt: (_place-lazylock utgt) clean-lazy-plugins && (_get-lazylock utgt)
+    nvim
+    nvim
+
+update-lazylock: (_update-lazylock target)

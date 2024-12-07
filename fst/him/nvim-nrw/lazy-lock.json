@@ -1,4 +1,5 @@
 {
+  "Colorizer": { "branch": "master", "commit": "4927c85d72917dc112453e8d54012aaa90d58e98" },
   "LuaSnip": { "branch": "master", "commit": "03c8e67eb7293c404845b3982db895d59c0d1538" },
   "carrot.nvim": { "branch": "main", "commit": "722b9bf195fc6bccbf8151c22fb2275386f41e08" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
@@ -9,6 +10,7 @@
   "darkrose.nvim": { "branch": "main", "commit": "ce6ceb55332862e180264fa534d2ce4d70f02db2" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "due.nvim": { "branch": "main", "commit": "70a93319fa0345c116f2b57cf1f99e0d20026c5e" },
+  "eva01.vim": { "branch": "main", "commit": "54412cbd92e74f43f4fc4479d12726f09723ce55" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
   "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
   "kmonad-vim": { "branch": "master", "commit": "37978445197ab00edeb5b731e9ca90c2b141723f" },

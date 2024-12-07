@@ -1,8 +1,13 @@
 return {
-  { "rose-pine/neovim", name = "rose-pine" },
-  {
-    "water-sucks/darkrose.nvim",
-    lazy = false,
-    priority = 1000,
-  },
+    { "rose-pine/neovim", name = "rose-pine" },
+    {
+        "water-sucks/darkrose.nvim",
+        lazy = false,
+        priority = 1000,
+    },
+    {
+        "hachy/eva01.vim",
+        lazy = false,
+        priority = 1000,
+    },
 }
