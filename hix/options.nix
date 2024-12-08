@@ -1,11 +1,11 @@
 {...}:
 {
     sys = {
-        hostname = "sha76";
+        hostname = "theseus";
         system = "x86_64-linux";
         timezone = "America/New_York";
         locale = "en_US.UTF-8";
-        useDisplayLink = true;
+        useDisplayLink = false;
         useWayland = false;
     };
     user = rec {
