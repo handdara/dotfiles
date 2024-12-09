@@ -3,6 +3,7 @@
     imports = [
         ./user/apps/bat
         ./user/apps/btop
+        ./user/apps/calcurse
         ./user/apps/eza
         ./user/apps/fzf
         ./user/apps/gpg
