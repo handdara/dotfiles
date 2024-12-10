@@ -21,5 +21,18 @@ end
 
 -- snips go here
 
+local bFn = [[
+{4}fn {1}({2}) {3} {{
+    {5}
+}}
+]]
+local sFn = s('fn', fmt(bFn, {
+    i(1, 'name'),
+    c(2, { i(1, 'args'), t '' }),
+    i(3, '!void'),
+    c(4, { t 'pub ', t '' }),
+    i(0),
+}))
+use(sFn)
 
 ls.add_snippets("zig", S)
