@@ -1,4 +1,4 @@
-{ opts, ... }:
+{ user_opts, ... }:
 {
     imports = [
         ./user/apps/bat
@@ -22,8 +22,8 @@
         ./user/shells/fish
     ];
 
-    home.username = opts.user.username;
-    home.homeDirectory = "/home/"+opts.user.username;
+    home.username = user_opts.username;
+    home.homeDirectory = "/home/"+user_opts.username;
 
     nixpkgs.config.allowUnfree = true;
 

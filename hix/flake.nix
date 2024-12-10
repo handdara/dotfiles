@@ -14,32 +14,39 @@
 
     outputs = { nixpkgs, nixpkgs-unstable, home-manager, ...}@inputs: 
         let
-            opts = import ./options.nix {};
+            user_opts = rec {
+                username = "handdara";
+                name = username;
+                email = "${username}.core@proton.me";
+                which_nvim = "nrw";
+                term_invert = false;
+            };
+            system = "x86_64-linux";
             lib = nixpkgs.lib;
             hmlib = home-manager.lib;
-            pkgs = nixpkgs.legacyPackages.${opts.sys.system};
-            pkgs_unstable = nixpkgs-unstable.legacyPackages.${opts.sys.system};
+            pkgs = nixpkgs.legacyPackages.${system};
+            pkgs_unstable = nixpkgs-unstable.legacyPackages.${system};
         in 
             {
             nixosConfigurations = {
                 sha76 = lib.nixosSystem {
-                    system = opts.sys.system;
                     modules = [
                         ./configuration.nix
                         inputs.kmonad.nixosModules.default
                     ];
                     specialArgs = {
-                        inherit opts;
+                        inherit system user_opts;
+                        sys_opts = import ./machines/sha76/options.nix {};
                     };
                 };
                 theseus = lib.nixosSystem {
-                    system = opts.sys.system;
                     modules = [
                         ./configuration.nix
                         inputs.kmonad.nixosModules.default
                     ];
                     specialArgs = {
-                        inherit opts;
+                        inherit system user_opts;
+                        sys_opts = import ./machines/sha76/options.nix {};
                     };
                 };
             };
@@ -50,8 +57,7 @@
                         ./home.nix
                     ];
                     extraSpecialArgs = {
-                        inherit opts;
-                        inherit pkgs_unstable;
+                        inherit user_opts pkgs_unstable;
                     };
                 };
             };

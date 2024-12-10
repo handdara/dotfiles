@@ -1,4 +1,4 @@
-{opts, ... }:
+{user_opts, ... }:
 let 
 
     # COLOR OPTIONS: 
@@ -12,7 +12,7 @@ let
     # marrissa-term overrides
     st_overrides = {
         fg5 = "#75507B";
-    } // (if opts.user.term_invert 
+    } // (if user_opts.term_invert 
             then rec { # marrissa-term light mode overrides
                 fg1 = c.bright_black; # os
                 bg1 = c.bright_blue;

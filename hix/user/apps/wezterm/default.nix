@@ -1,4 +1,4 @@
-{pkgs, opts, ... }:
+{pkgs, user_opts, ... }:
 let
     c = import ./../../../util/color/marrissa-term.nix;
 in {
@@ -51,11 +51,11 @@ in {
         '';
         ".config/wezterm/colors/marrissa-term.toml".text = ''
             [colors]
-            background = '${if opts.user.term_invert or false then c.fg else c.bg}'
-            foreground = '${if opts.user.term_invert or false then c.bg else c.fg}'
-            cursor_bg = '${if opts.user.term_invert then c.black else c.white}'
-            cursor_border = '${if opts.user.term_invert then c.black else c.white}'
-            cursor_fg = '${if opts.user.term_invert then c.white else c.black}'
+            background = '${if user_opts.term_invert or false then c.fg else c.bg}'
+            foreground = '${if user_opts.term_invert or false then c.bg else c.fg}'
+            cursor_bg = '${if user_opts.term_invert then c.black else c.white}'
+            cursor_border = '${if user_opts.term_invert then c.black else c.white}'
+            cursor_fg = '${if user_opts.term_invert then c.white else c.black}'
 
             ansi = [
                 '${c.black   }',

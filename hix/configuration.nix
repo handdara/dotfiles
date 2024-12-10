@@ -1,19 +1,16 @@
-{ pkgs, opts, ... }:
+{ pkgs, sys_opts, ... }@inputs:
 {
-    imports =
-        [ (./. + "/machines"+("/"+opts.sys.hostname)+"/hardware-configuration.nix") 
-            (./. + "/machines"+("/"+opts.sys.hostname)+"/bootloader.nix") 
-            ./system/fonts/nerdfonts
-            ./system/hardware/kmonad
-        ] ++ 
-        ( if opts.sys.useDisplayLink
-            then [ ./system/hardware/displaylink ]
-        else [] 
-        );
+    imports = [ 
+        ./machines/${sys_opts.hostname}/hardware-configuration.nix 
+        ./machines/${sys_opts.hostname}/bootloader.nix
+        ./system/wm/${sys_opts.wm}
+        ./system/fonts/nerdfonts
+        ./system/hardware/kmonad
+    ] ++ ( if sys_opts.useDisplayLink then [ ./system/hardware/displaylink ] else [] );
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    networking.hostName = opts.sys.hostname;
+    networking.hostName = sys_opts.hostname;
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
@@ -24,28 +21,28 @@
     networking.networkmanager.enable = true;
 
     # Set your time zone.
-    time.timeZone = opts.sys.timezone;
+    time.timeZone = sys_opts.timezone;
 
     # Select internationalisation properties.
-    i18n.defaultLocale = opts.sys.locale;
+    i18n.defaultLocale = sys_opts.locale;
 
     i18n.extraLocaleSettings = {
-        LC_ADDRESS = opts.sys.locale;
-        LC_IDENTIFICATION = opts.sys.locale;
-        LC_MEASUREMENT = opts.sys.locale;
-        LC_MONETARY = opts.sys.locale;
-        LC_NAME = opts.sys.locale;
-        LC_NUMERIC = opts.sys.locale;
-        LC_PAPER = opts.sys.locale;
-        LC_TELEPHONE = opts.sys.locale;
-        LC_TIME = opts.sys.locale;
+        LC_ADDRESS = sys_opts.locale;
+        LC_IDENTIFICATION = sys_opts.locale;
+        LC_MEASUREMENT = sys_opts.locale;
+        LC_MONETARY = sys_opts.locale;
+        LC_NAME = sys_opts.locale;
+        LC_NUMERIC = sys_opts.locale;
+        LC_PAPER = sys_opts.locale;
+        LC_TELEPHONE = sys_opts.locale;
+        LC_TIME = sys_opts.locale;
     };
 
     services.xserver = {
         enable = true; # Enable the X11 windowing system. displaylink driver set up for x11
         displayManager.gdm.enable = true; # Enable the GNOME Display Manager
         desktopManager.gnome.enable = true;
-        displayManager.gdm.wayland = opts.sys.useWayland;
+        displayManager.gdm.wayland = sys_opts.useWayland;
         xkb = { # Configure keymap in X11
             layout = "us";
             variant = "";
@@ -74,9 +71,9 @@
     };
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.${opts.user.username} = {
+    users.users.${inputs.user_opts.username} = {
         isNormalUser = true;
-        description = opts.user.name;
+        description = inputs.user_opts.name;
         extraGroups = [ "networkmanager" "wheel" ];
     };
 
