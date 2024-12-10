@@ -20,6 +20,7 @@
         ./user/apps/zoxide
         ./user/shells/bash
         ./user/shells/fish
+        ./system/wm/awesomewm/home.nix
     ];
 
     home.username = user_opts.username;
