@@ -1,0 +1,9 @@
+{...}:
+{
+    hostname = "theseus";
+    timezone = "America/New_York";
+    locale = "en_US.UTF-8";
+    wm = "gdm";
+    useDisplayLink = false;
+    useWayland = false;
+}

@@ -1,0 +1,10 @@
+calcurse_cfg_dir := env_var('HOME') / '.config' / 'calcurse'
+jd := justfile_directory()
+
+# list recipes
+default:
+    @just --list
+
+# grab config files set up using the TUI interface
+grab:
+    cp -rf {{calcurse_cfg_dir}}/* {{jd}}
