@@ -12,4 +12,10 @@ return {
             top_down = false,
         },
     },
+    {
+        'handdara/calendar-vim',
+        config = function ()
+              vim.cmd [[let g:calendar_diary=$HOME.'/MEGA/ansible/0-quest-board/dailies']]
+        end
+    },
 }

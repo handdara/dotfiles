@@ -18,6 +18,7 @@
         ./user/apps/vim
         ./user/apps/vivaldi
         ./user/apps/wezterm
+        ./user/apps/jqyq
         ./user/apps/zoxide
         ./user/shells/bash
         ./user/shells/fish
