@@ -16,6 +16,7 @@ local function setup(opts)
         hlooks.init_looks(col.name, col.is_light)
     end
     require 'handdara.obsidian'
+    vim.notify = require('notify')
 end
 
 local function mkHUtil()

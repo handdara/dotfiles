@@ -1,4 +1,4 @@
-return { 
+return {
     label = 'htop',
     args = { 'htop' },
-  }
+}

@@ -2,37 +2,42 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
-        options = {
+        options           = {
             icons_enabled = true,
             theme = 'auto',
-            component_separators = { left = '', right = '' },
-            section_separators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
+            section_separators = { left = '', right = '' },
             disabled_filetypes = {
                 statusline = {},
                 winbar = {},
             },
             ignore_focus = {},
-            always_divide_middle = true,
-            globalstatus = false,
+            always_divide_middle = false,
+            globalstatus = true,
             refresh = {
                 statusline = 40,
                 tabline = 100,
-                winbar = 100,
+                winbar = 40,
             }
         },
-        sections = {
+        sections          = {
             lualine_a = { 'mode' },
             lualine_b = {
                 {
                     'tabs',
                     mode = 0,
-                    -- separator = '',
-                    tabs_color = { -- these colors are for the using with the oxocarbon theme
-                        -- active = { fg = '#78a9ff', gui = 'bold' },
-                        --   inactive = { fg = '#d0d0d0', bg = '#161616' },
+                    path = 0,
+                    tabs_color = {
+                        active = { fg = '#b968fc' },
+                    },
+                    separator = { left = 'L', right = 'R' },
+                    symbols = {
+                        modified = '󱐋',
                     },
                 },
-                'branch', 'diff', 'diagnostics',
+                'branch',
+                'diff',
+                'diagnostics',
             },
             lualine_c = {
                 {
@@ -43,9 +48,36 @@ return {
                 },
             },
             lualine_x = {
+                function()
+                    local ok, pomo = pcall(require, "pomo")
+                    if not ok then
+                        return ""
+                    end
+
+                    local timer = pomo.get_first_to_finish()
+                    if timer == nil then
+                        return ""
+                    end
+
+                    return "󰄉 " .. tostring(timer)
+                end,
             },
-            lualine_y = { 'encoding', 'fileformat', 'filetype' },
-            lualine_z = { 'progress', 'location' }
+            lualine_y = {
+                'fileformat',
+                'filetype',
+                function()
+                    local ts = require('handdara.util').timestamp()
+                    return ts.hr .. ":" .. ts.mi
+                end,
+            },
+            lualine_z = {
+                function()
+                    local ts = require('handdara.util').timestamp()
+                    return ts.dy .. ts.mo .. ts.yr
+                end,
+                'progress',
+                'location',
+            }
         },
         inactive_sections = {
             lualine_a = {},
@@ -55,9 +87,9 @@ return {
             lualine_y = {},
             lualine_z = {}
         },
-        tabline = {},
-        winbar = {},
-        inactive_winbar = {},
-        extensions = {}
+        tabline           = {},
+        winbar            = { lualine_z = { 'filename' } },
+        inactive_winbar   = { lualine_z = { 'filename' } },
+        extensions        = {}
     },
 }

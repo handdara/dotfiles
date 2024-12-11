@@ -8,7 +8,7 @@ return function()
     map('t', '<C-/><C-/>', '<C-\\><C-n>')                    -- Better feeling exit term mode
     map({ 'n', 'v' }, "<leader>y", [["+y]])                  -- Access system clipboard
     map('n', "<leader>Y", [["+Y]])
-    map('n', "<leader>pp", [["+p]], { desc = '[P]aste system clipboard' })
+    map('n', "<leader>PP", [["+p]], { desc = '[P]aste system clipboard' })
     map('v', "<leader>p", [["_dP]]) -- Dont overwrite after pasting over text
 
     -- sorting paragraphs

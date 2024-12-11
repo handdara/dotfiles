@@ -57,6 +57,7 @@ in
         chafa # terminal graphics dependency for telescope-media-files.nvim
         imagemagick # telescope-media-files.nvim dependency
         poppler_utils # telescope-media-files.nvim optional dependency
+        libnotify # notify-nvim plugin dep
     ];
 
     home.file = {
@@ -99,6 +100,7 @@ in
         // inc_plugin "lazydev"
         // inc_plugin "colors"
         // inc_plugin "carrot"
+        // inc_plugin "pomo"
         // inc_plugin "completion" // inc_plugin "luasnip"
         // inc_plugin "telescope";
 }
