@@ -14,6 +14,13 @@ local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local u = require 'handdara.util'
 
+local S = {}
+local function use(snip)
+    table.insert(S, snip)
+end
+
+local filetypes = { 'just', 'lua', 'markdown', 'matlab', 'nix', 'tex', 'zig', 'rust', 'python', 'fish', 'bash', 'haskell' }
+
 local sdateheader = s('dateheader', {
     f(function()
         local ts = u.timestamp()
@@ -179,11 +186,17 @@ local stask = s('task', fmt(btask, {
     rep(2),
 }))
 
-local snips = {
-    sdateheader,
-    sdaily,
-    stask,
-}
+local function mkCodeBlockSnip(ft)
+    return s(ft, { t{'```'..ft,''}, i(1), t{'','```'} })
+end
+for _, ft in ipairs(filetypes) do
+    use(mkCodeBlockSnip(ft))
+end
+use(s('codeblock', { t{'```',''}, i(1), t{'','```'} }))
 
-ls.add_snippets("markdown", snips)
-ls.add_snippets("telekasten", snips)
+use(sdateheader)
+use(sdaily)
+use(stask)
+
+ls.add_snippets("markdown", S)
+ls.add_snippets("telekasten", S)
