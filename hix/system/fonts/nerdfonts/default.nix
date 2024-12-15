@@ -1,6 +1,6 @@
-{config, pkgs, ... }:
+{pkgs, ... }:
 {
-  environment.systemPackages = [
-    pkgs.nerdfonts
-  ];
+    fonts.packages = with pkgs; [
+        nerdfonts
+    ];
 }
