@@ -1,6 +1,7 @@
 { pkgs, ... }: 
 {
     services = {
+        picom.enable = true;
         xserver = {
             enable = true;
             windowManager.awesome = {

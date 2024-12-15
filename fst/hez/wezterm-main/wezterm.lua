@@ -14,7 +14,7 @@ require('handdara.keymap').apply_to_config(config)
 
 wezterm.on('gui-startup', function(cmd)
     local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-    window:gui_window():toggle_fullscreen()
+    -- window:gui_window():toggle_fullscreen()
     -- window:gui_window():toast_notification('wezterm', 'started!', nil, 4000)
 end)
 

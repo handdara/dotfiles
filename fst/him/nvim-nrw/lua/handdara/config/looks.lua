@@ -65,7 +65,7 @@ local function init_looks(colorscheme, is_light)
         vim.cmd [[highlight @markup.heading.1.markdown gui=bold,italic guibg=#b968fc guifg=#130114]]
         vim.cmd [[highlight @markup.heading.2.markdown gui=bold,italic guibg=#87FF5f guifg=#130114]]
         vim.cmd [[highlight @markup.heading.3.markdown gui=bold,italic guibg=#85b0e6 guifg=#130114]]
-        vim.cmd [[highlight @markup.heading.4.markdown gui=italic      guibg=#ce67f0 guifg=#130114]]
+        vim.cmd [[highlight @markup.heading.4.markdown gui=italic      guibg=#f5d6fd guifg=#130114]]
         vim.cmd [[highlight @markup.heading.5.markdown gui=italic      guibg=#a785ff guifg=#130114]]
         vim.cmd [[highlight @markup.heading.6.markdown gui=italic      guibg=#322a33 guifg=#f96f2f]]
     end

@@ -1,0 +1,26 @@
+set fallback
+
+awesome_cfg_dir := env_var('HOME') / ".config" / "awesome"
+jd := justfile_directory()
+theme_dir := jd / "themes"
+
+# list recipes
+default:
+    @just --list
+
+_mk_cfg_dir:
+    mkdir -p {{awesome_cfg_dir}}
+
+_link: _mk_cfg_dir
+    ln -sv {{jd}}/rc.lua {{awesome_cfg_dir}}
+    ln -sv {{theme_dir}} {{awesome_cfg_dir}}
+
+_unlink:
+    -rm -f {{awesome_cfg_dir}}/rc.lua
+    -rm -f {{awesome_cfg_dir}}/themes
+
+purge: _unlink
+    rm -Rf {{awesome_cfg_dir}}
+
+replace-nix: purge && _link
+
