@@ -22,6 +22,7 @@ MICRO: 3
 `snd`: secondary layer: tools that don't fit into core. their dotfiles are here
 
 -   `kmonad`: an amazing keyboard remapping utility! also, it's written in haskell :)
+-   `AwesomeWM`: currently testing out as my window manager pick
 
 ## usage
 
