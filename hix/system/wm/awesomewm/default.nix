@@ -21,4 +21,8 @@
             defaultSession = "none+awesome";
         };
     };
+    environment.systemPackages = with pkgs; [
+        light
+        xlockmore
+    ];
 }
