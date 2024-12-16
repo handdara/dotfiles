@@ -10,6 +10,16 @@ wezterm_cfg_dir := env_var('HOME') / '.config' / 'wezterm'
 default: 
     @just --list
 
+_save:
+    mkdir -p {{tmp_dir}}/colors
+    mkdir -p {{tmp_dir}}/handdara/colors
+    cp {{wezterm_cfg_dir}}/colors/* {{tmp_dir}}/colors/
+    cp {{wezterm_cfg_dir}}/handdara/colors/default.lua {{tmp_dir}}/handdara/colors
+
+_load:
+    cp {{tmp_dir}}/colors/* {{wezterm_cfg_dir}}/colors/
+    cp {{tmp_dir}}/handdara/colors/default.lua  {{wezterm_cfg_dir}}/handdara/colors/
+
 # unlink main wezterm configuration symlink
 unlink:
     -rm -f {{wezterm_cfg_dir}}
@@ -25,4 +35,4 @@ _link ltgt:
 link: (_link target)
 
 # replace nix loaded config with symlink to nvim-main here
-replace-nix: purge && link # the && here runs the subsequent recipes after this one
+replace-nix: _save purge && link _load # the && here runs the subsequent recipes after this one
