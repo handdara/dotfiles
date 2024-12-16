@@ -49,6 +49,16 @@
                         sys_opts = import ./machines/theseus/options.nix {};
                     };
                 };
+                tadok = lib.nixosSystem {
+                    modules = [
+                        ./configuration.nix
+                        inputs.kmonad.nixosModules.default
+                    ];
+                    specialArgs = {
+                        inherit system user_opts;
+                        sys_opts = import ./machines/tadok/options.nix {};
+                    };
+                };
             };
             homeConfigurations = {
                 handdara = hmlib.homeManagerConfiguration {
