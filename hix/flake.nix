@@ -46,7 +46,7 @@
                     ];
                     specialArgs = {
                         inherit system user_opts;
-                        sys_opts = import ./machines/sha76/options.nix {};
+                        sys_opts = import ./machines/theseus/options.nix {};
                     };
                 };
             };
