@@ -15,6 +15,7 @@ test:
 # rebuild nixos and home-manager using most up-to-date method and switch
 switch: && switch-home
     just {{dotfiles_dir}}/hix/ switch-nixos
+    @echo "current generation $(nixos-rebuild list-generations | awk '/current/ {print $1}')"
 
 # rebuild only home-manager using most up-to-date method and switch
 switch-home:
