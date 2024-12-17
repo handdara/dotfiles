@@ -19,6 +19,7 @@
         ./user/apps/vivaldi
         ./user/apps/wezterm
         ./user/apps/jqyq
+        ./user/apps/zathura
         ./user/apps/zoxide
         ./user/shells/bash
         ./user/shells/fish
