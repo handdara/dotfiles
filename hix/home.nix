@@ -1,6 +1,7 @@
 { user_opts, ... }:
 {
     imports = [
+        ./system/wm/awesomewm/home.nix
         ./user/apps/bat
         ./user/apps/btop
         ./user/apps/eza
@@ -14,13 +15,13 @@
         ./user/apps/pandoc
         # ./user/apps/r
         ./user/apps/starship
+        ./user/apps/tealdeer
         ./user/apps/vim
         ./user/apps/vivaldi
         ./user/apps/wezterm
         ./user/apps/zoxide
         ./user/shells/bash
         ./user/shells/fish
-        ./system/wm/awesomewm/home.nix
     ];
 
     home.username = user_opts.username;
