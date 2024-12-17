@@ -2,7 +2,7 @@
 ---
 YY: 24
 0M: 12
-MINOR: 1
+MINOR: 2
 MICRO: 0
 ---
 -->
@@ -22,6 +22,7 @@ MICRO: 0
 `snd`: secondary layer: tools that don't fit into core. their dotfiles are here
 
 -   `kmonad`: an amazing keyboard remapping utility! also, it's written in haskell :)
+-   `AwesomeWM`: currently testing out as my window manager pick
 
 ## usage
 
@@ -66,4 +67,4 @@ MICRO: 0
 
 ---
 
-[Version Badge]:https://img.shields.io/badge/version-24.12.1.0-a47daa?style=for-the-badge&labelColor=616097
+[Version Badge]:https://img.shields.io/badge/version-24.12.2.0-a47daa?style=for-the-badge&labelColor=616097

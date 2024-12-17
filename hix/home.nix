@@ -1,6 +1,7 @@
 { user_opts, ... }:
 {
     imports = [
+        ./system/wm/awesomewm/home.nix
         ./user/apps/bat
         ./user/apps/btop
         ./user/apps/calcurse
@@ -15,6 +16,7 @@
         ./user/apps/pandoc
         # ./user/apps/r
         ./user/apps/starship
+        ./user/apps/tealdeer
         ./user/apps/vim
         ./user/apps/vivaldi
         ./user/apps/wezterm

@@ -1,3 +1,4 @@
+local u = require 'handdara.util'
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -5,7 +6,7 @@ return {
         options           = {
             icons_enabled = true,
             theme = 'auto',
-            component_separators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
             section_separators = { left = '', right = '' },
             disabled_filetypes = {
                 statusline = {},
@@ -66,13 +67,13 @@ return {
                 'fileformat',
                 'filetype',
                 function()
-                    local ts = require('handdara.util').timestamp()
+                    local ts = u.timestamp()
                     return ts.hr .. ":" .. ts.mi
                 end,
             },
             lualine_z = {
                 function()
-                    local ts = require('handdara.util').timestamp()
+                    local ts = u.timestamp()
                     return ts.dy .. ts.mo .. ts.yr
                 end,
                 'progress',
@@ -88,8 +89,12 @@ return {
             lualine_z = {}
         },
         tabline           = {},
-        winbar            = { lualine_z = { 'filename' } },
-        inactive_winbar   = { lualine_z = { 'filename' } },
-        extensions        = {}
+        winbar = {
+            lualine_z = { 'filename', }
+        },
+        inactive_winbar = {
+            lualine_z = { 'filename', }
+        },
+        extensions = {}
     },
 }

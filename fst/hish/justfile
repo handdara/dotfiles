@@ -22,5 +22,5 @@ unlink:
     -rm {{fish_config_ln}}
 
 # purge the fish config dir
-purge:
+purge: unlink
     -rm -Rf {{fish_config_ln}}

@@ -7,9 +7,6 @@ default:
     @echo "nothing to do..."
     @just --list
 
-_matlab:
-    just {{dotfiles_dir}}/snd/matlab/
-
 # test rebuild nixos and home-manager
 test:
     just {{dotfiles_dir}}/hix/ test-nixos
@@ -23,18 +20,13 @@ switch: && switch-home
 switch-home:
     just {{dotfiles_dir}}/hix/ switch-home-mngr
 
-# unlink directories needed to switch home-manager
-unlink-all:
-    -just {{dotfiles_dir}}/fst/him/ unlink
-    -just {{dotfiles_dir}}/fst/hez/ unlink
-    -just {{dotfiles_dir}}/fst/hish/ unlink
-
 # purge directories needed to switch home-manager
-purge: unlink-all
+purge: 
     -just {{dotfiles_dir}}/fst/hish/ purge
     -just {{dotfiles_dir}}/fst/him/ purge
     -just {{dotfiles_dir}}/fst/hez/ purge
     -just {{dotfiles_dir}}/fst/hish/ purge
+    -just {{dotfiles_dir}}/snd/awesomewm/ purge
 
 # retrieve the lazy.vim lock-files
 get-lazylock:
@@ -48,6 +40,7 @@ place-lazylock:
 dev:
     just {{dotfiles_dir}}/fst/him/ replace-nix
     just {{dotfiles_dir}}/fst/hez/ replace-nix
+    just {{dotfiles_dir}}/snd/awesomewm/ replace-nix
 
 _git_add:
     git add .

@@ -11,7 +11,7 @@ local function apply_to_config(config)
 
     -- fonts and window settings
     config.font = hf.hurmit
-    config.font_size = 13.0
+    config.font_size = 12.0
     config.enable_tab_bar = false -- making the window layout simple, 99 times out of 100 scaling is handled
     config.window_frame = {
         font = config.font,
@@ -21,8 +21,8 @@ local function apply_to_config(config)
     config.window_decorations = "RESIZE" -- by my window manager even in the other cases, i usually just maximize
 
     config.window_padding = {
-        left = 4,
-        right = 4,
+        left = 0,
+        right = 0,
         top = 0,
         bottom = 0,
     }

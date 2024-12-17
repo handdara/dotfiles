@@ -1,6 +1,7 @@
 { pkgs, ... }: 
 {
     services = {
+        picom.enable = true;
         xserver = {
             enable = true;
             windowManager.awesome = {
@@ -20,4 +21,8 @@
             defaultSession = "none+awesome";
         };
     };
+    environment.systemPackages = with pkgs; [
+        light
+        xlockmore
+    ];
 }

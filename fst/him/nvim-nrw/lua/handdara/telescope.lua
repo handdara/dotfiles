@@ -62,6 +62,6 @@ vim.keymap.set('n', '<leader>?', tbi.oldfiles, { desc = '[?] Find recently opene
 vim.keymap.set('n', '<leader><space>', tbi.buffers, { desc = '[ ] Find existing buffers' })
 -- You can pass additional configuration to telescope to change theme, layout, etc.
 vim.keymap.set('n', '<leader>/', function()
-        tbi.current_buffer_fuzzy_find(require('telescope.themes').get_ivy { winblend = 10, previewer = true, })
+        tbi.current_buffer_fuzzy_find(require('telescope.themes').get_ivy { winblend = 70, previewer = true, })
     end,
     { desc = '[/] Fuzzily search in current buffer' })

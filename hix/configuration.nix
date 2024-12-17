@@ -38,17 +38,6 @@
         LC_TIME = sys_opts.locale;
     };
 
-    services.xserver = {
-        enable = true; # Enable the X11 windowing system. displaylink driver set up for x11
-        displayManager.gdm.enable = true; # Enable the GNOME Display Manager
-        desktopManager.gnome.enable = true;
-        displayManager.gdm.wayland = sys_opts.useWayland;
-        xkb = { # Configure keymap in X11
-            layout = "us";
-            variant = "";
-        };
-    };
-
     services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
 
     # Enable CUPS to print documents.
