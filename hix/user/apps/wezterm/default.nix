@@ -2,7 +2,9 @@
 let
     c = import ./../../../util/color/marrissa-term.nix;
 in {
-    home.packages = [ pkgs.wezterm ];
+    programs.wezterm = {
+        enable = true;
+    };
     home.file = {
         ".config/wezterm" = {
             source = ../../../../fst/hez/wezterm-main;
