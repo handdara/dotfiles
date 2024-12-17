@@ -59,8 +59,9 @@ beautiful.init(theme_dir .. theme .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "wezterm"
+terminal_cmd = terminal .. " start --always-new-process"
 editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
+editor_cmd = terminal_cmd .. " -- " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -94,7 +95,7 @@ awful.layout.layouts = {
 -- Create a launcher widget and a main menu
 myawesomemenu = {
     { "hotkeys",     function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-    { "manual",      terminal .. " -e man awesome" },
+    { "manual",      terminal_cmd .. " man awesome" },
     { "edit config", editor_cmd .. " " .. awesome.conffile },
     { "restart",     awesome.restart },
     { "quit",        function() awesome.quit() end },
@@ -113,7 +114,7 @@ mylauncher = awful.widget.launcher({
 })
 
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+menubar.utils.terminal = terminal_cmd -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
@@ -342,7 +343,7 @@ globalkeys = gears.table.join(
         { description = "go back", group = "client" }),
 
     -- Standard program
-    awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
+    awful.key({ modkey, }, "Return", function() awful.spawn(terminal_cmd) end,
         { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
         { description = "reload awesome", group = "awesome" }),

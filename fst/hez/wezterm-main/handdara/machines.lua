@@ -3,8 +3,12 @@ return {
     hostname = 'sha76',
     target_triple = "x86_64-unknown-linux-gnu",
   },
-  w7070 = {
-    hostname = 'w7070',
-    target_triple = "x86_64-windows-msvc",
+  whix = {
+    hostname = 'whix',
+    target_triple = "x86_64-unknown-linux-gnu",
+  },
+  theseus = {
+    hostname = 'theseus',
+    target_triple = "x86_64-unknown-linux-gnu",
   }
 }
