@@ -45,7 +45,20 @@ local sImp = s('import', fmt('import {} {{{}}};', {
     i(2, 'args'),
 }))
 
+local bHomeFile = [[
+home.file =
+    {{
+        ".config/nvim/init.lua".source = nvim_dir + /init.lua;
+        ".config/nvim/lua/handdara/config" = {{
+            source = handdara_dir + /config;
+            recursive = true;
+        }};
+    }};
+]]
+local sHomeFile = s('home.file', fmt(bHomeFile, {}))
+
 ls.add_snippets("nix", {
     sMod,
     sImp,
+    sHomeFile,
 })

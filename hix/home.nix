@@ -7,8 +7,10 @@
         ./user/apps/eza
         ./user/apps/fzf
         ./user/apps/gpg
+        ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
+        ./user/apps/mbsync
         ./user/apps/megacmd
         ./user/apps/neofetch
         ./user/apps/nvim
@@ -19,7 +21,6 @@
         ./user/apps/vim
         ./user/apps/vivaldi
         ./user/apps/wezterm
-        ./user/apps/jqyq
         ./user/apps/zathura
         ./user/apps/zoxide
         ./user/shells/bash
