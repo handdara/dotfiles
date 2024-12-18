@@ -9,6 +9,17 @@ function manage
     'kbd-on: start kmonad',\
     'kbd-off: kill kmonad',\
     'fd-proc: search through procs',\
+    'kill-proc: search through procs and kill result',\
+    'xlock: lock screen',\
+    'sc0: set screen backlight to 0',\
+    'sc10: set screen backlight to 10',\
+    'sc25: set screen backlight to 25',\
+    'sc50: set screen backlight to 50',\
+    'sc50: set screen backlight to 75',\
+    'sc100: set screen backlight to 100',\
+    'lowpow: run commands for conserving battery power',\
+    'tlp: start tlp in automatically selected mode',\
+    'netmgr: start nmtui',\
     'cheatsheet: NOT IMPLEMENTED YET search through cheatsheet'}
     set -l choice ( for o in $options; echo $o; end | fzf | awk -F: '{print $1}' )
 
@@ -50,6 +61,30 @@ function manage
     case 'fd-proc'
         set -gx MG_LAST_PROC_ID (ps -e | fzf | sed 's/\( \+\)\([0-9]*\)\( \+.*\)/\\2/' )
         echo $MG_LAST_PROC_ID | xclip -selection clipboard
+    case 'kill-proc'
+        set -gx MG_LAST_PROC_ID (ps -e | fzf | sed 's/\( \+\)\([0-9]*\)\( \+.*\)/\\2/' )
+        kill -9 $MG_LAST_PROC_ID
+    case 'xlock'
+        xlock
+    case 'sc0'
+        sudo light -S 0
+    case 'sc10'
+        sudo light -S 10
+    case 'sc25'
+        sudo light -S 25
+    case 'sc50'
+        sudo light -S 50
+    case 'sc50'
+        sudo light -S 50
+    case 'sc100'
+        sudo light -S 100
+    case 'lowpow'
+        sudo light -S 0
+        sudo tlp bat
+    case 'tlp'
+        sudo tlp start
+    case 'netmgr'
+        nmtui
     case '*'
         echo "error: unreachable"
         return 1
