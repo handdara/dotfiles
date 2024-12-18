@@ -1,0 +1,9 @@
+{
+    "diagnostics.globals": [
+        "awesome",
+        "client",
+        "screen",
+        "mouse",
+        "root"
+    ]
+}
