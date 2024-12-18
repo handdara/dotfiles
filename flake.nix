@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    alejandra.url = "github:kamadorueda/alejandra/3.1.0";
+    alejandra.url = "github:kamadorueda/alejandra/main";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
   };
 
