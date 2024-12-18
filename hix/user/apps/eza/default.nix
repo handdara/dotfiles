@@ -1,12 +1,12 @@
 {
-  config,
-  pkgs,
-  ...
+    config,
+    pkgs,
+    ...
 }: {
-  programs.eza = {
-    enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
+    programs.eza = {
+        enable = true;
+        enableFishIntegration = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+    };
 }

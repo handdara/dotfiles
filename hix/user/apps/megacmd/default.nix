@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = [
-    pkgs.megacmd
-  ];
+    home.packages = [
+        pkgs.megacmd
+    ];
 }

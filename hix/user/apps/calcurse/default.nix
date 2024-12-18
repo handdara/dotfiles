@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-  home.packages = [pkgs.calcurse];
+    home.packages = [pkgs.calcurse];
 }

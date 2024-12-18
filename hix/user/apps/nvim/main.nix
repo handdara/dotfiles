@@ -1,114 +1,114 @@
 {
-  /*
+    /*
   config, lib,
   */
-  pkgs,
-  ...
+    pkgs,
+    ...
 }: let
-  treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-    p.bash
-    p.c
-    p.comment
-    p.css
-    p.dockerfile
-    p.fish
-    p.gitattributes
-    p.gitignore
-    p.go
-    p.gomod
-    p.gowork
-    p.hcl
-    p.javascript
-    p.jq
-    p.json
-    p.json5
-    p.lua
-    p.make
-    p.markdown
-    p.markdown_inline
-    p.nix
-    p.python
-    p.rust
-    p.toml
-    p.typescript
-    p.vim
-    p.vimdoc
-    p.vue
-    p.yaml
-    p.zig
-  ]);
+    treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+        p.bash
+        p.c
+        p.comment
+        p.css
+        p.dockerfile
+        p.fish
+        p.gitattributes
+        p.gitignore
+        p.go
+        p.gomod
+        p.gowork
+        p.hcl
+        p.javascript
+        p.jq
+        p.json
+        p.json5
+        p.lua
+        p.make
+        p.markdown
+        p.markdown_inline
+        p.nix
+        p.python
+        p.rust
+        p.toml
+        p.typescript
+        p.vim
+        p.vimdoc
+        p.vue
+        p.yaml
+        p.zig
+    ]);
 
-  treesitter-parsers = pkgs.symlinkJoin {
-    name = "treesitter-parsers";
-    paths = treesitterWithGrammars.dependencies;
-  };
+    treesitter-parsers = pkgs.symlinkJoin {
+        name = "treesitter-parsers";
+        paths = treesitterWithGrammars.dependencies;
+    };
 in {
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    tree-sitter
-    lua-language-server # lua lang server
-    rust-analyzer-unwrapped # rust lang server
-    marksman # markdown lang server
-    nil # nix lang server
-    zls # zig lang server
-  ];
-
-  home.file = {
-    ".config/nvim/lua" = {
-      source = ../../../../fst/him/nvim-main/lua;
-      recursive = true;
-    };
-    ".config/nvim/handdara-snips" = {
-      source = ../../../../fst/him/nvim-main/handdara-snips;
-      recursive = true;
-    };
-    ".config/nvim/init.lua".source = ../../../../fst/him/nvim-main/init.lua;
-    ".config/nvim/lazy-lock.json".source = ../../../../fst/him/nvim-main/lazy-lock.json;
-    ".config/nvim/lua/handdara/config/init.lua".text = ''
-      require("handdara.config.telescope")
-      require("handdara.config.treesitter")
-      require("handdara.config.set")
-      require("handdara.config.luasnip")
-      require("handdara.config.snippet")
-      require("handdara.config.lsp")
-      require("handdara.config.keymap")
-      require("handdara.config.looks")
-      require("handdara.config.minifiles")
-      require("handdara.config.telekasten")
-      require("handdara.config.oil")
-      -- require("handdara.config.mkdnflow")
-      vim.opt.runtimepath:append("${treesitter-parsers}")
-    '';
-  };
-
-  programs.neovim = {
-    enable = true;
-    withNodeJs = true;
-    withPython3 = true;
-    viAlias = true;
-    extraPackages = with pkgs; [
-      cargo
-      clang
-      cmake
-      gcc
-      gnumake
-      pkg-config
-      python3
+    home.packages = with pkgs; [
+        ripgrep
+        fd
+        tree-sitter
+        lua-language-server # lua lang server
+        rust-analyzer-unwrapped # rust lang server
+        marksman # markdown lang server
+        nil # nix lang server
+        zls # zig lang server
     ];
-    plugins = [
-      treesitterWithGrammars
-    ];
-  };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+    home.file = {
+        ".config/nvim/lua" = {
+            source = ../../../../fst/him/nvim-main/lua;
+            recursive = true;
+        };
+        ".config/nvim/handdara-snips" = {
+            source = ../../../../fst/him/nvim-main/handdara-snips;
+            recursive = true;
+        };
+        ".config/nvim/init.lua".source = ../../../../fst/him/nvim-main/init.lua;
+        ".config/nvim/lazy-lock.json".source = ../../../../fst/him/nvim-main/lazy-lock.json;
+        ".config/nvim/lua/handdara/config/init.lua".text = ''
+          require("handdara.config.telescope")
+          require("handdara.config.treesitter")
+          require("handdara.config.set")
+          require("handdara.config.luasnip")
+          require("handdara.config.snippet")
+          require("handdara.config.lsp")
+          require("handdara.config.keymap")
+          require("handdara.config.looks")
+          require("handdara.config.minifiles")
+          require("handdara.config.telekasten")
+          require("handdara.config.oil")
+          -- require("handdara.config.mkdnflow")
+          vim.opt.runtimepath:append("${treesitter-parsers}")
+        '';
+    };
 
-  # Treesitter is configured as a locally developed module in lazy.nvim
-  # we hardcode a symlink here so that we can refer to it in our lazy config
-  home.file.".local/share/nvim/nix/nvim-treesitter/" = {
-    recursive = true;
-    source = treesitterWithGrammars;
-  };
+    programs.neovim = {
+        enable = true;
+        withNodeJs = true;
+        withPython3 = true;
+        viAlias = true;
+        extraPackages = with pkgs; [
+            cargo
+            clang
+            cmake
+            gcc
+            gnumake
+            pkg-config
+            python3
+        ];
+        plugins = [
+            treesitterWithGrammars
+        ];
+    };
+
+    home.sessionVariables = {
+        EDITOR = "nvim";
+    };
+
+    # Treesitter is configured as a locally developed module in lazy.nvim
+    # we hardcode a symlink here so that we can refer to it in our lazy config
+    home.file.".local/share/nvim/nix/nvim-treesitter/" = {
+        recursive = true;
+        source = treesitterWithGrammars;
+    };
 }

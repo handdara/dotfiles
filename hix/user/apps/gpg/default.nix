@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = [
-    pkgs.gnupg
-  ];
+    home.packages = [
+        pkgs.gnupg
+    ];
 }

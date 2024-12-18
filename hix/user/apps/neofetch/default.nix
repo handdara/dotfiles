@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = [
-    pkgs.neofetch
-  ];
+    home.packages = [
+        pkgs.neofetch
+    ];
 }

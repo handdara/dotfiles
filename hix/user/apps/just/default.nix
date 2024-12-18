@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = [
-    pkgs.just
-  ];
+    home.packages = [
+        pkgs.just
+    ];
 }

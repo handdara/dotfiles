@@ -1,12 +1,12 @@
 {
-  config,
-  pkgs,
-  ...
+    config,
+    pkgs,
+    ...
 }: {
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
+    programs.zoxide = {
+        enable = true;
+        enableFishIntegration = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+    };
 }

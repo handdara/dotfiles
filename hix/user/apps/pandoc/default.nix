@@ -1,7 +1,7 @@
 {
-  config,
-  pkgs,
-  ...
+    config,
+    pkgs,
+    ...
 }: {
-  programs.pandoc.enable = true;
+    programs.pandoc.enable = true;
 }
