@@ -173,7 +173,7 @@ desc: {3}
 repo: handdara/{4}
 branch: {5}
 ---
-# :{6}/quest{7}:
+# {6}/quest{7}
 
 ]]
 local stask = s('task', fmt(btask, {
