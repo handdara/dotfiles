@@ -16,7 +16,8 @@
             if sys_opts.useDisplayLink
             then [./system/hardware/displaylink]
             else []
-        );
+        )
+        ++ inputs.extraModules;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 

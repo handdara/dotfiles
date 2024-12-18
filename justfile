@@ -52,7 +52,7 @@ stable: _git_add purge && switch-home place-lazylock
 edit:
     nvim
 
-_check_fmt:
+@_check_fmt:
     nix develop --command alejandra --check .
 
 fmt:
