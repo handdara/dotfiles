@@ -13,12 +13,12 @@ test:
     just {{dotfiles_dir}}/hix/ test-home-mngr
 
 # rebuild nixos and home-manager using most up-to-date method and switch
-switch: && switch-home
+switch: _check_fmt && switch-home
     just {{dotfiles_dir}}/hix/ switch-nixos
     @echo "current generation $(nixos-rebuild list-generations | awk '/current/ {print $1}')"
 
 # rebuild only home-manager using most up-to-date method and switch
-switch-home:
+switch-home: _check_fmt 
     just {{dotfiles_dir}}/hix/ switch-home-mngr
 
 # purge directories needed to switch home-manager
@@ -43,7 +43,7 @@ dev:
     just {{dotfiles_dir}}/fst/hez/ replace-nix
     just {{dotfiles_dir}}/snd/awesomewm/ replace-nix
 
-_git_add:
+_git_add: _check_fmt
     git add .
 
 # replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
@@ -51,6 +51,9 @@ stable: _git_add purge && switch-home place-lazylock
 
 edit:
     nvim
+
+_check_fmt:
+    nix develop --command alejandra --check .
 
 fmt:
     nix develop --command alejandra .
