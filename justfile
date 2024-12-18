@@ -51,3 +51,6 @@ stable: _git_add purge && switch-home place-lazylock
 
 edit:
     nvim
+
+fmt:
+    nix develop --command alejandra .
