@@ -3,22 +3,22 @@
   fg = "#dedede"; # foreground
 
   # normal:
-  black   = "#2e3436";
-  red     = "#cc0000";
-  green   = "#4e9a06";
-  yellow  = "#c4a000";
-  blue    = "#3465a4";
+  black = "#2e3436";
+  red = "#cc0000";
+  green = "#4e9a06";
+  yellow = "#c4a000";
+  blue = "#3465a4";
   magenta = "#75507b";
-  cyan    = "#06989a";
-  white   = "#d3d7cf";
+  cyan = "#06989a";
+  white = "#d3d7cf";
 
   # Bright colors
-  bright_black    = "#555753";
-  bright_red      = "#ef2929";
-  bright_green    = "#8ae234";
-  bright_yellow   = "#fce94f";
-  bright_blue     = "#729fcf";
-  bright_magenta  = "#ad7fa8";
-  bright_cyan     = "#34e2e2";
-  bright_white    = "#eeeeec";
+  bright_black = "#555753";
+  bright_red = "#ef2929";
+  bright_green = "#8ae234";
+  bright_yellow = "#fce94f";
+  bright_blue = "#729fcf";
+  bright_magenta = "#ad7fa8";
+  bright_cyan = "#34e2e2";
+  bright_white = "#eeeeec";
 }

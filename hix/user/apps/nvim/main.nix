@@ -1,7 +1,11 @@
-{ /* config, lib, */ pkgs, ... }:
-
-let
-  treesitterWithGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+{
+  /*
+  config, lib,
+  */
+  pkgs,
+  ...
+}: let
+  treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
     p.bash
     p.c
     p.comment
@@ -32,14 +36,13 @@ let
     p.vue
     p.yaml
     p.zig
-  ]));
+  ]);
 
   treesitter-parsers = pkgs.symlinkJoin {
     name = "treesitter-parsers";
     paths = treesitterWithGrammars.dependencies;
   };
-in
-{
+in {
   home.packages = with pkgs; [
     ripgrep
     fd
@@ -85,16 +88,16 @@ in
     withPython3 = true;
     viAlias = true;
     extraPackages = with pkgs; [
-        cargo
-        clang
-        cmake
-        gcc
-        gnumake
-        pkg-config
-        python3
+      cargo
+      clang
+      cmake
+      gcc
+      gnumake
+      pkg-config
+      python3
     ];
     plugins = [
-     treesitterWithGrammars
+      treesitterWithGrammars
     ];
   };
 

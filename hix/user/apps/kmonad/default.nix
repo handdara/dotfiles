@@ -1,5 +1,8 @@
-{config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.file = {
     ".config/kmonad/" = {
       source = ../../../../snd/kmonad/keymap;

@@ -1,11 +1,11 @@
 {...}:
 # let
 #     c = ./../../../util/color/marrissa-term.nix;
-# in 
+# in
 {
-    programs.zathura = {
-        enable = true;
-        # options = {
-        # };
-    };
+  programs.zathura = {
+    enable = true;
+    # options = {
+    # };
+  };
 }

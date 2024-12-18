@@ -1,70 +1,72 @@
-{user_opts, ... }:
-let 
+{user_opts, ...}: let
+  # COLOR OPTIONS:
+  # c = import ./../../../util/color/tartan.nix;
+  # c = import ./../../../util/color/oxocarbon.nix;
+  # c = import ./../../../util/color/kasugano.nix;
+  # c = import ./../../../util/color/count-von-count.nix;
+  # c = import ./../../../util/color/navy-and-ivory.nix;
+  c = import ./../../../util/color/marrissa-term.nix;
 
-    # COLOR OPTIONS: 
-    # c = import ./../../../util/color/tartan.nix;
-    # c = import ./../../../util/color/oxocarbon.nix;
-    # c = import ./../../../util/color/kasugano.nix;
-    # c = import ./../../../util/color/count-von-count.nix;
-    # c = import ./../../../util/color/navy-and-ivory.nix;
-    c = import ./../../../util/color/marrissa-term.nix;
-
-    # marrissa-term overrides
-    st_overrides = {
-        fg5 = "#75507B";
-    } // (if user_opts.term_invert 
-            then rec { # marrissa-term light mode overrides
-                fg1 = c.bright_black; # os
-                bg1 = c.bright_blue;
-                fg2 = c.bright_black; # directory
-                bg2 = c.bright_magenta;
-                fg3 = c.bright_black; # git
-                bg3 = c.bright_blue;
-                fg4 = c.bright_black; # lang/env
-                bg4 = c.bright_cyan;
-                bg5 = c.white;
-                bgchar = bg5;
-            }
-            else {});
-
-    # # count von count overrides
-    # st.bg1 = c.white;
-    # st.fg3 = c.green;
-    # st.fg5 = c.red;
-    # st.bg5 = c.bright_black;
-
-    st = {
-        fg1 = st_overrides.fg1 or c.black; # os
-        bg1 = st_overrides.bg1 or c.blue;
-        fg2 = st_overrides.fg2 or c.black; # directory
-        bg2 = st_overrides.bg2 or c.magenta;
-        fg3 = st_overrides.fg3 or c.black; # git
-        bg3 = st_overrides.bg3 or c.bright_blue;
-        fg4 = st_overrides.fg4 or c.black; # lang/env
-        bg4 = st_overrides.bg4 or c.cyan;
-        fg5 = st_overrides.fg5 or c.magenta; # time
-        bg5 = st_overrides.bg5 or c.black;
-        bgchar = st_overrides.bgchar or c.black;
-    };
-
-    # SYMBOLS
-    os_sym = " ";
-    trunc_sym = "󱑼 /"; # other opts:    
-    err_sym = "󰲉 "; # other opts: 󰚑 
-    time_sym = " ";
-    home_sym = " ";
-    custom_latex = "\${custom.latex}";
-in
+  # marrissa-term overrides
+  st_overrides =
     {
-    programs.starship = {
-        enable = true;
-        enableFishIntegration = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
-    };
+      fg5 = "#75507B";
+    }
+    // (
+      if user_opts.term_invert
+      then rec {
+        # marrissa-term light mode overrides
+        fg1 = c.bright_black; # os
+        bg1 = c.bright_blue;
+        fg2 = c.bright_black; # directory
+        bg2 = c.bright_magenta;
+        fg3 = c.bright_black; # git
+        bg3 = c.bright_blue;
+        fg4 = c.bright_black; # lang/env
+        bg4 = c.bright_cyan;
+        bg5 = c.white;
+        bgchar = bg5;
+      }
+      else {}
+    );
 
-    home.file = {
-        ".config/starship.toml".text = ''
+  # # count von count overrides
+  # st.bg1 = c.white;
+  # st.fg3 = c.green;
+  # st.fg5 = c.red;
+  # st.bg5 = c.bright_black;
+
+  st = {
+    fg1 = st_overrides.fg1 or c.black; # os
+    bg1 = st_overrides.bg1 or c.blue;
+    fg2 = st_overrides.fg2 or c.black; # directory
+    bg2 = st_overrides.bg2 or c.magenta;
+    fg3 = st_overrides.fg3 or c.black; # git
+    bg3 = st_overrides.bg3 or c.bright_blue;
+    fg4 = st_overrides.fg4 or c.black; # lang/env
+    bg4 = st_overrides.bg4 or c.cyan;
+    fg5 = st_overrides.fg5 or c.magenta; # time
+    bg5 = st_overrides.bg5 or c.black;
+    bgchar = st_overrides.bgchar or c.black;
+  };
+
+  # SYMBOLS
+  os_sym = " ";
+  trunc_sym = "󱑼 /"; # other opts:   
+  err_sym = "󰲉 "; # other opts: 󰚑
+  time_sym = " ";
+  home_sym = " ";
+  custom_latex = "\${custom.latex}";
+in {
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
+
+  home.file = {
+    ".config/starship.toml".text = ''
       format = """
       [░▒▓](${st.bg1})\
       [ ${os_sym} ](bg:${st.bg1} fg:${st.fg1})\
@@ -203,6 +205,6 @@ in
       disabled = false
       style = "italic #394260"
       format = "[$duration]($style)"
-        '';
-    };
+    '';
+  };
 }

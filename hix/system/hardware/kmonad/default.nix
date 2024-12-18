@@ -1,5 +1,4 @@
-{ user_opts, ... }:
-{
+{user_opts, ...}: {
   services.kmonad = {
     enable = true;
     # keyboards = {
@@ -8,6 +7,6 @@
     #     config = builtins.readFile /path/to/my/config.kbd;
     #   };
     # };
-  }; 
-  users.users.${user_opts.username}.extraGroups = [ "input" "uinput" ];
+  };
+  users.users.${user_opts.username}.extraGroups = ["input" "uinput"];
 }

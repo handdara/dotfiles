@@ -1,4 +1,7 @@
-{config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.pandoc.enable = true;
 }
