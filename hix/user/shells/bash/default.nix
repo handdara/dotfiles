@@ -18,6 +18,7 @@
         };
         bashrcExtra = ''
           export PATH="$PATH:~/.yarn/bin"
+          eval "$(ssh-agent -s)"
         '';
     };
 }

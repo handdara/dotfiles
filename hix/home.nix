@@ -7,6 +7,7 @@
         ./user/apps/eza
         ./user/apps/fzf
         ./user/apps/gpg
+        ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
         ./user/apps/megacmd
@@ -18,8 +19,9 @@
         ./user/apps/tealdeer
         ./user/apps/vim
         ./user/apps/vivaldi
+        ./user/apps/watchexec
         ./user/apps/wezterm
-        ./user/apps/jqyq
+        ./user/apps/write
         ./user/apps/zathura
         ./user/apps/zoxide
         ./user/shells/bash

@@ -15,7 +15,7 @@ function manage
     'sc10: set screen backlight to 10',\
     'sc25: set screen backlight to 25',\
     'sc50: set screen backlight to 50',\
-    'sc50: set screen backlight to 75',\
+    'sc75: set screen backlight to 75',\
     'sc100: set screen backlight to 100',\
     'lowpow: run commands for conserving battery power',\
     'tlp: start tlp in automatically selected mode',\
