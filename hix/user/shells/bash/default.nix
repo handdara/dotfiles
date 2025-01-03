@@ -1,8 +1,4 @@
-{
-    config,
-    pkgs,
-    ...
-}: {
+{ ... }: {
     programs.bash = {
         enable = true;
         shellAliases = {
@@ -16,9 +12,9 @@
             gdh = "git diff HEAD";
             j = "just";
         };
-        bashrcExtra = ''
-          export PATH="$PATH:~/.yarn/bin"
-          eval "$(ssh-agent -s)"
-        '';
+        # bashrcExtra = ''
+        #   export PATH="$PATH:~/.yarn/bin"
+        #   eval "$(ssh-agent -s)"
+        # '';
     };
 }

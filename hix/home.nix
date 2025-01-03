@@ -1,11 +1,13 @@
 {user_opts, ...}: {
     imports = [
         ./system/wm/awesomewm/home.nix
+        ./user/apps/alacritty
         ./user/apps/bat
         ./user/apps/btop
         ./user/apps/calcurse
         ./user/apps/eza
         ./user/apps/fzf
+        ./user/apps/ghostty
         ./user/apps/gpg
         ./user/apps/jqyq
         ./user/apps/just

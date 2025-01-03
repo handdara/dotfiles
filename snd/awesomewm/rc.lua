@@ -53,8 +53,9 @@ local theme_dir = os.getenv("HOME") .. '/.config/awesome/themes/'
 beautiful.init(theme_dir .. theme .. "/theme.lua")
 
 local browser_cmd = "vivaldi"
-local terminal = "wezterm"
-local terminal_cmd = terminal .. " start --always-new-process"
+-- local terminal = "wezterm"
+-- local terminal_cmd = terminal .. " start --always-new-process"
+local terminal_cmd = "ghostty"
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. " -- " .. editor
 local fish_manage_cmd = terminal_cmd .. " -- fish -c manage"

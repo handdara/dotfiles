@@ -11,7 +11,7 @@
             ./system/wm/gdm
             ./system/wm/awesomewm
             ./system/fonts/nerdfonts
-            ./system/hardware/kmonad
+            # ./system/hardware/kmonad
         ]
         ++ (
             if sys_opts.useDisplayLink
