@@ -2,7 +2,6 @@
     services = {
         picom.enable = true;
         xserver = {
-            enable = true;
             windowManager.awesome = {
                 enable = true;
                 luaModules = with pkgs.luaPackages; [
@@ -15,10 +14,6 @@
                 layout = "us";
                 variant = "";
             };
-        };
-        displayManager = {
-            sddm.enable = true;
-            defaultSession = "none+awesome";
         };
     };
     environment.systemPackages = with pkgs; [

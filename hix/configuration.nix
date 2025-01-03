@@ -8,7 +8,8 @@
             ./machines/${sys_opts.hostname}/hardware-configuration.nix
             ./machines/${sys_opts.hostname}/bootloader.nix
             ./machines/${sys_opts.hostname}/networking.nix
-            ./system/wm/${sys_opts.wm}
+            ./system/wm/gdm
+            ./system/wm/awesomewm
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
         ]
