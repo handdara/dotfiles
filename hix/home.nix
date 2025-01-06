@@ -8,10 +8,10 @@
         ./user/apps/eza
         ./user/apps/fzf
         ./user/apps/ghostty
-        ./user/apps/gpg
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
+        ./user/apps/mail
         ./user/apps/megacmd
         ./user/apps/neofetch
         ./user/apps/nvim
