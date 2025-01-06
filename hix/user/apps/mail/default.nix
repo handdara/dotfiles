@@ -1,5 +1,5 @@
 {...}: let
-    email = "myemailaddress@mydomain.com";
+    email = "brittain@sent.com";
 in {
     programs.mbsync = {
         enable = true;

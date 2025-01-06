@@ -16,12 +16,19 @@ switch-nixos:
 switch-home-mngr: 
     home-manager switch --flake .
 
+# build home-manager (flake-based)
+build-home-mngr: 
+    home-manager build --flake .
+
+temp-home-mngr: build-home-mngr
+    ./result/activate
+
 # test NixOS system rebuild
 test-nixos:
     sudo nixos-rebuild test --flake .
 
 # test home-manager rebuild
-test-home-mngr: 
+test-home-mngr: && build-home-mngr
     home-manager -n switch --flake .
 
 # test system & home-manager rebuild

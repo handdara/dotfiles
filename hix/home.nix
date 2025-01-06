@@ -6,7 +6,6 @@
         ./user/apps/calcurse
         ./user/apps/eza
         ./user/apps/fzf
-        ./user/apps/gpg
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
