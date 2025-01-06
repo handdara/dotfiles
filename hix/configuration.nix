@@ -93,7 +93,10 @@
         git
         unzip
         xclip
+        xlockmore
         pavucontrol
+        alsa-utils
+        brightnessctl
     ];
 
     # Some programs need SUID wrappers, can be configured further or are

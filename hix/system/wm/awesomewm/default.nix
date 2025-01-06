@@ -16,8 +16,4 @@
             };
         };
     };
-    environment.systemPackages = with pkgs; [
-        light
-        xlockmore
-    ];
 }

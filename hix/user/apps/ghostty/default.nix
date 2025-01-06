@@ -6,7 +6,6 @@ in {
         ".config/ghostty/config".text = ''
           theme = marrissa
           font-family = Hurmit Nerd Font
-          background-blur-radius = 20
           cursor-style = block
           cursor-style-blink = false
           background-opacity = 0.90
