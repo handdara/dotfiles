@@ -1,6 +1,7 @@
 alias home := switch-home
 
 dotfiles_dir := justfile_directory()
+home_dir := env_var('HOME')
 
 # no default at the moment
 default:

@@ -67,24 +67,28 @@ function manage
     case 'xlock'
         xlock
     case 'sc0'
-        sudo light -S 0
+        brightnessctl set 0%
     case 'sc10'
-        sudo light -S 10
+        brightnessctl set 10%
     case 'sc25'
-        sudo light -S 25
+        brightnessctl set 25%
     case 'sc50'
-        sudo light -S 50
-    case 'sc50'
-        sudo light -S 50
+        brightnessctl set 50%
+    case 'sc75'
+        brightnessctl set 75%
     case 'sc100'
-        sudo light -S 100
+        brightnessctl set 100%
     case 'lowpow'
-        sudo light -S 0
+        brightnessctl set 0%
         sudo tlp bat
     case 'tlp'
         sudo tlp start
     case 'netmgr'
         nmtui
+    case 'bluemgr'
+        blueman-manager
+    case 'vol'
+        pavucontrol
     case '*'
         echo "error: unreachable"
         return 1

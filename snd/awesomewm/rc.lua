@@ -50,15 +50,25 @@ end
 -- {{{ Variable definitions
 local theme = "handdara" -- also available: default zenburn gtk sky
 local theme_dir = os.getenv("HOME") .. '/.config/awesome/themes/'
+local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible'
 beautiful.init(theme_dir .. theme .. "/theme.lua")
 
 local browser_cmd = "vivaldi"
--- local terminal = "wezterm"
--- local terminal_cmd = terminal .. " start --always-new-process"
-local terminal_cmd = "ghostty"
+local bluemgr_cmd = "blueman-manager"
+local terminal = "ghostty"
+local terminal_cmd = terminal .. " -e "
 local editor = os.getenv("EDITOR") or "vim"
-local editor_cmd = terminal_cmd .. " -- " .. editor
-local fish_manage_cmd = terminal_cmd .. " -- fish -c manage"
+local editor_cmd = terminal_cmd .. editor
+local ansible = "nvim quicklinks.md"
+local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
+local email = "mbsync -a && neomutt"
+local email_cmd = terminal_cmd .. email
+local calendar = "calcurse"
+local calendar_cmd = terminal_cmd .. calendar
+local netmgr = "nmtui"
+local netmgr_cmd = terminal_cmd .. netmgr
+local fish_manage = "fish -c manage"
+local fish_manage_cmd = terminal_cmd .. fish_manage
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -100,10 +110,15 @@ local menu_awesome = {
 
 local start_menu = awful.menu({
     items = {
-        { "awesome",          menu_awesome, beautiful.awesome_icon },
-        { "open terminal",    terminal_cmd },
-        { "open web browser", browser_cmd },
-        { "run manage",       fish_manage_cmd },
+        { "awesome",            menu_awesome,   beautiful.awesome_icon },
+        { "open terminal",      terminal },
+        { "contact the Ekumen", ansible_cmd },
+        { "open web browser",   browser_cmd },
+        { "open email",         email_cmd },
+        { "open calendar",      calendar_cmd },
+        { "manage network",     netmgr_cmd },
+        { "open bluetooth",     bluemgr_cmd },
+        { "run manage script",  fish_manage_cmd },
     }
 })
 
@@ -177,7 +192,6 @@ stbar_txtclk:buttons(gears.table.join(
         end
     end)
 ))
-
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -337,18 +351,27 @@ local globalkeys = gears.table.join(
         { description = "go back", group = "client" }),
 
     -- Standard program
-    awful.key({ super, }, "Return", function() awful.spawn(terminal_cmd) end, { description = "open a terminal", group = "launcher" }),
-    awful.key({ super, }, ".", function() awful.spawn(fish_manage_cmd) end, { description = "run manage script", group = "launcher" }),
+    awful.key({ super, }, "Return", function() awful.spawn(terminal) end,
+        { description = "open a terminal", group = "launcher" }),
+    awful.key({ super, }, ".", function() awful.spawn(fish_manage_cmd) end,
+        { description = "run manage script", group = "launcher" }),
     awful.key({ super, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
     awful.key({ super, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-    awful.key({ super, }, "l", function() awful.tag.incmwfact(0.05) end, { description = "increase master width factor", group = "layout" }),
-    awful.key({ super, }, "h", function() awful.tag.incmwfact(-0.05) end, { description = "decrease master width factor", group = "layout" }),
-    awful.key({ super, "Shift" }, "h", function() awful.tag.incnmaster(1, nil, true) end, { description = "increase the number of master clients", group = "layout" }),
-    awful.key({ super, "Shift" }, "l", function() awful.tag.incnmaster(-1, nil, true) end, { description = "decrease the number of master clients", group = "layout" }),
-    awful.key({ super, "Control" }, "h", function() awful.tag.incncol(1, nil, true) end, { description = "increase the number of columns", group = "layout" }),
-    awful.key({ super, "Control" }, "l", function() awful.tag.incncol(-1, nil, true) end, { description = "decrease the number of columns", group = "layout" }),
+    awful.key({ super, }, "l", function() awful.tag.incmwfact(0.05) end,
+        { description = "increase master width factor", group = "layout" }),
+    awful.key({ super, }, "h", function() awful.tag.incmwfact(-0.05) end,
+        { description = "decrease master width factor", group = "layout" }),
+    awful.key({ super, "Shift" }, "h", function() awful.tag.incnmaster(1, nil, true) end,
+        { description = "increase the number of master clients", group = "layout" }),
+    awful.key({ super, "Shift" }, "l", function() awful.tag.incnmaster(-1, nil, true) end,
+        { description = "decrease the number of master clients", group = "layout" }),
+    awful.key({ super, "Control" }, "h", function() awful.tag.incncol(1, nil, true) end,
+        { description = "increase the number of columns", group = "layout" }),
+    awful.key({ super, "Control" }, "l", function() awful.tag.incncol(-1, nil, true) end,
+        { description = "decrease the number of columns", group = "layout" }),
     awful.key({ super, }, "space", function() awful.layout.inc(1) end, { description = "select next", group = "layout" }),
-    awful.key({ super, "Shift" }, "space", function() awful.layout.inc(-1) end, { description = "select previous", group = "layout" }),
+    awful.key({ super, "Shift" }, "space", function() awful.layout.inc(-1) end,
+        { description = "select previous", group = "layout" }),
 
     awful.key({ super, "Control" }, "n",
         function()
@@ -363,7 +386,8 @@ local globalkeys = gears.table.join(
         { description = "restore minimized", group = "client" }),
 
     -- Prompt
-    awful.key({ super }, "r", function() awful.screen.focused().prompt_box:run() end, { description = "run prompt", group = "launcher" }),
+    awful.key({ super }, "r", function() awful.screen.focused().prompt_box:run() end,
+        { description = "run prompt", group = "launcher" }),
 
     awful.key({ super }, "x",
         function()
@@ -387,10 +411,13 @@ local clientkeys = gears.table.join(
         end,
         { description = "toggle fullscreen", group = "client" }),
     awful.key({ super, "Shift" }, "c", function(c) c:kill() end, { description = "close", group = "client" }),
-    awful.key({ super, "Control" }, "space", awful.client.floating.toggle, { description = "toggle floating", group = "client" }),
-    awful.key({ super, "Control" }, "Return", function(c) c:swap(awful.client.getmaster()) end, { description = "move to master", group = "client" }),
+    awful.key({ super, "Control" }, "space", awful.client.floating.toggle,
+        { description = "toggle floating", group = "client" }),
+    awful.key({ super, "Control" }, "Return", function(c) c:swap(awful.client.getmaster()) end,
+        { description = "move to master", group = "client" }),
     awful.key({ super, }, "o", function(c) c:move_to_screen() end, { description = "move to screen", group = "client" }),
-    awful.key({ super, }, "t", function(c) c.ontop = not c.ontop end, { description = "toggle keep on top", group = "client" }),
+    awful.key({ super, }, "t", function(c) c.ontop = not c.ontop end,
+        { description = "toggle keep on top", group = "client" }),
     awful.key({ super, }, "n",
         function(c)
             -- The client currently has the input focus, so it cannot be

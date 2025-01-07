@@ -6,6 +6,7 @@
         ./user/apps/btop
         ./user/apps/calcurse
         ./user/apps/eza
+        ./user/apps/fim
         ./user/apps/fzf
         ./user/apps/ghostty
         ./user/apps/jqyq

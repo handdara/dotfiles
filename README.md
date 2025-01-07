@@ -2,8 +2,8 @@
 ---
 YY: 25
 0M: 01
-MINOR: 0
-MICRO: 1
+MINOR: 1
+MICRO: 0
 ---
 -->
 # handdara's dotfiles
@@ -67,4 +67,4 @@ MICRO: 1
 
 ---
 
-[Version Badge]:https://img.shields.io/badge/version-25.01.0.1-a47daa?style=for-the-badge&labelColor=616097
+[Version Badge]:https://img.shields.io/badge/version-25.01.1.0-a47daa?style=for-the-badge&labelColor=616097
