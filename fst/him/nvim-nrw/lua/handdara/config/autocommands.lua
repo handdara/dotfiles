@@ -8,4 +8,21 @@ return function()
         group = zmark_group,
         pattern = '*',
     })
+
+    local calcurse = vim.api.nvim_create_augroup('CalcurseMarkdown', { clear = true })
+    vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+        callback = function()
+            vim.bo.filetype = "markdown"
+        end,
+        group = calcurse,
+        pattern = '/tmp/calcurse*',
+    })
+    local calcurse_nts = vim.api.nvim_create_augroup('CalcurseNotes', { clear = true })
+    vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+        callback = function()
+            vim.bo.filetype = "markdown"
+        end,
+        group = calcurse_nts,
+        pattern = '~/.local/share/calcurse/notes/*',
+    })
 end
