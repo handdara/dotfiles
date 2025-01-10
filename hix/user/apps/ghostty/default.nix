@@ -16,6 +16,7 @@ in {
           confirm-close-surface = false
           shell-integration-features = no-cursor
           gtk-tabs-location = hidden
+          keybind = ctrl+shift+a=unbind
         '';
         ".config/ghostty/themes/marrissa".text = ''
           palette = 0=${c.black}
