@@ -8,7 +8,7 @@ in {
           font-family = Hurmit Nerd Font
           cursor-style = block
           cursor-style-blink = false
-          background-opacity = 0.90
+          background-opacity = 0.80
           command = fish
           initial-command = fish -C neofetch
           window-decoration = false
