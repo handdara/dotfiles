@@ -65,7 +65,7 @@ function manage
         set -gx MG_LAST_PROC_ID (ps -e | fzf | sed 's/\( \+\)\([0-9]*\)\( \+.*\)/\\2/' )
         kill -9 $MG_LAST_PROC_ID
     case 'xlock'
-        xlock
+        xlock -mode thornbird
     case 'sc0'
         brightnessctl set 0%
     case 'sc10'
