@@ -17,7 +17,8 @@ function manage
     'sc-50: set screen backlight to 50',\
     'sc-75: set screen backlight to 75',\
     'sc-100: set screen backlight to 100',\
-    'sc-laptop: set screens to work office setup',\
+    'sc-laptop: set screens to simple laptop setup',\
+    'sc-triple: set screens to triple office setup',\
     'sc-office: set screens to work office setup',\
     'lowpow: run commands for conserving battery power',\
     'tlp: start tlp in automatically selected mode',\
@@ -68,22 +69,26 @@ function manage
         kill -9 $MG_LAST_PROC_ID
     case 'xlock'
         xlock -mode thornbird
-    case 'sc0'
+    case 'sc-0'
         brightnessctl set 0%
-    case 'sc10'
+    case 'sc-10'
         brightnessctl set 10%
-    case 'sc25'
+    case 'sc-25'
         brightnessctl set 25%
-    case 'sc50'
+    case 'sc-50'
         brightnessctl set 50%
-    case 'sc75'
+    case 'sc-75'
         brightnessctl set 75%
-    case 'sc100'
+    case 'sc-100'
         brightnessctl set 100%
     case 'sc-laptop'
         xrandr --output eDP-1 --auto
         xrandr --output DVI-I-2-2 --off
         xrandr --output DVI-I-1-1 --off
+    case 'sc-triple'
+        xrandr --output eDP-1 --auto
+        xrandr --output DVI-I-2-2 --auto --left-of eDP-1
+        xrandr --output DVI-I-1-1 --auto --left-of DVI-I-2-2
     case 'sc-office'
         xrandr --output eDP-1 --off
         xrandr --output DVI-I-2-2 --auto --left-of eDP-1
