@@ -20,6 +20,7 @@ function manage
     'sc-laptop: set screens to simple laptop setup',\
     'sc-triple: set screens to triple office setup',\
     'sc-office: set screens to work office setup',\
+    'sc-tv: set screens to work office setup',\
     'lowpow: run commands for conserving battery power',\
     'tlp: start tlp in automatically selected mode',\
     'netmgr: start nmtui',\
@@ -93,6 +94,9 @@ function manage
         xrandr --output eDP-1 --off
         xrandr --output DVI-I-2-2 --auto --left-of eDP-1
         xrandr --output DVI-I-1-1 --auto --left-of DVI-I-2-2
+    case 'sc-tv'
+        xrandr --output eDP-1 --off
+        xrandr --output DP-1 --mode 3840x2160 --scale 0.35 --rate 60 --left-of eDP-1
     case 'lowpow'
         brightnessctl set 0%
         sudo tlp bat

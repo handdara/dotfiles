@@ -75,6 +75,15 @@
         extraGroups = ["networkmanager" "wheel"];
     };
 
+    virtualisation.vmVariant = {
+        # following configuration is added only when building VM with build-vm
+        virtualisation = {
+            memorySize = 8192;
+            cores = 3;
+        };
+        users.users.${inputs.user_opts.username}.initialHashedPassword = "$y$j9T$JUfzgCrkYKRoLrIAVtJQ6/$7dfStm8xv38CGZP.LSuA4GEVVJyCuR8H1TRPCPc3D64";
+    };
+
     # Install firefox for all users
     programs.firefox.enable = true;
 
