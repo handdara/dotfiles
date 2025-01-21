@@ -6,10 +6,10 @@
         nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
         home-manager.url = "github:nix-community/home-manager/release-24.11";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
-        # kmonad = {
-        #     url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
-        #     inputs.nixpkgs.follows = "nixpkgs";
-        # };
+        kmonad = {
+            url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = {
@@ -29,14 +29,13 @@
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
         pkgs = nixpkgs.legacyPackages.${system};
-        # pkgs = import nixpkgs { inherit system; overlays = [ overlay1 overlay2 ]; }
         pkgs_unstable = nixpkgs-unstable.legacyPackages.${system};
     in {
         nixosConfigurations = {
             sha76 = lib.nixosSystem {
                 modules = [
                     ./configuration.nix
-                    # inputs.kmonad.nixosModules.default
+                    inputs.kmonad.nixosModules.default
                 ];
                 specialArgs = {
                     inherit system user_opts;

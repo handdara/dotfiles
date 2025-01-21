@@ -40,18 +40,18 @@
   to0 (layer-toggle l0)
   to1 (layer-toggle l1)
   to2 (layer-toggle l2)
-  shn (tap-hold-next         200 (around ret (pause 35)) lsft)              ;; sh:shift         n:enter
-  she (tap-hold-next         200 (around esc (pause 35)) lsft)              ;; sh:shift         e:esc
-  so1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1)) ;; s:space    t:or  1:layer1
-  soa (tap-hold-next-release 150 (around spc (pause 35)) lalt)              ;; s:space    t:or  1:alt
-  foc (tap-hold-next-release 200 (around f   (pause 35)) lctl)              ;; f:f        o:or  c:control
-  joc (tap-hold-next-release 200 (around j   (pause 35)) lctl)              ;; j:j        o:or  c:control
-  gom (tap-hold-next-release 200 (around g   (pause 35)) lmet)              ;; g:g        o:or  m:meta/super
-  hom (tap-hold-next-release 200 (around h   (pause 35)) lmet)              ;; h:h        o:or  m:meta/super
-  doa (tap-hold-next-release 200 (around d   (pause 35)) lalt)              ;; d:d        o:or  a:alt
-  koa (tap-hold-next-release 200 (around k   (pause 35)) lalt)              ;; k:k        o:or  a:alt
-  gvc (tap-hold-next-release 200 (around grv (pause 35)) lctl)              ;; g:grave    v:or  c:control
-  coe (tap-hold-next-release 200 (around esc (pause 35)) lctl)              ;; c:control  o:or  e:escape
+  shn (tap-hold-next         200 (around ret (pause 35)) lsft)
+  so1 (tap-hold-next-release 150 (around spc (pause 35)) (layer-toggle l1))
+  bs2 (tap-hold-next-release 150 (around bspc (pause 35)) (layer-toggle l2))
+  fhm (tap-hold-next-release 200 (around f   (pause 35)) lsft)
+  dhm (tap-hold-next-release 200 (around d   (pause 35)) lctl)
+  shm (tap-hold-next-release 150 (around s   (pause 35)) lalt)
+  ahm (tap-hold-next-release 200 (around a   (pause 35)) lmet)
+  jhm (tap-hold-next-release 200 (around j   (pause 35)) rsft)
+  khm (tap-hold-next-release 200 (around k   (pause 35)) rctl)
+  lhm (tap-hold-next-release 200 (around k   (pause 35)) ralt)
+  chm (tap-hold-next-release 200 (around ;   (pause 35)) rmet)
+  coe (tap-hold-next-release 200 (around esc (pause 35)) lctl)
   at S-2
 )
 
@@ -66,27 +66,28 @@
 
 (deflayer l0
   esc       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  prnt del  
-  grv       1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab       q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @gvc      a    s    @doa @foc @gom @hom @joc @koa l    ;    '    @shn
-  @shn      z    x    c    v    b    n    m    ,    .    /    @she up
-  @coe _    lmet lalt           @so1           ralt rctl left down rght
+  XX        1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab       q    w    e    r    t    y    u    i    o    p    \    ]    \
+  esc       @ahm @shm @dhm @fhm g    h    @jhm @khm @lhm @chm '    bspc
+  grv       z    x    c    v    b    n    m    ,    .    /    -    up
+  @coe _    @shn @bs2           @so1           @shn rctl left down rght
 )
 
 (deflayer l1
   _         _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _         f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
-  _         !    @    #    $    %    ^    &    *    -    =    _    _    _
-  _         1    2    3    4    5    6    7    8    9    0    _    _ 
-  _         _    _    _    _    _    _    _    _    _    _    _    _
-  @to2 _    _    @soa           _              _    _    _    _    _
+  _         _    [    ]    ;    ,    _    rsft rctl ralt rmet _    _    _
+  !         {    S-9  S-0  }    ?    _    left up   down rght _    _    _
+  #         ^    =    $    $    *    del  bspc tab  spc  ret  _    _ 
+  ~         <    |    -    >    /    _    _    _    _    _    _    _
+  _    _    &    +              XX             _    _    _    _    _
 )
 
 (deflayer l2
   _         _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _         _    _    _    _    _    _    _    _    _    _    _    _    _
-  _         _    _    _    _    _    _    _    _    _    _    _    _    _
-  _         _    _    _    _    _    left down up   rght _    _    _ 
-  _         _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _              _              _    _    _    _    _
+  _         _    S-9  S-0  _    _    ~    /    *    =    _    _    _    _
+  _         \    del  _    bspc >    ^    7    8    9    -    _    _    _
+  _         _    _    _    _    <    $    4    5    6    +    _    _ 
+  _         !    ret  _    spc  .    %    1    2    3    S--  _    _
+  _    _    _    XX             0              .    #    :    _    _
 )
+
