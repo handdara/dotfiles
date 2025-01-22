@@ -311,6 +311,7 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
+
 -- {{{ Key bindings
 local globalkeys = gears.table.join(
     awful.key({ super, }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
@@ -400,7 +401,20 @@ local globalkeys = gears.table.join(
         end,
         { description = "lua execute prompt", group = "awesome" }),
     -- Menubar
-    awful.key({ super }, "p", function() menubar.show() end, { description = "show the menubar", group = "launcher" })
+    awful.key({ super }, "p", function() menubar.show() end, { description = "show the menubar", group = "launcher" }),
+
+    -- Dismiss the latest notification
+    -- awful.key({ super }, "d", function()
+    --     if #naughty.notifications > 0 then
+    --         local ntf = naughty.notifications[#naughty.notifications]
+    --         local x = naughty.getById(ntf.id)
+    --         naughty.destroy(x)
+    --     end
+    -- end, {description = "dismiss latest notification", group = "notifications"}),
+    -- Clear all notifications
+    awful.key({ super, "Shift" }, "d", function()
+        naughty.destroy_all_notifications()
+    end, {description = "clear all notifications", group = "notifications"})
 )
 
 local clientkeys = gears.table.join(

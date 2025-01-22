@@ -49,7 +49,7 @@
   ahm (tap-hold-next-release 200 (around a   (pause 35)) lmet)
   jhm (tap-hold-next-release 200 (around j   (pause 35)) rsft)
   khm (tap-hold-next-release 200 (around k   (pause 35)) rctl)
-  lhm (tap-hold-next-release 200 (around k   (pause 35)) ralt)
+  lhm (tap-hold-next-release 200 (around l   (pause 35)) ralt)
   chm (tap-hold-next-release 200 (around ;   (pause 35)) rmet)
   coe (tap-hold-next-release 200 (around esc (pause 35)) lctl)
   at S-2
