@@ -1,5 +1,5 @@
 {pkgs_unstable, ...}: let
-    c = import ./../../../util/color/marrissa-term.nix;
+    c = import ./../../../util/color;
 in {
     home.packages = [pkgs_unstable.ghostty];
     home.file = {
@@ -8,7 +8,7 @@ in {
           font-family = Hurmit Nerd Font
           cursor-style = block
           cursor-style-blink = false
-          background-opacity = 0.80
+          background-opacity = 0.90
           command = fish
           initial-command = fish -C neofetch
           window-decoration = false

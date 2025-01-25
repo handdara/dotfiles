@@ -5,7 +5,9 @@
     # c = import ./../../../util/color/kasugano.nix;
     # c = import ./../../../util/color/count-von-count.nix;
     # c = import ./../../../util/color/navy-and-ivory.nix;
-    c = import ./../../../util/color/marrissa-term.nix;
+    # c = import ./../../../util/color/marrissa-term.nix;
+    # c = import ./../../../util/color/sagekit.nix;
+    c = import ./../../../util/color;
 
     # marrissa-term overrides
     st_overrides =

@@ -48,7 +48,7 @@ end
 -- }}}
 
 -- {{{ Variable definitions
-local theme = "handdara" -- also available: default zenburn gtk sky
+local theme = "marrissa" -- also available: default zenburn gtk sky
 local theme_dir = os.getenv("HOME") .. '/.config/awesome/themes/'
 local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible'
 beautiful.init(theme_dir .. theme .. "/theme.lua")
