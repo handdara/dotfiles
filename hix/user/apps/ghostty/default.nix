@@ -1,5 +1,6 @@
 {pkgs_unstable, ...}: let
-    c = import ./../../../util/color;
+    theme = import ./../../../util/color;
+    c = theme.hexcodes;
 in {
     home.packages = [pkgs_unstable.ghostty];
     home.file = {

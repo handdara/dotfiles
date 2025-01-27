@@ -1,42 +1,31 @@
 {user_opts, ...}: let
-    # COLOR OPTIONS:
-    # c = import ./../../../util/color/tartan.nix;
-    # c = import ./../../../util/color/oxocarbon.nix;
-    # c = import ./../../../util/color/kasugano.nix;
-    # c = import ./../../../util/color/count-von-count.nix;
-    # c = import ./../../../util/color/navy-and-ivory.nix;
-    # c = import ./../../../util/color/marrissa-term.nix;
-    # c = import ./../../../util/color/sagekit.nix;
-    c = import ./../../../util/color;
+    theme = import ./../../../util/color;
+    c = theme.hexcodes;
 
-    # marrissa-term overrides
     st_overrides =
-        {
-            fg5 = "#75507B";
-        }
-        // (
-            if user_opts.term_invert
-            then rec {
-                # marrissa-term light mode overrides
-                fg1 = c.bright_black; # os
-                bg1 = c.bright_blue;
-                fg2 = c.bright_black; # directory
-                bg2 = c.bright_magenta;
-                fg3 = c.bright_black; # git
-                bg3 = c.bright_blue;
-                fg4 = c.bright_black; # lang/env
-                bg4 = c.bright_cyan;
-                bg5 = c.white;
-                bgchar = bg5;
+        if theme.name == "marrissa"
+        then
+            ({
+                fg5 = "#75507B";
             }
-            else {}
-        );
-
-    # # count von count overrides
-    # st.bg1 = c.white;
-    # st.fg3 = c.green;
-    # st.fg5 = c.red;
-    # st.bg5 = c.bright_black;
+            // (
+                if user_opts.term_invert
+                then rec {
+                    # marrissa light mode overrides
+                    fg1 = c.bright_black; # os
+                    bg1 = c.bright_blue;
+                    fg2 = c.bright_black; # directory
+                    bg2 = c.bright_magenta;
+                    fg3 = c.bright_black; # git
+                    bg3 = c.bright_blue;
+                    fg4 = c.bright_black; # lang/env
+                    bg4 = c.bright_cyan;
+                    bg5 = c.white;
+                    bgchar = bg5;
+                }
+                else {}
+            ))
+        else {};
 
     st = {
         fg1 = st_overrides.fg1 or c.black; # os

@@ -1,6 +1,8 @@
 {...}: let
     awm_dir = ../../../../snd/awesomewm;
-    c = import ./../../../util/color;
+    theme = import ./../../../util/color;
+    c = theme.hexcodes;
+    systemFont = "Hurmit Nerd Font";
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;
@@ -16,9 +18,10 @@ in {
 
           local theme = {}
 
-          theme.font          = "sans 12"
-          theme.hotkeys_font  = "monospace 12"
-          theme.hotkeys_description_font  = "monospace 12"
+          theme.system_font   = "${systemFont}"
+          theme.font          = theme.system_font .. " 14"
+          theme.hotkeys_font  = "Monoid Nerd Font 12"
+          theme.hotkeys_description_font  = theme.hotkeys_font
 
           theme.bg_normal     = "${c.bg}"
           theme.bg_focus      = "${c.bg}"

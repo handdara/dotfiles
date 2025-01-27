@@ -3,7 +3,8 @@
     user_opts,
     ...
 }: let
-    c = import ./../../../util/color/marrissa-term.nix;
+    theme = import ./../../../util/color;
+    c = theme.hexcodes;
 in {
     home.packages = [pkgs.wezterm];
     home.file = {
@@ -52,7 +53,7 @@ in {
               compose_cursor = '#1D918B',
           }
         '';
-        ".config/wezterm/colors/marrissa-term.toml".text = ''
+        ".config/wezterm/colors/marrissa.toml".text = ''
           [colors]
           background = '${
                 if user_opts.term_invert or false
@@ -130,7 +131,7 @@ in {
 
 
           [metadata]
-          name = 'marrissa-term'
+          name = 'marrissa'
           # origin_url = '''
         '';
     };

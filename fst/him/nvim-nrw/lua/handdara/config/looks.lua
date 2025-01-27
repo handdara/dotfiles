@@ -59,7 +59,7 @@ local function init_looks(colorscheme, is_light)
         end,
     })
     set_looks(colorscheme, is_light)
-    if colorscheme == 'marrissa' then
+    if colorscheme == 'marrissa-only' then
         vim.cmd [[highlight TelescopeMatching gui=bold guifg=#823f8f]]
     elseif colorscheme == 'eva01' or colorscheme == 'eva01-LCL' then
         vim.cmd [[highlight @markup.heading.1.markdown gui=bold,italic guibg=#b968fc guifg=#130114]]

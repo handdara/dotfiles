@@ -1,6 +1,6 @@
 hi clear
 syntax reset
-let g:colors_name = "marrissa"
+let g:colors_name = "marrissa-only"
 set background=dark
 set t_Co=256
 hi Normal guifg=#dadada ctermbg=NONE guibg=#020003 gui=NONE

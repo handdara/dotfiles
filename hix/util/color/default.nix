@@ -1,4 +1,4 @@
 let
-    default_theme = import ./sagekit.nix;
+    theme = import ./marrissa.nix;
 in
-    default_theme
+    theme

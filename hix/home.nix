@@ -28,6 +28,7 @@
         ./user/apps/write
         ./user/apps/zathura
         ./user/apps/zoxide
+        ./user/misc/theme
         ./user/shells/bash
         ./user/shells/fish
     ];

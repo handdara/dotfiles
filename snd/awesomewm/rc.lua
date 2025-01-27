@@ -81,7 +81,7 @@ local super = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
@@ -94,7 +94,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
-    awful.layout.suit.floating,
+    -- awful.layout.suit.floating,
 }
 -- }}}
 
@@ -110,15 +110,15 @@ local menu_awesome = {
 
 local start_menu = awful.menu({
     items = {
-        { "awesome",            menu_awesome,   beautiful.awesome_icon },
-        { "open terminal",      terminal },
-        { "contact the Ekumen", ansible_cmd },
-        { "open web browser",   browser_cmd },
-        { "open email",         email_cmd },
-        { "open calendar",      calendar_cmd },
-        { "manage network",     netmgr_cmd },
-        { "open bluetooth",     bluemgr_cmd },
-        { "run manage script",  fish_manage_cmd },
+        { "Awesome",            menu_awesome,   beautiful.awesome_icon },
+        { "Open Terminal",      terminal },
+        { "Contact Ekumen", ansible_cmd },
+        { "Web Browser",   browser_cmd },
+        { "Email",         email_cmd },
+        { "Calendar",      calendar_cmd },
+        { "WiFi",     netmgr_cmd },
+        { "Bluetooth",     bluemgr_cmd },
+        { "Manage System",  fish_manage_cmd },
     }
 })
 
@@ -224,7 +224,7 @@ local tasklist_buttons = gears.table.join(
         end
     end),
     awful.button({}, 3, function()
-        awful.menu.client_list({ theme = { width = 250 } })
+        awful.menu.client_list({ theme = { width = 500 } })
     end),
     awful.button({}, 4, function()
         awful.client.focus.byidx(1)
