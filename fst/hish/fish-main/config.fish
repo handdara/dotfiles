@@ -106,7 +106,8 @@ abbr --add pts "nix-shell -p porsmo --run \"porsmo stopwatch\""
 abbr --add vi nvim
 
 # command I wrote for managing my fish stuff, can reload my config as well
-abbr --add mg manage
+abbr --add mg ~/.local/scripts/mg
+abbr --add mgf manage
 
 abbr --add --set-cursor=! m "math '(!)'"
 

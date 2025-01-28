@@ -69,6 +69,8 @@ local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
 local fish_manage = "fish -c manage"
 local fish_manage_cmd = terminal_cmd .. fish_manage
+local sys_manage = "sh ~/.local/scripts/mg"
+local sys_manage_cmd = terminal_cmd .. sys_manage
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -118,7 +120,7 @@ local start_menu = awful.menu({
         { "Calendar",      calendar_cmd },
         { "WiFi",     netmgr_cmd },
         { "Bluetooth",     bluemgr_cmd },
-        { "Manage System",  fish_manage_cmd },
+        { "Manage System",  sys_manage_cmd },
     }
 })
 
