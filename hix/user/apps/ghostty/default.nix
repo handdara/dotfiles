@@ -11,7 +11,6 @@ in {
           cursor-style-blink = false
           background-opacity = 0.90
           command = fish
-          initial-command = fish -C neofetch
           window-decoration = false
           window-theme = dark
           confirm-close-surface = false

@@ -67,10 +67,8 @@ local calendar = "calcurse"
 local calendar_cmd = terminal_cmd .. calendar
 local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
-local fish_manage = "fish -c manage"
-local fish_manage_cmd = terminal_cmd .. fish_manage
-local sys_manage = "sh ~/.local/scripts/mg"
-local sys_manage_cmd = terminal_cmd .. sys_manage
+local sys_manage = os.getenv("HOME") .. "/.local/scripts/mg"
+local sys_manage_cmd = terminal_cmd .. [["sleep 0.156; ]] .. sys_manage .. [["]]
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -82,17 +80,15 @@ local super = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.spiral,
+    awful.layout.suit.max,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -356,7 +352,7 @@ local globalkeys = gears.table.join(
     -- Standard program
     awful.key({ super, }, "Return", function() awful.spawn(terminal) end,
         { description = "open a terminal", group = "launcher" }),
-    awful.key({ super, }, ".", function() awful.spawn(fish_manage_cmd) end,
+    awful.key({ super, }, ".", function() awful.spawn(sys_manage_cmd) end,
         { description = "run manage script", group = "launcher" }),
     awful.key({ super, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
     awful.key({ super, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
