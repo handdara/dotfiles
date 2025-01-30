@@ -40,6 +40,10 @@ return {
                 action = "<CMD>ObsidianToggleCheckbox<CR>",
                 opts = { buffer = true },
             },
+            ["<leader>nn"] = {
+                action = "<CMD>ObsidianNew<CR>",
+                opts = { buffer = true },
+            },
             ["<leader>nt"] = {
                 action = "<CMD>ObsidianTags<CR>",
                 opts = { buffer = true },
@@ -66,6 +70,28 @@ return {
         --  * "current_dir" - put new notes in same directory as the current buffer.
         --  * "notes_subdir" - put new notes in the default notes subdirectory.
         new_notes_location = "notes_subdir",
+
+        -- Optional, customize how note IDs are generated given an optional title.
+        ---@param title string|?
+        ---@return string
+        note_id_func = function(title)
+            -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
+            -- In this case a note with the title 'My new note' will be given an ID that looks
+            -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
+            local id = ""
+            if title ~= nil then
+                -- If title is given, transform it into valid file name.
+                id = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+            else
+                -- If title is nil, just add 4 random uppercase letters to the suffix.
+                id = tostring(os.time()) .. "-" .. id
+                for _ = 1, 4 do
+                    id = id .. string.char(math.random(65, 90))
+                end
+            end
+            -- return tostring(os.time()) .. "-" .. id
+            return id
+        end,
         -- customize how note file names are generated given the ID, target directory, and title
         ---@param spec { id: string, dir: obsidian.Path, title: string|? }
         ---@return string|obsidian.Path The full path to the new note.

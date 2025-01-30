@@ -34,10 +34,10 @@ vim.cmd('colorscheme ' .. inital_colorscheme)
 require 'handdara'.setup {
   -- colorscheme = "rose-pine-moon",
   -- colorscheme = { name = "rose-pine-dawn", is_light = true },
-  colorscheme = "darkrose",
+  -- colorscheme = "darkrose",
   -- colorscheme = "lunaperche",
   -- colorscheme = "archery",
-  -- colorscheme = "eva01",
+  colorscheme = "eva01",
   -- colorscheme = "eva01-LCL",
   -- colorscheme = "marrissa-only",
 }
