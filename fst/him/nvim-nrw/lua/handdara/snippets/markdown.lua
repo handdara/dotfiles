@@ -19,7 +19,8 @@ local function use(snip)
     table.insert(S, snip)
 end
 
-local filetypes = { 'just', 'lua', 'markdown', 'matlab', 'nix', 'tex', 'zig', 'rust', 'python', 'fish', 'bash', 'haskell' }
+local filetypes = { 'yaml', 'just', 'lua', 'markdown', 'matlab', 'nix', 'tex', 'zig', 'rust', 'python', 'fish', 'bash',
+    'haskell' }
 
 local sdateheader = s('dateheader', {
     f(function()
@@ -28,10 +29,13 @@ local sdateheader = s('dateheader', {
     end),
     -- t(""),
 })
+use(sdateheader)
 
 local bDaily = [[
 ---
-curr_mo_link: {1}
+aliases: []
+tags: []
+curr_mo_link: "{1}"
 ---
 # {2}
 
@@ -195,7 +199,7 @@ local sunSched = [[
 | 2100 | ⬜ Rest Day          |
 | 2200 | 🟦 wind-down         |
 | 2300 | ⬛️ sleep             |]]
-local daySchedules = {sunSched, monSched, tueSched, wedSched, thuSched, friSched, satSched}
+local daySchedules = { sunSched, monSched, tueSched, wedSched, thuSched, friSched, satSched }
 local sdaily = s('daily', d(1, function()
     local ts = u.timestamp()
     return sn(nil, fmt(bDaily, {
@@ -209,38 +213,120 @@ local sdaily = s('daily', d(1, function()
         i(5, '...'),
     }))
 end))
+use(sdaily)
+
+local function mkCStacheContexts(idx)
+    return c(idx, {
+            t 'stache/context/laptop',
+            t 'stache/context/ccrf',
+            t 'stache/context/home',
+            t 'stache/context/paper',
+    })
+end
+use(s('context', {mkCStacheContexts(1)}))
+
+local function mkCStatuses(idx)
+    return c(idx, {
+        t 'status/open',
+        t 'status/closed',
+        t 'status/in-progress',
+        t 'status/archived',
+        t 'status/blocked',
+        t 'status/delayed',
+    })
+end
+use(s('status', {mkCStatuses(1)}))
 
 local btask = [[
 ---
-tag: {1}/quest{2}
-desc: {3}
-repo: handdara/{4}
-branch: {5}
+id: {1}-{2}
+aliases: []
+tags:
+  - {4}-{5}/def
+  - {9}
+  - {10}
+created: {7}
+description: {3}
+due: ~
+edited: {8}
+location: ~
+notes: []
+priority: 1
+repos:
+  - ring-bearer:
+      branches: dev-frodo
+      org: fellowship-of-the-ring
+subtasks: []
+type: task
 ---
-# {6}/quest{7}
+# {6}
 
 ]]
-local stask = s('task', fmt(btask, {
-    i(1, 'project'),
-    i(2, '#'),
-    i(3, 'description'),
-    i(4, 'repository'),
-    i(5, '~'),
-    rep(1),
-    rep(2),
-}))
+local snTask = sn(1, d(1, function()
+    local ts = u.timestamp()
+    local dateTxt = ts.dy .. ts.mo .. ts.yr
+    local timeTxt = ts.hr .. ':' .. ts.mi
+    local dtText = dateTxt .. ' ' .. timeTxt
+    return sn(nil, fmt(btask, {
+        i(1, 'project'),
+        i(2, '#'),
+        i(3, 'destroy the one ring'),
+        rep(1),
+        rep(2),
+        rep(3),
+        t(dtText),
+        t(dateTxt),
+        mkCStatuses(4),
+        mkCStacheContexts(5),
+    }))
+end))
+
+local bContact = [[
+---
+id: {1}
+aliases: []
+tags: []
+created: {2}
+description: {3}
+edited: {4}
+notes: []
+type:  contact
+---
+# {5}
+]]
+local snContact = sn(1, d(1, function()
+    local ts = u.timestamp()
+    local dateTxt = ts.dy .. ts.mo .. ts.yr
+    local timeTxt = ts.hr .. ':' .. ts.mi
+    local dtText = dateTxt .. ' ' .. timeTxt
+    return sn(nil, fmt(bContact, {
+        i(1, 'frodo-baggins'),
+        t(dtText),
+        t(dateTxt),
+        i(2, 'Frodo Baggins'),
+        rep(2),
+    }))
+end))
+
+use(s('stache', { c(1, {
+    snTask,
+    snContact,
+})}))
+
+local stacheTypes = {
+    'stache/type/task',
+    'stache/type/data',
+    'stache/type/contact',
+    'stache/type/inventory',
+}
 
 local function mkCodeBlockSnip(ft)
-    return s(ft, { t{'```'..ft,''}, i(1), t{'','```'} })
+    return s(ft, { t { '```' .. ft, '' }, i(1), t { '', '```' } })
 end
 for _, ft in ipairs(filetypes) do
     use(mkCodeBlockSnip(ft))
 end
-use(s('codeblock', { t{'```',''}, i(1), t{'','```'} }))
-
-use(sdateheader)
-use(sdaily)
-use(stask)
+use(s('codeblock', { t { '```', '' }, i(1), t { '', '```' } }))
 
 ls.add_snippets("markdown", S)
 ls.add_snippets("telekasten", S)

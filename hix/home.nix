@@ -25,6 +25,7 @@
         ./user/apps/vivaldi
         ./user/apps/watchexec
         ./user/apps/wezterm
+        ./user/apps/wiki-tui
         ./user/apps/write
         ./user/apps/zathura
         ./user/apps/zoxide

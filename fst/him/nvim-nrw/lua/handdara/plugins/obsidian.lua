@@ -80,7 +80,7 @@ return {
         end,
 
         preferred_link_style = "wiki", -- Either 'wiki' or 'markdown'.
-        disable_frontmatter = true,
+        disable_frontmatter = false,
         -- templates = { -- Optional, for templates (see below).
         --     folder = "templates",
         --     date_format = "%Y-%m-%d",
@@ -90,10 +90,10 @@ return {
         -- },
         picker = {
             name = "telescope.nvim", -- Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
-            -- mappings = {
-            --     new = "<C-x>", -- Create a new note from your query.
-            --     insert_link = "<C-l>", -- Insert a link to the selected note.
-            -- },
+            mappings = {
+                new = "<C-x>", -- Create a new note from your query.
+                insert_link = "<C-l>", -- Insert a link to the selected note.
+            },
         },
         -- Optional, sort search results by "path", "modified", "accessed", or "created".
         -- The recommend value is "modified" and `true` for `sort_reversed`, which means, for example,
