@@ -1,5 +1,5 @@
 ---@diagnostic disable: unused-local
-local ansible_path = vim.fn.expand("~/MEGA/ansible")
+local ansible_path = require('handdara.util.dirs').ansible
 
 return {
     "epwalsh/obsidian.nvim",

@@ -1,3 +1,4 @@
+local dailies = require('handdara.util.dirs').dailies
 return {
     'kmonad/kmonad-vim',
     {
@@ -15,7 +16,7 @@ return {
     {
         'handdara/calendar-vim',
         config = function ()
-            vim.cmd [[let g:calendar_diary=$HOME.'/MEGA/ansible/0-quest-board/dailies']]
+            vim.cmd ([[let g:calendar_diary=]] .. dailies)
             vim.cmd [[let g:calendar_weeknm = 1]]
             vim.cmd [[let g:calendar_monday = 1]]
         end
