@@ -13,6 +13,7 @@ local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local u = require 'handdara.util'
+local stache = require('handdara.util.stache')
 
 local S = {}
 local function use(snip)
@@ -215,28 +216,6 @@ local sdaily = s('daily', d(1, function()
 end))
 use(sdaily)
 
-local function mkCStacheContexts(idx)
-    return c(idx, {
-            t 'stache/context/laptop',
-            t 'stache/context/ccrf',
-            t 'stache/context/home',
-            t 'stache/context/paper',
-    })
-end
-use(s('context', {mkCStacheContexts(1)}))
-
-local function mkCStatuses(idx)
-    return c(idx, {
-        t 'status/open',
-        t 'status/closed',
-        t 'status/in-progress',
-        t 'status/archived',
-        t 'status/blocked',
-        t 'status/delayed',
-    })
-end
-use(s('status', {mkCStatuses(1)}))
-
 local btask = [[
 ---
 id: {1}-{2}
@@ -253,9 +232,7 @@ location: ~
 notes: []
 priority: 1
 repos:
-  - ring-bearer:
-      branches: dev-frodo
-      org: fellowship-of-the-ring
+{11}
 subtasks: []
 type: task
 ---
@@ -278,6 +255,9 @@ local snTask = sn(1, d(1, function()
         t(dateTxt),
         mkCStatuses(4),
         mkCStacheContexts(5),
+        t({ "  - ring-bearer:",
+            "      branches: dev-frodo",
+            "      org: fellowship-of-the-ring"}),
     }))
 end))
 
@@ -313,18 +293,11 @@ use(s('stache', { c(1, {
     snContact,
 })}))
 
-local stacheTypes = {
-    'stache/type/task',
-    'stache/type/data',
-    'stache/type/contact',
-    'stache/type/inventory',
-}
-
-local function mkCodeBlockSnip(ft)
-    return s(ft, { t { '```' .. ft, '' }, i(1), t { '', '```' } })
-end
-for _, ft in ipairs(filetypes) do
-    use(mkCodeBlockSnip(ft))
+for _, val in ipairs(filetypes) do
+    local function mkCodeBlockSnip(ft)
+        return s(ft, { t { '```' .. ft, '' }, i(1), t { '', '```' } })
+    end
+    use(mkCodeBlockSnip(val))
 end
 use(s('codeblock', { t { '```', '' }, i(1), t { '', '```' } }))
 

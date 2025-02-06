@@ -38,9 +38,11 @@ get-lazylock:
 place-lazylock:
     just {{dotfiles_dir}}/fst/him/ place-lazylock
 
-# "dev mode", i.e. replace the nix home manager controlled cfgs with a symlink for fast dev
-dev:
+dev-nvim:
     just {{dotfiles_dir}}/fst/him/ replace-nix
+
+# "dev mode", i.e. replace the nix home manager controlled cfgs with a symlink for fast dev
+dev: dev-nvim
     just {{dotfiles_dir}}/fst/hez/ replace-nix
     just {{dotfiles_dir}}/snd/awesomewm/ replace-nix
 

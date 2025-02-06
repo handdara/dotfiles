@@ -16,7 +16,7 @@ return {
     {
         'handdara/calendar-vim',
         config = function ()
-            vim.cmd ([[let g:calendar_diary=]] .. d)
+            vim.cmd ([[let g:calendar_diary=']] .. d ..[[']])
             vim.cmd [[let g:calendar_weeknm = 1]]
             vim.cmd [[let g:calendar_monday = 1]]
         end

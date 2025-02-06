@@ -23,6 +23,7 @@ function M.timestamp()
         wd_num = ts.wday,
         hr = M.dtnum2str(ts.hour),
         mi = M.dtnum2str(ts.min),
+        sc = M.dtnum2str(ts.sec),
     }
 end
 
