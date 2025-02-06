@@ -248,7 +248,10 @@ local function mkSnTask(idx)
                 }),
                 i(9, '[]'),  -- aliases
                 i(10, '[]'), -- repos
-                i(11, '[]'), -- notes
+                c(11, {     -- notes
+                    sn(nil, { t '[', i(1), t ']' }),
+                    { t { '', '  - ' }, i(1, "note...") },
+                }),
             }))
         end, { 1 }) })
 end

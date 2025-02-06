@@ -216,82 +216,9 @@ local sdaily = s('daily', d(1, function()
 end))
 use(sdaily)
 
-local btask = [[
----
-id: {1}-{2}
-aliases: []
-tags:
-  - {4}-{5}/def
-  - {9}
-  - {10}
-created: {7}
-description: {3}
-due: ~
-edited: {8}
-location: ~
-notes: []
-priority: 1
-repos:
-{11}
-subtasks: []
-type: task
----
-# {6}
+local bweekly = [[
 
 ]]
-local snTask = sn(1, d(1, function()
-    local ts = u.timestamp()
-    local dateTxt = ts.dy .. ts.mo .. ts.yr
-    local timeTxt = ts.hr .. ':' .. ts.mi
-    local dtText = dateTxt .. ' ' .. timeTxt
-    return sn(nil, fmt(btask, {
-        i(1, 'project'),
-        i(2, '#'),
-        i(3, 'destroy the one ring'),
-        rep(1),
-        rep(2),
-        rep(3),
-        t(dtText),
-        t(dateTxt),
-        mkCStatuses(4),
-        mkCStacheContexts(5),
-        t({ "  - ring-bearer:",
-            "      branches: dev-frodo",
-            "      org: fellowship-of-the-ring"}),
-    }))
-end))
-
-local bContact = [[
----
-id: {1}
-aliases: []
-tags: []
-created: {2}
-description: {3}
-edited: {4}
-notes: []
-type:  contact
----
-# {5}
-]]
-local snContact = sn(1, d(1, function()
-    local ts = u.timestamp()
-    local dateTxt = ts.dy .. ts.mo .. ts.yr
-    local timeTxt = ts.hr .. ':' .. ts.mi
-    local dtText = dateTxt .. ' ' .. timeTxt
-    return sn(nil, fmt(bContact, {
-        i(1, 'frodo-baggins'),
-        t(dtText),
-        t(dateTxt),
-        i(2, 'Frodo Baggins'),
-        rep(2),
-    }))
-end))
-
-use(s('stache', { c(1, {
-    snTask,
-    snContact,
-})}))
 
 for _, val in ipairs(filetypes) do
     local function mkCodeBlockSnip(ft)

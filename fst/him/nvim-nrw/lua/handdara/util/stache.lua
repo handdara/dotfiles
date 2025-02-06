@@ -4,11 +4,11 @@ M.areas = {
     'seal',
     'thesis-ms',
     'community',
-    'passion',
+    'learning',
     'hobbies',
+    'fitness',
     'community',
     'life',
-    'marrissa',
 }
 
 M.categories = {
@@ -36,7 +36,8 @@ M.contexts = {
     'laptop',
     'ccrf',
     'home',
-    'paper',
+    'notebook',
+    'cell',
 }
 
 M.types = {

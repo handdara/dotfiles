@@ -4,7 +4,7 @@
         ./user/apps/alacritty
         ./user/apps/bat
         ./user/apps/btop
-        ./user/apps/calcurse
+        ./user/apps/cal
         ./user/apps/eza
         ./user/apps/fim
         ./user/apps/fzf
