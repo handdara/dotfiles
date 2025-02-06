@@ -20,6 +20,21 @@ local maps = {
         action = ":ObsidianToday<CR>",
         opts = {},
     },
+    ["<leader>nA"] = {
+        modes = 'n',
+        action = ":ObsidianTomorrow<CR>",
+        opts = {},
+    },
+    ["<leader>nz"] = {
+        modes = 'n',
+        action = ":ObsidianYesterday<CR>",
+        opts = {},
+    },
+    ["<leader>gnf"] = {
+        modes = 'n',
+        action = ":ObsidianFollowLink<CR>",
+        opts = {},
+    },
     ["<leader>nf"] = {
         modes = 'n',
         action = ":ObsidianQuickSwitch<CR>",

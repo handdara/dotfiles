@@ -53,10 +53,10 @@ M.statuses = {
     'blocked', -- "waiting"
     'scheduled',
     'in-progress',
-    'closed',
     'backburner',
     'archived',
     'delayed',
+    'closed',
 }
 
 M.tags = {
