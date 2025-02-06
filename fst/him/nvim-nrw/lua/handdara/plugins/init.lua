@@ -1,4 +1,4 @@
-local d = require('handdara.util.dirs').dailies
+local d = require('handdara.util.dirs').dailies.abs
 return {
     'kmonad/kmonad-vim',
     {

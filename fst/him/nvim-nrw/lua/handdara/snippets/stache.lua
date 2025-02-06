@@ -54,23 +54,21 @@ local blocks = {
         notes: {9}
     ]],
     task = [[
-        stache: task
-        id: {1}
-        status: {8}
-        priority: {9}
-        context: {7}
-        due: {6}
-        location: {10}
-        alphabet: {11}
-        subtasks: {12}
+        status: {7}
+        priority: {8}
+        context: {6}
+        due: {5}
+        location: {9}
+        alphabet: {10}
+        subtasks: {11}
         tags:
-          - {2}/def
-        description: {3}
-        created: {4}
-        edited: {5}
-        aliases: {13}
-        repos: {14}
-        notes: {15}
+          - {1}/def
+        description: {2}
+        created: {3}
+        edited: {4}
+        aliases: {12}
+        repos: {13}
+        notes: {14}
     ]],
     inventory = [[
         stache: inventory
@@ -133,7 +131,7 @@ end
 use(s('context', { mkCStacheContexts(1) }))
 
 local function mkCLocations(idx)
-    local locs = {'iid-au1', 'iid-hm1'}
+    local locs = { 'hm-395', 'hm-369', 'hm-3802', 'au-1', 'of-176', }
     local lcs = {}
     for _, val in ipairs(locs) do
         table.insert(lcs, t(val))
@@ -209,30 +207,50 @@ end
 use(s('units', { mkCUnits(1) }))
 use(s('all-units', { mkCUnits(1, unitCats) }))
 
+local function mkSnSubtask(idx, parentTaskID, indent)
+    indent = indent or ''
+    parentTaskID = parentTaskID or ''
+    return sn(idx, {
+        t(indent .. '- description: '), i(1),
+        t { '', indent .. '  status: ' }, mkCStatuses(2),
+        t { '', indent .. '  id: ' }, c(3, {
+        t '~',
+        { t(parentTaskID .. '-'), i(1, '1') },
+    })
+    })
+end
+use(s('subtask', mkSnSubtask(1)))
+
 local function mkSnTask(idx)
-    return sn(idx, d(1, function()
-        local ts = u.timestamp()
-        local dateTxt = ts.dy .. ts.mo .. ts.yr
-        local timeTxt = ts.hr .. ':' .. ts.mi
-        local dtText = dateTxt .. ' ' .. timeTxt
-        return sn(nil, fmt(blocks.task, {
-            mkCStacheAreas(1),
-            rep(1),
-            i(2, 'destroy the one ring'),
-            t(dtText),
-            t(dtText),
-            i(3, '~'),
-            mkCStacheContexts(4),
-            mkCStatuses(5),
-            mkCPriorities(6),
-            i(7, 'mount doom'),
-            i(8, '~'),
-            i(9, '[]'),  -- subtasks
-            i(10, '[]'), -- aliases
-            i(11, '[]'), -- repos
-            i(12, '[]'), -- notes
-        }))
-    end))
+    return sn(idx, {
+        t { 'stache: task', 'id: ' },
+        mkCStacheAreas(1),
+        t { '', '' },
+        d(2, function(args)
+            local ts = u.timestamp()
+            local dateTxt = ts.dy .. ts.mo .. ts.yr
+            local timeTxt = ts.hr .. ':' .. ts.mi
+            local dtText = dateTxt .. ' ' .. timeTxt
+            return sn(1, fmt(blocks.task, {
+                t(args[1][1]),
+                i(8, 'Destroy the one ring'),
+                t(dtText),
+                t(dtText),
+                i(4, '~'), -- due
+                mkCStacheContexts(3),
+                mkCStatuses(1),
+                mkCPriorities(2),
+                mkCLocations(5),
+                i(6, '~'), -- alphabet
+                c(7, { -- subtasks
+                    sn(nil, { t '[', i(1), t ']' }),
+                    sn(nil, { i(1), t { '', '' }, mkSnSubtask(2, args[1][1], '    ') }),
+                }),
+                i(9, '[]'),  -- aliases
+                i(10, '[]'), -- repos
+                i(11, '[]'), -- notes
+            }))
+        end, { 1 }) })
 end
 use(s('task', mkSnTask(1)))
 
@@ -332,7 +350,7 @@ use(s('dataseries', mkSnDataSeries(1)))
 
 local function mkSnData(idx)
     return sn(idx, {
-        sn(1, { t { 'type: data', 'id: ' }, mkCStacheAreas(1), t { '', '' } }),
+        sn(1, { t { 'stache: data', 'id: ' }, mkCStacheAreas(1), t { '', '' } }),
         d(2, function()
             local ts = u.timestamp()
             local dtText = ts.dy .. ts.mo .. ts.yr .. ' ' .. ts.hr .. ':' .. ts.mi
@@ -374,21 +392,21 @@ local function mkSnInv(idx)
             return sn(nil, fmt(blocks.inventory, {
                 i(1, nextInvID()),
                 rep(1),
-                i(2,'name'),
-                i(7,'~'), -- mf
-                i(8,'~'), -- mfn
-                i(9,'~'), -- serial-number
-                mkCLocations(3), -- location
-                i(10,'~'), -- condition
-                i(12,'false'), -- warranty
-                i(4,'~'), -- quantity
-                i(13,'~'), -- current-value
-                i(11,'~'), -- purchase
+                i(2, 'name'),
+                i(7, '~'),        -- mf
+                i(8, '~'),        -- mfn
+                i(9, '~'),        -- serial-number
+                mkCLocations(3),  -- location
+                i(10, '~'),       -- condition
+                i(12, 'false'),   -- warranty
+                i(4, '~'),        -- quantity
+                i(13, '~'),       -- current-value
+                i(11, '~'),       -- purchase
                 mkCCategories(5), -- category
-                i(6,'~'), -- description
+                i(6, '~'),        -- description
                 t(dtText),
-                i(14,'[]'), -- aliases
-                c(15, {               -- notes
+                i(14, '[]'),      -- aliases
+                c(15, {           -- notes
                     { t '[',            i(1),           t ']' },
                     { t { '', '  - ' }, i(1, "note...") },
                 }),
@@ -401,6 +419,7 @@ use(s('stache', c(1, {
     { i(1), mkSnTask(2) },
     { i(1), mkSnContact(2) },
     { i(1), mkSnData(2) },
+    { i(1), mkSnInv(2) },
 })))
 
 ls.add_snippets("yaml", S)

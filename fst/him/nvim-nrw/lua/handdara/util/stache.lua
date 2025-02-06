@@ -52,6 +52,7 @@ M.statuses = {
     'to-discuss',
     'blocked', -- "waiting"
     'scheduled',
+    'in-progress',
     'closed',
     'backburner',
     'archived',

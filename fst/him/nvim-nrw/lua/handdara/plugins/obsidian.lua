@@ -1,5 +1,5 @@
 ---@diagnostic disable: unused-local
-local ansible_path = require('handdara.util.dirs').ansible
+local hdirs = require('handdara.util.dirs')
 
 return {
     "epwalsh/obsidian.nvim",
@@ -18,16 +18,16 @@ return {
     },
     opts = {
         workspaces = {
-            { name = "ansible", path = ansible_path },
+            { name = "ansible", path = hdirs.ansible },
         },
         daily_notes = {
-            folder = '0-quest-board/dailies'
+            folder = hdirs.dailies.rel
         },
         completion = {
             -- Set to false to disable completion.
             nvim_cmp = true,
         },
-        notes_subdir = "0-quest-board/inbox",
+        notes_subdir = hdirs.inbox.rel,
         mappings = { -- Optional, configure key mappings. These are the defaults. 
             -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
             ["gf"] = {
