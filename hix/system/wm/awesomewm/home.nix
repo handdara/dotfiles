@@ -37,8 +37,8 @@ in {
           theme.useless_gap   = dpi(4)
           theme.border_width  = dpi(3)
           theme.border_normal = "${c.black}"
-          theme.border_focus  = "${c.cyan}"
-          theme.border_marked = "${c.green}"
+          theme.border_focus  = "${c.green}"
+          theme.border_marked = "${c.cyan}"
 
           -- There are other variable sets
           -- overriding the default one when
@@ -78,7 +78,7 @@ in {
           -- menu_[border_color|border_width]
           theme.menu_submenu_icon = themes_path.."default/submenu.png"
           theme.menu_height = dpi(25)
-          theme.menu_width  = dpi(200)
+          theme.menu_width  = dpi(250)
 
           -- You can add as many variables as
           -- you wish and access them by using

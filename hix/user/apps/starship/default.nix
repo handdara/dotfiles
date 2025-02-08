@@ -25,6 +25,23 @@
                 }
                 else {}
             ))
+        else if theme.name == "sagekit"
+        then
+            ({
+            }
+            // (
+                if user_opts.term_invert
+                then {}
+                else {
+                    # sagekit light mode overrides
+                    fg1 = c.white;
+                    fg2 = c.bright_black;
+                    bg3 = c.bright_green;
+                    fg3 = c.blue;
+                    bg4 = c.green;
+                    bgchar = c.blue;
+                }
+            ))
         else {};
 
     st = {
