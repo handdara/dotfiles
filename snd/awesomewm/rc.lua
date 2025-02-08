@@ -63,7 +63,7 @@ local ansible = "nvim quicklinks.md"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
 local email = "mbsync -a && neomutt"
 local email_cmd = terminal_cmd .. email
-local calendar = "calcurse"
+local calendar = "ikhal"
 local calendar_cmd = terminal_cmd .. calendar
 local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
