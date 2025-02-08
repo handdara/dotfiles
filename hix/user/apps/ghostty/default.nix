@@ -9,7 +9,7 @@ in {
           font-family = Hurmit Nerd Font
           cursor-style = block
           cursor-style-blink = false
-          background-opacity = 0.90
+          background-opacity = 0.70
           command = fish
           window-decoration = false
           window-theme = dark
