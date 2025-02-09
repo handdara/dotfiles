@@ -426,3 +426,4 @@ use(s('stache', c(1, {
 })))
 
 ls.add_snippets("yaml", S)
+ls.add_snippets("markdown", S)

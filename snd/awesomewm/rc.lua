@@ -50,7 +50,8 @@ end
 -- {{{ Variable definitions
 local theme = "marrissa" -- also available: default zenburn gtk sky
 local theme_dir = os.getenv("HOME") .. '/.config/awesome/themes/'
-local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible'
+local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible/'
+local scripts_dir = os.getenv("HOME") .. '/.local/scripts/'
 beautiful.init(theme_dir .. theme .. "/theme.lua")
 
 local browser_cmd = "vivaldi"
@@ -67,8 +68,10 @@ local calendar = "ikhal"
 local calendar_cmd = terminal_cmd .. calendar
 local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
-local sys_manage = os.getenv("HOME") .. "/.local/scripts/mg"
+local sys_manage = scripts_dir .. "mg"
 local sys_manage_cmd = terminal_cmd .. [["sleep 0.156; ]] .. sys_manage .. [["]]
+local music = "hmu"
+local music_cmd = terminal_cmd .. music
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -108,14 +111,15 @@ local menu_awesome = {
 
 local start_menu = awful.menu({
     items = {
-        { "Awesome",            menu_awesome,   beautiful.awesome_icon },
-        { "Open Terminal",      terminal },
+        { "Awesome",        menu_awesome,  beautiful.awesome_icon },
+        -- { "Open Terminal",  terminal },
         { "Contact Ekumen", ansible_cmd },
-        { "Web Browser",   browser_cmd },
-        { "Email",         email_cmd },
-        { "Calendar",      calendar_cmd },
-        { "WiFi",     netmgr_cmd },
-        { "Bluetooth",     bluemgr_cmd },
+        { "Web Browser",    browser_cmd },
+        { "Email",          email_cmd },
+        { "Calendar",       calendar_cmd },
+        { "Music",          music_cmd },
+        -- { "WiFi",           netmgr_cmd },
+        -- { "Bluetooth",      bluemgr_cmd },
         { "Manage System",  sys_manage_cmd },
     }
 })
@@ -412,7 +416,7 @@ local globalkeys = gears.table.join(
     -- Clear all notifications
     awful.key({ super, "Shift" }, "d", function()
         naughty.destroy_all_notifications()
-    end, {description = "clear all notifications", group = "notifications"})
+    end, { description = "clear all notifications", group = "notifications" })
 )
 
 local clientkeys = gears.table.join(
