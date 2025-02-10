@@ -248,7 +248,7 @@ function M.print_result(fs)
 end
 
 local function grab_field(field, file)
-    local res = M.ask { { type = 'yq', data = { '.["' .. field .. '"]', file }, op = 'transform' } }
+    local res = M.ask { { type = 'yq', data = { '-r', '.["' .. field .. '"]', file }, op = 'transform' } }
     return res[1]
 end
 
@@ -256,13 +256,16 @@ local function render_task(file)
     local ri = grab_field('id', file)
     local rs = grab_field('status', file)
     local rd = grab_field('description', file)
+    local rdu = grab_field('due', file)
     return (
-        '-   ' ..
-        string.sub(ri, 2, -2) ..
+        '-   5-stache/' ..
+        ri ..
         ": <" ..
-        string.sub(rs, 2, -2) ..
+        rs ..
         '> ' ..
-        string.sub(rd, 2, -2)
+        rd ..
+        ' - ' ..
+        rdu
     )
 end
 
