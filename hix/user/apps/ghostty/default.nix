@@ -6,7 +6,7 @@ in {
     home.packages = [pkgs_unstable.ghostty];
     home.file = {
         ".config/ghostty/config".text = ''
-          theme = marrissa
+          theme = ${name}
           font-family = Hurmit Nerd Font
           cursor-style = block
           cursor-style-blink = false
