@@ -49,15 +49,15 @@ M.types = {
 }
 
 M.statuses = {
+    'backburner',
     'open', -- "clarify"
     'ready',
     'to-discuss',
     'blocked', -- "waiting"
     'scheduled',
     'in-progress',
-    'backburner',
-    'archived',
     'delayed',
+    'archived',
     'closed',
 }
 
@@ -70,7 +70,7 @@ M.units = {
     freq = { 'bpm', 'Hz' },
     velocity = { 'mph', 'mps', 'kph', },
     duration = { 'seconds', 'hours', 'days', 'weeks', 'months', 'years', },
-    misc = { 'count', },
+    misc = { 'count', '4-scale' },
 }
 
 M.favUnits = {
@@ -83,6 +83,7 @@ M.favUnits = {
     M.units.duration[3],
     M.units.duration[6],
     M.units.misc[1],
+    M.units.misc[2],
 }
 
 M.priorities = {
@@ -217,7 +218,8 @@ local function run_query(query, file_set)
         end,
     }
     local res = run[query.type](query.data, next)
-    assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''))
+    assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
+        'res:' .. vim.inspect(res))
     combine_results(res.stdout, query.op or 'add')
     return next
 end
@@ -245,15 +247,29 @@ function M.print_result(fs)
     end
 end
 
+local function grab_field(field, file)
+    local res = M.ask { { type = 'yq', data = { '.["' .. field .. '"]', file }, op = 'transform' } }
+    return res[1]
+end
+
+local function render_task(file)
+    local ri = grab_field('id', file)
+    local rs = grab_field('status', file)
+    local rd = grab_field('description', file)
+    return (
+        '-   ' ..
+        string.sub(ri, 2, -2) ..
+        ": <" ..
+        string.sub(rs, 2, -2) ..
+        '> ' ..
+        string.sub(rd, 2, -2)
+    )
+end
+
 function M.print_tasks(fs)
     local output = {}
     for _, f in ipairs(fs) do
-        local ri = M.ask {{  type = 'yq', data = { '.["id"]', f }, op = 'transform' }}
-        local rs = M.ask {{ type = 'yq', data = { '.["status"]', f }, op = 'transform' }}
-        local rd = M.ask {{ type = 'yq', data = { '.["description"]', f }, op = 'transform' }}
-        table.insert(output,
-            string.sub(ri[1], 2, -2) .. ": <" .. string.sub(rs[1], 2, -2) .. '> ' .. string.sub(rd[1], 2, -2)
-        )
+        table.insert(output, render_task(f))
     end
     for _, l in ipairs(output) do
         print(l)
@@ -261,10 +277,29 @@ function M.print_tasks(fs)
 end
 
 function M.task_board()
+    local ls = {}
+    table.insert(ls, "## tasks")
+    table.insert(ls, "")
     -- for each task status type
+    for _, st in ipairs(M.statuses) do
+        local ts = {}
         -- pretty print the status type
-        -- get tasks pertaining
+        table.insert(ts, "### " .. st)
+        -- get tasks pertaining to it
+        local res = M.ask { { type = 'task', data = { 'status', st } } }
         -- pretty print them
+        for _, f in ipairs(res) do
+            table.insert(ts, render_task(f))
+        end
+        table.sort(ts)
+        for _, t in ipairs(ts) do
+            table.insert(ls, t)
+        end
+        table.insert(ls, '')
+    end
+    for _, l in ipairs(ls) do
+        print(l)
+    end
 end
 
 return M
