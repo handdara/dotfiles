@@ -15,12 +15,14 @@ if status is-interactive
     fish_config theme choose '@fish_theme@'
 end
 
-# Adding to path
+# Adding to path and other env vars
 # -------------------------------------------------------------------------------------------------
 
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/scripts
 fish_add_path ~/.yarn/bin
+
+set -gx EZA_COLORS "di=38;5;12:da=38;5;12"
 
 # Custom Funcs
 # -------------------------------------------------------------------------------------------------

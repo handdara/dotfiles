@@ -1,5 +1,6 @@
 {pkgs_unstable, ...}: let
     theme = import ./../../../util/color;
+    name = theme.name;
     c = theme.hexcodes;
 in {
     home.packages = [pkgs_unstable.ghostty];
@@ -16,10 +17,11 @@ in {
           confirm-close-surface = false
           shell-integration-features = no-cursor
           gtk-tabs-location = hidden
-          keybind = ctrl+shift+a=unbind
           keybind = ctrl+,=unbind
+          keybind = ctrl+shift+a=unbind
+          keybind = ctrl+alt+shift+t=toggle_tab_overview
         '';
-        ".config/ghostty/themes/marrissa".text = ''
+        ".config/ghostty/themes/${name}".text = ''
           palette = 0=${c.black}
           palette = 1=${c.red}
           palette = 2=${c.green}
@@ -41,7 +43,6 @@ in {
           cursor-color = f2d5cf
           selection-background = 626880
           selection-foreground = c6d0f5
-          keybind = ctrl+alt+shift+t=toggle_tab_overview
         '';
     };
 }
