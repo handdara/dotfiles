@@ -131,7 +131,6 @@ end
 
 local function ask_rg(args)
     local command = { "rg" }
-    table.insert(command, "-l")
     for _, arg in ipairs(args) do
         table.insert(command, arg)
     end
@@ -161,7 +160,7 @@ end
 local function run_stache(data)
     assert(string.len(data) >= 1)
     local pattern = [[^stache: *]] .. data
-    return ask_rg { pattern }
+    return ask_rg { '-l', pattern }
 end
 
 local function run_rg(data)
@@ -208,7 +207,7 @@ local function run_query(query, file_set)
         stache = run_stache,
         task = function(data, passin)
             local tmp = run_query({ type = 'stache', data = 'task' }, passin)
-            local x = { '^' .. data[1] .. ': *' .. data[2] }
+            local x = { '-l',  '^' .. data[1] .. ': *' .. data[2] }
             tmp = run_query({ type = 'rg', data = x, op = 'sub' }, tmp)
             local res = { stdout = {}, stderr = { '' } }
             for key, _ in pairs(tmp) do
@@ -250,23 +249,30 @@ end
 local function grab_field(field, file)
     local res = M.ask { { type = 'yq', data = { '-r', '.["' .. field .. '"]', file }, op = 'transform' } }
     return res[1]
+    -- local res = M.ask { { type = 'rg' }, data = {} }
 end
 
 local function render_task(file)
-    local ri = grab_field('id', file)
-    local rs = grab_field('status', file)
-    local rd = grab_field('description', file)
-    local rdu = grab_field('due', file)
+    local task = {}
+    task.id = grab_field('id', file)
+    task.desc = grab_field('description', file)
+    task.due = grab_field('due', file)
+    task.priority = grab_field('priority', file)
+    assert(task.priority ~= 'null')
+    local due_str
+    if task.due == 'null' then
+        due_str = ''
+    else
+        due_str = '<' .. task.due .. '> '
+    end
     return (
-        '-   5-stache/' ..
-        ri ..
-        ": <" ..
-        rs ..
-        '> ' ..
-        rd ..
-        ' - ' ..
-        rdu
-    )
+        '-   [[' ..
+        task.id ..
+        "]] " ..
+        due_str .. '-' ..
+        task.priority .. '- ' ..
+        task.desc
+    ), task
 end
 
 function M.print_tasks(fs)
@@ -292,7 +298,8 @@ function M.task_board()
         local res = M.ask { { type = 'task', data = { 'status', st } } }
         -- pretty print them
         for _, f in ipairs(res) do
-            table.insert(ts, render_task(f))
+            local rndr = render_task(f)
+            table.insert(ts, rndr)
         end
         table.sort(ts)
         for _, t in ipairs(ts) do
