@@ -170,20 +170,19 @@ end
 
 local function run_query(query, file_set)
     assert(query.type and query.data)
-    assert(not (query.type == "yq" and query.op ~= "transform"))
+    assert(not (query.type == "yq" and query.op ~= "mtrans"))
     local next = file_set or {}
     local function combine_results(new_ls, merge_strat)
         local tmp = {}
         local merge_file = {
-            add = function(f) tmp[f] = true end,
-            sub = function(f) tmp[f] = next[f] or false end,
-            transform = function(l) tmp[l] = true end,
+            mor = function(f) tmp[f] = true end,
+            mand = function(f) tmp[f] = next[f] or false end,
+            mtrans = function(l) tmp[l] = true end,
         }
-        if merge_strat == 'add' then
+        if merge_strat == 'mor' then
             for _, f in ipairs(file_set) do
                 table.insert(tmp, f)
             end
-            -- elseif merge_strat == 'sub' then
         end
         for _, f in ipairs(new_ls) do
             if string.len(f) > 0 then
@@ -208,7 +207,7 @@ local function run_query(query, file_set)
         task = function(data, passin)
             local tmp = run_query({ type = 'stache', data = 'task' }, passin)
             local x = { '-l',  '^' .. data[1] .. ': *' .. data[2] }
-            tmp = run_query({ type = 'rg', data = x, op = 'sub' }, tmp)
+            tmp = run_query({ type = 'rg', data = x, op = 'mand' }, tmp)
             local res = { stdout = {}, stderr = { '' } }
             for key, _ in pairs(tmp) do
                 table.insert(res.stdout, key)
@@ -219,7 +218,7 @@ local function run_query(query, file_set)
     local res = run[query.type](query.data, next)
     assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
         'res:' .. vim.inspect(res))
-    combine_results(res.stdout, query.op or 'add')
+    combine_results(res.stdout, query.op or 'mor')
     return next
 end
 
@@ -247,7 +246,7 @@ function M.print_result(fs)
 end
 
 local function grab_field(field, file)
-    local res = M.ask { { type = 'yq', data = { '-r', '.["' .. field .. '"]', file }, op = 'transform' } }
+    local res = M.ask { { type = 'yq', data = { '-r', '.["' .. field .. '"]', file }, op = 'mtrans' } }
     return res[1]
     -- local res = M.ask { { type = 'rg' }, data = {} }
 end
