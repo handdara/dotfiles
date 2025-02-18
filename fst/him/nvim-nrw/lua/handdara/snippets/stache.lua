@@ -79,7 +79,7 @@ local blocks = {
         category: {13}
         description: {14}
         tags:
-          - "{2}/def"
+          - "iid-{2}/def"
         mf: {4}
         mfn: {5}
         serial-number: {6}

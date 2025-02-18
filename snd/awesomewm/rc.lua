@@ -72,6 +72,7 @@ local sys_manage = scripts_dir .. "mg"
 local sys_manage_cmd = terminal_cmd .. [["sleep 0.156; ]] .. sys_manage .. [["]]
 local music = "hmu"
 local music_cmd = terminal_cmd .. music
+local passmenu_cmd = "passmenu"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -358,6 +359,8 @@ local globalkeys = gears.table.join(
         { description = "open a terminal", group = "launcher" }),
     awful.key({ super, }, ".", function() awful.spawn(sys_manage_cmd) end,
         { description = "run manage script", group = "launcher" }),
+    awful.key({ super, }, ",", function() awful.spawn(passmenu_cmd) end,
+        { description = "run passmenu", group = "launcher" }),
     awful.key({ super, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
     awful.key({ super, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
     awful.key({ super, }, "l", function() awful.tag.incmwfact(0.05) end,

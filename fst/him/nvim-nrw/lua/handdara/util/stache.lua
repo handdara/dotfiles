@@ -206,7 +206,7 @@ local function run_query(query, file_set)
         stache = run_stache,
         task = function(data, passin)
             local tmp = run_query({ type = 'stache', data = 'task' }, passin)
-            local x = { '-l',  '^' .. data[1] .. ': *' .. data[2] }
+            local x = { '-l', '^' .. data[1] .. ': *' .. data[2] }
             tmp = run_query({ type = 'rg', data = x, op = 'mand' }, tmp)
             local res = { stdout = {}, stderr = { '' } }
             for key, _ in pairs(tmp) do
@@ -246,9 +246,12 @@ function M.print_result(fs)
 end
 
 local function grab_field(field, file)
-    local res = M.ask { { type = 'yq', data = { '-r', '.["' .. field .. '"]', file }, op = 'mtrans' } }
-    return res[1]
-    -- local res = M.ask { { type = 'rg' }, data = {} }
+    local command = { 'rg', "-NIor=$1", '^' .. field .. ': *(.*)(\t| )*', file }
+    local co = coroutine.create(ask_cr)
+    local _, ans = coroutine.resume(co, command)
+    assert(coroutine.resume(co))
+    assert(ans.stderr[1] == "")
+    return ans.stdout[1]
 end
 
 local function render_task(file)
@@ -259,25 +262,29 @@ local function render_task(file)
     task.priority = grab_field('priority', file)
     assert(task.priority ~= 'null')
     local due_str
-    if task.due == 'null' then
+    if task.due == '~' or task.due == 'null' then
         due_str = ''
     else
         due_str = '<' .. task.due .. '> '
     end
-    return (
-        '-   [[' ..
-        task.id ..
-        "]] " ..
-        due_str .. '-' ..
-        task.priority .. '- ' ..
-        task.desc
-    ), task
+    return {
+        str = (
+            '-   [[' ..
+            task.id ..
+            "]] " ..
+            due_str .. '-' ..
+            task.priority .. '- ' ..
+            task.desc
+        ),
+        fields = task
+    }
 end
 
 function M.print_tasks(fs)
     local output = {}
     for _, f in ipairs(fs) do
-        table.insert(output, render_task(f))
+        local rndr = render_task(f)
+        table.insert(output, rndr.str)
     end
     for _, l in ipairs(output) do
         print(l)
@@ -298,7 +305,7 @@ function M.task_board()
         -- pretty print them
         for _, f in ipairs(res) do
             local rndr = render_task(f)
-            table.insert(ts, rndr)
+            table.insert(ts, rndr.str)
         end
         table.sort(ts)
         for _, t in ipairs(ts) do
