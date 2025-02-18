@@ -47,4 +47,6 @@ return function()
     -- working with views
     map('n', 'zl', '<CMD>loadview<CR>', { desc = 'load [v]iew for current file' })
     map('n', 'zk', '<CMD>mkview<CR>', { desc = 'ma[k]e view for current file' })
+
+    map('n', '<leader>ns', '<CMD>StacheOpenTask<CR>', { desc = 'open stache task on current line' })
 end

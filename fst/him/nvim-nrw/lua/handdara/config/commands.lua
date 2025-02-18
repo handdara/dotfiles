@@ -1,4 +1,3 @@
-
 return function()
     vim.api.nvim_create_user_command('W', 'write', {})
     vim.api.nvim_create_user_command('Wq', 'wq', {})
@@ -9,4 +8,7 @@ return function()
     vim.api.nvim_create_user_command('Ranker', function (opts)
         require('handdara.util.ranker').ranker(opts.line1, opts.line2)
     end , { range = true })
+    vim.api.nvim_create_user_command('StacheOpenTask', function ()
+         require'handdara.util.stache'.open_task()
+    end, {})
 end

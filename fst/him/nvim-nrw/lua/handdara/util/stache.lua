@@ -269,9 +269,9 @@ local function render_task(file)
     end
     return {
         str = (
-            '-   [[' ..
+            '-   (' ..
             task.id ..
-            "]] " ..
+            ") " ..
             due_str .. '-' ..
             task.priority .. '- ' ..
             task.desc
@@ -315,6 +315,17 @@ function M.task_board()
     end
     for _, l in ipairs(ls) do
         print(l)
+    end
+end
+
+function M.open_task()
+    local line_text = vim.api.nvim_get_current_line()
+    local task_id = string.match(line_text, '%((.*)%)')
+    local file = hdirs.stache.abs .. '/' .. task_id
+    if task_id then
+        vim.cmd('edit ' .. file)
+    else
+        vim.notify('File not found!')
     end
 end
 
