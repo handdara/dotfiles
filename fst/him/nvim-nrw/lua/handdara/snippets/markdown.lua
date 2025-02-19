@@ -35,12 +35,17 @@ use(sdateheader)
 local bDaily = [[
 ---
 aliases: []
-tags: []
+tags:
+  - daily-notes
 curr_mo_link: "{1}"
 ---
 # {2}
 
 {3}
+
+```lua
+Handdara.stache.task_board()
+```
 
 ## quests
 ### daily adventures
@@ -51,7 +56,7 @@ curr_mo_link: "{1}"
 - [ ] {7}
 
 ## log
-- {8}
+{8}
 ]]
 local monSched = [[
 |      | mon          |
@@ -207,11 +212,11 @@ local sdaily = s('daily', d(1, function()
         t('[[p' .. u.dtnum2str(ts.mo_num) .. '-' .. ts.mo .. '-' .. ts.yr .. ']]'),
         t(ts.dy .. ts.mo .. ts.yr .. ', ' .. ts.wd),
         daySchedules[ts.wd_num],
-        i(1, '#? ...'),
-        i(2, '#? ...'),
-        i(3, '#? ...'),
-        i(4, '#? ...'),
-        i(5, '...'),
+        i(1, '...'),
+        i(2, '...'),
+        i(3, '...'),
+        i(4, '...'),
+        i(5),
     }))
 end))
 use(sdaily)
