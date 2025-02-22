@@ -48,6 +48,7 @@ Handdara.stache.task_board()
 ```
 
 ## quests
+{9}
 ### daily adventures
 - [ ]   1. {4}
 - [ ]   2. {5}
@@ -217,13 +218,37 @@ local sdaily = s('daily', d(1, function()
         i(3, '...'),
         i(4, '...'),
         i(5),
+        t('-   [[daily-quests]]'),
     }))
 end))
 use(sdaily)
 
 local bweekly = [[
+### WK{1}-2025
+
+| M      | T      | W           | R    | F    | S     | N   |
+|--------|--------|-------------|------|------|-------|-----|
+| thesis | thesis | thesis/seal | seal | seal | piano |     |
+
+#### affirms & active investments
+#todo, see {2}
+
+#### goals
+#todo, see {3}
+
+#### reflection
+#todo
 
 ]]
+local dweekly = d(1, function()
+    local ts = u.timestamp()
+    return sn(nil, fmt(bweekly, {
+        t(ts.wk),
+        t({'[[affirms-vals-goals]]', 'also [[quarterly-goals-2025#list of possible personal investments]]'}),
+        t('[[quarterly-goals-2025#Quarter ' .. ts.qt .. ' Goals]]'),
+    }))
+end)
+use(s('wkly', dweekly))
 
 for _, val in ipairs(filetypes) do
     local function mkCodeBlockSnip(ft)

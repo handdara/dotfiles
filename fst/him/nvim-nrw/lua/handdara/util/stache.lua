@@ -170,7 +170,7 @@ end
 
 local function run_query(query, file_set)
     assert(query.type and query.data)
-    assert(not (query.type == "yq" and query.op ~= "mtrans"))
+    assert(query.type ~= "yq" or query.op == "mtrans")
     local next = file_set or {}
     local function combine_results(new_ls, merge_strat)
         local tmp = {}
@@ -178,6 +178,7 @@ local function run_query(query, file_set)
             mor = function(f) tmp[f] = true end,
             mand = function(f) tmp[f] = next[f] or false end,
             mtrans = function(l) tmp[l] = true end,
+            msub = function (f) tmp[f] = false end,
         }
         if merge_strat == 'mor' then
             for _, f in ipairs(file_set) do
@@ -291,8 +292,10 @@ function M.print_tasks(fs)
     end
 end
 
-function M.task_board()
+function M.task_board(opts)
     local ls = {}
+    opts = opts or {}
+    assert(not(opts.include and opts.exclude))
     table.insert(ls, "## tasks")
     table.insert(ls, "")
     -- for each task status type
@@ -320,7 +323,7 @@ end
 
 function M.open_task()
     local line_text = vim.api.nvim_get_current_line()
-    local task_id = string.match(line_text, '%((.*)%)')
+    local task_id = string.match(line_text, '%((.*)%)') or string.match(line_text, 'id: *([%w%-%_]+)')
     local file = hdirs.stache.abs .. '/' .. task_id
     if task_id then
         vim.cmd('edit ' .. file)
