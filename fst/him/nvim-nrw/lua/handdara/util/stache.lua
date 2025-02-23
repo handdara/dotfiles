@@ -1,9 +1,9 @@
 local hdirs = require 'handdara.util.dirs'
-local M = {}
+local M = {dirs = {data = hdirs.stache.abs}}
 
 M.areas = {
     'seal',
-    'thesis-ms',
+    'thesis',
     'community',
     'learning',
     'hobbies',

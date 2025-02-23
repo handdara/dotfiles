@@ -72,14 +72,14 @@ local blocks = {
     ]],
     inventory = [[
         stache: inventory
-        id: iid-{1}
+        id: {1}
         name: {3}
         location: {7}
         quantity: {10}
         category: {13}
         description: {14}
         tags:
-          - "iid-{2}/def"
+          - "{2}/def"
         mf: {4}
         mfn: {5}
         serial-number: {6}
@@ -93,11 +93,7 @@ local blocks = {
     ]],
 }
 
-local function nextInvID()
-    return '#'
-end
-
-local function mkCAreaCnt(idx)
+local function mkCIdCnt(idx)
     return c(idx, {
         i(nil, '#'),
         f(function()
@@ -113,12 +109,67 @@ end
 local function mkCStacheAreas(idx)
     local as = {}
     for _, val in ipairs(stache.areas) do
-        table.insert(as, sn(nil, { t(val), i(1), t '-', mkCAreaCnt(2) }))
+        table.insert(as, sn(nil, { t(val), i(1), t '-', mkCIdCnt(2) }))
     end
-    table.insert(as, sn(nil, { i(1, 'other'), t '-', mkCAreaCnt(2) }))
+    table.insert(as, sn(nil, { i(1, 'other'), t '-', mkCIdCnt(2) }))
     return c(idx, as)
 end
 use(s('area', { mkCStacheAreas(1) }))
+
+local function mkSNStacheID(idx, stacheType)
+    local invFiles = stache.ask{ {type = 'stache', data = stacheType}, }
+    local defaultName, idCats
+    if stacheType == 'inventory' then
+        defaultName = 'iid'
+        idCats = {iid = 0}
+    elseif stacheType == 'task' then
+        defaultName = 'misc'
+        idCats = {misc = 0}
+        for _, area in ipairs(stache.areas) do
+            idCats[area] = 0
+        end
+    else
+        error('unknown stache type given, ', stacheType)
+    end
+    for jdx, file in ipairs(invFiles) do
+        local fname = string.match(file, '.*/([^ %#\t]*)')
+        invFiles[jdx] = fname
+    end
+    for _, file in ipairs(invFiles) do
+        local cat, num_str = string.match(file, '([^%-]+)-([^%-]+)')
+        local num = tonumber(num_str)
+        if cat and num then
+            idCats[cat] = math.max(num, idCats[cat] or 1)
+        elseif cat then
+            idCats[cat] = idCats[cat] or 1
+        end
+    end
+    local idCatNs = {i(1, defaultName)}
+    for cat, val in pairs(idCats) do
+        if val and cat ~= defaultName then
+            table.insert(idCatNs, t(cat))
+        end
+    end
+    return sn(idx, {
+        c(1, idCatNs),
+        t'-',
+        c(2, {
+            d(1, function(args)
+                local cat = args[1][1]
+                local num = (idCats[cat] or 0) + 1
+                return sn(nil, {i(1, tostring(num))})
+            end, {1}),
+            f(function()
+                local st = ''
+                for _ = 1, 4 do
+                    st = st .. string.char(math.random(string.byte('a'), string.byte('z')))
+                end
+                return st
+            end),
+        }),
+    })
+end
+use(s('iid', mkSNStacheID(1, 'inventory')))
 
 local function mkCStacheContexts(idx)
     local cs = {}
@@ -224,7 +275,7 @@ use(s('subtask', mkSnSubtask(1)))
 local function mkSnTask(idx)
     return sn(idx, {
         t { 'stache: task', 'id: ' },
-        mkCStacheAreas(1),
+        mkSNStacheID(1, 'task'),
         t { '', '' },
         d(2, function(args)
             local ts = u.timestamp()
@@ -393,7 +444,7 @@ local function mkSnInv(idx)
             local ts = u.timestamp()
             local dtText = ts.dy .. ts.mo .. ts.yr .. ' ' .. ts.hr .. ':' .. ts.mi
             return sn(nil, fmt(blocks.inventory, {
-                i(1, nextInvID()),
+                mkSNStacheID(1, 'inventory'),
                 rep(1),
                 i(2, 'name'),
                 i(7, '~'),        -- mf
