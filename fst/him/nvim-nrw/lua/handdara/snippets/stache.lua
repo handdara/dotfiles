@@ -51,6 +51,7 @@ local blocks = {
         email: {7}
         address: {10}
         created: {8}
+        attachements: []
         notes: {9}
     ]],
     task = [[
@@ -68,6 +69,7 @@ local blocks = {
         edited: {4}
         aliases: {12}
         repos: {13}
+        attachements: []
         notes: {14}
     ]],
     inventory = [[
@@ -89,32 +91,10 @@ local blocks = {
         warranty: {9}
         current-value: {11}
         aliases: {16}
+        attachements: []
         notes: {17}
     ]],
 }
-
-local function mkCIdCnt(idx)
-    return c(idx, {
-        i(nil, '#'),
-        f(function()
-            local st = ''
-            for _ = 1, 4 do
-                st = st .. string.char(math.random(string.byte('a'), string.byte('z')))
-            end
-            return st
-        end)
-    })
-end
-
-local function mkCStacheAreas(idx)
-    local as = {}
-    for _, val in ipairs(stache.areas) do
-        table.insert(as, sn(nil, { t(val), i(1), t '-', mkCIdCnt(2) }))
-    end
-    table.insert(as, sn(nil, { i(1, 'other'), t '-', mkCIdCnt(2) }))
-    return c(idx, as)
-end
-use(s('area', { mkCStacheAreas(1) }))
 
 local function mkSNStacheID(idx, stacheType)
     local invFiles = stache.ask{ {type = 'stache', data = stacheType}, }
@@ -128,6 +108,12 @@ local function mkSNStacheID(idx, stacheType)
         for _, area in ipairs(stache.areas) do
             idCats[area] = 0
         end
+    elseif stacheType == 'data' then
+        defaultName = 'dat'
+        idCats = {dat = 0}
+    elseif stacheType == 'contact' then
+        defaultName = 'person'
+        idCats = {person = 0}
     else
         error('unknown stache type given, ', stacheType)
     end
@@ -404,7 +390,7 @@ use(s('dataseries', mkSnDataSeries(1)))
 
 local function mkSnData(idx)
     return sn(idx, {
-        sn(1, { t { 'stache: data', 'id: ' }, mkCStacheAreas(1), t { '', '' } }),
+        sn(1, { t { 'stache: data', 'id: ' }, mkSNStacheID(1, 'data'), t { '', '' } }),
         d(2, function()
             local ts = u.timestamp()
             local dtText = ts.dy .. ts.mo .. ts.yr .. ' ' .. ts.hr .. ':' .. ts.mi

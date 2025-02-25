@@ -332,4 +332,7 @@ function M.open_task()
     end
 end
 
+-- function M.print_inv(files)
+-- end
+
 return M

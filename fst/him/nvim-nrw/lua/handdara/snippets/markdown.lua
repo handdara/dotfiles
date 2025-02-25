@@ -224,7 +224,7 @@ end))
 use(sdaily)
 
 local bweekly = [[
-### WK{1}-2025
+### WK{1}-2025, week of {4}
 
 | M      | T      | W           | R    | F    | S     | N   |
 |--------|--------|-------------|------|------|-------|-----|
@@ -237,15 +237,66 @@ local bweekly = [[
 #todo, see {3}
 
 #### reflection
-#todo
+
+##### wheel of life
+
+health:
+-   body
+    -   how im doing in general: {5}
+    -   how well i did this past week: {6}
+-   mind
+    -   how im doing in general: {7}
+    -   how well i did this past week: {8}
+-   soul
+    -   how im doing in general: {9}
+    -   how well i did this past week: {10}
+work:
+-   mission
+    -   how im doing in general: {11}
+    -   how well i did this past week: {12}
+-   money
+    -   how im doing in general: {13}
+    -   how well i did this past week: {14}
+-   growth
+    -   how im doing in general: {15}
+    -   how well i did this past week: {16}
+relationships:
+-   family
+    -   how im doing in general: {17}
+    -   how well i did this past week: {18}
+-   romance
+    -   how im doing in general: {19}
+    -   how well i did this past week: {20}
+-   friends
+    -   how im doing in general: {21}
+    -   how well i did this past week: {22}
 
 ]]
 local dweekly = d(1, function()
     local ts = u.timestamp()
     return sn(nil, fmt(bweekly, {
-        t(ts.wk),
-        t({'[[affirms-vals-goals]]', 'also [[quarterly-goals-2025#list of possible personal investments]]'}),
+        t(u.dtnum2str( ts.wk+1 )),
+        t({ '[[affirms-vals-goals]]', 'also [[quarterly-goals-2025#list of possible personal investments]]' }),
         t('[[quarterly-goals-2025#Quarter ' .. ts.qt .. ' Goals]]'),
+        i(1, 'DDmmmYYYY'),
+        c(2, {t'1', t'2', t'3', t'4', }),
+        c(3, {t'1', t'2', t'3', t'4', }),
+        c(4, {t'1', t'2', t'3', t'4', }),
+        c(5, {t'1', t'2', t'3', t'4', }),
+        c(6, {t'1', t'2', t'3', t'4', }),
+        c(7, {t'1', t'2', t'3', t'4', }),
+        c(8, {t'1', t'2', t'3', t'4', }),
+        c(9, {t'1', t'2', t'3', t'4', }),
+        c(10, {t'1', t'2', t'3', t'4', }),
+        c(11, {t'1', t'2', t'3', t'4', }),
+        c(12, {t'1', t'2', t'3', t'4', }),
+        c(13, {t'1', t'2', t'3', t'4', }),
+        c(14, {t'1', t'2', t'3', t'4', }),
+        c(15, {t'1', t'2', t'3', t'4', }),
+        c(16, {t'1', t'2', t'3', t'4', }),
+        c(17, {t'1', t'2', t'3', t'4', }),
+        c(18, {t'1', t'2', t'3', t'4', }),
+        c(19, {t'1', t'2', t'3', t'4', }),
     }))
 end)
 use(s('wkly', dweekly))
@@ -257,6 +308,22 @@ for _, val in ipairs(filetypes) do
     use(mkCodeBlockSnip(val))
 end
 use(s('codeblock', { t { '```', '' }, i(1), t { '', '```' } }))
+
+use(s('tasks', { t {
+    '```lua',
+    'Handdara.stache.task_board()',
+    '```',
+} }))
+
+use(s('inv-items', {t {
+'```lua',
+'local queries = {',
+        '{type = "stache", data = {"inventory"}},',
+'}',
+'local res = Handdara.stache.ask(queries)',
+'Handdara.stache.print_result(res)',
+'```',
+}}))
 
 ls.add_snippets("markdown", S)
 ls.add_snippets("telekasten", S)

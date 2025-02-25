@@ -19,7 +19,7 @@ function M.timestamp()
         yr = tostring(ts.year),
         dy = tostring(ts.day),
         mo = months[ts.month],
-        wk = M.dtnum2str( math.modf((ts.yday / 7) + 1) ),
+        wk = math.modf((ts.yday / 7) + 1),
         mo_num = ts.month,
         wd = weekdays[ts.wday],
         wd_num = ts.wday,
