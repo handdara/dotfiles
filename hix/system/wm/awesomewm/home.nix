@@ -37,7 +37,7 @@ in {
           theme.useless_gap   = dpi(4)
           theme.border_width  = dpi(3)
           theme.border_normal = "${c.black}"
-          theme.border_focus  = "${c.green}"
+          theme.border_focus  = "${c.window_focus}"
           theme.border_marked = "${c.cyan}"
 
           -- There are other variable sets

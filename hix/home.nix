@@ -15,6 +15,7 @@
         ./user/apps/mail
         ./user/apps/matlab
         ./user/apps/megacmd
+        # ./user/apps/minecraft
         ./user/apps/neofetch
         ./user/apps/nvim
         ./user/apps/pandoc

@@ -7,7 +7,7 @@ local hautocmds = require 'handdara.config.autocommands'
 local M = {}
 
 M.setup = function(opts)
-    local M = {}
+    local N = {}
     hset()
     hkeymap()
     hcmds()
@@ -21,13 +21,13 @@ M.setup = function(opts)
     require 'handdara.obsidian'
     vim.notify = require('notify')
 
-    M.util = require 'handdara.util'
+    N.util = require 'handdara.util'
 
-    M.stache = require 'handdara.util.stache'
+    N.stache = require 'handdara.util.stache'
 
-    M.set_looks = hlooks.set_looks
+    N.set_looks = hlooks.set_looks
 
-    return M
+    return N
 end
 
 return M

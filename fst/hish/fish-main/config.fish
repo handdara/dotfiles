@@ -13,6 +13,7 @@ if status is-interactive
     end
 
     fish_config theme choose '@fish_theme@'
+    fish_vi_key_bindings
 end
 
 # Adding to path and other env vars
