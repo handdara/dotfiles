@@ -8,16 +8,13 @@
             ./machines/${sys_opts.hostname}/hardware-configuration.nix
             ./machines/${sys_opts.hostname}/bootloader.nix
             ./machines/${sys_opts.hostname}/networking.nix
+            ./machines/${sys_opts.hostname}/gpu.nix
             ./system/wm/gdm
             ./system/wm/awesomewm
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
+            ./system/hardware/displaylink
         ]
-        ++ (
-            if sys_opts.useDisplayLink
-            then [./system/hardware/displaylink]
-            else []
-        )
         ++ inputs.extraModules;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
