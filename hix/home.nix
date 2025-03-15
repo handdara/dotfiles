@@ -20,6 +20,7 @@
         ./user/apps/nvim
         ./user/apps/pandoc
         # ./user/apps/r
+        ./user/apps/redshift
         ./user/apps/starship
         ./user/apps/tealdeer
         ./user/apps/vim

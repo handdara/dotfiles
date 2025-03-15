@@ -89,6 +89,7 @@ abbr --add zx "z (fd --type d . ~/.config | fzf)" # "open config sub-directory"
 abbr --add zd --set-cursor=! 'z (fd --type d .! | fzf)' # open subdirectory of current dir
 abbr --add zm "z (fd --type d -HI . ~/MEGA | fzf)" # "open mega sub-directory"
 abbr --add zp "z (fd --min-depth 1 --max-depth 1 --type d . ~/code | fzf)" # "open project"
+abbr --add zt "z (mktemp -d)" # "open temp directory"
 
 abbr --add qe --set-cursor=! "$EDITOR (fd --min-depth 1 . ! | fzf)" # [Q]uick [E]dit a file
 abbr --add qec --set-cursor=! "$EDITOR (fd --min-depth 1 . ~/code | fzf)" # [Q]uick [E]dit a code file
