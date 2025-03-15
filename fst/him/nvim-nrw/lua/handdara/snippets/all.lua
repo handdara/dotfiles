@@ -11,7 +11,14 @@ local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local u = require 'handdara.util'
 
-local sdate = s("date", {
+local sdate = s({"date", "today"}, {
+    f(function()
+        local ts = u.timestamp()
+        return ts.dy .. ts.mo .. ts.yr
+    end),
+})
+
+local stmrw = s({"tmrw", 'tomorrow'}, {
     f(function()
         local ts = u.timestamp()
         return ts.dy .. ts.mo .. ts.yr
@@ -22,6 +29,13 @@ local sdatetime = s("datetime", {
     f(function()
         local ts = u.timestamp()
         return ts.dy .. ts.mo .. ts.yr .. ' ' .. ts.hr .. ':' .. ts.mi
+    end),
+})
+
+local stime = s({"mt","time","mil-time"}, {
+    f(function()
+        local ts = u.timestamp()
+        return ts.hr .. ts.mi
     end),
 })
 
