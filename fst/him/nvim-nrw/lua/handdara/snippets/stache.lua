@@ -97,51 +97,55 @@ local blocks = {
 }
 
 local function mkSNStacheID(idx, stacheType)
-    local invFiles = stache.ask{ {type = 'stache', data = stacheType}, }
-    local defaultName, idCats
-    if stacheType == 'inventory' then
-        defaultName = 'iid'
-        idCats = {iid = 0}
-    elseif stacheType == 'task' then
-        defaultName = 'misc'
-        idCats = {misc = 0}
-        for _, area in ipairs(stache.areas) do
-            idCats[area] = 0
+    local function getCatsNs()
+        local invFiles = stache.ask{ {type = 'stache', data = stacheType}, }
+        local defaultName, idCats
+        if stacheType == 'inventory' then
+            defaultName = 'iid'
+            idCats = {iid = 0}
+        elseif stacheType == 'task' then
+            defaultName = 'misc'
+            idCats = {misc = 0}
+            for _, area in ipairs(stache.areas) do
+                idCats[area] = 0
+            end
+        elseif stacheType == 'data' then
+            defaultName = 'dat'
+            idCats = {dat = 0}
+        elseif stacheType == 'contact' then
+            defaultName = 'person'
+            idCats = {person = 0}
+        else
+            error('unknown stache type given, ', stacheType)
         end
-    elseif stacheType == 'data' then
-        defaultName = 'dat'
-        idCats = {dat = 0}
-    elseif stacheType == 'contact' then
-        defaultName = 'person'
-        idCats = {person = 0}
-    else
-        error('unknown stache type given, ', stacheType)
-    end
-    for jdx, file in ipairs(invFiles) do
-        local fname = string.match(file, '.*/([^ %#\t]*)')
-        invFiles[jdx] = fname
-    end
-    for _, file in ipairs(invFiles) do
-        local cat, num_str = string.match(file, '([^%-]+)-([^%-]+)')
-        local num = tonumber(num_str)
-        if cat and num then
-            idCats[cat] = math.max(num, idCats[cat] or 1)
-        elseif cat then
-            idCats[cat] = idCats[cat] or 1
+        for jdx, file in ipairs(invFiles) do
+            local fname = string.match(file, '.*/([^ %#\t]*)')
+            invFiles[jdx] = fname
         end
-    end
-    local idCatNs = {i(1, defaultName)}
-    for cat, val in pairs(idCats) do
-        if val and cat ~= defaultName then
-            table.insert(idCatNs, t(cat))
+        for _, file in ipairs(invFiles) do
+            local cat, num_str = string.match(file, '([^%-]+)-([^%-]+)')
+            local num = tonumber(num_str)
+            if cat and num then
+                idCats[cat] = math.max(num, idCats[cat] or 1)
+            elseif cat then
+                idCats[cat] = idCats[cat] or 1
+            end
         end
+        local idCatNs = {i(1, defaultName)}
+        for cat, val in pairs(idCats) do
+            if val and cat ~= defaultName then
+                table.insert(idCatNs, t(cat))
+            end
+        end
+        return idCatNs, idCats
     end
     return sn(idx, {
-        c(1, idCatNs),
+        c(1, getCatsNs()),
         t'-',
         c(2, {
             d(1, function(args)
                 local cat = args[1][1]
+                local _, idCats = getCatsNs()
                 local num = (idCats[cat] or 0) + 1
                 return sn(nil, {i(1, tostring(num))})
             end, {1}),
