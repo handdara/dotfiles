@@ -14,7 +14,9 @@ test:
     just {{dotfiles_dir}}/hix/ test-home-mngr
 
 # rebuild nixos and home-manager using most up-to-date method and switch
-switch: _check_fmt && switch-home
+switch: _check_fmt switch-nixos switch-home
+
+switch-nixos:
     just {{dotfiles_dir}}/hix/ switch-nixos
     @echo "current generation $(nixos-rebuild list-generations | awk '/current/ {print $1}')"
 

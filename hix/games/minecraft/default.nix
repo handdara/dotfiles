@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-    fonts.packages = with pkgs; [prismlauncher];
+    environment.systemPackages = with pkgs; [prismlauncher];
 }
