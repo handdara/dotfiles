@@ -36,6 +36,7 @@
                 modules = [
                     ./configuration.nix
                     inputs.kmonad.nixosModules.default
+                    ./games/minecraft
                 ];
                 specialArgs = {
                     inherit system user_opts;
