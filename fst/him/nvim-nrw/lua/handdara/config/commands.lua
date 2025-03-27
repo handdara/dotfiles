@@ -9,6 +9,6 @@ return function()
         require('handdara.util.ranker').ranker(opts.line1, opts.line2)
     end , { range = true })
     vim.api.nvim_create_user_command('StacheOpenTask', function ()
-         require'handdara.util.stache'.open_task()
+         require'handdara.util.stache'.open_item()
     end, {})
 end

@@ -321,9 +321,9 @@ function M.task_board(opts)
     end
 end
 
-function M.open_task()
+function M.open_item()
     local line_text = vim.api.nvim_get_current_line()
-    local task_id = string.match(line_text, '%((.*)%)') or string.match(line_text, 'id: *([%w%-%_]+)')
+    local task_id = string.match(line_text, '%((.-)%)') or string.match(line_text, 'id: *([%w%-%_]+)')
     local file = hdirs.stache.abs .. '/' .. task_id
     if task_id then
         vim.cmd('edit ' .. file)

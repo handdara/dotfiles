@@ -53,6 +53,8 @@ in {
           -- Example:
           theme.taglist_bg_focus = "${c.bright_red}"
           theme.taglist_fg_focus = "${c.bg}"
+          theme.hotkeys_modifiers_fg = "${c.bright_blue}"
+          theme.hotkeys_fg = "${c.magenta}"
 
           -- Generate taglist squares:
           local taglist_square_size = dpi(6)

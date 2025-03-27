@@ -42,4 +42,5 @@ local stime = s("time", {
 ls.add_snippets("all", {
     sdate,
     sdatetime,
+    stime,
 })
