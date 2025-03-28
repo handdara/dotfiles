@@ -10,12 +10,18 @@
             url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        nix-matlab = {
+            # see https://gitlab.com/doronbehar/nix-matlab for more
+            url = "gitlab:doronbehar/nix-matlab";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = {
         nixpkgs,
         nixpkgs-unstable,
         home-manager,
+        nix-matlab,
         ...
     } @ inputs: let
         user_opts = rec {
@@ -25,6 +31,7 @@
             which_nvim = "nrw";
             term_invert = false;
         };
+        flake-overlays = [nix-matlab.overlay];
         system = "x86_64-linux";
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
@@ -34,7 +41,7 @@
         nixosConfigurations = {
             sha76 = lib.nixosSystem {
                 modules = [
-                    ./configuration.nix
+                    (import ./configuration.nix flake-overlays)
                     inputs.kmonad.nixosModules.default
                     ./games/minecraft
                 ];

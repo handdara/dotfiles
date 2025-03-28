@@ -25,7 +25,7 @@
 
         # see also hix/machines/sha76/gpu.nix for another use of this code, it's also where I copied it from
         hardware.graphics.enable = true;
-        hardware.nvidia.open = false; # Set to false to use the proprietary kernel module
+        hardware.nvidia.open = true; # Set to false to use the proprietary kernel module
         hardware.nvidia.prime = {
             intelBusId = "PCI:0:2:0";
             nvidiaBusId = "PCI:1:0:0";
