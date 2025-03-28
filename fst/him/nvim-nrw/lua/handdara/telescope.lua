@@ -1,3 +1,4 @@
+local hdirs = require('handdara.util.dirs')
 local ta = require 'telescope.actions'
 require('telescope').setup {
     defaults = {
@@ -45,8 +46,29 @@ require('telescope').load_extension('media_files')
 local tbi = require('telescope.builtin')
 vim.keymap.set('n', '<leader>gf', tbi.git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', tbi.find_files, { desc = '[S]earch [f]iles' })
-vim.keymap.set('n', '<leader>sF', function() tbi.find_files({ no_ignore = true, no_ignore_parent = true }) end,
-    { desc = '[S]earch [F]iles (include gitignored)' })
+vim.keymap.set('n', '<leader>sF', function()
+    tbi.find_files({
+        no_ignore = true,
+        hidden = true,
+        no_ignore_parent = true
+    })
+end, { desc = '[S]earch [F]iles (include gitignored)' })
+vim.keymap.set('n', '<leader>sx', function()
+    tbi.find_files({
+        cwd = hdirs.config.abs,
+        no_ignore = true,
+        hidden = true,
+        no_ignore_parent = true,
+    })
+end, { desc = '[S]earch Configuration Files' })
+vim.keymap.set('n', '<leader>sX', function()
+    tbi.find_files({
+        cwd = hdirs.config_repo.abs,
+        no_ignore = true,
+        hidden = true,
+        no_ignore_parent = true,
+    })
+end, { desc = '[S]earch Configuration Repository' })
 vim.keymap.set('n', '<leader>sh', tbi.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', tbi.grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', tbi.live_grep, { desc = '[S]earch by [G]rep' })
