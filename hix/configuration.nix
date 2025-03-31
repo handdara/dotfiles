@@ -1,4 +1,4 @@
-{
+flake-overlays: {
     pkgs,
     sys_opts,
     ...
@@ -17,6 +17,8 @@
             ./system/hardware/displaylink
         ]
         ++ inputs.extraModules;
+
+    nixpkgs.overlays = flake-overlays;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -106,6 +108,7 @@
         brightnessctl
         pinentry-curses
         pass
+        matlab
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
