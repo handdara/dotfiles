@@ -67,6 +67,7 @@ vim.keymap.set('n', '<leader>sX', function()
         no_ignore = true,
         hidden = true,
         no_ignore_parent = true,
+        follow = true,
     })
 end, { desc = '[S]earch Configuration Repository' })
 vim.keymap.set('n', '<leader>sh', tbi.help_tags, { desc = '[S]earch [H]elp' })
