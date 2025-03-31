@@ -13,7 +13,6 @@
             };
         };
         system.nixos.tags = ["nvidia" "offload"];
-        services.xserver.desktopManager.gnome.enable = true;
     };
     specialisation.nvidia-sync.configuration = {
         hardware.graphics.enable = true;
@@ -27,6 +26,5 @@
             reverseSync.enable = true;
         };
         system.nixos.tags = ["nvidia" "sync"];
-        services.xserver.desktopManager.gnome.enable = true;
     };
 }

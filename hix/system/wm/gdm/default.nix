@@ -1,17 +1,12 @@
-{...} @ inputs: {
-    services.xserver = {
-        enable = true; # Enable the X11 windowing system. displaylink driver set up for x11
-        displayManager.gdm.enable = true; # Enable the GNOME Display Manager
-        # displayManager.gdm.wayland = inputs.sys_opts.useWayland;
-        xkb = {
-            # Configure keymap in X11
-            layout = "us";
-            variant = "";
-        };
-    };
-    specialisation = {
-        gdm.configuration = {
-            services.xserver.desktopManager.gnome.enable = true;
+{lib, ...} @ inputs: {
+    specialisation.gdm.configuration = {
+        services.displayManager.sddm.enable = lib.mkForce false;
+        services.displayManager.sddm.wayland.enable = lib.mkForce false;
+        services.xserver = {
+            enable = lib.mkForce true; # Enable the X11 windowing system. displaylink driver set up for x11
+            displayManager.gdm.enable = lib.mkForce true; # Enable the GNOME Display Manager
+            # displayManager.gdm.wayland = inputs.sys_opts.useWayland;
+            desktopManager.gnome.enable = true;
         };
     };
 }

@@ -9,11 +9,6 @@
                     luadbi-mysql # Database abstraction layer
                 ];
             };
-            xkb = {
-                # Configure keymap in X11
-                layout = "us";
-                variant = "";
-            };
         };
     };
 }

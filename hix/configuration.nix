@@ -11,6 +11,7 @@ flake-overlays: {
             ./machines/${sys_opts.hostname}/gpu.nix
             ./system/wm/gdm
             ./system/wm/awesomewm
+            ./system/wm/plasma
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
             ./system/hardware/displaylink

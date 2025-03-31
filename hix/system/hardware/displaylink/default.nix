@@ -35,6 +35,7 @@
             };
         };
         system.nixos.tags = ["nvidia" "offload" "ccrf"];
-        services.xserver.desktopManager.gnome.enable = true;
+        # services.xserver.desktopManager.gnome.enable = true;
+        services.desktopManager.plasma6.enable = true;
     };
 }
