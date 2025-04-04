@@ -49,4 +49,6 @@ return function()
     map('n', 'zk', '<CMD>mkview<CR>', { desc = 'ma[k]e view for current file' })
 
     map('n', '<leader>ns', '<CMD>StacheOpenTask<CR>', { desc = 'open stache task on current line' })
+
+    map('n', 'ZB', '<CMD>bufdo bd<CR>', { desc = 'Close all [B]uffers' })
 end
