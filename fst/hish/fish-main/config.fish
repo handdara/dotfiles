@@ -117,6 +117,8 @@ abbr --add mgf manage
 
 abbr --add --set-cursor=! m "math '(!)'"
 
+abbr --add hs hsync
+
 # CLI inits
 # -------------------------------------------------------------------------------------------------
 
