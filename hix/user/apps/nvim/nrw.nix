@@ -58,6 +58,7 @@ in {
         imagemagick # telescope-media-files.nvim dependency
         poppler_utils # telescope-media-files.nvim optional dependency
         libnotify # notify-nvim plugin dep
+        tinymist
     ];
 
     home.file =

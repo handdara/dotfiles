@@ -69,14 +69,24 @@ require 'lspconfig'.fish_lsp.setup { -- fish lsp config
     on_attach = on_attach,
 }
 
-require 'lspconfig'.pyright.setup { -- fish lsp config
+require 'lspconfig'.pyright.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
 
-require 'lspconfig'.texlab.setup { -- fish lsp config
+require 'lspconfig'.texlab.setup { -- latex lsp config
     capabilities = capabilities,
     on_attach = on_attach,
+}
+
+require 'lspconfig'.tinymist.setup { -- fish lsp config
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        formmaterMode = "typstyle",
+        exportPdf = "onType",
+        sematicTokens = "disable",
+    },
 }
 
 require 'lspconfig'.r_language_server.setup { -- fish lsp config
