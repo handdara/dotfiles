@@ -172,7 +172,7 @@ end
 use(s('context', { mkCStacheContexts(1) }))
 
 local function mkCLocations(idx)
-    local locs = { 'hm-395', 'hm-369', 'hm-3802', 'au-1', 'of-176', }
+    local locs = { 'hm-373', 'hm-369', 'hm-3802', 'au-1', 'of-176', }
     local lcs = {}
     for _, val in ipairs(locs) do
         table.insert(lcs, t(val))

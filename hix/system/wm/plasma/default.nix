@@ -15,6 +15,6 @@
     specialisation.plasma6-x11.configuration = {
         services.desktopManager.plasma6.enable = true;
         services.displayManager.defaultSession = "plasmax11";
-        services.displayManager.sddm.wayland.enable = lib.mkForce true;
+        services.displayManager.sddm.wayland.enable = lib.mkForce false;
     };
 }
