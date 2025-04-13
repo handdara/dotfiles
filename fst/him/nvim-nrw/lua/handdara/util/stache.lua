@@ -324,11 +324,11 @@ end
 function M.open_item()
     local line_text = vim.api.nvim_get_current_line()
     local task_id = string.match(line_text, '%((.-)%)') or string.match(line_text, 'id: *([%w%-%_]+)')
-    local file = hdirs.stache.abs .. '/' .. task_id
     if task_id then
+        local file = hdirs.stache.abs .. '/' .. task_id
         vim.cmd('edit ' .. file)
     else
-        vim.notify('File not found!')
+        vim.notify('No stache item on current line!')
     end
 end
 
