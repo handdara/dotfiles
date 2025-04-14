@@ -129,19 +129,26 @@ local function ask_cr(cmd)
     coroutine.yield(res)
 end
 
-local function grab_field(field, file)
+local function grab_field(field, file, tbl)
+    assert(type(file) == 'string' and string.len(file) > 0,
+        'grab_field: invalid arg: file: ' .. vim.inspect(file)
+        .. '\n\targ: tbl: '.. vim.inspect(tbl or 'tbl not passed')
+    )
     local command = { 'rg', "-NIor=$1", '^' .. field .. ': *(.*)(\t| )*', file }
     local co = coroutine.create(ask_cr)
     local _, ans = coroutine.resume(co, command)
     assert(coroutine.resume(co))
-    assert(ans.stderr[1] == "")
+    assert(ans.stderr[1] == "", "rg errored:\n\tans:\n" .. vim.inspect(ans) ..
+        "\n\tcommand: " .. vim.inspect(command) ..
+        "\n\tfile: " .. vim.inspect(file)
+    )
     return ans.stdout[1]
 end
 
 local meta_itmdat = {
     __is_stache_item = true,
     __index = function(tbl, key)
-        local fld = grab_field(key, tbl.path)
+        local fld = grab_field(key, tbl.path, tbl)
         if fld == '~' then
             fld = 'null'
         end
@@ -161,7 +168,9 @@ local meta_itmdat = {
 }
 
 function M.mk_itm_dat(filepath)
-    assert(type(filepath) == "string")
+    assert(type(filepath) == "string" and string.len(filepath) > 0,
+        'mk_itm_dat: invalid arg: filepath: ' ..  vim.inspect(filepath)
+    )
     local itmdat = {
         path = vim.fs.normalize(filepath),
     }
@@ -175,7 +184,11 @@ function M.mk_itm_dat(filepath)
         assert(self.id == vim.fs.basename(self.path))
     end
     setmetatable(itmdat, meta_itmdat)
-    assert(itmdat.id == vim.fs.basename(filepath))
+    assert(itmdat.id == vim.fs.basename(filepath),
+        'assertion failed, id/filepath basename mismatch:\n\t'
+        .. vim.inspect(itmdat.id) .. ' /= ' .. vim.inspect(vim.fs.basename(filepath)) .. '\n' ..
+        '!!! failing file: ' .. filepath
+    )
     return itmdat
 end
 
@@ -210,12 +223,7 @@ function M.mk_itm_set(filepaths)
         return self
     end
     function itmset:remove(itm)
-        for k, el in pairs(self.els) do
-            if el == itm then
-                self.els[k] = nil
-            end
-            return self
-        end
+        self.els[itm.id] = nil
         return self
     end
     function itmset:has(itm)
@@ -226,9 +234,21 @@ function M.mk_itm_set(filepaths)
         end
         return false
     end
+    --- foldl: (Set itm, a, (a, itm) -> a) -> a
+    ---@param acc any
+    ---@param f any
+    ---@return table
+    function itmset:foldl(acc, f)
+        for _, itm in pairs(self.els) do
+            acc = f(acc, itm)
+        end
+        return acc
+    end
     setmetatable(itmset, meta_itmset)
     for _, fp in ipairs(filepaths) do
-        itmset:insert(M.mk_itm_dat(fp))
+        if string.len(fp) > 0 then
+            itmset:insert(M.mk_itm_dat(fp))
+        end
     end
     return itmset
 end
@@ -267,7 +287,7 @@ local function run_stache(data)
     return ask_rg { '-l', pattern }
 end
 
-local function run_rg(data)
+local function run_rg(data, passin)
     assert(#data >= 1) -- args for ripgrep
     return ask_rg(data)
 end
@@ -276,26 +296,6 @@ local function run_query(query, file_set)
     assert(query.type and query.data)
     assert(query.type ~= "yq" or query.op == "mtrans")
     local next = file_set or M.mk_itm_set()
-    local function combine_results(new_ls, merge_strat)
-        local tmp = {}
-        local merge_file = {
-            mor = function(f) tmp[f] = true end,
-            mand = function(f) tmp[f] = next[f] or false end,
-            mtrans = function(l) tmp[l] = true end,
-            msub = function (f) tmp[f] = false end,
-        }
-        if merge_strat == 'mor' then
-            for _, f in ipairs(file_set) do
-                table.insert(tmp, f)
-            end
-        end
-        for _, f in ipairs(new_ls) do
-            if string.len(f) > 0 then
-                merge_file[merge_strat](f)
-            end
-        end
-        next = tmp
-    end
     local run = {
         rg = run_rg,
         yq = function(data, pass_in)
@@ -323,24 +323,26 @@ local function run_query(query, file_set)
     local res = run[query.type](query.data, next)
     assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
         'res:' .. vim.inspect(res))
-    combine_results(res.stdout, query.op or 'mor')
-    return next
+    local res_set = M.mk_itm_set(res.stdout)
+    if query.op == 'mor' or not query.op then
+        return next .. res_set
+    elseif query.op == 'mtrans' then
+        error('mtrans option is a todo')
+    elseif query.op == 'mand' then
+        error('mand option is a todo')
+    elseif query.op == 'msub' then
+        return next - res_set
+    end
 end
 
-function M.ask(queries)
+function M.ask(queries, itm_set_in)
     assert(type(queries) == "table")
     assert(type(queries[1]) == "table")
-    local pass_thru = {}
+    local itm_set = itm_set_in or M.mk_itm_set()
     for _, q in ipairs(queries) do
-        pass_thru = run_query(q, pass_thru)
+        itm_set = run_query(q, itm_set)
     end
-    local passed = {}
-    for f, in_file_set in pairs(pass_thru) do
-        if in_file_set then
-            table.insert(passed, f)
-        end
-    end
-    return passed
+    return itm_set
 end
 
 function M.print_result(fs)
