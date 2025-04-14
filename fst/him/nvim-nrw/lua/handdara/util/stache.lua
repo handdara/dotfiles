@@ -129,6 +129,96 @@ local function ask_cr(cmd)
     coroutine.yield(res)
 end
 
+local function grab_field(field, file)
+    local command = { 'rg', "-NIor=$1", '^' .. field .. ': *(.*)(\t| )*', file }
+    local co = coroutine.create(ask_cr)
+    local _, ans = coroutine.resume(co, command)
+    assert(coroutine.resume(co))
+    assert(ans.stderr[1] == "")
+    return ans.stdout[1]
+end
+
+local meta_itmdat = {
+    __is_stache_item = true,
+    __index = function(tbl, key)
+        local fld = grab_field(key, tbl.path)
+        tbl[key] = fld
+        return fld
+    end,
+    __eq = function (t1, t2)
+        return t1.id == t2.id
+    end,
+    __concat = function (t1, t2)
+        assert(t1 == t2)
+        for k, v in pairs(t2) do
+            t1[k] = v
+        end
+        return t1
+    end,
+}
+
+function M.mk_itm_dat(filepath)
+    assert(type(filepath) == "string")
+    local itmdat = {
+        path = vim.fs.normalize(filepath),
+        refresh = function()
+            error("TODO: complete refresh func")
+        end,
+    }
+    setmetatable(itmdat, meta_itmdat)
+    assert(itmdat.id == vim.fs.basename(filepath))
+    return itmdat
+end
+
+local meta_itmset = {
+    __is_stache_item_set = true,
+    __sub = function(self, rhs)
+        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set, 'both LHS and RHS must be item sets')
+        for _, v in pairs(rhs.els) do
+            self:remove(v)
+        end
+        return self
+    end,
+    __concat = function (self, rhs)
+        for _, itm in pairs(rhs.els) do
+            self:insert(itm)
+        end
+        return self
+    end,
+}
+
+function M.mk_itm_set()
+    local itmset = {els = {}}
+    function itmset:insert(itm)
+        for k, el in pairs(self.els) do
+            if el == itm then
+                self.els[k] = el .. itm
+                return self
+            end
+        end
+        self.els[itm.id] = itm
+        return self
+    end
+    function itmset:remove(itm)
+        for k, el in pairs(self.els) do
+            if el == itm then
+                self.els[k] = nil
+            end
+            return self
+        end
+        return self
+    end
+    function itmset:has(itm)
+        for k, el in pairs(self.els) do
+            if k == itm.id then
+                return getmetatable(el).__is_stache_item
+            end
+        end
+        return false
+    end
+    return setmetatable(itmset, meta_itmset)
+end
+
 local function ask_rg(args)
     local command = { "rg" }
     for _, arg in ipairs(args) do
@@ -244,15 +334,6 @@ function M.print_result(fs)
         assert(type(f) == 'string')
         print(f)
     end
-end
-
-local function grab_field(field, file)
-    local command = { 'rg', "-NIor=$1", '^' .. field .. ': *(.*)(\t| )*', file }
-    local co = coroutine.create(ask_cr)
-    local _, ans = coroutine.resume(co, command)
-    assert(coroutine.resume(co))
-    assert(ans.stderr[1] == "")
-    return ans.stdout[1]
 end
 
 local function render_task(file)
