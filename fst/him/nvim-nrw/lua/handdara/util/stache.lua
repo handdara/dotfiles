@@ -196,7 +196,8 @@ local meta_itmset = {
     end,
 }
 
-function M.mk_itm_set()
+function M.mk_itm_set(filepaths)
+    filepaths = filepaths or {}
     local itmset = {els = {}}
     function itmset:insert(itm)
         for k, el in pairs(self.els) do
@@ -225,7 +226,11 @@ function M.mk_itm_set()
         end
         return false
     end
-    return setmetatable(itmset, meta_itmset)
+    setmetatable(itmset, meta_itmset)
+    for _, fp in ipairs(filepaths) do
+        itmset:insert(M.mk_itm_dat(fp))
+    end
+    return itmset
 end
 
 local function ask_rg(args)
@@ -270,7 +275,7 @@ end
 local function run_query(query, file_set)
     assert(query.type and query.data)
     assert(query.type ~= "yq" or query.op == "mtrans")
-    local next = file_set or {}
+    local next = file_set or M.mk_itm_set()
     local function combine_results(new_ls, merge_strat)
         local tmp = {}
         local merge_file = {
