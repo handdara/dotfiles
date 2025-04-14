@@ -161,10 +161,16 @@ function M.mk_itm_dat(filepath)
     assert(type(filepath) == "string")
     local itmdat = {
         path = vim.fs.normalize(filepath),
-        refresh = function()
-            error("TODO: complete refresh func")
-        end,
     }
+    function itmdat:refresh()
+        local path_ = self.path
+        for k, _ in pairs(self) do
+            self[k] = nil
+        end
+        self.path = path_
+        setmetatable(self, meta_itmdat)
+        assert(self.id == vim.fs.basename(self.path))
+    end
     setmetatable(itmdat, meta_itmdat)
     assert(itmdat.id == vim.fs.basename(filepath))
     return itmdat
