@@ -142,6 +142,9 @@ local meta_itmdat = {
     __is_stache_item = true,
     __index = function(tbl, key)
         local fld = grab_field(key, tbl.path)
+        if fld == '~' then
+            fld = 'null'
+        end
         tbl[key] = fld
         return fld
     end,
@@ -343,14 +346,17 @@ function M.print_result(fs)
 end
 
 local function render_task(file)
-    local task = {}
-    task.id = grab_field('id', file)
-    task.desc = grab_field('description', file)
-    task.due = grab_field('due', file)
-    task.priority = grab_field('priority', file)
+    local task
+    if type(file) == "string" then
+        task = M.mk_itm_dat(file)
+    elseif getmetatable(file).__is_stache_item then
+        task = file
+    else
+        error('render_task: file given was neither a stache itm_dat nor a file path')
+    end
     assert(task.priority ~= 'null')
     local due_str
-    if task.due == '~' or task.due == 'null' then
+    if task.due == 'null' then
         due_str = ''
     else
         due_str = '<' .. task.due .. '> '
@@ -362,7 +368,7 @@ local function render_task(file)
             ") " ..
             due_str .. '-' ..
             task.priority .. '- ' ..
-            task.desc
+            task.description
         ),
         fields = task
     }
