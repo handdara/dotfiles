@@ -1,5 +1,6 @@
 local hdirs = require 'handdara.util.dirs'
-local M = {dirs = {data = hdirs.stache.abs}}
+local tr = require('handdara.util').trace
+local M = { dirs = { data = hdirs.stache.abs } }
 
 M.areas = {
     'seal',
@@ -132,7 +133,7 @@ end
 local function grab_field(field, file, tbl)
     assert(type(file) == 'string' and string.len(file) > 0,
         'grab_field: invalid arg: file: ' .. vim.inspect(file)
-        .. '\n\targ: tbl: '.. vim.inspect(tbl or 'tbl not passed')
+        .. '\n\targ: tbl: ' .. vim.inspect(tbl or 'tbl not passed')
     )
     local command = { 'rg', "-NIor=$1", '^' .. field .. ': *(.*)(\t| )*', file }
     local co = coroutine.create(ask_cr)
@@ -155,10 +156,10 @@ local meta_itmdat = {
         tbl[key] = fld
         return fld
     end,
-    __eq = function (t1, t2)
+    __eq = function(t1, t2)
         return t1.id == t2.id
     end,
-    __concat = function (t1, t2)
+    __concat = function(t1, t2)
         assert(t1 == t2)
         for k, v in pairs(t2) do
             t1[k] = v
@@ -169,7 +170,7 @@ local meta_itmdat = {
 
 function M.mk_itm_dat(filepath)
     assert(type(filepath) == "string" and string.len(filepath) > 0,
-        'mk_itm_dat: invalid arg: filepath: ' ..  vim.inspect(filepath)
+        'mk_itm_dat: invalid arg: filepath: ' .. vim.inspect(filepath)
     )
     local itmdat = {
         path = vim.fs.normalize(filepath),
@@ -183,6 +184,7 @@ function M.mk_itm_dat(filepath)
         setmetatable(self, meta_itmdat)
         assert(self.id == vim.fs.basename(self.path))
     end
+
     setmetatable(itmdat, meta_itmdat)
     assert(itmdat.id == vim.fs.basename(filepath),
         'assertion failed, id/filepath basename mismatch:\n\t'
@@ -195,23 +197,33 @@ end
 local meta_itmset = {
     __is_stache_item_set = true,
     __sub = function(self, rhs)
-        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set, 'both LHS and RHS must be item sets')
+        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set,
+            'both LHS and RHS must be item sets')
         for _, v in pairs(rhs.els) do
             self:remove(v)
         end
         return self
     end,
-    __concat = function (self, rhs)
+    __concat = function(self, rhs)
+        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set,
+            'both LHS and RHS must be item sets')
         for _, itm in pairs(rhs.els) do
             self:insert(itm)
         end
         return self
     end,
+    __pow = function(self, rhs)
+        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set,
+            'both LHS and RHS must be item sets')
+        return self:filter(function(itm)
+            return rhs:has(itm)
+        end)
+    end
 }
 
 function M.mk_itm_set(filepaths)
     filepaths = filepaths or {}
-    local itmset = {els = {}}
+    local itmset = { els = {} }
     function itmset:insert(itm)
         for k, el in pairs(self.els) do
             if el == itm then
@@ -222,10 +234,12 @@ function M.mk_itm_set(filepaths)
         self.els[itm.id] = itm
         return self
     end
+
     function itmset:remove(itm)
         self.els[itm.id] = nil
         return self
     end
+
     function itmset:has(itm)
         for k, el in pairs(self.els) do
             if k == itm.id then
@@ -234,16 +248,24 @@ function M.mk_itm_set(filepaths)
         end
         return false
     end
-    --- foldl: (Set itm, a, (a, itm) -> a) -> a
-    ---@param acc any
-    ---@param f any
-    ---@return table
+
+    -- foldl: (Set itm, a, (a, itm) -> a) -> a
     function itmset:foldl(acc, f)
         for _, itm in pairs(self.els) do
             acc = f(acc, itm)
         end
         return acc
     end
+
+    function itmset:filter(p)
+        for key, itm in pairs(self.els) do
+            if not p(itm) then
+                self.els[key] = nil
+            end
+        end
+        return self
+    end
+
     setmetatable(itmset, meta_itmset)
     for _, fp in ipairs(filepaths) do
         if string.len(fp) > 0 then
@@ -287,17 +309,21 @@ local function run_stache(data)
     return ask_rg { '-l', pattern }
 end
 
-local function run_rg(data, passin)
-    assert(#data >= 1) -- args for ripgrep
-    return ask_rg(data)
-end
-
 local function run_query(query, file_set)
     assert(query.type and query.data)
     assert(query.type ~= "yq" or query.op == "mtrans")
-    local next = file_set or M.mk_itm_set()
+    local next
+    if file_set then
+        assert(getmetatable(file_set).__is_stache_item_set)
+        next = file_set
+    else
+        next = M.mk_itm_set()
+    end
     local run = {
-        rg = run_rg,
+        rg = function(data, _)
+            assert(#data >= 1) -- args for ripgrep
+            return ask_rg(data)
+        end,
         yq = function(data, pass_in)
             table.insert(data, 1, '-c')
             for f, in_file_set in pairs(pass_in) do
@@ -311,12 +337,16 @@ local function run_query(query, file_set)
         stache = run_stache,
         task = function(data, passin)
             local tmp = run_query({ type = 'stache', data = 'task' }, passin)
-            local x = { '-l', '^' .. data[1] .. ': *' .. data[2] }
-            tmp = run_query({ type = 'rg', data = x, op = 'mand' }, tmp)
-            local res = { stdout = {}, stderr = { '' } }
-            for key, _ in pairs(tmp) do
-                table.insert(res.stdout, key)
-            end
+            tmp = tmp:filter(function(itm)
+                return itm[data[1]] == data[2]
+            end)
+            local res = {
+                stdout = tmp:foldl({}, function(acc, itm)
+                    table.insert(acc, itm.path)
+                    return acc
+                end),
+                stderr = { '' },
+            }
             return res
         end,
     }
@@ -329,7 +359,7 @@ local function run_query(query, file_set)
     elseif query.op == 'mtrans' then
         error('mtrans option is a todo')
     elseif query.op == 'mand' then
-        error('mand option is a todo')
+        return next ^ res_set
     elseif query.op == 'msub' then
         return next - res_set
     end
@@ -338,7 +368,12 @@ end
 function M.ask(queries, itm_set_in)
     assert(type(queries) == "table")
     assert(type(queries[1]) == "table")
-    local itm_set = itm_set_in or M.mk_itm_set()
+    local itm_set
+    if itm_set_in then
+        itm_set = M.mk_itm_set() .. itm_set_in -- shallow copy
+    else
+        itm_set = M.mk_itm_set()
+    end
     for _, q in ipairs(queries) do
         itm_set = run_query(q, itm_set)
     end
@@ -381,37 +416,24 @@ local function render_task(file)
     }
 end
 
-function M.print_tasks(fs)
-    local output = {}
-    for _, f in ipairs(fs) do
-        local rndr = render_task(f)
-        table.insert(output, rndr.str)
-    end
-    for _, l in ipairs(output) do
-        print(l)
-    end
-end
-
 function M.task_board(opts)
     local ls = {}
     opts = opts or {}
-    assert(not(opts.include and opts.exclude))
+    assert(not (opts.include and opts.exclude))
     table.insert(ls, "## tasks")
     table.insert(ls, "")
     -- for each task status type
     for _, st in ipairs(M.statuses) do
-        local ts = {}
-        -- pretty print the status type
-        table.insert(ts, "### " .. st)
-        -- get tasks pertaining to it
+        -- get tasks pertaining to status type
         local res = M.ask { { type = 'task', data = { 'status', st } } }
         -- pretty print them
-        for _, f in ipairs(res) do
-            local rndr = render_task(f)
-            table.insert(ts, rndr.str)
-        end
-        table.sort(ts)
-        for _, t in ipairs(ts) do
+        local task_lines = res:foldl({ "### " .. st }, function(acc, itm)
+            local rndr = render_task(itm)
+            table.insert(acc, rndr.str)
+            return acc
+        end)
+        table.sort(task_lines)
+        for _, t in ipairs(task_lines) do
             table.insert(ls, t)
         end
         table.insert(ls, '')

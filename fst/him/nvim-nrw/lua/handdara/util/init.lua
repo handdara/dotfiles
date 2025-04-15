@@ -30,4 +30,16 @@ function M.timestamp()
     }
 end
 
+function M.trace(msg, x)
+    assert(type(msg) == "string")
+    print(msg .. vim.inspect(x))
+    return x
+end
+
+function M.trace_notify(msg, x)
+    assert(type(msg) == "string")
+    vim.notify(msg .. vim.inspect(x))
+    return x
+end
+
 return M
