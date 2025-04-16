@@ -380,6 +380,11 @@ function M.ask(queries, itm_set_in)
     return itm_set
 end
 
+function M.quick_get_names(stache_type)
+    local res = run_stache(stache_type)
+    return res.stdout
+end
+
 function M.print_result(fs)
     for _, f in ipairs(fs) do
         assert(type(f) == 'string')

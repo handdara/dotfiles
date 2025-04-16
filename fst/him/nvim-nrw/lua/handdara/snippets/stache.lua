@@ -98,7 +98,7 @@ local blocks = {
 
 local function mkSNStacheID(idx, stacheType)
     local function getCatsNs()
-        local invFiles = stache.ask{ {type = 'stache', data = stacheType}, }
+        local filepaths = stache.quick_get_names(stacheType)
         local defaultName, idCats
         if stacheType == 'inventory' then
             defaultName = 'iid'
@@ -118,11 +118,11 @@ local function mkSNStacheID(idx, stacheType)
         else
             error('unknown stache type given, ', stacheType)
         end
-        for jdx, file in ipairs(invFiles) do
+        for jdx, file in ipairs(filepaths) do
             local fname = string.match(file, '.*/([^ %#\t]*)')
-            invFiles[jdx] = fname
+            filepaths[jdx] = fname
         end
-        for _, file in ipairs(invFiles) do
+        for _, file in ipairs(filepaths) do
             local cat, num_str = string.match(file, '([^%-]+)-([^%-]+)')
             local num = tonumber(num_str)
             if cat and num then
