@@ -28,8 +28,13 @@ end
 ---@class Foldable<A>
 ---@field foldl fun(self:Foldable<`A`>, acc0: `B`, f:fun(acc:`B`, el:`A`):`B`):`B`
 
+---@generic A, B
+---@class Mappable<A>
+---@field map fun(self:Mappable<`A`>, f:fun(el:`A`):`B`):Mappable<`B`>
+---@field filter fun(self:Mappable<`A`>, p:fun(el:`A`):boolean):Mappable<`A`>
+
 ---@generic T
----@class Set<T>: Foldable
+---@class Set<T>: Foldable, Mappable
 ---@field _elements table<`T`, boolean>
 ---@field new fun(self:Set, list:`T`?):Set
 ---@field insert fun(self:Set, element: `T`):Set
@@ -48,7 +53,7 @@ local Set_mt = {
         end
         return self
     end,
-    __sub = function (self, rhs)
+    __sub = function(self, rhs)
         for element, is_in_rhs in pairs(rhs._elements) do
             if is_in_rhs then
                 self:remove(element)
@@ -56,7 +61,7 @@ local Set_mt = {
         end
         return self
     end,
-    __mul = function (self, rhs)
+    __mul = function(self, rhs)
         for element, el_is_in_lhs in pairs(self._elements) do
             if not (el_is_in_lhs and rhs:has(element)) then
                 self:remove(element)
@@ -104,6 +109,26 @@ function Set:foldl(acc0, f)
     return acc
 end
 
+function Set:filter(p)
+    local next = Set:new()
+    for element, is_in_self in pairs(self._elements) do
+        if is_in_self and p(element) then
+            next:insert(element)
+        end
+    end
+    return next
+end
+
+function Set:map(f)
+    local next = Set:new()
+    for element, is_in_self in pairs(self._elements) do
+        if is_in_self then
+            next:insert(f(element))
+        end
+    end
+    return next
+end
+
 local function runtests(tests, pr)
     local idx = 1
     for name, test in pairs(tests) do
@@ -115,7 +140,7 @@ local function runtests(tests, pr)
     end
 end
 local test_out = {}
-runtests({
+local tests = {
     test_set_init = function(prefix)
         local x = Set:new()
         assert(type(x) == 'table', prefix .. ":Set builtin type should be a table!")
@@ -180,26 +205,41 @@ runtests({
     end,
     test_set_fold = function(prefix)
         local x = Set:new()
-        assert(x.foldl, prefix .. ":Set should have an foldl metamethod!")
+        assert(x.foldl, prefix .. ":Set should have an foldl method!")
         x = x:insert(0)
         x = x:insert(1)
         x = x:insert(42)
-        local res = x:foldl(-1, function (acc, el) return acc + el end)
+        local res = x:foldl(-1, function(acc, el) return acc + el end)
         assert(res == 42, prefix .. ":result of Set fold should be 42! res = " .. vim.inspect(res))
     end,
     test_list2set_init = function(prefix)
-        local x = Set:new({'alpha', 'beta', 'kappa'})
+        local x = Set:new({ 'alpha', 'beta', 'kappa' })
         assert(x:has('alpha') and x:has('beta') and x:has('kappa'),
             prefix .. ":Set should contain alpha, beta, and kappa! x = " .. vim.inspect(x))
     end,
-}, function(msg)
+    test_set_mappable = function(prefix)
+        local x = Set:new()
+        assert(x.filter, prefix .. ":Set should have an filter method!")
+        assert(x.map, prefix .. ":Set should have an map method!")
+        for i = 1, 20 do
+            x:insert(tostring(i))
+        end
+        local function is_even(el)
+            local el_ = tonumber(el)
+            return (el_ % 2) == 0
+        end
+        local y = x:filter(is_even)
+        local res = x:map(tonumber):foldl(0, function(a, b) return a + b end) == 210
+        assert(y:foldl(0, function(a, b) return a + b end) == 110)
+        assert(res, prefix .. ":result of Set fold should be 42! res = " .. vim.inspect(res))
+    end,
+}
+runtests(tests, function(msg)
     table.insert(test_out, ('testing type.lua:' .. msg))
 end)
 -- for _, line in pairs(test_out) do
 --     print(line)
 -- end
 
-M = {
-    Set = Set
-}
+M.Set = Set
 return M
