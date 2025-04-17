@@ -1,4 +1,4 @@
-local tr = require('handdara.util').trace_notify
+local tr = require('handdara.util').trace
 ---@class M
 local M = {}
 
@@ -31,7 +31,7 @@ end
 ---@generic T
 ---@class Set<T>: Foldable
 ---@field _elements table<`T`, boolean>
----@field new fun(self:Set):Set
+---@field new fun(self:Set, list:`T`?):Set
 ---@field insert fun(self:Set, element: `T`):Set
 ---@field has fun(self:Set, element: `T`):boolean
 ---@field remove fun(self:Set, element: `T`):Set
@@ -69,8 +69,14 @@ local Set_mt = {
 setmetatable(Set, Set_mt)
 
 ---@return Set
-function Set:new()
+function Set:new(elements)
     local inst = setmetatable({ _elements = {} }, getmetatable(self))
+    if elements then
+        assert(type(elements) == "table")
+        for _, el in pairs(elements) do
+            inst:insert(el)
+        end
+    end
     return inst
 end
 
@@ -86,6 +92,16 @@ end
 function Set:remove(x)
     self._elements[x] = false
     return self
+end
+
+function Set:foldl(acc0, f)
+    local acc = acc0
+    for element, is_in_self in pairs(self._elements) do
+        if is_in_self then
+            acc = f(acc, element)
+        end
+    end
+    return acc
 end
 
 local function runtests(tests, pr)
@@ -161,6 +177,20 @@ runtests({
         local z = x * y
         assert(z:has(1) and z:has(42) and (not z:has(0)) and (not z:has(2)),
             prefix .. ":Set should contain only `1`! z = " .. vim.inspect(z))
+    end,
+    test_set_fold = function(prefix)
+        local x = Set:new()
+        assert(x.foldl, prefix .. ":Set should have an foldl metamethod!")
+        x = x:insert(0)
+        x = x:insert(1)
+        x = x:insert(42)
+        local res = x:foldl(-1, function (acc, el) return acc + el end)
+        assert(res == 42, prefix .. ":result of Set fold should be 42! res = " .. vim.inspect(res))
+    end,
+    test_list2set_init = function(prefix)
+        local x = Set:new({'alpha', 'beta', 'kappa'})
+        assert(x:has('alpha') and x:has('beta') and x:has('kappa'),
+            prefix .. ":Set should contain alpha, beta, and kappa! x = " .. vim.inspect(x))
     end,
 }, function(msg)
     table.insert(test_out, ('testing type.lua:' .. msg))
