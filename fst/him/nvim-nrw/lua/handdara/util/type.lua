@@ -173,6 +173,14 @@ rawset(Map, 'filter', function(self, p)
     return next
 end)
 
+rawset(Map, 'foldl', function(self, acc0, f)
+    local acc = acc0
+    for _, v in pairs(self._elements) do
+        acc = f(acc, v)
+    end
+    return acc
+end)
+
 local function runtests(tests, pr)
     local idx = 1
     for name, test in pairs(tests) do
@@ -297,13 +305,20 @@ local tests = {
         assert(m['a'] == '1', prefix .. "should be equal to '1', m = " .. vim.inspect(m))
         assert(m['b'] == 'c', prefix .. "should be equal to 'c', m = " .. vim.inspect(m))
         assert(m[17] == 'false', prefix .. "should be equal to 'false', m = " .. vim.inspect(m))
-        local l = n:filter(function (el)
+        local l = n:filter(function(el)
             return type(el) ~= "string"
         end)
         assert(l['a'], prefix .. "l['a'] should not exist, l = " .. vim.inspect(l))
         assert(not l['b'], prefix .. "l['b'] should not exist, l = " .. vim.inspect(l))
         assert(l[17] == false, prefix .. "l[17] should exist, l = " .. vim.inspect(l))
-    end
+    end,
+    test_map_foldable = function(prefix)
+        local m = Map:new()
+        for i = 1, 20 do
+            m[tostring(i)] = i
+        end
+        assert(m:foldl(0, function (a, b) return a + b end) == 210, prefix .. 'answer should equal 210')
+    end,
 }
 runtests(tests, function(msg)
     table.insert(test_out, ('testing type.lua:' .. msg))

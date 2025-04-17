@@ -1,4 +1,5 @@
 local hdirs = require 'handdara.util.dirs'
+local T = require 'handdara.util.type'
 -- local tr = require('handdara.util').trace
 local M = { dirs = { data = hdirs.stache.abs } }
 
@@ -146,6 +147,8 @@ local function grab_field(field, file, tbl)
     return ans.stdout[1]
 end
 
+---@alias FilePath string
+
 local meta_itmdat = {
     __is_stache_item = true,
     __index = function(tbl, key)
@@ -168,6 +171,12 @@ local meta_itmdat = {
     end,
 }
 
+---@class ItmDat
+---@field refresh fun(self:ItmDat)
+---@operator concat(ItmDat):ItmDat
+
+---@param filepath FilePath
+---@return ItmDat
 function M.mk_itm_dat(filepath)
     assert(type(filepath) == "string" and string.len(filepath) > 0,
         'mk_itm_dat: invalid arg: filepath: ' .. vim.inspect(filepath)
@@ -223,53 +232,12 @@ local meta_itmset = {
 
 function M.mk_itm_set(filepaths)
     filepaths = filepaths or {}
-    local itmset = { els = {} }
-    function itmset:insert(itm)
-        for k, el in pairs(self.els) do
-            if el == itm then
-                self.els[k] = el .. itm
-                return self
-            end
-        end
-        self.els[itm.id] = itm
-        return self
-    end
+    local itmset = T.Set:new()
 
-    function itmset:remove(itm)
-        self.els[itm.id] = nil
-        return self
-    end
-
-    function itmset:has(itm)
-        for k, el in pairs(self.els) do
-            if k == itm.id then
-                return getmetatable(el).__is_stache_item
-            end
-        end
-        return false
-    end
-
-    -- foldl: (Set itm, a, (a, itm) -> a) -> a
-    function itmset:foldl(acc, f)
-        for _, itm in pairs(self.els) do
-            acc = f(acc, itm)
-        end
-        return acc
-    end
-
-    function itmset:filter(p)
-        for key, itm in pairs(self.els) do
-            if not p(itm) then
-                self.els[key] = nil
-            end
-        end
-        return self
-    end
-
-    setmetatable(itmset, meta_itmset)
     for _, fp in ipairs(filepaths) do
         if string.len(fp) > 0 then
-            itmset:insert(M.mk_itm_dat(fp))
+            local new_itm = M.mk_itm_dat(fp)
+            itmset:insert(new_itm['id'])
         end
     end
     return itmset
@@ -314,7 +282,6 @@ local function run_query(query, file_set)
     assert(query.type ~= "yq" or query.op == "mtrans")
     local next
     if file_set then
-        assert(getmetatable(file_set).__is_stache_item_set)
         next = file_set
     else
         next = M.mk_itm_set()
@@ -355,11 +322,11 @@ local function run_query(query, file_set)
         'res:' .. vim.inspect(res))
     local res_set = M.mk_itm_set(res.stdout)
     if query.op == 'mor' or not query.op then
-        return next .. res_set
+        return next + res_set
     elseif query.op == 'mtrans' then
         error('mtrans option is a todo')
     elseif query.op == 'mand' then
-        return next ^ res_set
+        return next * res_set
     elseif query.op == 'msub' then
         return next - res_set
     end
@@ -370,7 +337,7 @@ function M.ask(queries, itm_set_in)
     assert(type(queries[1]) == "table")
     local itm_set
     if itm_set_in then
-        itm_set = M.mk_itm_set() .. itm_set_in -- shallow copy
+        itm_set = M.mk_itm_set() + itm_set_in -- shallow copy
     else
         itm_set = M.mk_itm_set()
     end
