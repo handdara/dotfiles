@@ -328,4 +328,5 @@ end)
 -- end
 
 M.Set = Set
+M.Map = Map
 return M

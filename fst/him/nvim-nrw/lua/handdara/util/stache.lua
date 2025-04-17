@@ -3,6 +3,12 @@ local T = require 'handdara.util.type'
 -- local tr = require('handdara.util').trace
 local M = { dirs = { data = hdirs.stache.abs } }
 
+StacheCache = T.Map:new()
+---@param itm ItmDat
+local function cacheItem(itm)
+    StacheCache[itm['id']] = itm
+end
+
 M.areas = {
     'seal',
     'thesis',
@@ -181,6 +187,12 @@ function M.mk_itm_dat(filepath)
     assert(type(filepath) == "string" and string.len(filepath) > 0,
         'mk_itm_dat: invalid arg: filepath: ' .. vim.inspect(filepath)
     )
+    local fid = vim.fs.basename(filepath)
+    local cacheQuery = StacheCache[fid]
+    if cacheQuery then
+        return cacheQuery
+    end
+
     local itmdat = {
         path = vim.fs.normalize(filepath),
     }
@@ -200,35 +212,9 @@ function M.mk_itm_dat(filepath)
         .. vim.inspect(itmdat.id) .. ' /= ' .. vim.inspect(vim.fs.basename(filepath)) .. '\n' ..
         '!!! failing file: ' .. filepath
     )
+    cacheItem(itmdat)
     return itmdat
 end
-
-local meta_itmset = {
-    __is_stache_item_set = true,
-    __sub = function(self, rhs)
-        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set,
-            'both LHS and RHS must be item sets')
-        for _, v in pairs(rhs.els) do
-            self:remove(v)
-        end
-        return self
-    end,
-    __concat = function(self, rhs)
-        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set,
-            'both LHS and RHS must be item sets')
-        for _, itm in pairs(rhs.els) do
-            self:insert(itm)
-        end
-        return self
-    end,
-    __pow = function(self, rhs)
-        assert(getmetatable(self).__is_stache_item_set and getmetatable(rhs).__is_stache_item_set,
-            'both LHS and RHS must be item sets')
-        return self:filter(function(itm)
-            return rhs:has(itm)
-        end)
-    end
-}
 
 function M.mk_itm_set(filepaths)
     filepaths = filepaths or {}
