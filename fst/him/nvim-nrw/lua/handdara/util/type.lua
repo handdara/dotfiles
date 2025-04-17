@@ -156,9 +156,21 @@ rawset(Map, 'new', function(self)
 end)
 
 rawset(Map, 'map', function(self, f)
-    for key, value in pairs(self) do
-        self[key] = f(value)
+    local next = Map:new()
+    for key, value in pairs(self._elements) do
+        next[key] = f(value)
     end
+    return next
+end)
+
+rawset(Map, 'filter', function(self, p)
+    local next = Map:new()
+    for key, val in pairs(self._elements) do
+        if p(val) then
+            next[key] = val
+        end
+    end
+    return next
 end)
 
 local function runtests(tests, pr)
@@ -277,7 +289,20 @@ local tests = {
         assert(m.test == 1, prefix .. 'should return the set number 1')
     end,
     test_map_mappable = function(prefix)
-
+        local n = Map:new()
+        n['a'] = 1
+        n['b'] = 'c'
+        n[17] = false
+        local m = n:map(tostring)
+        assert(m['a'] == '1', prefix .. "should be equal to '1', m = " .. vim.inspect(m))
+        assert(m['b'] == 'c', prefix .. "should be equal to 'c', m = " .. vim.inspect(m))
+        assert(m[17] == 'false', prefix .. "should be equal to 'false', m = " .. vim.inspect(m))
+        local l = n:filter(function (el)
+            return type(el) ~= "string"
+        end)
+        assert(l['a'], prefix .. "l['a'] should not exist, l = " .. vim.inspect(l))
+        assert(not l['b'], prefix .. "l['b'] should not exist, l = " .. vim.inspect(l))
+        assert(l[17] == false, prefix .. "l[17] should exist, l = " .. vim.inspect(l))
     end
 }
 runtests(tests, function(msg)
