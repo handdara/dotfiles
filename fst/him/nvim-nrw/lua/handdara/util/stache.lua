@@ -1,5 +1,5 @@
 local hdirs = require 'handdara.util.dirs'
-local tr = require('handdara.util').trace
+-- local tr = require('handdara.util').trace
 local M = { dirs = { data = hdirs.stache.abs } }
 
 M.areas = {
