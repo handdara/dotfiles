@@ -41,6 +41,8 @@ end
 ---@field has fun(self:Set, element: `T`):boolean
 ---@field remove fun(self:Set, element: `T`):Set
 ---@operator add(Set): Set
+---@operator sub(Set): Set
+---@operator mul(Set): Set
 local Set = {}
 
 local Set_mt = {
@@ -128,6 +130,36 @@ function Set:map(f)
     end
     return next
 end
+
+---@class Map: Foldable, Mappable
+---@field _elements table<any, any>
+---@field new fun(self:Map, list:`T`?):Map
+local Map = {}
+setmetatable(Map, {
+    __index = function(self, key)
+        if rawget(Map, key) then
+            return Map[key]
+        else
+            return self._elements[key]
+        end
+    end,
+    __newindex = function(t, k, v)
+        assert(not rawget(Map, k))
+        rawget(t, '_elements')[k] = v
+    end
+})
+
+rawset(Map, 'new', function(self)
+    ---@type Map
+    local inst = setmetatable({ _elements = {} }, getmetatable(self))
+    return inst
+end)
+
+rawset(Map, 'map', function(self, f)
+    for key, value in pairs(self) do
+        self[key] = f(value)
+    end
+end)
 
 local function runtests(tests, pr)
     local idx = 1
@@ -233,6 +265,20 @@ local tests = {
         assert(y:foldl(0, function(a, b) return a + b end) == 110)
         assert(res, prefix .. ":result of Set fold should be 42! res = " .. vim.inspect(res))
     end,
+    test_map_new = function(prefix)
+        local m = Map:new()
+        rawset(m, '_elements', { new = 'test', a_key = 'test' })
+        assert(m.new == Map.new, prefix .. 'accessing a Map method should work')
+        assert(m['a_key'] == 'test', prefix .. 'accessing a non-Map-method should give _elements access')
+    end,
+    test_map_newindex = function(prefix)
+        local m = Map:new()
+        m['test'] = 1
+        assert(m.test == 1, prefix .. 'should return the set number 1')
+    end,
+    test_map_mappable = function(prefix)
+
+    end
 }
 runtests(tests, function(msg)
     table.insert(test_out, ('testing type.lua:' .. msg))
