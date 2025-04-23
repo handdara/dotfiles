@@ -1,4 +1,3 @@
-local tr = require('handdara.util').trace
 ---@class M
 local M = {}
 

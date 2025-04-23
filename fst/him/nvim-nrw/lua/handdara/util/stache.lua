@@ -1,7 +1,10 @@
 local hdirs = require 'handdara.util.dirs'
 local T = require 'handdara.util.type'
--- local tr = require('handdara.util').trace
+local tr = require('handdara.util').trace
 local M = { dirs = { data = hdirs.stache.abs } }
+
+---@alias StacheID string
+---@alias FilePath string
 
 StacheCache = T.Map:new()
 ---@param itm ItmDat
@@ -153,8 +156,6 @@ local function grab_field(field, file, tbl)
     return ans.stdout[1]
 end
 
----@alias FilePath string
-
 local meta_itmdat = {
     __is_stache_item = true,
     __index = function(tbl, key)
@@ -241,21 +242,21 @@ local function ask_rg(args)
     return ans
 end
 
-local function ask_yq(args)
-    local command = { "yq" }
-    for _, arg in ipairs(args) do
-        table.insert(command, arg)
-    end
-    local co = coroutine.create(ask_cr)
-    local _, ans = coroutine.resume(co, command)
-    assert(coroutine.resume(co))
-    return ans
-end
+-- local function ask_yq(args)
+--     local command = { "yq" }
+--     for _, arg in ipairs(args) do
+--         table.insert(command, arg)
+--     end
+--     local co = coroutine.create(ask_cr)
+--     local _, ans = coroutine.resume(co, command)
+--     assert(coroutine.resume(co))
+--     return ans
+-- end
 
-local function run_yq(data)
-    assert(#data >= 3) -- args for yq
-    return ask_yq(data)
-end
+-- local function run_yq(data)
+--     assert(#data >= 3) -- args for yq
+--     return ask_yq(data)
+-- end
 
 local function run_stache(data)
     assert(string.len(data) >= 1)
@@ -263,39 +264,27 @@ local function run_stache(data)
     return ask_rg { '-l', pattern }
 end
 
-local function run_query(query, file_set)
-    assert(query.type and query.data)
-    assert(query.type ~= "yq" or query.op == "mtrans")
-    local next
-    if file_set then
-        next = file_set
-    else
-        next = M.mk_itm_set()
-    end
+---@param query table
+---@return Set<StacheID>
+local function run_query(query)
+    assert(query.type and query.data, "failed assertion: query = " .. vim.inspect(query))
     local run = {
-        rg = function(data, _)
+        rg = function(data)
             assert(#data >= 1) -- args for ripgrep
             return ask_rg(data)
         end,
-        yq = function(data, pass_in)
-            table.insert(data, 1, '-c')
-            for f, in_file_set in pairs(pass_in) do
-                if in_file_set then
-                    table.insert(data, f)
-                end
-            end
-            local res = run_yq(data)
-            return res
-        end,
         stache = run_stache,
-        task = function(data, passin)
-            local tmp = run_query({ type = 'stache', data = 'task' }, passin)
-            tmp = tmp:filter(function(itm)
+        task = function(data)
+            local tmp = run_query({ type = 'stache', data = 'task' })
+            ---@diagnostic disable-next-line: undefined-field
+            tmp = tmp:filter(function(itm_id)
+                local itm = StacheCache[itm_id]
+                    or M.mk_itm_dat(hdirs.stache.abs .. '/' .. itm_id)
                 return itm[data[1]] == data[2]
             end)
             local res = {
-                stdout = tmp:foldl({}, function(acc, itm)
-                    table.insert(acc, itm.path)
+                stdout = tmp:foldl({}, function(acc, itm_id)
+                    table.insert(acc, itm_id)
                     return acc
                 end),
                 stderr = { '' },
@@ -303,33 +292,16 @@ local function run_query(query, file_set)
             return res
         end,
     }
-    local res = run[query.type](query.data, next)
-    assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
-        'res:' .. vim.inspect(res))
+    local res = run[query.type](query.data)
+    -- assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
+    --     'res:' .. vim.inspect(res))
     local res_set = M.mk_itm_set(res.stdout)
-    if query.op == 'mor' or not query.op then
-        return next + res_set
-    elseif query.op == 'mtrans' then
-        error('mtrans option is a todo')
-    elseif query.op == 'mand' then
-        return next * res_set
-    elseif query.op == 'msub' then
-        return next - res_set
-    end
+    return res_set
 end
 
-function M.ask(queries, itm_set_in)
-    assert(type(queries) == "table")
-    assert(type(queries[1]) == "table")
-    local itm_set
-    if itm_set_in then
-        itm_set = M.mk_itm_set() + itm_set_in -- shallow copy
-    else
-        itm_set = M.mk_itm_set()
-    end
-    for _, q in ipairs(queries) do
-        itm_set = run_query(q, itm_set)
-    end
+function M.ask(query)
+    assert(type(query) == "table")
+    local itm_set = run_query(query)
     return itm_set
 end
 
@@ -375,26 +347,57 @@ local function render_task(file)
 end
 
 function M.task_board(opts)
-    local ls = {}
     opts = opts or {}
-    assert(not (opts.include and opts.exclude))
+    if opts.stexcl then
+        for _, st in pairs(M.statuses) do
+            if opts[st] == nil then
+                opts[st] = true
+            else
+                opts[st] = not opts[st]
+            end
+        end
+    elseif opts.only then
+        for _, st in pairs(M.statuses) do
+            opts[st] = false
+        end
+        if type(opts.only) == "string" then
+            opts[opts.only] = true
+        elseif type(opts.only) == "table" then
+            for _, value in ipairs(opts.only) do
+                    opts[value] = true
+            end
+        end
+    else
+        for _, st in pairs(M.statuses) do
+            if opts[st] == nil then
+                opts[st] = true
+            end
+        end
+    end
+    local task_ids = M.ask { type = 'stache', data = 'task' }
+    local task_itms = task_ids:map(function (id)
+        return M.mk_itm_dat(id)
+    end)
+    local ls = {}
     table.insert(ls, "## tasks")
     table.insert(ls, "")
     -- for each task status type
     for _, st in ipairs(M.statuses) do
-        -- get tasks pertaining to status type
-        local res = M.ask { { type = 'task', data = { 'status', st } } }
-        -- pretty print them
-        local task_lines = res:foldl({ "### " .. st }, function(acc, itm)
-            local rndr = render_task(itm)
-            table.insert(acc, rndr.str)
-            return acc
-        end)
-        table.sort(task_lines)
-        for _, t in ipairs(task_lines) do
-            table.insert(ls, t)
+        if opts[st] then
+            -- get tasks pertaining to status type
+            local res = task_itms:filter(function(task) return task['status'] == st end)
+            -- pretty print them
+            local task_lines = res:foldl({ "### " .. st }, function(acc, itm)
+                local rndr = render_task(itm)
+                table.insert(acc, rndr.str)
+                return acc
+            end)
+            table.sort(task_lines)
+            for _, t in ipairs(task_lines) do
+                table.insert(ls, t)
+            end
+            table.insert(ls, '')
         end
-        table.insert(ls, '')
     end
     for _, l in ipairs(ls) do
         print(l)
