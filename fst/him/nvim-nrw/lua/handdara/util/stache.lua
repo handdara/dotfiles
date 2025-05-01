@@ -1,5 +1,16 @@
 local hdirs = require 'handdara.util.dirs'
-local M = {dirs = {data = hdirs.stache.abs}}
+local T = require 'handdara.util.type'
+local tr = require('handdara.util').trace
+local M = { dirs = { data = hdirs.stache.abs } }
+
+---@alias StacheID string
+---@alias FilePath string
+
+StacheCache = T.Map:new()
+---@param itm ItmDat
+local function cacheItem(itm)
+    StacheCache[itm['id']] = itm
+end
 
 M.areas = {
     'seal',
@@ -129,6 +140,96 @@ local function ask_cr(cmd)
     coroutine.yield(res)
 end
 
+local function grab_field(field, file, tbl)
+    assert(type(file) == 'string' and string.len(file) > 0,
+        'grab_field: invalid arg: file: ' .. vim.inspect(file)
+        .. '\n\targ: tbl: ' .. vim.inspect(tbl or 'tbl not passed')
+    )
+    local command = { 'rg', "-NIor=$1", '^' .. field .. ': *(.*)(\t| )*', file }
+    local co = coroutine.create(ask_cr)
+    local _, ans = coroutine.resume(co, command)
+    assert(coroutine.resume(co))
+    assert(ans.stderr[1] == "", "rg errored:\n\tans:\n" .. vim.inspect(ans) ..
+        "\n\tcommand: " .. vim.inspect(command) ..
+        "\n\tfile: " .. vim.inspect(file)
+    )
+    return ans.stdout[1]
+end
+
+local meta_itmdat = {
+    __is_stache_item = true,
+    __index = function(tbl, key)
+        local fld = grab_field(key, tbl.path, tbl)
+        if fld == '~' then
+            fld = 'null'
+        end
+        tbl[key] = fld
+        return fld
+    end,
+    __eq = function(t1, t2)
+        return t1.id == t2.id
+    end,
+    __concat = function(t1, t2)
+        assert(t1 == t2)
+        for k, v in pairs(t2) do
+            t1[k] = v
+        end
+        return t1
+    end,
+}
+
+---@class ItmDat
+---@field refresh fun(self:ItmDat)
+---@operator concat(ItmDat):ItmDat
+
+---@param filepath FilePath
+---@return ItmDat
+function M.mk_itm_dat(filepath)
+    assert(type(filepath) == "string" and string.len(filepath) > 0,
+        'mk_itm_dat: invalid arg: filepath: ' .. vim.inspect(filepath)
+    )
+    local fid = vim.fs.basename(filepath)
+    local cacheQuery = StacheCache[fid]
+    if cacheQuery then
+        return cacheQuery
+    end
+
+    local itmdat = {
+        path = vim.fs.normalize(filepath),
+    }
+    function itmdat:refresh()
+        local path_ = self.path
+        for k, _ in pairs(self) do
+            self[k] = nil
+        end
+        self.path = path_
+        setmetatable(self, meta_itmdat)
+        assert(self.id == vim.fs.basename(self.path))
+    end
+
+    setmetatable(itmdat, meta_itmdat)
+    assert(itmdat.id == vim.fs.basename(filepath),
+        'assertion failed, id/filepath basename mismatch:\n\t'
+        .. vim.inspect(itmdat.id) .. ' /= ' .. vim.inspect(vim.fs.basename(filepath)) .. '\n' ..
+        '!!! failing file: ' .. filepath
+    )
+    cacheItem(itmdat)
+    return itmdat
+end
+
+function M.mk_itm_set(filepaths)
+    filepaths = filepaths or {}
+    local itmset = T.Set:new()
+
+    for _, fp in ipairs(filepaths) do
+        if string.len(fp) > 0 then
+            local new_itm = M.mk_itm_dat(fp)
+            itmset:insert(new_itm['id'])
+        end
+    end
+    return itmset
+end
+
 local function ask_rg(args)
     local command = { "rg" }
     for _, arg in ipairs(args) do
@@ -141,21 +242,21 @@ local function ask_rg(args)
     return ans
 end
 
-local function ask_yq(args)
-    local command = { "yq" }
-    for _, arg in ipairs(args) do
-        table.insert(command, arg)
-    end
-    local co = coroutine.create(ask_cr)
-    local _, ans = coroutine.resume(co, command)
-    assert(coroutine.resume(co))
-    return ans
-end
+-- local function ask_yq(args)
+--     local command = { "yq" }
+--     for _, arg in ipairs(args) do
+--         table.insert(command, arg)
+--     end
+--     local co = coroutine.create(ask_cr)
+--     local _, ans = coroutine.resume(co, command)
+--     assert(coroutine.resume(co))
+--     return ans
+-- end
 
-local function run_yq(data)
-    assert(#data >= 3) -- args for yq
-    return ask_yq(data)
-end
+-- local function run_yq(data)
+--     assert(#data >= 3) -- args for yq
+--     return ask_yq(data)
+-- end
 
 local function run_stache(data)
     assert(string.len(data) >= 1)
@@ -163,80 +264,50 @@ local function run_stache(data)
     return ask_rg { '-l', pattern }
 end
 
-local function run_rg(data)
-    assert(#data >= 1) -- args for ripgrep
-    return ask_rg(data)
-end
-
-local function run_query(query, file_set)
-    assert(query.type and query.data)
-    assert(query.type ~= "yq" or query.op == "mtrans")
-    local next = file_set or {}
-    local function combine_results(new_ls, merge_strat)
-        local tmp = {}
-        local merge_file = {
-            mor = function(f) tmp[f] = true end,
-            mand = function(f) tmp[f] = next[f] or false end,
-            mtrans = function(l) tmp[l] = true end,
-            msub = function (f) tmp[f] = false end,
-        }
-        if merge_strat == 'mor' then
-            for _, f in ipairs(file_set) do
-                table.insert(tmp, f)
-            end
-        end
-        for _, f in ipairs(new_ls) do
-            if string.len(f) > 0 then
-                merge_file[merge_strat](f)
-            end
-        end
-        next = tmp
-    end
+---@param query table
+---@return Set<StacheID>
+local function run_query(query)
+    assert(query.type and query.data, "failed assertion: query = " .. vim.inspect(query))
     local run = {
-        rg = run_rg,
-        yq = function(data, pass_in)
-            table.insert(data, 1, '-c')
-            for f, in_file_set in pairs(pass_in) do
-                if in_file_set then
-                    table.insert(data, f)
-                end
-            end
-            local res = run_yq(data)
-            return res
+        rg = function(data)
+            assert(#data >= 1) -- args for ripgrep
+            return ask_rg(data)
         end,
         stache = run_stache,
-        task = function(data, passin)
-            local tmp = run_query({ type = 'stache', data = 'task' }, passin)
-            local x = { '-l', '^' .. data[1] .. ': *' .. data[2] }
-            tmp = run_query({ type = 'rg', data = x, op = 'mand' }, tmp)
-            local res = { stdout = {}, stderr = { '' } }
-            for key, _ in pairs(tmp) do
-                table.insert(res.stdout, key)
-            end
+        task = function(data)
+            local tmp = run_query({ type = 'stache', data = 'task' })
+            ---@diagnostic disable-next-line: undefined-field
+            tmp = tmp:filter(function(itm_id)
+                local itm = StacheCache[itm_id]
+                    or M.mk_itm_dat(hdirs.stache.abs .. '/' .. itm_id)
+                return itm[data[1]] == data[2]
+            end)
+            local res = {
+                stdout = tmp:foldl({}, function(acc, itm_id)
+                    table.insert(acc, itm_id)
+                    return acc
+                end),
+                stderr = { '' },
+            }
             return res
         end,
     }
-    local res = run[query.type](query.data, next)
-    assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
-        'res:' .. vim.inspect(res))
-    combine_results(res.stdout, query.op or 'mor')
-    return next
+    local res = run[query.type](query.data)
+    -- assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
+    --     'res:' .. vim.inspect(res))
+    local res_set = M.mk_itm_set(res.stdout)
+    return res_set
 end
 
-function M.ask(queries)
-    assert(type(queries) == "table")
-    assert(type(queries[1]) == "table")
-    local pass_thru = {}
-    for _, q in ipairs(queries) do
-        pass_thru = run_query(q, pass_thru)
-    end
-    local passed = {}
-    for f, in_file_set in pairs(pass_thru) do
-        if in_file_set then
-            table.insert(passed, f)
-        end
-    end
-    return passed
+function M.ask(query)
+    assert(type(query) == "table")
+    local itm_set = run_query(query)
+    return itm_set
+end
+
+function M.quick_get_names(stache_type)
+    local res = run_stache(stache_type)
+    return res.stdout
 end
 
 function M.print_result(fs)
@@ -246,24 +317,18 @@ function M.print_result(fs)
     end
 end
 
-local function grab_field(field, file)
-    local command = { 'rg', "-NIor=$1", '^' .. field .. ': *(.*)(\t| )*', file }
-    local co = coroutine.create(ask_cr)
-    local _, ans = coroutine.resume(co, command)
-    assert(coroutine.resume(co))
-    assert(ans.stderr[1] == "")
-    return ans.stdout[1]
-end
-
 local function render_task(file)
-    local task = {}
-    task.id = grab_field('id', file)
-    task.desc = grab_field('description', file)
-    task.due = grab_field('due', file)
-    task.priority = grab_field('priority', file)
+    local task
+    if type(file) == "string" then
+        task = M.mk_itm_dat(file)
+    elseif getmetatable(file).__is_stache_item then
+        task = file
+    else
+        error('render_task: file given was neither a stache itm_dat nor a file path')
+    end
     assert(task.priority ~= 'null')
     local due_str
-    if task.due == '~' or task.due == 'null' then
+    if task.due == 'null' then
         due_str = ''
     else
         due_str = '<' .. task.due .. '> '
@@ -275,46 +340,64 @@ local function render_task(file)
             ") " ..
             due_str .. '-' ..
             task.priority .. '- ' ..
-            task.desc
+            task.description
         ),
         fields = task
     }
 end
 
-function M.print_tasks(fs)
-    local output = {}
-    for _, f in ipairs(fs) do
-        local rndr = render_task(f)
-        table.insert(output, rndr.str)
-    end
-    for _, l in ipairs(output) do
-        print(l)
-    end
-end
-
 function M.task_board(opts)
-    local ls = {}
     opts = opts or {}
-    assert(not(opts.include and opts.exclude))
+    if opts.stexcl then
+        for _, st in pairs(M.statuses) do
+            if opts[st] == nil then
+                opts[st] = true
+            else
+                opts[st] = not opts[st]
+            end
+        end
+    elseif opts.only then
+        for _, st in pairs(M.statuses) do
+            opts[st] = false
+        end
+        if type(opts.only) == "string" then
+            opts[opts.only] = true
+        elseif type(opts.only) == "table" then
+            for _, value in ipairs(opts.only) do
+                    opts[value] = true
+            end
+        end
+    else
+        for _, st in pairs(M.statuses) do
+            if opts[st] == nil then
+                opts[st] = true
+            end
+        end
+    end
+    local task_ids = M.ask { type = 'stache', data = 'task' }
+    local task_itms = task_ids:map(function (id)
+        return M.mk_itm_dat(id)
+    end)
+    local ls = {}
     table.insert(ls, "## tasks")
     table.insert(ls, "")
     -- for each task status type
     for _, st in ipairs(M.statuses) do
-        local ts = {}
-        -- pretty print the status type
-        table.insert(ts, "### " .. st)
-        -- get tasks pertaining to it
-        local res = M.ask { { type = 'task', data = { 'status', st } } }
-        -- pretty print them
-        for _, f in ipairs(res) do
-            local rndr = render_task(f)
-            table.insert(ts, rndr.str)
+        if opts[st] then
+            -- get tasks pertaining to status type
+            local res = task_itms:filter(function(task) return task['status'] == st end)
+            -- pretty print them
+            local task_lines = res:foldl({ "### " .. st }, function(acc, itm)
+                local rndr = render_task(itm)
+                table.insert(acc, rndr.str)
+                return acc
+            end)
+            table.sort(task_lines)
+            for _, t in ipairs(task_lines) do
+                table.insert(ls, t)
+            end
+            table.insert(ls, '')
         end
-        table.sort(ts)
-        for _, t in ipairs(ts) do
-            table.insert(ls, t)
-        end
-        table.insert(ls, '')
     end
     for _, l in ipairs(ls) do
         print(l)
@@ -324,11 +407,11 @@ end
 function M.open_item()
     local line_text = vim.api.nvim_get_current_line()
     local task_id = string.match(line_text, '%((.-)%)') or string.match(line_text, 'id: *([%w%-%_]+)')
-    local file = hdirs.stache.abs .. '/' .. task_id
     if task_id then
+        local file = hdirs.stache.abs .. '/' .. task_id
         vim.cmd('edit ' .. file)
     else
-        vim.notify('File not found!')
+        vim.notify('No stache item on current line!')
     end
 end
 

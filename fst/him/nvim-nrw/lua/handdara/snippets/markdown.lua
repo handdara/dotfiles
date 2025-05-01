@@ -42,7 +42,7 @@ curr_mo_link: "{1}"
 # {2}
 {3}
 ```lua
-Handdara.stache.task_board()
+Handdara.stache.task_board{{stexcl = true, archived = true, closed = true, scheduled = false}}
 ```
 
 ## quests
@@ -310,7 +310,7 @@ use(s('codeblock', { t { '```', '' }, i(1), t { '', '```' } }))
 
 use(s('tasks', { t {
     '```lua',
-    'Handdara.stache.task_board()',
+    'Handdara.stache.task_board{stexcl = true, archived = true, closed = true, scheduled = false}',
     '```',
 } }))
 
