@@ -40,9 +40,7 @@ tags:
 curr_mo_link: "{1}"
 ---
 # {2}
-
 {3}
-
 ```lua
 Handdara.stache.task_board()
 ```
@@ -212,7 +210,8 @@ local sdaily = s('daily', d(1, function()
     return sn(nil, fmt(bDaily, {
         t('[[p' .. u.dtnum2str(ts.mo_num) .. '-' .. ts.mo .. '-' .. ts.yr .. ']]'),
         t(ts.dy .. ts.mo .. ts.yr .. ', ' .. ts.wd),
-        daySchedules[ts.wd_num],
+        -- daySchedules[ts.wd_num],
+        t '',
         i(1, '...'),
         i(2, '...'),
         i(3, '...'),

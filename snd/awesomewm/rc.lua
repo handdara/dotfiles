@@ -60,7 +60,7 @@ local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
-local ansible = "nvim quicklinks.md"
+local ansible = "nvim SUMMARY.md"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
 local email = "mbsync -a && neomutt"
 local email_cmd = terminal_cmd .. email
