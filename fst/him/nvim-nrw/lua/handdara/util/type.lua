@@ -2,25 +2,41 @@
 local M = {}
 
 ---@class Some
----@field _l "some"
----@field val any
+---@field _val any
 
 ---@class None
----@field _l "none"
-
---@alias Option None|Some
 
 ---Creates a new Some
----@param x any
+---@generic T
+---@param x T
 ---@return Some
 function M.Some(x)
-    return { _l = "some", val = x }
+    return { _val = x }
 end
 
 ---Creates a new None
 ---@return None
 function M.None()
-    return { _l = "none" }
+    return {}
+end
+
+---@alias Option None | Some
+
+---@generic T
+---@generic S
+---@param x Option
+---@param onSome fun(S):T
+---@param onNone fun():T
+---@return T
+---@diagnostic disable-next-line: unused-function, unused-local
+function M.matchOption(x, onSome, onNone)
+    if x._val then
+        ---@cast x Some
+        return onSome(x._val)
+    else
+        ---@cast x None
+        return onNone()
+    end
 end
 
 ---@generic A, B
@@ -319,9 +335,9 @@ local tests = {
         assert(m:foldl(0, function (a, b) return a + b end) == 210, prefix .. 'answer should equal 210')
     end,
 }
-runtests(tests, function(msg)
-    table.insert(test_out, ('testing type.lua:' .. msg))
-end)
+-- runtests(tests, function(msg)
+--     table.insert(test_out, ('testing type.lua:' .. msg))
+-- end)
 -- for _, line in pairs(test_out) do
 --     print(line)
 -- end

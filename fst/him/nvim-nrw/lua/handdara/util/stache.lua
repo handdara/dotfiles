@@ -1,5 +1,6 @@
-local hdirs = require 'handdara.util.dirs'
-local T = require 'handdara.util.type'
+local hdirs = require('handdara.util.dirs')
+local T = require('handdara.util.type')
+local P = require('handdara.util.parse')
 local tr = require('handdara.util').trace
 local M = { dirs = { data = hdirs.stache.abs } }
 
@@ -11,6 +12,8 @@ StacheCache = T.Map:new()
 local function cacheItem(itm)
     StacheCache[itm['id']] = itm
 end
+
+M.stache = hdirs.stache
 
 M.areas = {
     'seal',
@@ -364,7 +367,7 @@ function M.task_board(opts)
             opts[opts.only] = true
         elseif type(opts.only) == "table" then
             for _, value in ipairs(opts.only) do
-                    opts[value] = true
+                opts[value] = true
             end
         end
     else
@@ -375,7 +378,7 @@ function M.task_board(opts)
         end
     end
     local task_ids = M.ask { type = 'stache', data = 'task' }
-    local task_itms = task_ids:map(function (id)
+    local task_itms = task_ids:map(function(id)
         return M.mk_itm_dat(id)
     end)
     local ls = {}
@@ -415,7 +418,141 @@ function M.open_item()
     end
 end
 
--- function M.print_inv(files)
--- end
+local function get_buf_stache_blocks(bufnr)
+    local ls = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+    local block_bounds = {}
+    local curr = {}
+    for idx, line in ipairs(ls) do
+        if table.maxn(curr) == 0 then
+            if string.match(line, "^```stache%s*$") then
+                table.insert(curr, idx)
+            end
+        elseif table.maxn(curr) == 1 then
+            if string.match(line, "^```%s*$") then
+                table.insert(curr, idx - 1)
+                table.insert(block_bounds, curr)
+                curr = {}
+            end
+        end
+    end
+    local blocks = {}
+    for _, bounds in ipairs(block_bounds) do
+        table.insert(blocks, vim.api.nvim_buf_get_lines(bufnr, bounds[1], bounds[2], false))
+    end
+    return blocks
+end
+
+---@return Parser
+local function mkSetOpP(s)
+    local p = P.pstr(s)
+    return p + P.ppure(string.lower(s))
+end
+local pPath = P.pmatch('^[%w%-%_%/]+()')
+local pSetOpKW = mkSetOpP('UNION') ^ mkSetOpP('SUBTRACT') ^ mkSetOpP('INTERSECT')
+local pWhite = P.prep(P.pstr(' ') ^ P.pstr('\t') ^ P.pstr('\n'))
+local pFrom = P.pstr('FROM') + pWhite + P.pstr('`') + pPath - P.pstr('`') - pWhite
+local pFroms = P.prep(pFrom - pWhite):fmap(function(x)
+    if #x == 0 then
+        return { { M.stache.abs } }
+    else
+        return { x }
+    end
+end)
+local pFilt = P.pstr('<filter>')
+local pSetOp = (pSetOpKW - pWhite .. pFroms .. pFilt)
+pSetOp = pSetOp:fmap(function(x)
+    return { { op = x[1], from_dirs = x[2], filter = x[3] } }
+end)
+local pGrpOp = pWhite + P.ppure('group', 'operation'):fmap(function(x)
+    return { x }
+end)
+-- local pGrpOps = P.prep(pGrpOp)
+local pBlk = pSetOp .. pGrpOp
+
+local function parse_block(block)
+    local fullBlock = table.concat(block, '\n')
+    return pSetOp.runParser(block[1])
+end
+
+local function run_block(block)
+end
+
+local function runtests(tests, pr)
+    local idx = 1
+    for name, test in pairs(tests) do
+        local prefix = 'test #' .. tostring(idx) .. ':' .. name .. ':'
+        pr(prefix .. 'running...')
+        test(prefix)
+        pr(prefix .. 'passed!')
+        idx = idx + 1
+    end
+end
+---@diagnostic disable-next-line: unused-local
+local test_output = {}
+local tests = {
+    test_get_buf_lines = function()
+        local ls = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+        local fnd = false
+        for _, l in ipairs(ls) do
+            if l == 'return M' then
+                fnd = true
+                break
+            end
+        end
+        assert(fnd, 'didnt find `return M`!\n')
+    end,
+    test_get_blks = function()
+        local testbuf = vim.api.nvim_create_buf(false, true)
+        local ls = {
+            "```stache",
+            "```",
+            "",
+            "```stache",
+            "```",
+            "",
+            "stache",
+            "",
+            "``stache",
+            "```",
+            "",
+            "```lua",
+            "```",
+            "",
+            "```stache",
+            "QUERY",
+            "```"
+        }
+        vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
+        local blks = get_buf_stache_blocks(testbuf)
+        vim.api.nvim_buf_delete(testbuf, { force = true })
+        assert(#blks[1] == 0)
+        assert(#blks[2] == 0)
+        assert(#blks[3] == 1 and blks[3][1] == 'QUERY')
+    end,
+    test_parse_set_op = function()
+        local ts = "UNION FROM `path` FROM `path` <filter>"
+        local res = pSetOp.runParser(ts)
+        assert(res._val)
+        assert(res._val[2][1]['op'] == 'union')
+        assert(res._val[2][1]['from_dirs'][1] == 'path')
+        assert(res._val[2][1]['from_dirs'][2] == 'path')
+    end,
+    test_parse_set_op_no_fr = function()
+        local ts = "UNION <filter>"
+        local res = pSetOp.runParser(ts)
+        assert(res._val)
+        assert(res._val[2][1]['op'] == 'union')
+        assert(res._val[2][1]['from_dirs'][1] == hdirs.stache.abs, vim.inspect(res))
+    end,
+    test_parse_blk = function()
+        local ts = "UNION FROM `path` <filter> "
+        local res = pBlk.runParser(ts)
+        tr('test_parse_blk:1:', res)
+    end
+}
+---@diagnostic disable-next-line: unused-local
+-- runtests(tests, function(msg) end)
+
+vim.cmd [[nnoremap <leader><leader>x :%lua<cr>]]
 
 return M
