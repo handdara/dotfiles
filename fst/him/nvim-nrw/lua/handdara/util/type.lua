@@ -1,6 +1,8 @@
 ---@class M
 local M = {}
 
+local tr = require('handdara.util').trace
+
 ---@class Some
 ---@field _val any
 
@@ -55,6 +57,7 @@ end
 ---@field insert fun(self:Set, element: `T`):Set
 ---@field has fun(self:Set, element: `T`):boolean
 ---@field remove fun(self:Set, element: `T`):Set
+---@field empty fun(self:Set):boolean
 ---@operator add(Set): Set
 ---@operator sub(Set): Set
 ---@operator mul(Set): Set
@@ -116,6 +119,21 @@ function Set:remove(x)
     return self
 end
 
+function Set:empty()
+    for _, inSet in pairs(self._elements) do
+        if inSet then
+            return false
+        end
+    end
+    return true
+end
+
+---left fold
+---@generic A
+---@generic B
+---@param acc0 A
+---@param f fun(acc:A, x:B):A
+---@return A
 function Set:foldl(acc0, f)
     local acc = acc0
     for element, is_in_self in pairs(self._elements) do
@@ -217,6 +235,13 @@ local tests = {
         assert(x.insert, prefix .. ":Set should have an insert method!")
         x = x:insert(0)
         assert(x._elements[0], prefix .. ":Set should contain `0`! set = " .. vim.inspect(x))
+    end,
+    test_set_empty = function(prefix)
+        local x = Set:new()
+        assert(x.empty, prefix .. ":Set should have a has method!")
+        assert(x:empty(), 'x = ' .. vim.inspect(x))
+        x = x:insert(0)
+        assert(not x:empty())
     end,
     test_set_has = function(prefix)
         local x = Set:new()
@@ -335,6 +360,7 @@ local tests = {
         assert(m:foldl(0, function (a, b) return a + b end) == 210, prefix .. 'answer should equal 210')
     end,
 }
+
 -- runtests(tests, function(msg)
 --     table.insert(test_out, ('testing type.lua:' .. msg))
 -- end)

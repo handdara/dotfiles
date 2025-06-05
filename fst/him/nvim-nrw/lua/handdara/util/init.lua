@@ -30,9 +30,11 @@ function M.timestamp()
     }
 end
 
-function M.trace(msg, x)
-    assert(type(msg) == "string", "first argument to trace should be a string")
-    print(msg .. vim.inspect(x))
+function M.trace(x, msg)
+    msg = msg or ''
+    if type(msg) == "string" then
+        print(msg .. vim.inspect(x))
+    end
     return x
 end
 
