@@ -31,10 +31,7 @@ function M.timestamp()
 end
 
 function M.trace(x, msg)
-    msg = msg or ''
-    if type(msg) == "string" then
-        print(msg .. vim.inspect(x))
-    end
+    print((msg or '') .. vim.inspect(x))
     return x
 end
 

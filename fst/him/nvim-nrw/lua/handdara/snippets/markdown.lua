@@ -41,9 +41,6 @@ curr_mo_link: "{1}"
 ---
 # {2}
 {3}
-```lua
-Handdara.stache.task_board{{stexcl = true, archived = true, closed = true, scheduled = false}}
-```
 
 ## quests
 {9}
@@ -211,7 +208,17 @@ local sdaily = s('daily', d(1, function()
         t('[[p' .. u.dtnum2str(ts.mo_num) .. '-' .. ts.mo .. '-' .. ts.yr .. ']]'),
         t(ts.dy .. ts.mo .. ts.yr .. ', ' .. ts.wd),
         -- daySchedules[ts.wd_num],
-        t '',
+        t {
+            '```stache',
+            'UNION FROM - STACHE task',
+            '#INTERSECT FIELD id "stache"',
+            'SUBTRACT FIELD status "closed"',
+            'SUBTRACT FIELD status "archived"',
+            'GROUP SPL FIELD status ASC',
+            'GROUP FIELD priority DES',
+            'LIST',
+            '```',
+        },
         i(1, '...'),
         i(2, '...'),
         i(3, '...'),
@@ -309,8 +316,14 @@ end
 use(s('codeblock', { t { '```', '' }, i(1), t { '', '```' } }))
 
 use(s('tasks', { t {
-    '```lua',
-    'Handdara.stache.task_board{stexcl = true, archived = true, closed = true, scheduled = false}',
+    '```stache',
+    'UNION FROM - STACHE task',
+    '#INTERSECT FIELD id "stache"',
+    'SUBTRACT FIELD status "closed"',
+    'SUBTRACT FIELD status "archived"',
+    'GROUP SPL FIELD status ASC',
+    'GROUP FIELD priority DES',
+    'LIST',
     '```',
 } }))
 

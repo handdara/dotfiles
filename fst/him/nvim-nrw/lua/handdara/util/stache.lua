@@ -5,6 +5,7 @@ local tr = require('handdara.util').trace
 local M = { dirs = { data = hdirs.stache.abs } }
 
 ---@alias StacheID string
+---@alias StacheField string
 ---@alias FilePath string
 
 StacheCache = T.Map:new()
@@ -128,6 +129,121 @@ M.types = {
     },
 }
 
+local function wrap0(...) return ... end
+local function wrap1(...) return { ... } end
+---@param f function
+---@param g function?
+---@return function
+local function compose(f, g)
+    assert(type(f) == "function")
+    if g then
+        assert(type(g) == "function")
+        return function(...)
+            return f(g(...))
+        end
+    else
+        return function(g_)
+            return compose(f, g_)
+        end
+    end
+end
+local wrapmap = function(f)
+    return compose(wrap1, compose(f, unpack))
+end
+
+---@return Parser
+local function mkSetOpP(s)
+    local p = P.pstr(s)
+    return p + P.ppure(string.lower(s))
+end
+local pYear = P.pmatch('^%d%d%d%d()'):fmap(wrapmap(tonumber))
+local pMo = P.pmatch('^%d?%d()'):fmap(wrapmap(tonumber))
+local function mkPMo(name)
+    local lowered = string.lower(name)
+    local capitalized = string.upper(string.sub(name,1,1)) .. string.sub(lowered,2)
+    return P.pstr(lowered) ^ P.pstr(capitalized)
+end
+local pMon = (mkPMo('jan') + P.ppure(1))
+    ^ (mkPMo('feb') + P.ppure(2))
+    ^ (mkPMo('mar') + P.ppure(3))
+    ^ (mkPMo('apr') + P.ppure(4))
+    ^ (mkPMo('may') + P.ppure(5))
+    ^ (mkPMo('jun') + P.ppure(6))
+    ^ (mkPMo('jul') + P.ppure(7))
+    ^ (mkPMo('aug') + P.ppure(8))
+    ^ (mkPMo('sep') + P.ppure(9))
+    ^ (mkPMo('oct') + P.ppure(10))
+    ^ (mkPMo('nov') + P.ppure(11))
+    ^ (mkPMo('dec') + P.ppure(12))
+local pDay = P.pmatch('^%d?%d()'):fmap(wrapmap(tonumber))
+local pDate = (pDay .. pMon .. pYear):fmap(compose(wrap1, function(x)
+    return {yr = x[3], mo = x[2], da = x[1]}
+end))
+    ^ (pYear - P.pstr('-') .. pMo - P.pstr('-') .. pDay):fmap(compose(wrap1, function(x)
+    return {yr = x[1], mo = x[2], da = x[3]}
+end))
+local pNullOrDate = (P.pstr('null') + P.ppure({yr = 9999, mo = 12, da = 31})) ^ pDate
+local pPath = P.pmatch('^[%w%-%_%/]+()')
+local pSetOpKW = mkSetOpP('UNION') ^ mkSetOpP('SUBTRACT') ^ mkSetOpP('INTERSECT')
+local pWhChar = P.pstr(' ') ^ P.pstr('\t')
+local pWhite = P.prep(pWhChar)
+local pNewLine = P.pstr('\n')
+local pWhSep = pWhChar + pWhite
+local pHome = P.pstr('-') + P.ppure(M.stache.abs)
+local pDir = pHome ^ pPath ^ (P.pstr('`') + pPath - P.pstr('`'))
+local pFrom = P.pstr('FROM') + pWhSep + pDir
+local pFroms = P.prep(pWhSep + pFrom):fmap(wrap1)
+local pStache = P.pstr('task') ^ P.pstr('data') ^ P.pstr('contact') ^ P.pstr('inventory')
+local pFiltStache = (P.pstr('STACHE') + pWhSep + pStache)
+    :fmap(function(x)
+        return { { filt = 'stache', data = x[1] } }
+    end)
+local pDblQuotes = P.pstr('"') + P.pmatch('^[^"]+()') - P.pstr('"')
+local pFiltGrep = (P.pstr('GREP') + pWhSep + pDblQuotes)
+    :fmap(function(re)
+        return { { filt = 'grep', data = re[1] } }
+    end)
+local pFieldStr = P.pmatch('^[%w%_]+()')
+local pField = pFieldStr ^ pDblQuotes
+local pFiltField = (P.pstr('FIELD') + pWhSep + pField .. pWhSep + pDblQuotes)
+    :fmap(function(x)
+        return { { filt = 'field', field = x[1], data = x[2] } }
+    end)
+local pFilters = pFiltStache ^ pFiltGrep ^ pFiltField
+local pInv = (P.pstr('INV') + pWhSep + P.ppure(true)) ^ P.ppure(false)
+local pInvFilt = (pInv .. pFilters):fmap(function(x)
+    x[2]['invert'] = x[1]
+    return { x[2] }
+end)
+local pFilt = (pWhSep + pInvFilt) ^ P.ppure({})
+local pSetOp = (pSetOpKW .. pFroms .. pFilt - pWhite)
+    :fmap(function(x)
+        return { { op = x[1], fromDirs = x[2], filter = x[3] } }
+    end)
+local pSetOps = (pSetOp .. P.prep(pNewLine + pSetOp)):fmap(wrap1)
+local pGrpSpl = P.pstr('GROUP') + pWhSep + P.pstr('SPL') + P.ppure(true)
+local pGrpNoSpl = P.pstr('GROUP') + P.ppure(false)
+local pGrpField = (P.pstr('FIELD') + pWhSep + pField)
+local pSort = pWhSep + (P.pstr('ASC') ^ P.pstr('DES'))
+    :fmap(function(x) return { string.lower(x[1]) } end)
+local pGrpOp = ((pGrpSpl ^ pGrpNoSpl) .. pWhSep + pGrpField .. (pSort ^ P.ppure(nil)) - pWhite)
+    :fmap(function(x)
+        ---@type GroupOp
+        local op = {
+            split = x[1],
+            field = x[2],
+            sort = x[3],
+        }
+        return { op }
+    end)
+local pDispOp = P.pstr('LIST') - pWhite
+local pBlk = (
+    pSetOps
+    .. (P.prep(pNewLine + pGrpOp - pWhite):fmap(wrap1))
+    .. (pNewLine + pDispOp)
+):fmap(function(x)
+    return { setOps = x[1], grpOps = x[2], dispOp = x[3] }
+end)
 local function ask_cr(cmd)
     local res = {}
     local function collect(_, data, name)
@@ -337,6 +453,7 @@ end
 ---@field filt string?
 ---@field data string?
 ---@field field string?
+---@field invert boolean?
 
 ---@class SetOp
 ---@field op string
@@ -353,9 +470,14 @@ local function do_query_set_ops(ops)
         for _, op in ipairs(ops) do
             local nextset
             if #op.fromDirs == 0 then
-                assert(not currset:empty(), 'ops = ' .. vim.inspect(ops) .. '\ncurrset = ' .. vim.inspect(currset))
                 -- using the current set instead of pulling from file system
-                local cmd = currset:foldl({'-l'},function(acc, id)
+                local rgFlags
+                if op.filter.invert then
+                    rgFlags = '--files-without-match'
+                else
+                    rgFlags = '--files-with-matches'
+                end
+                local cmd = currset:foldl({ rgFlags }, function(acc, id)
                     local itm = M.mk_itm_dat(id)
                     table.insert(acc, itm['path'])
                     return acc
@@ -363,46 +485,63 @@ local function do_query_set_ops(ops)
                 -- apply filter
                 if op.filter.filt == 'stache' then
                     local pattern = [[^stache: *]] .. op.filter.data
-                    table.insert(cmd,2,pattern)
+                    table.insert(cmd, 2, pattern)
                     local askRes = ask_rg(cmd)
                     assert(askRes.stderr[1] == "", 'std err: ' .. vim.inspect(askRes.stderr))
                     nextset = M.mk_itm_set(askRes.stdout)
                 elseif op.filter.filt == 'grep' then
-                    table.insert(cmd,2,op.filter.data)
+                    table.insert(cmd, 2, op.filter.data)
                     local askRes = ask_rg(cmd)
                     assert(askRes.stderr[1] == "", 'ask_rg result: ' .. vim.inspect(askRes))
                     nextset = M.mk_itm_set(askRes.stdout)
                 elseif op.filter.filt == 'field' then
-                    table.insert(cmd,2,'')
+                    cmd[1] = '--files-with-matches'
+                    table.insert(cmd, 2, '')
                     local askRes = ask_rg(cmd)
                     assert(askRes.stderr[1] == "")
                     nextset = M.mk_itm_set(askRes.stdout):filter(function(sid)
-                        return string.match(StacheCache[sid][op.filter.field], op.filter.data)
+                        local matched = string.match(StacheCache[sid][op.filter.field], op.filter.data)
+                        if op.filter.invert then
+                            return not matched
+                        else
+                            return matched
+                        end
                     end)
                 else
                     error('not impl')
                 end
             else
+                local rgFlags
+                if op.filter.invert then
+                    rgFlags = '--files-without-match'
+                else
+                    rgFlags = '--files-with-matches'
+                end
                 -- searching through file system
                 nextset = M.mk_itm_set()
                 for _, dir in ipairs(op.fromDirs) do
                     if op.filter.filt == 'stache' then
                         local pattern = [[^stache: *]] .. op.filter.data
-                        local askRes = ask_rg { '-l', pattern, dir }
+                        local askRes = ask_rg { rgFlags, pattern, dir }
                         assert(askRes.stderr[1] == "")
                         nextset = nextset + M.mk_itm_set(askRes.stdout)
                     elseif op.filter.filt == 'grep' then
-                        local askRes = ask_rg { '-l', op.filter.data, dir }
-                        assert(askRes.stderr[1] == "")
+                        local askRes = ask_rg { rgFlags, op.filter.data, dir }
+                        assert(askRes.stderr[1] == "", 'stderr: ' .. vim.inspect(askRes.stderr))
                         nextset = nextset + M.mk_itm_set(askRes.stdout)
                     elseif op.filter.filt == 'field' then
-                        local askRes = ask_rg { '-l', '', dir }
+                        local askRes = ask_rg { '-l', '', dir } -- leave this as just the -l arg because inversion happens later
                         assert(askRes.stderr[1] == "")
                         nextset = nextset + M.mk_itm_set(askRes.stdout):filter(function(sid)
-                            return string.match(StacheCache[sid][op.filter.field], op.filter.data)
+                            local matched = string.match(StacheCache[sid][op.filter.field], op.filter.data)
+                            if op.filter.invert then
+                                return not matched
+                            else
+                                return matched
+                            end
                         end)
                     else
-                        error('not impl')
+                        error('not impl: op = ' .. vim.inspect(op))
                     end
                 end
             end
@@ -418,9 +557,129 @@ local function do_query_set_ops(ops)
     end
 end
 
+---@class GroupOp
+---@field field StacheField
+---@field sort ('asc'|'des')?
+---@field split boolean
+
+---@alias Group {groups:[ string, Group ], opts:table?} | { items:ItmDat[] }
+
+local function compare_dates(lhs, rhs)
+    return T.matchOption(pNullOrDate.runParser(lhs),
+        function(lres)
+            local l = lres[2][1]
+            return T.matchOption(pNullOrDate.runParser(rhs),
+                function(rres)
+                    local r = rres[2][1]
+                    ---@cast l {yr:number, mo:number, da:number}
+                    ---@cast r {yr:number, mo:number, da:number}
+                    local yrEq = l.yr == r.yr
+                    local yrMoEq = yrEq and l.mo == r.mo
+                    return l.yr < r.yr or (yrEq and l.mo < r.mo) or (yrMoEq and l.da < r.da)
+                end,
+                function() error('date comparison failed') end)
+        end,
+        function() error('lhs date comparison failed, lhs: ' .. vim.inspect(lhs)) end)
+end
+
+---@param field StacheField
+---@param tups [string, any][]
+---@param invert boolean
+---@return [string, any][]
+local function sort_grp(field, tups, invert)
+    local comp_1 = function(c)
+        return function(ltup, rtup)
+            return c(ltup[1], rtup[1])
+        end
+    end
+    local comparison_funcs = { -- is (lhs < rhs) true?
+        id = nil,
+        due = comp_1(compare_dates),
+        created = comp_1(compare_dates),
+        modified = comp_1(compare_dates),
+        priority = comp_1(function(lhs, rhs)
+            local compTbl = {['null'] = 1, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4}
+            local l = compTbl[lhs]
+            local r = compTbl[rhs]
+            -- print(l .. '<' .. r .. '=' .. tostring(l<r))
+            return l < r
+        end),
+        status = comp_1(function(lhs, rhs)
+            local lnum, rnum
+            for idx, st in ipairs(M.statuses) do
+                if st == lhs then
+                    lnum = idx
+                end
+                if st == rhs then
+                    rnum = idx
+                end
+            end
+            return lnum < rnum
+        end),
+    }
+    table.sort(tups, comparison_funcs[field])
+    if invert then
+        local tupsInv = {}
+        for _, tup in ipairs(tups) do
+            table.insert(tupsInv, 1, tup)
+        end
+        return tupsInv
+    else
+        return tups
+    end
+end
+
+---@param op GroupOp
+---@param group Group
+---@return Group
+local function process_grp_op(op, group)
+    if group.groups then
+        local newGrps = {}
+        for _, tup in ipairs(group.groups) do
+            local key = tup[1]
+            local grp = tup[2]
+            table.insert(newGrps, {key, process_grp_op(op, grp)})
+        end
+        return { groups = newGrps }
+    elseif group.items and op.split then
+        local newGrps = {}
+        for _, itm in ipairs(group.items) do
+            local fld = itm[op.field]
+            local grp = newGrps[fld] or { items = {} }
+            table.insert(grp.items, itm)
+            newGrps[fld] = grp
+        end
+        local grp = { groups = {} }
+        for fld, subgrp in pairs(newGrps) do
+            table.insert(grp.groups, { fld, subgrp })
+        end
+        if op.sort then
+            grp.groups = sort_grp(op.field, grp.groups, op.sort == 'des')
+        end
+        return grp
+    elseif group.items and (not op.split) then
+        if op.sort then
+            -- pack for sorting
+            local zipped = {}
+            for _, itm in ipairs(group.items) do
+                table.insert(zipped, {itm[op.field], itm})
+            end
+            -- do sort
+            zipped = sort_grp(op.field, zipped, op.sort == 'des')
+            -- unpack after sorting
+            for idx, tup in ipairs(zipped) do
+                group.items[idx] = tup[2]
+            end
+        end
+        return group
+    else
+        error('group had neither "groups" nor "items" field. ')
+    end
+end
+
 ---@class Query
 ---@field setOps SetOp[]
----@field grpOps string[]
+---@field grpOps GroupOp[]
 ---@field dispOp string
 
 ---@param query Query
@@ -431,23 +690,49 @@ local function process_query(query)
 
     return T.matchOption(resultSet, function(x)
         ---@cast x Set
-        -- TODO: do group ops
-        -- for _, grpOp in ipairs(query.grpOps) do
-        -- end
+        ---@type Group
+        local rootGrp = {
+            items = x:foldl({}, function(acc, y)
+                table.insert(acc, M.mk_itm_dat(y))
+                return acc
+            end)
+        }
+        for _, grpOp in ipairs(query.grpOps) do
+            rootGrp = process_grp_op(grpOp, rootGrp)
+        end
 
         -- display op
         if query.dispOp == 'LIST' then
-            return x:foldl({}, function(acc, y)
-                local itm = M.mk_itm_dat(y)
-                table.insert(acc, itm:render()['str'])
-                return acc
-            end)
+            ---@param level integer
+            ---@param grp Group
+            ---@return string[]
+            local function disp_grps(level, grp)
+                local lines = {}
+                if grp.items then
+                    local preLine = string.rep('    ', math.max(0, level - 1))
+                    for _, itm in ipairs(grp.items) do
+                        table.insert(lines, preLine .. itm:render()['str'])
+                    end
+                elseif grp.groups then
+                    local preHdr = '##' .. string.rep('#',level) .. ' '
+                    for _, grpTuple in pairs(grp.groups) do
+                        table.insert(lines, preHdr .. grpTuple[1])
+                        for _, subline in ipairs(disp_grps(level+1, grpTuple[2])) do
+                            table.insert(lines, subline)
+                        end
+                    end
+                else
+                    error('root group has neither items nor subgroups')
+                end
+                return lines
+            end
+            return disp_grps(0, rootGrp)
         else
             error('not impl')
         end
     end, function()
-        return {'either no set operations were specified or the first set operation has no FROM expr'}
-    end)
+        return { 'Failed parse: either no set operations were specified or the first set operation has no FROM expr' }
+end)
 end
 
 function M.ask(query)
@@ -566,9 +851,34 @@ function M.open_item()
     end
 end
 
-local function get_buf_stache_blocks(bufnr)
+---@class StacheBlock
+---@field range [number, number]
+---@field lines string[]
+---@field output string[]
+---@field outReplaceRange [number, number]
+
+local function buf_get_blk_replace_range(bufnr, afterBlockLineNr)
+    local remLinesHead = vim.api.nvim_buf_get_lines(bufnr, afterBlockLineNr, afterBlockLineNr + 1, false)
+    if remLinesHead[1] and string.match(remLinesHead[1], '^```markdown%s?') then
+        local remLinesTail = vim.api.nvim_buf_get_lines(bufnr, afterBlockLineNr + 1, -1, false)
+        for idx, line in ipairs(remLinesTail) do
+            if string.match(line, '^```%s?') then
+                return { afterBlockLineNr, afterBlockLineNr + idx + 1 }
+            elseif string.match(line, '^```markdown%s?') then
+                break
+            end
+        end
+    end
+    return { afterBlockLineNr, afterBlockLineNr }
+end
+
+---get stache blocks in a buffer
+---@param bufnr number
+---@return StacheBlock[]
+local function buf_get_blocks(bufnr)
     local ls = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-    local block_bounds = {}
+    ---@type StacheBlock[]
+    local sBlks = {}
     local curr = {}
     for idx, line in ipairs(ls) do
         if table.maxn(curr) == 0 then
@@ -576,77 +886,35 @@ local function get_buf_stache_blocks(bufnr)
                 table.insert(curr, idx)
             end
         elseif table.maxn(curr) == 1 then
-            if string.match(line, "^```%s*$") then
+            if string.match(line, "^```stache%s*$") then
+                curr[1] = idx - 1
+            elseif string.match(line, "^```%s*$") then
                 table.insert(curr, idx - 1)
-                table.insert(block_bounds, curr)
+                local newBlk = {
+                    range = curr,
+                    lines = vim.api.nvim_buf_get_lines(bufnr, curr[1], curr[2], false),
+                    output = {},
+                    outReplaceRange = buf_get_blk_replace_range(bufnr, curr[2] + 1),
+                }
+                table.insert(sBlks, newBlk)
                 curr = {}
             end
         end
     end
-    local blocks = {}
-    for _, bounds in ipairs(block_bounds) do
-        table.insert(blocks, vim.api.nvim_buf_get_lines(bufnr, bounds[1], bounds[2], false))
+    return sBlks
+end
+
+---@param blockLines string[]
+---@return string[]
+local function run_block(blockLines)
+    local withoutComments = {}
+    for _, line in ipairs(blockLines) do
+        if not string.match(line, '^%s*#') then
+            table.insert(withoutComments, line)
+        end
     end
-    return blocks
-end
-
-local function wrap0(x) return x end
-local function wrap1(x) return { x } end
----@return Parser
-local function mkSetOpP(s)
-    local p = P.pstr(s)
-    return p + P.ppure(string.lower(s))
-end
-local pPath = P.pmatch('^[%w%-%_%/]+()')
-local pSetOpKW = mkSetOpP('UNION') ^ mkSetOpP('SUBTRACT') ^ mkSetOpP('INTERSECT')
-local pWhChar = P.pstr(' ') ^ P.pstr('\t')
-local pWhite = P.prep(pWhChar)
-local pNewLine = P.pstr('\n')
-local pWhSep = pWhChar + pWhite
-local pHome = P.pstr('-') + P.ppure(M.stache.abs)
-local pDir = pHome ^ pPath ^ (P.pstr('`') + pPath - P.pstr('`'))
-local pFrom = P.pstr('FROM') + pWhSep + pDir
-local pFroms = P.prep(pWhSep + pFrom):fmap(wrap1)
-local pStache = P.pstr('task') ^ P.pstr('data') ^ P.pstr('contact') ^ P.pstr('inventory')
-local pFiltStache = (P.pstr('STACHE') + pWhSep + pStache)
-    :fmap(function(x)
-        return { { filt = 'stache', data = x[1] } }
-    end)
-local pDblQuotes = P.pstr('"') + P.pmatch('^[^"]+()') - P.pstr('"')
-local pFiltGrep = (P.pstr('GREP') + pWhSep + pDblQuotes)
-    :fmap(function(re)
-        return { { filt = 'grep', data = re[1] } }
-    end)
-local pFieldStr = P.pmatch('^[%w%_]+()')
-local pField = pFieldStr ^ pDblQuotes
-local pFiltField = (P.pstr('FIELD') + pWhSep + pField .. pWhSep + pDblQuotes)
-    :fmap(function(x)
-        return { { filt = 'field', field = x[1], data = x[2] } }
-    end)
-local pFilters = pFiltStache ^ pFiltGrep ^ pFiltField
-local pFilt = (pWhSep + pFilters) ^ P.ppure({})
-local pSetOp = (pSetOpKW .. pFroms .. pFilt - pWhite)
-    :fmap(function(x)
-        return { { op = x[1], fromDirs = x[2], filter = x[3] } }
-    end)
-local pSetOps = (pSetOp .. P.prep(pNewLine + pSetOp)):fmap(wrap1)
-local pGrpField = (P.pstr('GROUP') + pWhSep + P.pstr('FIELD') + pWhSep + pField)
-    :fmap(function(x)
-        return {{ 'field', x[1] }}
-    end)
-local pGrpOp = pGrpField ^ P.pstr('GROUP')
-local pDispOp = P.pstr('LIST') - pWhite
-local pBlk = (
-    pSetOps
-    .. ( P.prep(pNewLine + pGrpOp - pWhite):fmap(wrap1) )
-    .. ( pNewLine + pDispOp)
-):fmap(function(x)
-    return { setOps = x[1], grpOps = x[2], dispOp = x[3] }
-end)
-
-local function run_block(block)
     local resLines = { '```markdown' }
-    local blkString = table.concat(block, '\n')
+    local blkString = table.concat(withoutComments, '\n')
     local processedLines = T.matchOption(pBlk.runParser(blkString),
         function(res)
             local query = res[2]
@@ -660,6 +928,19 @@ local function run_block(block)
     end
     table.insert(resLines, '```')
     return resLines
+end
+
+function M.buf_exec_all_blocks(bufnr)
+    bufnr = bufnr or 0
+    local blks = buf_get_blocks(bufnr)
+    local blkShft = 0
+    for _, blk in ipairs(blks) do
+        local res = run_block(blk.lines)
+        blk.output = res
+        vim.api.nvim_buf_set_lines(bufnr, blkShft + blk.outReplaceRange[1], blkShft + blk.outReplaceRange[2], false, res)
+        blkShft = blkShft + #res - blk.outReplaceRange[2] + blk.outReplaceRange[1]
+    end
+    return blks
 end
 
 local function runtests(tests, pr)
@@ -692,14 +973,41 @@ local tests = {
             "",
             "```stache",
             "UNION FROM - GREP \"regex\"",
-            "```"
+            "```",
+            "```markdown",
+            "-   ex task",
+            "```",
         }
         vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
-        local blks = get_buf_stache_blocks(testbuf)
+        local blks = buf_get_blocks(testbuf)
         vim.api.nvim_buf_delete(testbuf, { force = true })
-        assert(#blks[1] == 0)
-        assert(#blks[2] == 0)
-        assert(#blks[3] == 1 and blks[3][1] == 'UNION FROM - GREP \"regex\"')
+        assert(#blks[1].lines == 0)
+        assert(#blks[2].lines == 0)
+        assert(#blks[3].lines == 1 and blks[3].lines[1] == 'UNION FROM - GREP \"regex\"')
+        assert(blks[3].outReplaceRange[1] == blks[3].range[2] + 1
+            and blks[3].outReplaceRange[2] == blks[3].range[2] + 4)
+    end,
+    test_parse_dates = function()
+        assert(T.matchOption(pDate.runParser('12jun2025'), function(x)
+            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 12
+        end, function() return false end))
+        assert(T.matchOption(pDate.runParser('3jun2025'), function(x)
+            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 3
+        end, function() return false end))
+        assert(T.matchOption(pDate.runParser('2025-06-12'), function(x)
+            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 12
+        end, function() return false end))
+        assert(T.matchOption(pDate.runParser('2025-6-1'), function(x)
+            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 1
+        end, function() return false end))
+        assert(compare_dates('11jun2025', '12jun2025'))
+        assert(compare_dates('11jun2025', 'null'))
+        assert(not compare_dates('null', 'null'))
+        assert(not compare_dates('null', '1960-01-01'))
+        assert(not compare_dates('13jun2025', '12jun2025'))
+        assert(not compare_dates('12jun2025', '12jun2025'))
+        assert(compare_dates('2024-01-01', '12jun2025'))
+        assert(not compare_dates('2024-01-01', '12jun2023'))
     end,
     test_parse_set_op = function()
         local ts = "UNION FROM `path` FROM `path` STACHE task"
@@ -753,21 +1061,27 @@ local tests = {
         assert(res._val[2][1]['data'] == 'lua pattern', resString)
     end,
     test_parse_group_ops = function()
-        local ts = '\nGROUP\nGROUP FIELD id\nGROUP FIELD id'
+        local ts = '\nGROUP FIELD id\nGROUP SPL FIELD status\nGROUP FIELD id ASC'
         local p = P.prep(pNewLine + pGrpOp)
         ---@type Option
         local res = p.runParser(ts)
-        assert(#res._val[2] == 3, 'res = ' .. vim.inspect(res))
-        for i = 2, 3 do
-            assert(res._val[2][i][1] == 'field')
-            assert(res._val[2][i][2] == 'id')
-        end
+        local resString = 'res = ' .. vim.inspect(res)
+        assert(#res._val[2] == 3, resString)
+        assert(res._val[2][1]['sort'] == nil, resString)
+        assert(res._val[2][1]['field'] == 'id', resString)
+        assert(res._val[2][1]['split'] == false, resString)
+        assert(res._val[2][2]['sort'] == nil, resString)
+        assert(res._val[2][2]['field'] == 'status', resString)
+        assert(res._val[2][2]['split'] == true, resString)
+        assert(res._val[2][3]['sort'] == 'asc', resString)
+        assert(res._val[2][3]['field'] == 'id', resString)
+        assert(res._val[2][3]['split'] == false, resString)
     end,
     test_parse_blk = function()
         local blkLines = {
             'UNION FROM -',
             'INTERSECT GREP "regex"',
-            'GROUP',
+            'GROUP FIELD id',
             'LIST'
         }
         local blk = table.concat(blkLines, '\n')
@@ -775,7 +1089,9 @@ local tests = {
         local res_string = 'test_parse_blk:res = ' .. vim.inspect(res)
         assert(res._val, res_string)
         assert(#res._val[2].setOps == 2, res_string)
-        assert(res._val[2].grpOps[1] == 'GROUP', res_string)
+        assert(#res._val[2].grpOps == 1, res_string)
+        assert(res._val[2].grpOps[1]['field'] == 'id', res_string)
+        assert(res._val[2].grpOps[1]['split'] == false, res_string)
         assert(res._val[2].dispOp == 'LIST', res_string)
         -- print(table.concat(run_block(blkLines), '\n'))
     end,
@@ -827,13 +1143,43 @@ local tests = {
             {
                 op = 'union',
                 fromDirs = { M.stache.abs },
-                filter = { filt = 'grep', data = 'marrissa' }
+                filter = { filt = 'grep', data = 'marrissa', invert = false }
+            },
+        }
+        local setOpsAll = {
+            {
+                op = 'union',
+                fromDirs = { M.stache.abs },
+                filter = { filt = 'grep', data = '', invert = false }
+            },
+        }
+        local setOpsInv = {
+            {
+                op = 'union',
+                fromDirs = { M.stache.abs },
+                filter = { filt = 'grep', data = 'marrissa', invert = true }
             },
         }
         ---@type Option
         local res = do_query_set_ops(setOps)
+        ---@type Option
+        local resInv = do_query_set_ops(setOpsInv)
+        ---@type Option
+        local resAll_ = do_query_set_ops(setOpsAll)
+        ---@type Set
+        assert(resAll_._val)
+        local resAll = resAll_._val
         local resStr = 'res = ' .. vim.inspect(res)
+        ---@type Set
+        local intersection = (M.mk_itm_set() + res._val) * resInv._val
+        ---@type Set
+        local union = (M.mk_itm_set() + res._val) + resInv._val
         assert(res._val._elements, resStr)
+        assert(intersection:empty())
+        resAll:map(function(x)
+            assert(union:has(x))
+            return x
+        end)
     end,
     test_do_query_set_ops__field_filt = function()
         ---@type SetOp[]
@@ -868,7 +1214,7 @@ local tests = {
         end
     end,
     test_run_blk_in_buf = function()
-        local testbuf = vim.api.nvim_create_buf(true, true)
+        local testbuf = vim.api.nvim_create_buf(false, true)
         local ls = {
             "```stache",
             'UNION FROM - STACHE task',
@@ -879,14 +1225,46 @@ local tests = {
             "```",
         }
         vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
-        local blks = get_buf_stache_blocks(testbuf)
+        local blks = buf_get_blocks(testbuf)
+        local blksStr = 'bnds = ' .. vim.inspect(blks)
+        assert(blks[1].range[1] == 1, blksStr)
+        assert(blks[1].range[2] == 6, blksStr)
         vim.api.nvim_buf_delete(testbuf, { force = true })
+        ---@diagnostic disable-next-line: unused-local
         local res = run_block(blks[1])
+    end,
+    test_run_all_blocks = function()
+        local testbuf = vim.api.nvim_create_buf(false, true)
+        local ls = {
+            "```stache",
+            'UNION FROM - STACHE task',
+            '#SUBTRACT FROM - STACHE task',
+            'INTERSECT FROM - GREP "marrissa"',
+            'SUBTRACT FIELD id "life%-"',
+            'GROUP SPL FIELD status DES',
+            '#GROUP FIELD priority DES',
+            'LIST',
+            "```",
+        }
+        vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
+        local bs = M.buf_exec_all_blocks(testbuf)
+        for idx, line in ipairs(bs[1].output) do
+            tr(line, 'output['..idx..']:')
+        end
+        vim.api.nvim_buf_delete(testbuf, { force = true })
+        assert(bs[1].range[1] == 1)
+        assert(bs[1].range[2] == #ls - 1)
+        assert(not string.match(bs[1].output[2], 'fail'))
     end,
 }
 
+-- vim.notify('running tests in `fst/him/nvim-nrw/lua/handdara/util/stache.lua`')
 -- runtests(tests, function(_) end)
-
-vim.cmd [[nnoremap <leader><leader>x :%lua<cr>]]
+-- runtests({
+--     test_top = tests.test_run_all_blocks,
+--     test_date = tests.test_parse_dates
+-- }, function(_) end)
+-- vim.notify('completed tests in `fst/him/nvim-nrw/lua/handdara/util/stache.lua`')
+-- vim.cmd [[nnoremap <leader><leader>x :%lua<cr>]]
 
 return M
