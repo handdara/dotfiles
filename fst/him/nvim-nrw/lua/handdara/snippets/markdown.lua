@@ -13,7 +13,7 @@ local extras = require 'luasnip.extras'
 local rep = extras.rep
 local fmt = require("luasnip.extras.fmt").fmt
 local u = require 'handdara.util'
-local stache = require('handdara.util.stache')
+local stache = require('stache')
 
 local S = {}
 local function use(snip)
