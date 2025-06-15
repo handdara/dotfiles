@@ -1,7 +1,6 @@
 local hdirs = require('handdara.util.dirs')
-local T = require('handdara.util.type')
-local P = require('handdara.util.parse')
-local tr = require('handdara.util').trace
+local T = require 'stache.type'
+local P = require('stache.parse')
 local M = { dirs = { data = hdirs.stache.abs } }
 
 ---@alias StacheID string
@@ -392,22 +391,6 @@ local function ask_rg(args, searchDir)
     return ans
 end
 
--- local function ask_yq(args)
---     local command = { "yq" }
---     for _, arg in ipairs(args) do
---         table.insert(command, arg)
---     end
---     local co = coroutine.create(ask_cr)
---     local _, ans = coroutine.resume(co, command)
---     assert(coroutine.resume(co))
---     return ans
--- end
-
--- local function run_yq(data)
---     assert(#data >= 3) -- args for yq
---     return ask_yq(data)
--- end
-
 local function run_stache(data)
     assert(string.len(data) >= 1)
     local pattern = [[^stache: *]] .. data
@@ -443,8 +426,6 @@ local function run_query(query)
         end,
     }
     local res = run[query.type](query.data)
-    -- assert(#res.stderr == 0 or (#res.stderr == 1 and res.stderr[1] == ''),
-    --     'res:' .. vim.inspect(res))
     local res_set = M.mk_itm_set(res.stdout)
     return res_set
 end
@@ -746,100 +727,6 @@ function M.quick_get_names(stache_type)
     return res.stdout
 end
 
-function M.print_result(fs)
-    for _, f in ipairs(fs) do
-        assert(type(f) == 'string')
-        print(f)
-    end
-end
-
-local function render_task(file)
-    local task
-    if type(file) == "string" then
-        task = M.mk_itm_dat(file)
-    elseif getmetatable(file).__is_stache_item then
-        task = file
-    else
-        error('render_task: file given was neither a stache itm_dat nor a file path')
-    end
-    assert(task.priority ~= 'null')
-    local due_str
-    if task.due == 'null' then
-        due_str = ''
-    else
-        due_str = '<' .. task.due .. '> '
-    end
-    return {
-        str = (
-            '-   (' ..
-            task.id ..
-            ") " ..
-            due_str .. '-' ..
-            task.priority .. '- ' ..
-            task.description
-        ),
-        fields = task
-    }
-end
-
-function M.task_board(opts)
-    opts = opts or {}
-    if opts.stexcl then
-        for _, st in pairs(M.statuses) do
-            if opts[st] == nil then
-                opts[st] = true
-            else
-                opts[st] = not opts[st]
-            end
-        end
-    elseif opts.only then
-        for _, st in pairs(M.statuses) do
-            opts[st] = false
-        end
-        if type(opts.only) == "string" then
-            opts[opts.only] = true
-        elseif type(opts.only) == "table" then
-            for _, value in ipairs(opts.only) do
-                opts[value] = true
-            end
-        end
-    else
-        for _, st in pairs(M.statuses) do
-            if opts[st] == nil then
-                opts[st] = true
-            end
-        end
-    end
-    local task_ids = M.ask { type = 'stache', data = 'task' }
-    local task_itms = task_ids:map(function(id)
-        return M.mk_itm_dat(id)
-    end)
-    local ls = {}
-    table.insert(ls, "## tasks")
-    table.insert(ls, "")
-    -- for each task status type
-    for _, st in ipairs(M.statuses) do
-        if opts[st] then
-            -- get tasks pertaining to status type
-            local res = task_itms:filter(function(task) return task['status'] == st end)
-            -- pretty print them
-            local task_lines = res:foldl({ "### " .. st }, function(acc, itm)
-                local rndr = render_task(itm)
-                table.insert(acc, rndr.str)
-                return acc
-            end)
-            table.sort(task_lines)
-            for _, t in ipairs(task_lines) do
-                table.insert(ls, t)
-            end
-            table.insert(ls, '')
-        end
-    end
-    for _, l in ipairs(ls) do
-        print(l)
-    end
-end
-
 function M.open_item()
     local line_text = vim.api.nvim_get_current_line()
     local task_id = string.match(line_text, '%((.-)%)') or string.match(line_text, 'id: *([%w%-%_]+)')
@@ -943,328 +830,328 @@ function M.buf_exec_all_blocks(bufnr)
     return blks
 end
 
-local function runtests(tests, pr)
-    local idx = 1
-    for name, test in pairs(tests) do
-        local prefix = 'test #' .. tostring(idx) .. ':' .. name .. ':'
-        pr(prefix .. 'running...')
-        test(prefix)
-        pr(prefix .. 'passed!')
-        idx = idx + 1
-    end
-end
-local tests = {
-    test_get_blks = function()
-        local testbuf = vim.api.nvim_create_buf(false, true)
-        local ls = {
-            "```stache",
-            "```",
-            "",
-            "```stache",
-            "```",
-            "",
-            "stache",
-            "",
-            "``stache",
-            "```",
-            "",
-            "```lua",
-            "```",
-            "",
-            "```stache",
-            "UNION FROM - GREP \"regex\"",
-            "```",
-            "```markdown",
-            "-   ex task",
-            "```",
-        }
-        vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
-        local blks = buf_get_blocks(testbuf)
-        vim.api.nvim_buf_delete(testbuf, { force = true })
-        assert(#blks[1].lines == 0)
-        assert(#blks[2].lines == 0)
-        assert(#blks[3].lines == 1 and blks[3].lines[1] == 'UNION FROM - GREP \"regex\"')
-        assert(blks[3].outReplaceRange[1] == blks[3].range[2] + 1
-            and blks[3].outReplaceRange[2] == blks[3].range[2] + 4)
-    end,
-    test_parse_dates = function()
-        assert(T.matchOption(pDate.runParser('12jun2025'), function(x)
-            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 12
-        end, function() return false end))
-        assert(T.matchOption(pDate.runParser('3jun2025'), function(x)
-            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 3
-        end, function() return false end))
-        assert(T.matchOption(pDate.runParser('2025-06-12'), function(x)
-            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 12
-        end, function() return false end))
-        assert(T.matchOption(pDate.runParser('2025-6-1'), function(x)
-            return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 1
-        end, function() return false end))
-        assert(compare_dates('11jun2025', '12jun2025'))
-        assert(compare_dates('11jun2025', 'null'))
-        assert(not compare_dates('null', 'null'))
-        assert(not compare_dates('null', '1960-01-01'))
-        assert(not compare_dates('13jun2025', '12jun2025'))
-        assert(not compare_dates('12jun2025', '12jun2025'))
-        assert(compare_dates('2024-01-01', '12jun2025'))
-        assert(not compare_dates('2024-01-01', '12jun2023'))
-    end,
-    test_parse_set_op = function()
-        local ts = "UNION FROM `path` FROM `path` STACHE task"
-        local res = pSetOp.runParser(ts)
-        assert(res._val, 'res._val: ' .. vim.inspect(res._val))
-        assert(res._val[2][1]['op'] == 'union')
-        assert(res._val[2][1]['fromDirs'][1] == 'path')
-        assert(res._val[2][1]['fromDirs'][2] == 'path')
-        local ts_ = 'UNION FROM - FIELD id "marrissa"'
-        local res_ = pSetOp.runParser(ts_)
-        local res_str = 'res_._val: ' .. vim.inspect(res_._val)
-        assert(res_._val, res_str)
-        assert(res_._val[2][1]['op'] == 'union', res_str)
-        assert(res_._val[2][1]['fromDirs'][1] == M.stache.abs, res_str)
-        assert(res_._val[2][1]['filter']['field'] == 'id', res_str)
-        assert(res_._val[2][1]['filter']['data'] == 'marrissa', res_str)
-    end,
-    test_parse_set_op_no_fr = function()
-        local ts = "UNION STACHE task"
-        local res = pSetOp.runParser(ts)
-        -- tr('test_parse_set_op_no_fr', res._val)
-        assert(res._val)
-        assert(res._val[2][1]['op'] == 'union')
-    end,
-    test_parse_set_op_no_filter = function()
-        local ts = "UNION FROM -"
-        local res = pSetOp.runParser(ts)
-        local resString = 'res = ' .. vim.inspect(res)
-        assert(res._val, resString)
-        assert(res._val[2][1]['op'] == 'union')
-    end,
-    test_parse_grep_filter = function()
-        local ts = ' GREP "regex"'
-        local res = pFilt.runParser(ts)
-        local resString = 'res = ' .. vim.inspect(res)
-        assert(res._val[2][1]['filt'] == 'grep', resString)
-        assert(res._val[2][1]['data'] == 'regex', resString)
-    end,
-    test_parse_empty_filter = function()
-        local ts = ''
-        local res = pFilt.runParser(ts)
-        assert(res._val, 'res = ' .. vim.inspect(res))
-        assert(#res._val[2][1] == 0, 'res = ' .. vim.inspect(res))
-    end,
-    test_parse_field_filter = function()
-        local ts = ' FIELD id "lua pattern"'
-        local res = pFilt.runParser(ts)
-        local resString = 'res = ' .. vim.inspect(res)
-        assert(res._val[2][1]['filt'] == 'field', resString)
-        assert(res._val[2][1]['field'] == 'id', resString)
-        assert(res._val[2][1]['data'] == 'lua pattern', resString)
-    end,
-    test_parse_group_ops = function()
-        local ts = '\nGROUP FIELD id\nGROUP SPL FIELD status\nGROUP FIELD id ASC'
-        local p = P.prep(pNewLine + pGrpOp)
-        ---@type Option
-        local res = p.runParser(ts)
-        local resString = 'res = ' .. vim.inspect(res)
-        assert(#res._val[2] == 3, resString)
-        assert(res._val[2][1]['sort'] == nil, resString)
-        assert(res._val[2][1]['field'] == 'id', resString)
-        assert(res._val[2][1]['split'] == false, resString)
-        assert(res._val[2][2]['sort'] == nil, resString)
-        assert(res._val[2][2]['field'] == 'status', resString)
-        assert(res._val[2][2]['split'] == true, resString)
-        assert(res._val[2][3]['sort'] == 'asc', resString)
-        assert(res._val[2][3]['field'] == 'id', resString)
-        assert(res._val[2][3]['split'] == false, resString)
-    end,
-    test_parse_blk = function()
-        local blkLines = {
-            'UNION FROM -',
-            'INTERSECT GREP "regex"',
-            'GROUP FIELD id',
-            'LIST'
-        }
-        local blk = table.concat(blkLines, '\n')
-        local res = pBlk.runParser(blk)
-        local res_string = 'test_parse_blk:res = ' .. vim.inspect(res)
-        assert(res._val, res_string)
-        assert(#res._val[2].setOps == 2, res_string)
-        assert(#res._val[2].grpOps == 1, res_string)
-        assert(res._val[2].grpOps[1]['field'] == 'id', res_string)
-        assert(res._val[2].grpOps[1]['split'] == false, res_string)
-        assert(res._val[2].dispOp == 'LIST', res_string)
-        -- print(table.concat(run_block(blkLines), '\n'))
-    end,
-    test_do_query_set_ops__empty = function()
-        ---@type SetOp[]
-        local setOps = {}
-        ---@type Option
-        local res = do_query_set_ops(setOps)
-        local resStr = 'res = ' .. vim.inspect(res)
-        assert(not res._val, resStr)
-    end,
-    test_do_query_set_ops__empty_fst_fromDirs = function()
-        ---@type SetOp[]
-        local setOps = {
-            { op = 'union', fromDirs = {}, filter = {} }
-        }
-        ---@type Option
-        local res = do_query_set_ops(setOps)
-        local resStr = 'res = ' .. vim.inspect(res)
-        assert(not res._val, resStr)
-    end,
-    test_do_query_set_ops__stache_filt = function()
-        for _, stacheTypeToSearch in ipairs(M.itemTypes) do
-            ---@type SetOp[]
-            local setOps = {
-                {
-                    op = 'union',
-                    fromDirs = { M.stache.abs },
-                    filter = { filt = 'stache', data = stacheTypeToSearch }
-                },
-            }
-            ---@type Option
-            local res = do_query_set_ops(setOps)
-            local resStr = 'res = ' .. vim.inspect(res)
-            assert(res._val, resStr)
-            local els = res._val._elements
-            for name, inSet in pairs(els) do
-                if inSet then
-                    local el = M.mk_itm_dat(name)
-                    ---@diagnostic disable-next-line: undefined-field
-                    assert(el.stache == stacheTypeToSearch)
-                end
-            end
-        end
-    end,
-    test_do_query_set_ops__grep_filt = function()
-        ---@type SetOp[]
-        local setOps = {
-            {
-                op = 'union',
-                fromDirs = { M.stache.abs },
-                filter = { filt = 'grep', data = 'marrissa', invert = false }
-            },
-        }
-        local setOpsAll = {
-            {
-                op = 'union',
-                fromDirs = { M.stache.abs },
-                filter = { filt = 'grep', data = '', invert = false }
-            },
-        }
-        local setOpsInv = {
-            {
-                op = 'union',
-                fromDirs = { M.stache.abs },
-                filter = { filt = 'grep', data = 'marrissa', invert = true }
-            },
-        }
-        ---@type Option
-        local res = do_query_set_ops(setOps)
-        ---@type Option
-        local resInv = do_query_set_ops(setOpsInv)
-        ---@type Option
-        local resAll_ = do_query_set_ops(setOpsAll)
-        ---@type Set
-        assert(resAll_._val)
-        local resAll = resAll_._val
-        local resStr = 'res = ' .. vim.inspect(res)
-        ---@type Set
-        local intersection = (M.mk_itm_set() + res._val) * resInv._val
-        ---@type Set
-        local union = (M.mk_itm_set() + res._val) + resInv._val
-        assert(res._val._elements, resStr)
-        assert(intersection:empty())
-        resAll:map(function(x)
-            assert(union:has(x))
-            return x
-        end)
-    end,
-    test_do_query_set_ops__field_filt = function()
-        ---@type SetOp[]
-        local setOps = {
-            {
-                op = 'union',
-                fromDirs = { M.stache.abs },
-                filter = { filt = 'field', field = 'id', data = 'marrissa' }
-            },
-        }
-        ---@type Option
-        local res = do_query_set_ops(setOps)
-        local resStr = 'res = ' .. vim.inspect(res)
-        assert(res._val, resStr)
-        for name, inSet in pairs(res._val._elements) do
-            if inSet then
-                assert(string.sub(name, 1, 8) == 'marrissa', resStr)
-            end
-        end
-    end,
-    test_run_block_contact = function()
-        local blkLines = {
-            'UNION FROM - FIELD id "marrissa"',
-            'GROUP',
-            'LIST'
-        }
-        -- local blk = table.concat(blkLines, '\n')
-        local res = run_block(blkLines)
-        for _, line in ipairs(res) do
-            -- print(line)
-            assert(string.len(line) > 0)
-        end
-    end,
-    test_run_blk_in_buf = function()
-        local testbuf = vim.api.nvim_create_buf(false, true)
-        local ls = {
-            "```stache",
-            'UNION FROM - STACHE task',
-            'INTERSECT FROM - GREP "marrissa"',
-            'SUBTRACT FIELD id "life%-"',
-            'GROUP FIELD id',
-            'LIST',
-            "```",
-        }
-        vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
-        local blks = buf_get_blocks(testbuf)
-        local blksStr = 'bnds = ' .. vim.inspect(blks)
-        assert(blks[1].range[1] == 1, blksStr)
-        assert(blks[1].range[2] == 6, blksStr)
-        vim.api.nvim_buf_delete(testbuf, { force = true })
-        ---@diagnostic disable-next-line: unused-local
-        local res = run_block(blks[1])
-    end,
-    test_run_all_blocks = function()
-        local testbuf = vim.api.nvim_create_buf(false, true)
-        local ls = {
-            "```stache",
-            'UNION FROM - STACHE task',
-            '#SUBTRACT FROM - STACHE task',
-            'INTERSECT FROM - GREP "marrissa"',
-            'SUBTRACT FIELD id "life%-"',
-            'GROUP SPL FIELD status DES',
-            '#GROUP FIELD priority DES',
-            'LIST',
-            "```",
-        }
-        vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
-        local bs = M.buf_exec_all_blocks(testbuf)
-        for idx, line in ipairs(bs[1].output) do
-            tr(line, 'output['..idx..']:')
-        end
-        vim.api.nvim_buf_delete(testbuf, { force = true })
-        assert(bs[1].range[1] == 1)
-        assert(bs[1].range[2] == #ls - 1)
-        assert(not string.match(bs[1].output[2], 'fail'))
-    end,
-}
-
+-- local function runtests(tests, pr)
+--     local idx = 1
+--     for name, test in pairs(tests) do
+--         local prefix = 'test #' .. tostring(idx) .. ':' .. name .. ':'
+--         pr(prefix .. 'running...')
+--         test(prefix)
+--         pr(prefix .. 'passed!')
+--         idx = idx + 1
+--     end
+-- end
+-- local tests = {
+--     test_get_blks = function()
+--         local testbuf = vim.api.nvim_create_buf(false, true)
+--         local ls = {
+--             "```stache",
+--             "```",
+--             "",
+--             "```stache",
+--             "```",
+--             "",
+--             "stache",
+--             "",
+--             "``stache",
+--             "```",
+--             "",
+--             "```lua",
+--             "```",
+--             "",
+--             "```stache",
+--             "UNION FROM - GREP \"regex\"",
+--             "```",
+--             "```markdown",
+--             "-   ex task",
+--             "```",
+--         }
+--         vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
+--         local blks = buf_get_blocks(testbuf)
+--         vim.api.nvim_buf_delete(testbuf, { force = true })
+--         assert(#blks[1].lines == 0)
+--         assert(#blks[2].lines == 0)
+--         assert(#blks[3].lines == 1 and blks[3].lines[1] == 'UNION FROM - GREP \"regex\"')
+--         assert(blks[3].outReplaceRange[1] == blks[3].range[2] + 1
+--             and blks[3].outReplaceRange[2] == blks[3].range[2] + 4)
+--     end,
+--     test_parse_dates = function()
+--         assert(T.matchOption(pDate.runParser('12jun2025'), function(x)
+--             return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 12
+--         end, function() return false end))
+--         assert(T.matchOption(pDate.runParser('3jun2025'), function(x)
+--             return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 3
+--         end, function() return false end))
+--         assert(T.matchOption(pDate.runParser('2025-06-12'), function(x)
+--             return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 12
+--         end, function() return false end))
+--         assert(T.matchOption(pDate.runParser('2025-6-1'), function(x)
+--             return x[1] == '' and x[2][1].yr == 2025 and x[2][1].mo == 6 and x[2][1].da == 1
+--         end, function() return false end))
+--         assert(compare_dates('11jun2025', '12jun2025'))
+--         assert(compare_dates('11jun2025', 'null'))
+--         assert(not compare_dates('null', 'null'))
+--         assert(not compare_dates('null', '1960-01-01'))
+--         assert(not compare_dates('13jun2025', '12jun2025'))
+--         assert(not compare_dates('12jun2025', '12jun2025'))
+--         assert(compare_dates('2024-01-01', '12jun2025'))
+--         assert(not compare_dates('2024-01-01', '12jun2023'))
+--     end,
+--     test_parse_set_op = function()
+--         local ts = "UNION FROM `path` FROM `path` STACHE task"
+--         local res = pSetOp.runParser(ts)
+--         assert(res._val, 'res._val: ' .. vim.inspect(res._val))
+--         assert(res._val[2][1]['op'] == 'union')
+--         assert(res._val[2][1]['fromDirs'][1] == 'path')
+--         assert(res._val[2][1]['fromDirs'][2] == 'path')
+--         local ts_ = 'UNION FROM - FIELD id "marrissa"'
+--         local res_ = pSetOp.runParser(ts_)
+--         local res_str = 'res_._val: ' .. vim.inspect(res_._val)
+--         assert(res_._val, res_str)
+--         assert(res_._val[2][1]['op'] == 'union', res_str)
+--         assert(res_._val[2][1]['fromDirs'][1] == M.stache.abs, res_str)
+--         assert(res_._val[2][1]['filter']['field'] == 'id', res_str)
+--         assert(res_._val[2][1]['filter']['data'] == 'marrissa', res_str)
+--     end,
+--     test_parse_set_op_no_fr = function()
+--         local ts = "UNION STACHE task"
+--         local res = pSetOp.runParser(ts)
+--         -- tr('test_parse_set_op_no_fr', res._val)
+--         assert(res._val)
+--         assert(res._val[2][1]['op'] == 'union')
+--     end,
+--     test_parse_set_op_no_filter = function()
+--         local ts = "UNION FROM -"
+--         local res = pSetOp.runParser(ts)
+--         local resString = 'res = ' .. vim.inspect(res)
+--         assert(res._val, resString)
+--         assert(res._val[2][1]['op'] == 'union')
+--     end,
+--     test_parse_grep_filter = function()
+--         local ts = ' GREP "regex"'
+--         local res = pFilt.runParser(ts)
+--         local resString = 'res = ' .. vim.inspect(res)
+--         assert(res._val[2][1]['filt'] == 'grep', resString)
+--         assert(res._val[2][1]['data'] == 'regex', resString)
+--     end,
+--     test_parse_empty_filter = function()
+--         local ts = ''
+--         local res = pFilt.runParser(ts)
+--         assert(res._val, 'res = ' .. vim.inspect(res))
+--         assert(#res._val[2][1] == 0, 'res = ' .. vim.inspect(res))
+--     end,
+--     test_parse_field_filter = function()
+--         local ts = ' FIELD id "lua pattern"'
+--         local res = pFilt.runParser(ts)
+--         local resString = 'res = ' .. vim.inspect(res)
+--         assert(res._val[2][1]['filt'] == 'field', resString)
+--         assert(res._val[2][1]['field'] == 'id', resString)
+--         assert(res._val[2][1]['data'] == 'lua pattern', resString)
+--     end,
+--     test_parse_group_ops = function()
+--         local ts = '\nGROUP FIELD id\nGROUP SPL FIELD status\nGROUP FIELD id ASC'
+--         local p = P.prep(pNewLine + pGrpOp)
+--         ---@type Option
+--         local res = p.runParser(ts)
+--         local resString = 'res = ' .. vim.inspect(res)
+--         assert(#res._val[2] == 3, resString)
+--         assert(res._val[2][1]['sort'] == nil, resString)
+--         assert(res._val[2][1]['field'] == 'id', resString)
+--         assert(res._val[2][1]['split'] == false, resString)
+--         assert(res._val[2][2]['sort'] == nil, resString)
+--         assert(res._val[2][2]['field'] == 'status', resString)
+--         assert(res._val[2][2]['split'] == true, resString)
+--         assert(res._val[2][3]['sort'] == 'asc', resString)
+--         assert(res._val[2][3]['field'] == 'id', resString)
+--         assert(res._val[2][3]['split'] == false, resString)
+--     end,
+--     test_parse_blk = function()
+--         local blkLines = {
+--             'UNION FROM -',
+--             'INTERSECT GREP "regex"',
+--             'GROUP FIELD id',
+--             'LIST'
+--         }
+--         local blk = table.concat(blkLines, '\n')
+--         local res = pBlk.runParser(blk)
+--         local res_string = 'test_parse_blk:res = ' .. vim.inspect(res)
+--         assert(res._val, res_string)
+--         assert(#res._val[2].setOps == 2, res_string)
+--         assert(#res._val[2].grpOps == 1, res_string)
+--         assert(res._val[2].grpOps[1]['field'] == 'id', res_string)
+--         assert(res._val[2].grpOps[1]['split'] == false, res_string)
+--         assert(res._val[2].dispOp == 'LIST', res_string)
+--         -- print(table.concat(run_block(blkLines), '\n'))
+--     end,
+--     test_do_query_set_ops__empty = function()
+--         ---@type SetOp[]
+--         local setOps = {}
+--         ---@type Option
+--         local res = do_query_set_ops(setOps)
+--         local resStr = 'res = ' .. vim.inspect(res)
+--         assert(not res._val, resStr)
+--     end,
+--     test_do_query_set_ops__empty_fst_fromDirs = function()
+--         ---@type SetOp[]
+--         local setOps = {
+--             { op = 'union', fromDirs = {}, filter = {} }
+--         }
+--         ---@type Option
+--         local res = do_query_set_ops(setOps)
+--         local resStr = 'res = ' .. vim.inspect(res)
+--         assert(not res._val, resStr)
+--     end,
+--     test_do_query_set_ops__stache_filt = function()
+--         for _, stacheTypeToSearch in ipairs(M.itemTypes) do
+--             ---@type SetOp[]
+--             local setOps = {
+--                 {
+--                     op = 'union',
+--                     fromDirs = { M.stache.abs },
+--                     filter = { filt = 'stache', data = stacheTypeToSearch }
+--                 },
+--             }
+--             ---@type Option
+--             local res = do_query_set_ops(setOps)
+--             local resStr = 'res = ' .. vim.inspect(res)
+--             assert(res._val, resStr)
+--             local els = res._val._elements
+--             for name, inSet in pairs(els) do
+--                 if inSet then
+--                     local el = M.mk_itm_dat(name)
+--                     ---@diagnostic disable-next-line: undefined-field
+--                     assert(el.stache == stacheTypeToSearch)
+--                 end
+--             end
+--         end
+--     end,
+--     test_do_query_set_ops__grep_filt = function()
+--         ---@type SetOp[]
+--         local setOps = {
+--             {
+--                 op = 'union',
+--                 fromDirs = { M.stache.abs },
+--                 filter = { filt = 'grep', data = 'marrissa', invert = false }
+--             },
+--         }
+--         local setOpsAll = {
+--             {
+--                 op = 'union',
+--                 fromDirs = { M.stache.abs },
+--                 filter = { filt = 'grep', data = '', invert = false }
+--             },
+--         }
+--         local setOpsInv = {
+--             {
+--                 op = 'union',
+--                 fromDirs = { M.stache.abs },
+--                 filter = { filt = 'grep', data = 'marrissa', invert = true }
+--             },
+--         }
+--         ---@type Option
+--         local res = do_query_set_ops(setOps)
+--         ---@type Option
+--         local resInv = do_query_set_ops(setOpsInv)
+--         ---@type Option
+--         local resAll_ = do_query_set_ops(setOpsAll)
+--         ---@type Set
+--         assert(resAll_._val)
+--         local resAll = resAll_._val
+--         local resStr = 'res = ' .. vim.inspect(res)
+--         ---@type Set
+--         local intersection = (M.mk_itm_set() + res._val) * resInv._val
+--         ---@type Set
+--         local union = (M.mk_itm_set() + res._val) + resInv._val
+--         assert(res._val._elements, resStr)
+--         assert(intersection:empty())
+--         resAll:map(function(x)
+--             assert(union:has(x))
+--             return x
+--         end)
+--     end,
+--     test_do_query_set_ops__field_filt = function()
+--         ---@type SetOp[]
+--         local setOps = {
+--             {
+--                 op = 'union',
+--                 fromDirs = { M.stache.abs },
+--                 filter = { filt = 'field', field = 'id', data = 'marrissa' }
+--             },
+--         }
+--         ---@type Option
+--         local res = do_query_set_ops(setOps)
+--         local resStr = 'res = ' .. vim.inspect(res)
+--         assert(res._val, resStr)
+--         for name, inSet in pairs(res._val._elements) do
+--             if inSet then
+--                 assert(string.sub(name, 1, 8) == 'marrissa', resStr)
+--             end
+--         end
+--     end,
+--     test_run_block_contact = function()
+--         local blkLines = {
+--             'UNION FROM - FIELD id "marrissa"',
+--             'GROUP',
+--             'LIST'
+--         }
+--         -- local blk = table.concat(blkLines, '\n')
+--         local res = run_block(blkLines)
+--         for _, line in ipairs(res) do
+--             -- print(line)
+--             assert(string.len(line) > 0)
+--         end
+--     end,
+--     test_run_blk_in_buf = function()
+--         local testbuf = vim.api.nvim_create_buf(false, true)
+--         local ls = {
+--             "```stache",
+--             'UNION FROM - STACHE task',
+--             'INTERSECT FROM - GREP "marrissa"',
+--             'SUBTRACT FIELD id "life%-"',
+--             'GROUP FIELD id',
+--             'LIST',
+--             "```",
+--         }
+--         vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
+--         local blks = buf_get_blocks(testbuf)
+--         local blksStr = 'bnds = ' .. vim.inspect(blks)
+--         assert(blks[1].range[1] == 1, blksStr)
+--         assert(blks[1].range[2] == 6, blksStr)
+--         vim.api.nvim_buf_delete(testbuf, { force = true })
+--         ---@diagnostic disable-next-line: unused-local
+--         local res = run_block(blks[1])
+--     end,
+--     test_run_all_blocks = function()
+--         local testbuf = vim.api.nvim_create_buf(false, true)
+--         local ls = {
+--             "```stache",
+--             'UNION FROM - STACHE task',
+--             '#SUBTRACT FROM - STACHE task',
+--             'INTERSECT FROM - GREP "marrissa"',
+--             'SUBTRACT FIELD id "life%-"',
+--             'GROUP SPL FIELD status DES',
+--             '#GROUP FIELD priority DES',
+--             'LIST',
+--             "```",
+--         }
+--         vim.api.nvim_buf_set_lines(testbuf, 0, -1, false, ls)
+--         local bs = M.buf_exec_all_blocks(testbuf)
+--         -- for idx, line in ipairs(bs[1].output) do
+--         --     print('output['..idx..']:' .. line)
+--         -- end
+--         vim.api.nvim_buf_delete(testbuf, { force = true })
+--         assert(bs[1].range[1] == 1)
+--         assert(bs[1].range[2] == #ls - 1)
+--         assert(not string.match(bs[1].output[2], 'fail'))
+--     end,
+-- }
 -- vim.notify('running tests in `fst/him/nvim-nrw/lua/handdara/util/stache.lua`')
 -- runtests(tests, function(_) end)
--- runtests({
---     test_top = tests.test_run_all_blocks,
---     test_date = tests.test_parse_dates
--- }, function(_) end)
+-- -- runtests({
+-- --     test_top = tests.test_run_all_blocks,
+-- --     test_date = tests.test_parse_dates
+-- -- }, function(_) end)
 -- vim.notify('completed tests in `fst/him/nvim-nrw/lua/handdara/util/stache.lua`')
+
 -- vim.cmd [[nnoremap <leader><leader>x :%lua<cr>]]
 
 return M
