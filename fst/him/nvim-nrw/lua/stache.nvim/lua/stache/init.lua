@@ -1,7 +1,7 @@
 local hdirs = require('handdara.util.dirs')
 local T = require 'stache.type'
-local P = require('stache.parse')
-local M = { dirs = { data = hdirs.stache.abs } }
+local P = require 'stache.parse'
+local M = {}
 
 ---@alias StacheID string
 ---@alias StacheField string
@@ -41,7 +41,6 @@ local M = { dirs = { data = hdirs.stache.abs } }
 ---@field output string[]
 ---@field outReplaceRange [number, number]
 
-StacheCache = T.Map:new()
 ---@param itm ItmDat
 local function cacheItem(itm)
     StacheCache[itm['id']] = itm
@@ -409,7 +408,7 @@ function M.mk_itm_set(filepaths)
 end
 
 local function ask_rg(args, searchDir)
-    searchDir = searchDir or M.stache.abs
+    searchDir = searchDir or M.dirs.data
     local command = { "rg" }
     for _, arg in ipairs(args) do
         table.insert(command, arg)
@@ -831,6 +830,12 @@ function M.buf_exec_all_blocks(bufnr)
     return blks
 end
 
+function M.setup(c)
+    M.dirs = c.dirs
+    assert(M.dirs.data)
+    StacheCache = T.Map:new()
+end
+
 -- local function runtests(tests, pr)
 --     local idx = 1
 --     for name, test in pairs(tests) do
@@ -1152,7 +1157,6 @@ end
 -- --     test_date = tests.test_parse_dates
 -- -- }, function(_) end)
 -- vim.notify('completed tests in `fst/him/nvim-nrw/lua/handdara/util/stache.lua`')
-
 -- vim.cmd [[nnoremap <leader><leader>x :%lua<cr>]]
 
 return M
