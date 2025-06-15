@@ -51,4 +51,5 @@ return function()
     map('n', '<leader>ns', '<CMD>StacheOpenTask<CR>', { desc = 'open stache task on current line' })
 
     map('n', 'ZB', '<CMD>bufdo bd<CR>', { desc = 'Close all [B]uffers' })
+    map('n', '<leader><leader>s', '<CMD>StacheRunAll<CR>', {desc = 'Run stache blocks in current buffer'})
 end
