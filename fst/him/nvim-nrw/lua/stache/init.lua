@@ -7,6 +7,40 @@ local M = { dirs = { data = hdirs.stache.abs } }
 ---@alias StacheField string
 ---@alias FilePath string
 
+---@class ItmDat
+---@field refresh fun(self:ItmDat)
+---@field render fun(self:ItmDat):string[]
+---@operator concat(ItmDat):ItmDat
+
+---@class FilterOp
+---@field filt string?
+---@field data string?
+---@field field string?
+---@field invert boolean?
+
+---@class SetOp
+---@field op string
+---@field fromDirs string[]
+---@field filter FilterOp
+
+---@class GroupOp
+---@field field StacheField
+---@field sort ('asc'|'des')?
+---@field split boolean
+
+---@alias Group {groups:[ string, Group ], opts:table?} | { items:ItmDat[] }
+
+---@class Query
+---@field setOps SetOp[]
+---@field grpOps GroupOp[]
+---@field dispOp string
+
+---@class StacheBlock
+---@field range [number, number]
+---@field lines string[]
+---@field output string[]
+---@field outReplaceRange [number, number]
+
 StacheCache = T.Map:new()
 ---@param itm ItmDat
 local function cacheItem(itm)
@@ -128,6 +162,7 @@ M.types = {
     },
 }
 
+---@diagnostic disable-next-line: unused-local, unused-function
 local function wrap0(...) return ... end
 local function wrap1(...) return { ... } end
 ---@param f function
@@ -296,11 +331,6 @@ local meta_itmdat = {
     end,
 }
 
----@class ItmDat
----@field refresh fun(self:ItmDat)
----@field render fun(self:ItmDat):string[]
----@operator concat(ItmDat):ItmDat
-
 ---@param filepath FilePath
 ---@return ItmDat
 function M.mk_itm_dat(filepath)
@@ -430,17 +460,6 @@ local function run_query(query)
     return res_set
 end
 
----@class FilterOp
----@field filt string?
----@field data string?
----@field field string?
----@field invert boolean?
-
----@class SetOp
----@field op string
----@field fromDirs string[]
----@field filter FilterOp
-
 ---@param ops SetOp[]
 ---@return Option<Set<StacheID>>
 local function do_query_set_ops(ops)
@@ -537,13 +556,6 @@ local function do_query_set_ops(ops)
         return T.Some(currset)
     end
 end
-
----@class GroupOp
----@field field StacheField
----@field sort ('asc'|'des')?
----@field split boolean
-
----@alias Group {groups:[ string, Group ], opts:table?} | { items:ItmDat[] }
 
 local function compare_dates(lhs, rhs)
     return T.matchOption(pNullOrDate.runParser(lhs),
@@ -658,11 +670,6 @@ local function process_grp_op(op, group)
     end
 end
 
----@class Query
----@field setOps SetOp[]
----@field grpOps GroupOp[]
----@field dispOp string
-
 ---@param query Query
 ---@return string[]
 local function process_query(query)
@@ -737,12 +744,6 @@ function M.open_item()
         vim.notify('No stache item on current line!')
     end
 end
-
----@class StacheBlock
----@field range [number, number]
----@field lines string[]
----@field output string[]
----@field outReplaceRange [number, number]
 
 local function buf_get_blk_replace_range(bufnr, afterBlockLineNr)
     local remLinesHead = vim.api.nvim_buf_get_lines(bufnr, afterBlockLineNr, afterBlockLineNr + 1, false)
