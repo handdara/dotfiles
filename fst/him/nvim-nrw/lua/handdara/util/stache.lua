@@ -714,7 +714,7 @@ local function process_query(query)
                         table.insert(lines, preLine .. itm:render()['str'])
                     end
                 elseif grp.groups then
-                    local preHdr = '##' .. string.rep('#',level) .. ' '
+                    local preHdr = '###' .. string.rep('#',level) .. ' '
                     for _, grpTuple in pairs(grp.groups) do
                         table.insert(lines, preHdr .. grpTuple[1])
                         for _, subline in ipairs(disp_grps(level+1, grpTuple[2])) do
