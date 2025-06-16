@@ -1,4 +1,3 @@
-local hdirs = require 'handdara.util.dirs'
 return function()
     -- use register `z` as last location
     local zmark_group = vim.api.nvim_create_augroup('ZMarkPrevLoc', { clear = true })
@@ -25,13 +24,5 @@ return function()
         end,
         group = calcurse_nts,
         pattern = '~/.local/share/calcurse/notes/*',
-    })
-    local stache_enter = vim.api.nvim_create_augroup('StacheEnter', { clear = true })
-    vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
-        callback = function()
-            vim.bo.filetype = "yaml"
-        end,
-        group = stache_enter,
-        pattern = hdirs.stache.abs..'/*',
     })
 end

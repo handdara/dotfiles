@@ -23,8 +23,6 @@ M.setup = function(opts)
 
     N.util = require 'handdara.util'
 
-    -- N.stache = require 'stache'
-
     N.set_looks = hlooks.set_looks
 
     return N

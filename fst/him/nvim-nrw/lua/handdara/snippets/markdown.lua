@@ -303,7 +303,7 @@ local bweekly = [=[
 local dweekly = d(1, function()
     local ts = u.timestamp()
     return sn(nil, fmt(bweekly, {
-        t(u.dtnum2str( ts.wk+1 )),
+        t(u.dtnum2str(ts.wk + 1)),
         -- t({ '[[affirms-vals-goals]]', 'also [[quarterly-goals-2025#list of possible personal investments]]' }),
         -- t('[[quarterly-goals-2025#Quarter ' .. ts.qt .. ' Goals]]'),
         -- i(1, 'DDmmmYYYY'),
@@ -337,10 +337,48 @@ for _, val in ipairs(filetypes) do
 end
 use(s('codeblock', { t { '```', '' }, i(1), t { '', '```' } }))
 
+local function mkCBasic(idx, opts, custom)
+    local ts = {}
+    for _, val in ipairs(opts) do
+        table.insert(ts, t(val))
+    end
+    if custom then
+        table.insert(ts, 1, i(1, custom))
+    end
+    return c(idx, ts)
+end
+
+local function mkStacheFilt(idx)
+    return c(idx,
+         {
+            { i(1), t 'STACHE ', mkCBasic(2, stache.itemTypes) },
+            { i(1), t 'FIELD ', mkCBasic(2, {'status', 'priority'}, 'id') },
+            { t 'GREP "', i(1,'regex'), t'"' },
+        })
+end
+
+local mkSetOp = function(idx)
+    return sn(idx, {
+        c(1, { t 'INTERSECT', t 'SUBTRACT', t 'UNION' }),
+        t ' ',
+        c(2, { { t 'FROM ', i(1, '-'), t' ' }, t '' }),
+        mkStacheFilt(3),
+    })
+end
+use(s('setop', mkSetOp(1)))
+
+local mkGrpOp = function(idx)
+    return sn(idx, {
+        c(1, {t'GROUP SPL ', t'GROUP '}),
+        mkStacheFilt(2),
+        c(3, {t' ASC',t' DES',t''}),
+    })
+end
+use(s('grpop', mkGrpOp(1)))
+
 use(s('tasks', { t {
     '```stache',
     'UNION FROM - STACHE task',
-    '#INTERSECT FIELD id "stache"',
     'SUBTRACT FIELD status "closed"',
     'SUBTRACT FIELD status "archived"',
     'GROUP SPL FIELD status ASC',
@@ -349,15 +387,12 @@ use(s('tasks', { t {
     '```',
 } }))
 
-use(s('inv-items', {t {
-'```lua',
-'local queries = {',
-        '{type = "stache", data = {"inventory"}},',
-'}',
-'local res = Handdara.stache.ask(queries)',
-'Handdara.stache.print_result(res)',
-'```',
-}}))
+use(s('inv-items', { t {
+    '```stache',
+    'UNION FROM - STACHE inventory',
+    'LIST',
+    '```',
+} }))
 
 ls.add_snippets("markdown", S)
 ls.add_snippets("telekasten", S)
