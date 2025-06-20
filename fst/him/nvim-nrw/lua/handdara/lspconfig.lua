@@ -89,7 +89,12 @@ require 'lspconfig'.tinymist.setup { -- fish lsp config
     },
 }
 
-require 'lspconfig'.r_language_server.setup { -- fish lsp config
+require 'lspconfig'.r_language_server.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+require 'lspconfig'.fortls.setup { -- fortran lsp config
     capabilities = capabilities,
     on_attach = on_attach,
 }
