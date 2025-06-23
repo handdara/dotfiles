@@ -19,6 +19,7 @@
         ./user/apps/neofetch
         ./user/apps/nvim
         ./user/apps/pandoc
+        ./user/apps/pastel
         # ./user/apps/r
         ./user/apps/redshift
         ./user/apps/starship
