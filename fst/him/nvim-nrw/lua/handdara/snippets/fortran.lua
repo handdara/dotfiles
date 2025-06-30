@@ -44,6 +44,17 @@ use(s('subroutine', fmt(bSubrtn,{
     i(2, "! TODO...")
 })))
 
+local bFunc = [[
+function {1}
+    {3}
+end function {2}
+]]
+use(s('function', fmt(bFunc,{
+    i(1, "name"),
+    rep(1),
+    i(2, "! TODO...")
+})))
+
 local bDo = [[
     {1}do {3} ={4}
         {5}
