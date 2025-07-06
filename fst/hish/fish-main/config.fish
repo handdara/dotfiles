@@ -119,6 +119,8 @@ abbr --add --set-cursor=! m "math '(!)'"
 
 abbr --add hs hsync
 
+abbr --add matlab "matlab -softwareopengl"
+
 # CLI inits
 # -------------------------------------------------------------------------------------------------
 
