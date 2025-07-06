@@ -4,11 +4,13 @@
         ./user/apps/alacritty
         ./user/apps/bat
         ./user/apps/btop
+        ./user/apps/desmume
         ./user/apps/cal
         ./user/apps/eza
         ./user/apps/fim
         ./user/apps/fzf
         ./user/apps/ghostty
+        ./user/apps/ctags
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad

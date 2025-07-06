@@ -12,7 +12,7 @@ function fesh
     else
         cd (string replace '~' $HOME $projdir)
         if test -e justfile
-            just edit
+            just edit || just develop
         else if test -e Session.vim
             nvim -S Session.vim
         else
