@@ -4,11 +4,9 @@
   */
     ...
 }: {
-    programs.vim.enable = true;
-    home.file.".vimrc".text = ''
-      set relativenumber
-      set number
-      inoremap jk <esc>
-      inoremap kj <esc>
-    '';
+    home.file.".vimrc".source = ../../../../fst/him/vim-plain/init.vim;
+    # home.file.".vim/after" = {
+    #     source = ../../../../fst/him/vim-plain/after;
+    #     recursive = true;
+    # };
 }

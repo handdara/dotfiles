@@ -108,7 +108,7 @@ flake-overlays: {
         brightnessctl
         pinentry-curses
         pass
-        matlab
+        # matlab
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
