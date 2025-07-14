@@ -19,6 +19,11 @@ return {
     opts = {
         workspaces = {
             { name = "ansible", path = hdirs.ansible },
+            {
+                name = "tadok",
+                path = vim.fs.normalize("~/code/tadok"),
+                overrides = { notes_subdir = "inbox" }
+            },
         },
         daily_notes = {
             folder = hdirs.dailies.rel
@@ -157,9 +162,9 @@ return {
         -- Optional, configure additional syntax highlighting / extmarks.
         -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
         ui = {
-            enable = true,  -- set to false to disable all additional syntax features
+            enable = true,          -- set to false to disable all additional syntax features
             update_debounce = 200,  -- update delay after a text change (in milliseconds)
-            max_file_length = 5000,  -- disable UI features for files with more than this many lines
+            max_file_length = 5000, -- disable UI features for files with more than this many lines
             -- Define how various check-boxes are displayed
             checkboxes = {
                 -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
@@ -190,7 +195,7 @@ return {
                 ObsidianTilde = { bold = true, fg = "#ce0a04" },
                 ObsidianImportant = { bold = true, fg = "#f9bb01" },
                 ObsidianDelayed = { bold = true, fg = "#302de2" },
-                ObsidianInProg = {bold = true, fg = "#f96c00"},
+                ObsidianInProg = { bold = true, fg = "#f96c00" },
                 ObsidianBullet = { bold = true, fg = "#89ddff" },
                 ObsidianRefText = { underline = true, fg = "#c792ea" },
                 ObsidianExtLinkIcon = { fg = "#c792ea" },
@@ -205,7 +210,7 @@ return {
             -- The default folder to place images in via `:ObsidianPasteImg`.
             -- If this is a relative path it will be interpreted as relative to the vault root.
             -- You can always override this per image by passing a full path to the command instead of just a filename.
-            img_folder = "assets/imgs",  -- This is the default
+            img_folder = "assets/imgs", -- This is the default
             -- A function that determines the text to insert in the note when pasting an image.
             -- It takes two arguments, the `obsidian.Client` and an `obsidian.Path` to the image file.
             -- This is the default implementation.
