@@ -44,6 +44,7 @@
                     (import ./configuration.nix flake-overlays)
                     inputs.kmonad.nixosModules.default
                     ./games/minecraft
+                    ./games/steam
                 ];
                 specialArgs = {
                     inherit system user_opts;
