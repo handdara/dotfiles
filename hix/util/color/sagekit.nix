@@ -44,7 +44,7 @@ in {
             bright_cyan = "${bright_cyan}";
             bright_white = "${bright_white}";
             base00 = "${base16.bg}";
-            base01 = "${base16.blue}";
+            base01 = "${base16.bright_blue}";
             base02 = "${base16.bright_green}";
             base03 = "${base16.yellow}";
             base04 = "${base16.green}";
