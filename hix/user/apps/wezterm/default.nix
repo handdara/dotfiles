@@ -86,7 +86,7 @@ in {
               '${c.red}',
               '${c.green}',
               '${c.yellow}',
-              '${c.blue}',
+              '${c.bright_blue}',
               '${c.magenta}',
               '${c.cyan}',
               '${c.white}',
@@ -96,10 +96,10 @@ in {
               '${c.bright_red}',
               '${c.bright_green}',
               '${c.bright_yellow}',
-              '${c.bright_blue}',
+              '${c.bright_white}',
               '${c.bright_magenta}',
               '${c.bright_cyan}',
-              '${c.bright_white}',
+              '${c.fg}',
           ]
 
           [colors.tab_bar]

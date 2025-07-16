@@ -22,7 +22,10 @@ return {
             {
                 name = "tadok",
                 path = vim.fs.normalize("~/code/tadok"),
-                overrides = { notes_subdir = "inbox" }
+                overrides = {
+                    notes_subdir = "0-inbox",
+                    daily_notes = { folder = "0-inbox" }
+                }
             },
         },
         daily_notes = {
@@ -33,7 +36,7 @@ return {
             nvim_cmp = true,
         },
         notes_subdir = hdirs.inbox.rel,
-        mappings = { -- Optional, configure key mappings. These are the defaults. 
+        mappings = { -- Optional, configure key mappings. These are the defaults.
             -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
             ["gf"] = {
                 action = function()
@@ -120,9 +123,9 @@ return {
         --     substitutions = {},
         -- },
         picker = {
-            name = "telescope.nvim", -- Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
+            name = "telescope.nvim",   -- Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
             mappings = {
-                new = "<C-x>", -- Create a new note from your query.
+                new = "<C-x>",         -- Create a new note from your query.
                 insert_link = "<C-l>", -- Insert a link to the selected note.
             },
         },
