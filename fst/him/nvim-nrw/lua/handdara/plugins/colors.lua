@@ -1,4 +1,19 @@
 return {
+    {
+        'yorickpeterse/vim-paper',
+        lazy = false,
+        priority = 1000,
+    },
+    {
+        "e-ink-colorscheme/e-ink.nvim",
+        lazy = false,
+        priority = 1000,
+    },
+    {
+        "xero/miasma.nvim",
+        lazy = false,
+        priority = 1000,
+    },
     { "rose-pine/neovim", name = "rose-pine" },
     {
         "water-sucks/darkrose.nvim",

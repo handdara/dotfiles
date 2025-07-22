@@ -32,4 +32,9 @@ return function()
     vim.o.updatetime = 250 -- Decrease update time
     vim.o.timeoutlen = 300
     vim.o.undofile = true  -- Save undo history
+    vim.cmd [[let fortran_free_source=1]]
+    vim.cmd [[let fortran_more_precise=1]]
+    vim.cmd [[let fortran_do_enddo=1]]
+    vim.cmd [[filetype plugin indent on]]
+    vim.cmd [[syntax on]]
 end

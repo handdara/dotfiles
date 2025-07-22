@@ -46,6 +46,8 @@ local function set_looks(colorscheme, is_light)
     if not light then
         apply(groups)
         apply(extra_groups)
+    else
+        vim.o.background = 'light'
     end
 end
 

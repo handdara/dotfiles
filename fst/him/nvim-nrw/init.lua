@@ -38,7 +38,9 @@ Handdara = require 'handdara'.setup {
   -- colorscheme = "lunaperche",
   -- colorscheme = "retrobox",
   -- colorscheme = "archery",
-  colorscheme = "eva01",
+  -- colorscheme = "eva01",
   -- colorscheme = "eva01-LCL",
   -- colorscheme = "marrissa-only",
+  -- colorscheme = { name = "e-ink", is_light = true },
+  colorscheme = { name = "paper", is_light = true },
 }

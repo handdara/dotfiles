@@ -121,6 +121,8 @@ abbr --add hs hsync
 
 abbr --add matlab "matlab -softwareopengl"
 
+abbr --add passls "pass ls | decolor"
+
 # CLI inits
 # -------------------------------------------------------------------------------------------------
 

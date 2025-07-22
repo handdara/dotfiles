@@ -89,6 +89,7 @@ flake-overlays: {
 
     environment.shells = with pkgs; [fish bash zsh dash];
     programs.fish.enable = true;
+    programs.bash.enableLsColors = false;
     users.defaultUserShell = pkgs.bash;
 
     # Allow unfree packages
@@ -108,6 +109,7 @@ flake-overlays: {
         brightnessctl
         pinentry-curses
         pass
+        tree
         # matlab
     ];
 

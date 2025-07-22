@@ -15,6 +15,11 @@ local maps = {
         action = ":ObsidianLink<CR>",
         opts = {},
     },
+    ["<leader>nt"] = {
+        modes = 'n',
+        action = ":ObsidianTags<CR>",
+        opts = {},
+    },
     ["<leader>na"] = {
         modes = 'n',
         action = ":ObsidianToday<CR>",
