@@ -23,7 +23,7 @@
         ./user/apps/pandoc
         ./user/apps/pastel
         # ./user/apps/r
-        ./user/apps/redshift
+        # ./user/apps/redshift
         ./user/apps/starship
         ./user/apps/tealdeer
         ./user/apps/vim
@@ -32,6 +32,7 @@
         ./user/apps/wezterm
         ./user/apps/wiki-tui
         ./user/apps/write
+        ./user/apps/xcolor
         ./user/apps/zathura
         ./user/apps/zoxide
         ./user/misc/theme

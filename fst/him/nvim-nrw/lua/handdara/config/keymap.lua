@@ -22,12 +22,6 @@ return function()
     map('n', '<C-k>', "<C-w><C-k>")
     map('n', '<C-l>', "<C-w><C-l>")
 
-    map('n', "<C-,>", "<c-w>5<") -- split resizing
-    map('n', "<C-.>", "<c-w>5>")
-    map('n', "<C-t>", "<C-W>+")
-    map('n', "<C-b>", "<C-W>-")
-    map('n', "<C-=>", "<C-W>=")
-
     map('n', "<C-S-a>", "'A`z") -- "quick-use" global marks
     map('n', "<C-S-s>", "'S`z")
     map('n', "<C-S-d>", "'D`z")

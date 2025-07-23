@@ -1,61 +1,36 @@
 {user_opts, ...}: let
     theme = import ./../../../util/color;
-    c = theme.hexcodes;
-
-    st_overrides =
-        if theme.name == "marrissa"
-        then
-            ({
-                fg5 = "#75507B";
+    st =
+        theme.starship
+        or (
+            if theme.is_light
+            then {
+                fg1 = theme.hexcodes.black; # os
+                bg1 = theme.hexcodes.white;
+                fg2 = theme.hexcodes.bright_black; # directory
+                bg2 = theme.hexcodes.bright_white;
+                fg3 = theme.hexcodes.black; # git
+                bg3 = theme.hexcodes.white;
+                fg4 = theme.hexcodes.bright_black; # lang/env
+                bg4 = theme.hexcodes.bright_white;
+                fg5 = theme.hexcodes.black; # time
+                bg5 = theme.hexcodes.white;
+                bgchar = theme.hexcodes.white;
             }
-            // (
-                if user_opts.term_invert
-                then rec {
-                    # marrissa light mode overrides
-                    fg1 = c.bright_black; # os
-                    bg1 = c.bright_blue;
-                    fg2 = c.bright_black; # directory
-                    bg2 = c.bright_magenta;
-                    fg3 = c.bright_black; # git
-                    bg3 = c.bright_blue;
-                    fg4 = c.bright_black; # lang/env
-                    bg4 = c.bright_cyan;
-                    bg5 = c.white;
-                    bgchar = bg5;
-                }
-                else {}
-            ))
-        else if theme.name == "sagekit_dark"
-        then
-            (
-                {
-                    # fg5 = "#75507B";
-                }
-                // {
-                    # sagekit dark mode overrides
-                    fg1 = c.white;
-                    fg2 = c.bright_black;
-                    bg3 = c.bright_green;
-                    fg3 = c.blue;
-                    bg4 = c.green;
-                    bgchar = c.blue;
-                }
-            )
-        else {};
-
-    st = {
-        fg1 = st_overrides.fg1 or c.black; # os
-        bg1 = st_overrides.bg1 or c.blue;
-        fg2 = st_overrides.fg2 or c.black; # directory
-        bg2 = st_overrides.bg2 or c.magenta;
-        fg3 = st_overrides.fg3 or c.black; # git
-        bg3 = st_overrides.bg3 or c.bright_blue;
-        fg4 = st_overrides.fg4 or c.black; # lang/env
-        bg4 = st_overrides.bg4 or c.cyan;
-        fg5 = st_overrides.fg5 or c.magenta; # time
-        bg5 = st_overrides.bg5 or c.black;
-        bgchar = st_overrides.bgchar or c.black;
-    };
+            else {
+                fg1 = theme.hexcodes.white;
+                bg1 = theme.hexcodes.black; # os
+                fg2 = theme.hexcodes.bright_white;
+                bg2 = theme.hexcodes.bright_black; # directory
+                fg3 = theme.hexcodes.white;
+                bg3 = theme.hexcodes.black; # git
+                fg4 = theme.hexcodes.bright_white;
+                bg4 = theme.hexcodes.bright_black; # lang/env
+                fg5 = theme.hexcodes.white;
+                bg5 = theme.hexcodes.black; # time
+                bgchar = theme.hexcodes.black;
+            }
+        );
 
     # SYMBOLS
     os_sym = " ";
@@ -117,7 +92,7 @@ in {
           "dotfiles" = " "
 
           [username]
-          style_root = 'bold fg:${c.red} bg:${st.bg1}'
+          style_root = 'bold fg:${theme.hexcodes.red} bg:${st.bg1}'
           style_user = 'bold fg:${st.fg1} bg:${st.bg1}'
           show_always = true
           format = '[$user ]($style)'
@@ -130,19 +105,19 @@ in {
           [[battery.display]]
           threshold = 10
           discharging_symbol = ' ! '
-          style = 'bold fg:${c.red} bg:${st.bg1}'
+          style = 'bold fg:${theme.hexcodes.red} bg:${st.bg1}'
 
           [[battery.display]]
           threshold = 25
-          style = 'fg:${c.white} bg:${st.bg1}'
+          style = 'fg:${theme.hexcodes.white} bg:${st.bg1}'
           discharging_symbol = '  '
 
           [character]
-          success_symbol = '[ 󱞪 ](fg:${c.cyan} bg:${st.bgchar}) '
-          vimcmd_symbol = '[  ](fg:${c.bright_blue} bg:${st.bgchar}) '
-          vimcmd_visual_symbol = '[  ](fg:${c.magenta} bg:${st.bgchar}) '
-          vimcmd_replace_symbol = '[  ](fg:${c.yellow} bg:${st.bgchar}) '
-          error_symbol = '[ ${err_sym}](bold fg:${c.bright_red} bg:${st.bgchar}) '
+          success_symbol = '[ 󱞪 ](fg:${theme.hexcodes.cyan} bg:${st.bgchar}) '
+          vimcmd_symbol = '[  ](fg:${theme.hexcodes.bright_blue} bg:${st.bgchar}) '
+          vimcmd_visual_symbol = '[  ](fg:${theme.hexcodes.magenta} bg:${st.bgchar}) '
+          vimcmd_replace_symbol = '[  ](fg:${theme.hexcodes.yellow} bg:${st.bgchar}) '
+          error_symbol = '[ ${err_sym}](bold fg:${theme.hexcodes.bright_red} bg:${st.bgchar}) '
           format = '[$symbol](bg:${st.bgchar})'
 
           [git_branch]

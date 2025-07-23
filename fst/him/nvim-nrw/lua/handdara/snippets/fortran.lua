@@ -14,6 +14,8 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local u = require 'handdara.util'
 
+local todoCmnt = '! TODO...'
+
 local S = {}
 local function use(snip)
     table.insert(S, snip)
@@ -30,7 +32,7 @@ end program {2}
 use(s('program', fmt(bPrg,{
     i(1, "name"),
     rep(1),
-    i(2, "! TODO..."),
+    i(2, todoCmnt),
 })))
 
 local bSubrtn = [[
@@ -40,8 +42,8 @@ end subroutine {2}
 ]]
 use(s('subroutine', fmt(bSubrtn,{
     i(1, "name"),
-    rep(1),
-    i(2, "! TODO...")
+    f(function (args) return string.match(args[1][1], '^[%w%_]+') end, {1}),
+    i(2, todoCmnt)
 })))
 
 local bFunc = [[
@@ -51,8 +53,8 @@ end function {2}
 ]]
 use(s('function', fmt(bFunc,{
     i(1, "name"),
-    rep(1),
-    i(2, "! TODO...")
+    f(function (args) return string.match(args[1][1], '^[%w%_]+') end, {1}),
+    i(2, todoCmnt)
 })))
 
 local bDo = [[
@@ -81,6 +83,28 @@ use(s('do_for', fmt(bDo, {
     }),
     -- d(4, function(args) return 'print *, ' .. args[1][1] end, {1}),
     d(4, function(args) return sn(nil, i(1,'print *, ' .. args[1][1])) end, {3}),
+})))
+
+local bIf = [[
+    {1}if ({3}) then
+        {4}
+    end if{2}
+]]
+use(s('if', fmt(bIf, {
+    c(1, {
+        {i(1,'if_name'), t ': ' },
+        t'',
+    }),
+    f(function (args)
+        if string.match(args[1][1], ":") then
+            local str = string.match(args[1][1], '(.-):')
+            return ' ' .. str
+        else
+            return ''
+        end
+    end, {1}),
+    i(2, '.false.'),
+    i(3, todoCmnt)
 })))
 
 ls.add_snippets("fortran", S)

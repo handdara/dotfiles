@@ -1,0 +1,59 @@
+[colors]
+background = '#000b01'
+foreground = '#f9ffde'
+cursor_bg = '#aeb58b'
+cursor_border = '#aeb58b'
+cursor_fg = '#001501'
+
+ansi = [
+    '#001501',
+    '#671b06',
+    '#1f4f00',
+    '#4f4a17',
+    '#0a3874',
+    '#56564d',
+    '#066b6b',
+    '#aeb58b',
+]
+brights = [
+    '#072d09',
+    '#ba334b',
+    '#68914d',
+    '#bcca39',
+    '#c3f2d0',
+    '#a3a054',
+    '#669292',
+    '#f9ffde',
+]
+
+[colors.tab_bar]
+background = "#262626"
+
+[colors.tab_bar.active_tab]
+bg_color = '#161616'
+fg_color = '#ffffff'
+intensity = 'Normal'
+italic = false
+strikethrough = false
+underline = 'None'
+
+[colors.tab_bar.inactive_tab]
+bg_color = '#262626'
+fg_color = '#ffffff'
+intensity = 'Normal'
+italic = false
+strikethrough = false
+underline = 'None'
+
+[colors.tab_bar.new_tab]
+bg_color = '#262626'
+fg_color = '#ffffff'
+intensity = 'Normal'
+italic = false
+strikethrough = false
+underline = 'None'
+
+
+[metadata]
+name = 'marrissa'
+# origin_url = ''

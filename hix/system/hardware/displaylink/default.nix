@@ -23,21 +23,19 @@
         services.xserver.displayManager.sessionCommands = ''
           ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0
         '';
-
-        # # see also hix/machines/sha76/gpu.nix for another use of this code, it's also where I copied it from
-        # hardware.graphics.enable = true;
-        # hardware.nvidia.open = true; # Set to false to use the proprietary kernel module
-        # hardware.nvidia.prime = {
-        #     intelBusId = "PCI:0:2:0";
-        #     nvidiaBusId = "PCI:1:0:0";
-        #     offload = {
-        #         enable = true;
-        #         enableOffloadCmd = true;
-        #     };
-        # };
-        # system.nixos.tags = ["nvidia" "offload" "ccrf"];
-
-        # services.xserver.desktopManager.gnome.enable = true;
-        # services.desktopManager.plasma6.enable = true;
     };
+
+    hardware.graphics.enable = true;
+    services.xserver.videoDrivers = ["nvidia"];
+    hardware.nvidia.open = false; # Set to false to use the proprietary kernel module
+    # boot.kernelParams = ["module_blacklist=i915"];
+    hardware.nvidia.prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+        offload = {
+            enable = true;
+            enableOffloadCmd = true;
+        };
+    };
+    system.nixos.tags = ["nvidia" "offload"];
 }

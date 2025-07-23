@@ -52,14 +52,6 @@ local function set_looks(colorscheme, is_light)
 end
 
 local function init_looks(colorscheme, is_light)
-    -- Highlight when yanking (copying) text
-    vim.api.nvim_create_autocmd('TextYankPost', {
-        desc = 'Highlight when yanking (copying) text',
-        group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-        callback = function()
-            vim.highlight.on_yank()
-        end,
-    })
     set_looks(colorscheme, is_light)
     if colorscheme == 'marrissa-only' then
         vim.cmd [[highlight TelescopeMatching gui=bold guifg=#823f8f]]

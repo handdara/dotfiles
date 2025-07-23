@@ -38,7 +38,7 @@ in {
           palette = 13=${c.bright_magenta}
           palette = 14=${c.bright_cyan}
           palette = 15=${c.bright_white}
-          background = ${c.bg}
+          background = ${theme.ghostty.bg or c.bg}
           foreground = ${c.fg}
           cursor-color = f2d5cf
           selection-background = 626880
