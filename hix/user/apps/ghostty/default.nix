@@ -1,5 +1,5 @@
 {pkgs_unstable, ...}: let
-    theme = import ./../../../util/color;
+    theme = import ../../../util/color;
     name = theme.name;
     c = theme.hexcodes;
 in {
@@ -10,10 +10,12 @@ in {
           font-family = Hurmit Nerd Font
           cursor-style = block
           cursor-style-blink = false
-          background-opacity = 0.70
+          background-opacity = 0.85
+          window-padding-x = 0
+          window-padding-y = 0
           command = fish
           window-decoration = false
-          window-theme = dark
+          window-theme = auto
           confirm-close-surface = false
           shell-integration-features = no-cursor
           gtk-tabs-location = hidden
@@ -40,7 +42,7 @@ in {
           palette = 15=${c.bright_white}
           background = ${theme.ghostty.bg or c.bg}
           foreground = ${c.fg}
-          cursor-color = f2d5cf
+          cursor-color = ${c.red}
           selection-background = 626880
           selection-foreground = c6d0f5
         '';

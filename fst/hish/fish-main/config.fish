@@ -95,7 +95,7 @@ abbr --add qe --set-cursor=! "$EDITOR (fd --min-depth 1 . ! | fzf)" # [Q]uick [E
 abbr --add qec --set-cursor=! "$EDITOR (fd --min-depth 1 . ~/code | fzf)" # [Q]uick [E]dit a code file
 
 # command line/clipboard interop help
-abbr --add xc --position anywhere "xclip -selection clipboard"
+abbr --add xc --position anywhere "xclip -rmlastnl -selection clipboard"
 abbr --add xp --position anywhere "xclip -selection clipboard -o"
 abbr --add xcv --position anywhere xclip
 abbr --add xpv --position anywhere "xclip -o"

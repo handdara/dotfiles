@@ -173,7 +173,7 @@ in
                 bgchar = hexcodes.magenta;
             };
             ghostty = {
-                bg = "ffffcc";
+                bg = "c9dcbc";
             };
         };
     }

@@ -3,7 +3,8 @@
     user_opts,
     ...
 }: let
-    fish_light_theme = "Snow Day";
+    # fish_light_theme = "Snow Day";
+    fish_light_theme = "fish default";
     fish_dark_theme = "Just a Touch";
     theme = import ../../../util/color;
 in {

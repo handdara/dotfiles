@@ -26,13 +26,13 @@ in {
           theme.bg_normal     = "${c.bg}"
           theme.bg_focus      = "${c.bg}"
           theme.bg_urgent     = "${c.red}"
-          theme.bg_minimize   = "${c.black}"
+          theme.bg_minimize   = "${c.bright_green}"
           theme.bg_systray    = "${c.bg}"
 
           theme.fg_normal     = "${c.fg}"
-          theme.fg_focus      = "${c.bright_cyan}"
+          theme.fg_focus      = "${c.bright_green}"
           theme.fg_urgent     = "${c.bright_white}"
-          theme.fg_minimize   = "${c.magenta}"
+          theme.fg_minimize   = "${c.bg}"
 
           theme.useless_gap   = dpi(4)
           theme.border_width  = dpi(3)
