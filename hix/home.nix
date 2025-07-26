@@ -17,7 +17,6 @@
         ./user/apps/mail
         ./user/apps/matlab
         ./user/apps/megacmd
-        # ./user/apps/minecraft
         ./user/apps/neofetch
         ./user/apps/nvim
         ./user/apps/pandoc
@@ -28,6 +27,7 @@
         ./user/apps/tealdeer
         ./user/apps/vim
         ./user/apps/vivaldi
+        ./user/apps/w3m
         ./user/apps/watchexec
         ./user/apps/wezterm
         ./user/apps/wiki-tui
