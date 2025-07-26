@@ -71,13 +71,13 @@ abbr --add ed "eza -lTD"
 alias ed "eza -lTD"
 
 # dir and subdirectory abbrs
-abbr --add fdirh --set-cursor=! "fd --type d -HI . ~! | fzf" # find directory, exclude .dirs
-abbr --add ffh --set-cursor=! "fd --type f -HI . ~! | fzf" # find file, exclude .dirs
-abbr --add fdir --set-cursor=! "fd --type d -HIL . ! | fzf" # find directory including `.___` dirs 
-abbr --add ff --set-cursor=! "fd --type f -HIL . ! | fzf" # find file including `.___` dirs 
+abbr --add fdirh --set-cursor=! "fd -utd . ~! | fzf" # find directory, exclude .dirs
+abbr --add ffh --set-cursor=! "fd -utf . ~! | fzf" # find file, exclude .dirs
+abbr --add fdir --set-cursor=! "fd -utd . ! | fzf" # find directory including `.___` dirs 
+abbr --add ff --set-cursor=! "fd -utf . ! | fzf" # find file including `.___` dirs 
 
-abbr --add bx "bat (fd -LHI --type f . ~/.config | fzf)"
-abbr --add bc "bat (fd -LHI --type f . ~/code | fzf)"
+abbr --add bx "fd -LHI --type f . ~/.config | fzf | xargs bat"
+abbr --add bc "fd -LHI --type f . ~/code | fzf | xargs bat"
 
 # fish just abbrs
 abbr --add j just
