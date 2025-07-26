@@ -40,6 +40,7 @@ tags:
 curr_mo_link: "{1}"
 ---
 # {2}
+
 {3}
 
 ## quests
