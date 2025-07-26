@@ -24,25 +24,25 @@ in {
           keybind = ctrl+alt+shift+t=toggle_tab_overview
         '';
         ".config/ghostty/themes/${name}".text = ''
-          palette = 0=${c.black}
-          palette = 1=${c.red}
-          palette = 2=${c.green}
-          palette = 3=${c.yellow}
-          palette = 4=${c.blue}
-          palette = 5=${c.magenta}
-          palette = 6=${c.cyan}
-          palette = 7=${c.white}
-          palette =  8=${c.bright_black}
-          palette =  9=${c.bright_red}
-          palette = 10=${c.bright_green}
-          palette = 11=${c.bright_yellow}
-          palette = 12=${c.bright_blue}
-          palette = 13=${c.bright_magenta}
-          palette = 14=${c.bright_cyan}
-          palette = 15=${c.bright_white}
+          palette =  0=${theme.ghostty.palette0 or c.black}
+          palette =  1=${theme.ghostty.palette1 or c.red}
+          palette =  2=${theme.ghostty.palette2 or c.green}
+          palette =  3=${theme.ghostty.palette3 or c.yellow}
+          palette =  4=${theme.ghostty.palette4 or c.blue}
+          palette =  5=${theme.ghostty.palette5 or c.magenta}
+          palette =  6=${theme.ghostty.palette6 or c.cyan}
+          palette =  7=${theme.ghostty.palette7 or c.white}
+          palette =  8=${theme.ghostty.palette8 or c.bright_black}
+          palette =  9=${theme.ghostty.palette9 or c.bright_red}
+          palette = 10=${theme.ghostty.paletteA or c.bright_green}
+          palette = 11=${theme.ghostty.paletteB or c.bright_yellow}
+          palette = 12=${theme.ghostty.paletteC or c.bright_blue}
+          palette = 13=${theme.ghostty.paletteD or c.bright_magenta}
+          palette = 14=${theme.ghostty.paletteE or c.bright_cyan}
+          palette = 15=${theme.ghostty.paletteF or c.bright_white}
           background = ${theme.ghostty.bg or c.bg}
           foreground = ${c.fg}
-          cursor-color = ${c.red}
+          cursor-color = ${theme.ghostty.cursor or c.red}
           selection-background = 626880
           selection-foreground = c6d0f5
         '';

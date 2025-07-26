@@ -97,6 +97,25 @@ in
                 bg5 = hexcodes.blue;
                 bgchar = hexcodes.black;
             };
+            ghostty = {
+                palette0 = black;
+                palette1 = bright_red;
+                palette2 = green;
+                palette3 = yellow;
+                palette4 = "0e4fa3";
+                palette5 = magenta;
+                palette6 = cyan;
+                palette7 = white;
+                palette8 = bright_black;
+                palette9 = "dc143c";
+                paletteA = bright_green;
+                paletteB = bright_yellow;
+                paletteC = "1471e9";
+                paletteD = bright_magenta;
+                paletteE = bright_cyan;
+                paletteF = bright_white;
+                cursor = bright_red;
+            };
         };
         light = rec {
             name = "${theme_name}_light";
@@ -174,6 +193,23 @@ in
             };
             ghostty = {
                 bg = "c9dcbc";
+                palette0 = black;
+                palette1 = red;
+                palette2 = green;
+                palette3 = yellow;
+                palette4 = blue;
+                palette5 = magenta;
+                palette6 = cyan;
+                palette7 = white;
+                palette8 = bright_black;
+                palette9 = bright_red;
+                paletteA = bright_green;
+                paletteB = bright_yellow;
+                paletteC = bright_blue;
+                paletteD = bright_magenta;
+                paletteE = bright_cyan;
+                paletteF = bright_white;
+                cursor = red;
             };
         };
     }
