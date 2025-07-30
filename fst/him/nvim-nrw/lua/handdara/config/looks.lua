@@ -62,6 +62,9 @@ local function init_looks(colorscheme, is_light)
         vim.cmd [[highlight @markup.heading.4.markdown gui=italic      guibg=#f5d6fd guifg=#130114]]
         vim.cmd [[highlight @markup.heading.5.markdown gui=italic      guibg=#a785ff guifg=#130114]]
         vim.cmd [[highlight @markup.heading.6.markdown gui=italic      guibg=#322a33 guifg=#f96f2f]]
+    elseif colorscheme == 'retrobox' then
+        vim.cmd [[highlight NeogitDiffAddHighlight guibg=#52561b]]
+        vim.cmd [[highlight NeogitDiffAdd guibg=#52561b]]
     end
 end
 

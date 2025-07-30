@@ -34,6 +34,7 @@
         ./user/apps/write
         ./user/apps/xcolor
         ./user/apps/zathura
+        ./user/apps/zotero
         ./user/apps/zoxide
         ./user/misc/theme
         ./user/shells/bash
