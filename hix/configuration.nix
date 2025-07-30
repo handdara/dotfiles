@@ -110,7 +110,7 @@ flake-overlays: {
         pinentry-curses
         pass
         tree
-        # matlab
+        matlab
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
