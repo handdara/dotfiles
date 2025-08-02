@@ -14,6 +14,7 @@ return function()
     -- sorting paragraphs
     map('v', '<leader>s', '!sort<CR>', { desc = '[S]ort highlighted' })
     map('v', '<leader>S', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
+    map('v', '<leader>y', '!yq -y<CR>', { desc = 'clean up YAML with yq' })
 
     map('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })
 

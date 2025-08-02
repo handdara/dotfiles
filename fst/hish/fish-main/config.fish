@@ -21,9 +21,8 @@ end
 
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/scripts
-fish_add_path ~/.yarn/bin
 
-set -gx EZA_COLORS "di=38;5;12:da=38;5;12"
+#set -gx EZA_COLORS "di=38;5;12:da=38;5;12"
 
 # Custom Funcs
 # -------------------------------------------------------------------------------------------------
