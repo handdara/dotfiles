@@ -25,6 +25,7 @@
         # ./user/apps/redshift
         ./user/apps/starship
         ./user/apps/tealdeer
+        ./user/apps/tmux
         ./user/apps/vim
         ./user/apps/vivaldi
         ./user/apps/w3m
