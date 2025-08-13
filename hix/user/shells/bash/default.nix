@@ -6,7 +6,8 @@
             e = "ls";
             ea = "ls -a";
             el = "eza -l";
-            et = "eza --tree";
+            et = "eza --tree --group-directories-first";
+            ed = "eza --tree --group-directories-first -D";
             ela = "ls -la";
             ga = "git add";
             gs = "git status";

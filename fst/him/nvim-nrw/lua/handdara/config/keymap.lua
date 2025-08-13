@@ -16,18 +16,7 @@ return function()
     map('v', '<leader>S', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
     map('v', '<leader>y', '!yq -y<CR>', { desc = 'clean up YAML with yq' })
 
-    map('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%T\'<CR>', { desc = 'insert [D]ate [T]ime' })
-
-    map('n', '<C-h>', "<C-w><C-h>") -- split movement
-    map('n', '<C-j>', "<C-w><C-j>")
-    map('n', '<C-k>', "<C-w><C-k>")
-    map('n', '<C-l>', "<C-w><C-l>")
-
-    map('n', "<C-S-a>", "'A`z") -- "quick-use" global marks
-    map('n', "<C-S-s>", "'S`z")
-    map('n', "<C-S-d>", "'D`z")
-    map('n', "<C-S-f>", "'F`z")
-    map('n', "<C-S-g>", "'G`z")
+    map('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%H%M\'<CR>', { desc = 'insert [D]ate [T]ime' })
 
     -- Diagnostic, quickfix, location, keymaps
     map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -36,8 +25,8 @@ return function()
     map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
     map('n', ']q', ':cnext<CR>', { desc = 'next in [q]uickfix list' })
     map('n', '[q', ':cprev<CR>', { desc = 'prev in [q]uickfix list' })
-    map('n', ']f', ':lnext<CR>', { desc = 'next in [l]ocation list' })
-    map('n', '[f', ':lprev<CR>', { desc = 'prev in [l]ocation list' })
+    map('n', ']l', ':lnext<CR>', { desc = 'next in [l]ocation list' })
+    map('n', '[l', ':lprev<CR>', { desc = 'prev in [l]ocation list' })
 
     -- working with views
     map('n', 'zl', '<CMD>loadview<CR>', { desc = 'load [v]iew for current file' })

@@ -27,6 +27,7 @@ local sBash = s('bash-recipe', fmt(bBash, {
 
 ls.add_snippets("just", {
     s("jd", t([[jd := justfile_directory()]])),
+    s("hd", t[[hd := env_var('HOME')]]),
     s("def", t({'# list recipes', 'default:', '    @just --list', ''})),
     sBash,
 })

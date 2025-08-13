@@ -14,7 +14,8 @@ local u = require 'handdara.util'
 local sdate = s("today", {
     f(function()
         local ts = u.timestamp()
-        return ts.dy .. ts.mo .. ts.yr
+        -- return ts.dy .. ts.mo .. ts.yr
+        return ts.yr ..'-'.. ts.mo_num ..'-'.. ts.dy
     end),
 })
 
@@ -28,7 +29,7 @@ local sdate = s("today", {
 local sdatetime = s("datetime", {
     f(function()
         local ts = u.timestamp()
-        return ts.dy .. ts.mo .. ts.yr .. ' ' .. ts.hr .. ':' .. ts.mi
+        return ts.yr ..'-'.. ts.mo_num ..'-'.. ts.dy .. ' ' .. ts.hr .. '' .. ts.mi
     end),
 })
 

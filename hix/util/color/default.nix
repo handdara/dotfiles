@@ -3,4 +3,4 @@ let
     # theme = import ./sagekit.nix;
     theme = import ./haley.nix;
 in
-    theme.dark
+    theme.light

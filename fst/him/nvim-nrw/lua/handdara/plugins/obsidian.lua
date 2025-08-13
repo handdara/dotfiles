@@ -44,7 +44,7 @@ return {
                 end,
                 opts = { noremap = false, expr = true, buffer = true },
             },
-            ["<C-;>"] = { -- the <leader>ch mapping was the original
+            ["<M-S-c>"] = { -- the <leader>ch mapping was the original
                 action = "<CMD>ObsidianToggleCheckbox<CR>",
                 opts = { buffer = true },
             },
