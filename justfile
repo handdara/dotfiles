@@ -1,7 +1,9 @@
+alias a := session
 alias home := switch-home
-
-dotfiles_dir := justfile_directory()
-home_dir := env_var('HOME')
+session_name := 'cfg'
+hd := env_var('HOME')
+jd := justfile_directory()
+startup_cmd := 'nix develop'
 
 # no default at the moment
 default:
@@ -10,43 +12,43 @@ default:
 
 # test rebuild nixos and home-manager
 test:
-    just {{dotfiles_dir}}/hix/ test-nixos
-    just {{dotfiles_dir}}/hix/ test-home-mngr
+    just {{jd}}/hix/ test-nixos
+    just {{jd}}/hix/ test-home-mngr
 
 # rebuild nixos and home-manager using most up-to-date method and switch
 switch: _check_fmt switch-nixos switch-home
 
 switch-nixos:
-    just {{dotfiles_dir}}/hix/ switch-nixos
+    just {{jd}}/hix/ switch-nixos
     @echo "current generation $(nixos-rebuild list-generations | awk '/current/ {print $1}')"
 
 # rebuild only home-manager using most up-to-date method and switch
 switch-home: _check_fmt 
-    just {{dotfiles_dir}}/hix/ switch-home-mngr
+    just {{jd}}/hix/ switch-home-mngr
 
 # purge directories needed to switch home-manager
 purge: 
-    -just {{dotfiles_dir}}/fst/hish/ purge
-    -just {{dotfiles_dir}}/fst/him/ purge
-    -just {{dotfiles_dir}}/fst/hez/ purge
-    -just {{dotfiles_dir}}/fst/hish/ purge
-    -just {{dotfiles_dir}}/snd/awesomewm/ purge
+    -just {{jd}}/fst/hish/ purge
+    -just {{jd}}/fst/him/ purge
+    -just {{jd}}/fst/hez/ purge
+    -just {{jd}}/fst/hish/ purge
+    -just {{jd}}/snd/awesomewm/ purge
 
 # retrieve the lazy.vim lock-files
 get-lazylock:
-    just {{dotfiles_dir}}/fst/him/ get-lazylock
+    just {{jd}}/fst/him/ get-lazylock
 
 # retrieve the lazy.vim lock-files
 place-lazylock:
-    just {{dotfiles_dir}}/fst/him/ place-lazylock
+    just {{jd}}/fst/him/ place-lazylock
 
 dev-nvim:
-    just {{dotfiles_dir}}/fst/him/ replace-nix
+    just {{jd}}/fst/him/ replace-nix
 
 # "dev mode", i.e. replace the nix home manager controlled cfgs with a symlink for fast dev
 dev: dev-nvim
-    just {{dotfiles_dir}}/fst/hez/ replace-nix
-    just {{dotfiles_dir}}/snd/awesomewm/ replace-nix
+    just {{jd}}/fst/hez/ replace-nix
+    just {{jd}}/snd/awesomewm/ replace-nix
 
 _git_add: _check_fmt
     git add .
@@ -62,3 +64,18 @@ edit:
 
 fmt:
     nix develop --command alejandra .
+
+# start tmux session
+session:
+    #!/usr/bin/env bash
+    set -exo pipefail
+    if ! tmux has-session -t={{session_name}} 2> /dev/null; then
+        tmux new-session -ds {{session_name}} -c {{jd}} {{startup_cmd}}
+    fi
+    if [ -z $TMUX ] ; then
+        echo 'tmux a -t {{session_name}}' | xclip -rmlastnl -selection clipboard
+        echo 'Run `tmux a -t {{session_name}}`. Which has been placed into the system clipboard.'
+    else
+        echo 'switching client'
+        tmux switch-client -t {{session_name}}
+    fi

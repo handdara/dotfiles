@@ -3,9 +3,11 @@
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
         ./user/apps/bat
+        ./user/apps/bc
         ./user/apps/btop
-        ./user/apps/desmume
         ./user/apps/cal
+        ./user/apps/chafa
+        ./user/apps/desmume
         ./user/apps/eza
         ./user/apps/fim
         ./user/apps/fzf
