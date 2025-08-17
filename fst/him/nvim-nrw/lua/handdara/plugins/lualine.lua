@@ -75,7 +75,7 @@ return {
                 end,
                 function()
                     local ts = u.timestamp()
-                    return ts.hr .. ts.mi
+                    return ts.hr .. ts.mi .. ' ' .. ts.sc .. 's'
                 end,
             },
             lualine_z = {
