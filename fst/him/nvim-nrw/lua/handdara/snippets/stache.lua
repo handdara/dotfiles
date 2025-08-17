@@ -102,28 +102,31 @@ local function mkSNStacheID(idx, stacheType)
         local defaultName, idCats
         if stacheType == 'inventory' then
             defaultName = 'iid'
-            idCats = {iid = 0}
+            idCats = { iid = 0 }
         elseif stacheType == 'task' then
             defaultName = 'misc'
-            idCats = {misc = 0}
+            idCats = { misc = 0 }
             for _, area in ipairs(stache.areas) do
                 idCats[area] = 0
             end
         elseif stacheType == 'data' then
             defaultName = 'dat'
-            idCats = {dat = 0}
+            idCats = { dat = 0 }
         elseif stacheType == 'contact' then
             defaultName = 'person'
-            idCats = {person = 0}
+            idCats = { person = 0 }
         else
             error('unknown stache type given, ', stacheType)
         end
         for jdx, file in ipairs(filepaths) do
+            if string.find(file, ' ') then
+                u.warn('space found in a filename, this can cause errors. File: ' .. file)
+            end
             local fname = string.match(file, '.*/([^ %#\t]*)')
             filepaths[jdx] = fname
         end
         for _, file in ipairs(filepaths) do
-            local cat, num_str = string.match(file, '([^%-]+)-([^%-]+)')
+            local cat, num_str = string.match(file, '(%a[%w%-%_]*)-([%h%d]+)')
             local num = tonumber(num_str)
             if cat and num then
                 idCats[cat] = math.max(num, idCats[cat] or 1)
@@ -131,7 +134,7 @@ local function mkSNStacheID(idx, stacheType)
                 idCats[cat] = idCats[cat] or 1
             end
         end
-        local idCatNs = {i(1, defaultName)}
+        local idCatNs = { i(1, defaultName) }
         for cat, val in pairs(idCats) do
             if val and cat ~= defaultName then
                 table.insert(idCatNs, t(cat))
@@ -141,14 +144,14 @@ local function mkSNStacheID(idx, stacheType)
     end
     return sn(idx, {
         c(1, getCatsNs()),
-        t'-',
+        t '-',
         c(2, {
             d(1, function(args)
                 local cat = args[1][1]
                 local _, idCats = getCatsNs()
                 local num = (idCats[cat] or 0) + 1
-                return sn(nil, {i(1, tostring(num))})
-            end, {1}),
+                return sn(nil, { i(1, tostring(num)) })
+            end, { 1 }),
             f(function()
                 local st = ''
                 for _ = 1, 4 do
@@ -283,13 +286,13 @@ local function mkSnTask(idx)
                 mkCPriorities(2),
                 mkCLocations(5),
                 i(6, '~'), -- alphabet
-                c(7, { -- subtasks
+                c(7, {     -- subtasks
                     sn(nil, { t '[', i(1), t ']' }),
                     sn(nil, { i(1), t { '', '' }, mkSnSubtask(2, args[1][1], '    ') }),
                 }),
                 i(9, '[]'),  -- aliases
                 i(10, '[]'), -- repos
-                c(11, {     -- notes
+                c(11, {      -- notes
                     sn(nil, { t '[', i(1), t ']' }),
                     { t { '', '  - ' }, i(1, "note...") },
                 }),

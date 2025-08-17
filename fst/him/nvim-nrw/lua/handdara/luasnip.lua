@@ -42,7 +42,12 @@ vim.keymap.set({ "i", "s" }, '<C-j>', function()
 end, { silent = true })
 
 vim.keymap.set({ "i", 's' }, '<C-k>', function()
-    return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
+    if vim.snippet.active { direction = -1 } then
+        return vim.snippet.jump(-1)
+    else
+        local key = vim.api.nvim_replace_termcodes("<C-k>", true, false, true)
+        return vim.api.nvim_feedkeys(key, "n", false)
+    end
 end, { silent = true })
 
 vim.keymap.set({ "i", "s" }, '<C-h>', function()

@@ -11,22 +11,22 @@ function M.dtnum2str(x)
 end
 
 function M.timestamp()
-    local ts = os.date('*t')
-    local months = { 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' }
-    local weekdays = { 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' }
-    local quarter = tostring(math.modf(ts.month / 3) + 1)
+    local ts = os.time()
     return {
-        yr = tostring(ts.year),
-        dy = tostring(ts.day),
-        mo = months[ts.month],
-        wk = math.modf((ts.yday / 7) + 1),
-        mo_num = M.dtnum2str(ts.month),
-        wd = weekdays[ts.wday],
-        wd_num = ts.wday,
-        hr = M.dtnum2str(ts.hour),
-        mi = M.dtnum2str(ts.min),
-        sc = M.dtnum2str(ts.sec),
-        qt = quarter
+        epochtime = ts,
+        yr = os.date('%Y',ts),
+        dy = os.date('%d',ts),
+        mo = os.date('%b',ts),
+        month = os.date('%B',ts),
+        wk = os.date('%W'),
+        mo_num = os.date('%m',ts),
+        wd = os.date('%a',ts),
+        wd_num = os.date('%u',ts),
+        hr = os.date('%H',ts),
+        mi = os.date('%M',ts),
+        sc = os.date('%S',ts),
+        yrdy = os.date('%j',ts),
+        qt = os.date('%q',ts),
     }
 end
 
@@ -39,6 +39,10 @@ function M.trace_notify(msg, x)
     assert(type(msg) == "string")
     vim.notify(msg .. vim.inspect(x))
     return x
+end
+
+function M.warn(msg, opts)
+    return vim.notify(msg, vim.log.levels.WARN, opts)
 end
 
 return M

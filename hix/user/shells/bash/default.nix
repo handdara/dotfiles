@@ -7,7 +7,7 @@
             ea = "ls -a";
             el = "eza -l";
             et = "eza --tree --group-directories-first";
-            ed = "eza --tree --group-directories-first -D";
+            ed = "eza --tree -D --group-directories-first";
             ela = "ls -la";
             ga = "git add";
             gs = "git status";
@@ -32,10 +32,11 @@
             zcd = "z \"\$(fd -utd '' ~/code | fzf || echo '/DNE')\"";
             zcf = "z \"\$(fd -utf --min-depth 2 '' ~/code | fzf | xargs dirname  || echo '/DNE')\"";
             zc = "z \"\$(fd -utf -td --min-depth 2 '' ~/code | fzf | xargs dirname || echo '/DNE')\"";
+            alfred = "__h_boot_alfred";
         };
         # bashrcExtra = ''
-        #   export PATH="$PATH:~/.yarn/bin"
-        #   eval "$(ssh-agent -s)"
+        #     alfred(){
+        #     }
         # '';
     };
 }

@@ -33,15 +33,18 @@ local sdatetime = s("datetime", {
     end),
 })
 
-local stime = s("time", {
+local shhmm = s("hhmm", {
     f(function()
         local ts = u.timestamp()
         return ts.hr .. ts.mi
     end),
 })
 
+local stime = s('time', { f(function() return tostring(os.time()) end) })
+
 ls.add_snippets("all", {
     sdate,
     sdatetime,
+    shhmm,
     stime,
 })

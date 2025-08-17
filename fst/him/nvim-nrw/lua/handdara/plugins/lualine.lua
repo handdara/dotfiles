@@ -6,7 +6,7 @@ return {
         options           = {
             icons_enabled = true,
             theme = 'auto',
-            component_separators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
             section_separators = { left = '', right = '' },
             disabled_filetypes = {
                 statusline = {},
@@ -31,7 +31,9 @@ return {
                     tabs_color = {
                         active = { fg = '#b968fc' },
                     },
-                    separator = { left = 'L', right = 'R' },
+                    -- separator = { left = '', right = '' },
+                    separator = { left = '', right = '' },
+                    draw_empty = true,
                     symbols = {
                         modified = '󱐋',
                     },
@@ -62,19 +64,24 @@ return {
 
                     return "󰄉 " .. tostring(timer)
                 end,
+                'fileformat',
             },
             lualine_y = {
-                'fileformat',
+                'encoding',
                 'filetype',
                 function()
                     local ts = u.timestamp()
-                    return ts.hr .. ":" .. ts.mi
+                    return 'WK' .. u.dtnum2str(ts.wk)
+                end,
+                function()
+                    local ts = u.timestamp()
+                    return ts.hr .. ts.mi
                 end,
             },
             lualine_z = {
                 function()
                     local ts = u.timestamp()
-                    return ts.dy .. ts.mo .. ts.yr
+                    return ts.yr .. ' ' .. ts.month .. ' ' .. ts.dy .. ', Week ' .. ts.wk .. ', Day ' .. ts.yrdy
                 end,
                 'progress',
                 'location',
