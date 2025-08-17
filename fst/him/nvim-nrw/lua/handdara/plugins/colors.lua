@@ -21,6 +21,16 @@ return {
         priority = 1000,
     },
     {
+        'nikolvs/vim-sunbather',
+        lazy = false,
+        priority = 1000,
+    },
+    {
+        'n1ghtmare/noirblaze-vim',
+        lazy = false,
+        priority = 1000,
+    },
+    {
         "hachy/eva01.vim",
         lazy = false,
         priority = 1000,

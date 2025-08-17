@@ -24,11 +24,13 @@ local filetypes = { 'yaml', 'just', 'lua', 'markdown', 'matlab', 'nix', 'tex', '
     'haskell' }
 
 local sdateheader = s('dateheader', {
+    c(1, { t'#', t'##', t'###', t'####', t'#####', t'######' }),
     f(function()
         local ts = u.timestamp()
-        return '## ' .. ts.dy .. ts.mo .. ts.yr .. ', ' .. ts.wd
+        return ' ' .. ts.wd .. ', ' .. ts.month .. ' ' .. ts.dy .. ', Week ' .. ts.wk
+            .. ', Day ' .. ts.yrdy .. ' of ' .. ts.yr
     end),
-    -- t(""),
+    t{'',''},
 })
 use(sdateheader)
 
@@ -153,10 +155,10 @@ end
 
 local function mkStacheFilt(idx)
     return c(idx,
-         {
-            { i(1), t 'STACHE ', mkCBasic(2, stache.itemTypes) },
-            { i(1), t 'FIELD ', mkCBasic(2, {'status', 'priority'}, 'id') },
-            { t 'GREP "', i(1,'regex'), t'"' },
+        {
+            { i(1),       t 'STACHE ',  mkCBasic(2, stache.itemTypes) },
+            { i(1),       t 'FIELD ',   mkCBasic(2, { 'status', 'priority' }, 'id') },
+            { t 'GREP "', i(1, 'regex'), t '"' },
         })
 end
 
@@ -164,7 +166,7 @@ local mkSetOp = function(idx)
     return sn(idx, {
         c(1, { t 'INTERSECT', t 'SUBTRACT', t 'UNION' }),
         t ' ',
-        c(2, { { t 'FROM ', i(1, '-'), t' ' }, t '' }),
+        c(2, { { t 'FROM ', i(1, '-'), t ' ' }, t '' }),
         mkStacheFilt(3),
     })
 end
@@ -172,9 +174,9 @@ use(s('setop', mkSetOp(1)))
 
 local mkGrpOp = function(idx)
     return sn(idx, {
-        c(1, {t'GROUP SPL ', t'GROUP '}),
+        c(1, { t 'GROUP SPL ', t 'GROUP ' }),
         mkStacheFilt(2),
-        c(3, {t' ASC',t' DES',t''}),
+        c(3, { t ' ASC', t ' DES', t '' }),
     })
 end
 use(s('grpop', mkGrpOp(1)))

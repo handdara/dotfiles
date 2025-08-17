@@ -22,6 +22,7 @@
   "mini.files": { "branch": "main", "commit": "6abe854f1410fc6aec69897a78b1db994c32d9c6" },
   "mini.icons": { "branch": "main", "commit": "54686be7d58807906cb2c8c2216e0bf9c044f19a" },
   "neogit": { "branch": "master", "commit": "c3a1e8f1b568c7ea844645bc327c22908ea3df68" },
+  "noirblaze-vim": { "branch": "master", "commit": "03132e01915d261ce5a8812ec633ff63d84718a1" },
   "nvim-cmp": { "branch": "main", "commit": "ed31156aa2cc14e3bc066c59357cc91536a2bc01" },
   "nvim-lspconfig": { "branch": "master", "commit": "e869c7e6af0a3c40a2b344a9765779d74dd12720" },
   "nvim-notify": { "branch": "master", "commit": "fbef5d32be8466dd76544a257d3f3dce20082a07" },
@@ -41,5 +42,6 @@
   "tree-sitter-just": { "branch": "main", "commit": "f6d29300f9fee15dcd8c2b25ab762001d38da731" },
   "undotree": { "branch": "master", "commit": "78b5241191852ffa9bb5da5ff2ee033160798c3b" },
   "vim-paper": { "branch": "main", "commit": "d8decc44569aec6247bae54d971e658bb8108399" },
+  "vim-sunbather": { "branch": "master", "commit": "64506a07a735ad92752e0e9935c4fc304f0327a4" },
   "which-key.nvim": { "branch": "main", "commit": "9b365a6428a9633e3eeb34dbef1b791511c54f70" }
 }

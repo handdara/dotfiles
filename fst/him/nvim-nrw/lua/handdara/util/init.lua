@@ -18,7 +18,7 @@ function M.timestamp()
         dy = os.date('%d',ts),
         mo = os.date('%b',ts),
         month = os.date('%B',ts),
-        wk = os.date('%W'),
+        wk = os.date('%V'),
         mo_num = os.date('%m',ts),
         wd = os.date('%a',ts),
         wd_num = os.date('%u',ts),
