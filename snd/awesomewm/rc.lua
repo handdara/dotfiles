@@ -60,8 +60,10 @@ local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
-local ansible = "nvim SUMMARY.md"
+local ansible = "tmux attach -t ansible || tmux new -s ansible nvim SUMMARY.md"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
+local nsi_cmd = "ghostty -e ~/.local/scripts/nsi"
+local osi_cmd = "ghostty -e ~/.local/scripts/osi"
 local email = "mbsync -a && neomutt"
 local email_cmd = terminal_cmd .. email
 local calendar = "ikhal"
@@ -70,9 +72,10 @@ local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
 local sys_manage = scripts_dir .. "mg"
 local sys_manage_cmd = terminal_cmd .. [["sleep 0.156; ]] .. sys_manage .. [["]]
-local music = "hmu"
+local music = "nix run ~/apps/hmus"
 local music_cmd = terminal_cmd .. music
 local passmenu_cmd = "passmenu"
+local discord_cmd = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p discord --run discord"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -114,9 +117,9 @@ local start_menu = awful.menu({
     items = {
         { "Awesome",        menu_awesome,  beautiful.awesome_icon },
         -- { "Open Terminal",  terminal },
-        { "Contact Ekumen", ansible_cmd },
+        { "Contact Ekumen", discord_cmd },
         { "Web Browser",    browser_cmd },
-        { "Email",          email_cmd },
+        -- { "Email",          email_cmd },
         { "Calendar",       calendar_cmd },
         { "Music",          music_cmd },
         -- { "WiFi",           netmgr_cmd },
@@ -391,8 +394,14 @@ local globalkeys = gears.table.join(
         { description = "run passmenu", group = "launcher" }),
     awful.key({ super, }, "v", function() awful.spawn(browser_cmd) end,
         { description = "Open Web Browser", group = "launcher" }),
-    awful.key({ super, }, "e", function() awful.spawn(ansible_cmd) end,
+    awful.key({ super, }, "e", function() awful.spawn(discord_cmd) end,
         { description = "Contact Ekumen", group = "launcher" }),
+    awful.key({ super, }, "a", function() awful.spawn(ansible_cmd) end,
+        { description = "Use Ansible", group = "launcher" }),
+    awful.key({ super, "Control" }, "a", function() awful.spawn(nsi_cmd) end,
+        { description = "[a]dd New Stache Item", group = "launcher" }),
+    awful.key({ super, "Shift" }, "a", function() awful.spawn(osi_cmd) end,
+        { description = "[o]pen New Stache Item", group = "launcher" }),
     awful.key({ super, }, "c", function() awful.spawn(calendar_cmd) end,
         { description = "Open Calendar Ekumen", group = "launcher" }),
     awful.key({ super, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),

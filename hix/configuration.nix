@@ -14,7 +14,7 @@ flake-overlays: {
             ./system/wm/plasma
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
-            ./system/hardware/displaylink
+            # ./system/hardware/displaylink
         ]
         ++ inputs.extraModules;
 
