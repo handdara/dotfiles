@@ -45,10 +45,11 @@
                     inputs.kmonad.nixosModules.default
                     ./games/minecraft
                     ./games/steam
+                    ./system/wm/retrofuture
                 ];
                 specialArgs = {
                     inherit system user_opts;
-                    extraModules = [./battery.nix];
+                    extraModules = [./system/hardware/battery];
                     sys_opts = import ./machines/sha76/options.nix {};
                 };
             };
@@ -70,7 +71,7 @@
                 ];
                 specialArgs = {
                     inherit system user_opts;
-                    extraModules = [./battery.nix];
+                    extraModules = [./system/hardware/battery];
                     sys_opts = import ./machines/tadok/options.nix {};
                 };
             };
