@@ -15,6 +15,10 @@
             url = "gitlab:doronbehar/nix-matlab";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        retrofuture = {
+            url = "github:diinki/diinki-retrofuture";
+            flake = false;
+        };
     };
 
     outputs = {
@@ -84,6 +88,7 @@
                 ];
                 extraSpecialArgs = {
                     inherit user_opts pkgs_unstable;
+                    retrofuture = inputs.retrofuture;
                 };
             };
         };

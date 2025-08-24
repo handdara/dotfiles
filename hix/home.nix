@@ -1,6 +1,7 @@
 {user_opts, ...}: {
     imports = [
         ./system/wm/awesomewm/home.nix
+        ./system/wm/retrofuture/home.nix
         ./user/apps/alacritty
         ./user/apps/bat
         ./user/apps/bc

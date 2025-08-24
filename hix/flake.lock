@@ -114,13 +114,30 @@
         "type": "github"
       }
     },
+    "retrofuture": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754906505,
+        "narHash": "sha256-mSHzwTEZxNLrXVncwjrLGl01u5IfNIWY4OHWPKpQEXM=",
+        "owner": "diinki",
+        "repo": "diinki-retrofuture",
+        "rev": "f8133fe792785f26354a95807dd32aeadd749e5d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "diinki",
+        "repo": "diinki-retrofuture",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "kmonad": "kmonad",
         "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "retrofuture": "retrofuture"
       }
     }
   },
