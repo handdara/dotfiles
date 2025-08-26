@@ -20,11 +20,19 @@ return {
         workspaces = {
             { name = "ansible", path = hdirs.ansible },
             {
-                name = "tadok",
+                name = "tadok-373",
                 path = vim.fs.normalize("~/code/tadok"),
                 overrides = {
                     notes_subdir = "0-inbox",
-                    daily_notes = { folder = "0-inbox" }
+                    daily_notes = { folder = "4-game-373/sessions" }
+                }
+            },
+            {
+                name = "tadok-176",
+                path = vim.fs.normalize("~/code/tadok"),
+                overrides = {
+                    notes_subdir = "0-inbox",
+                    daily_notes = { folder = "6-game-373/sessions" }
                 }
             },
         },

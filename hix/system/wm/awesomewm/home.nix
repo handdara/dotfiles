@@ -2,7 +2,7 @@
     awm_dir = ../../../../snd/awesomewm;
     theme = import ./../../../util/color;
     c = theme.hexcodes;
-    systemFont = "Hurmit Nerd Font";
+    systemFont = "Maple Mono";
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;

@@ -18,7 +18,7 @@ return function()
     vim.wo.number = true -- Make line numbers default and relative
     vim.wo.relativenumber = true
     vim.wo.signcolumn = 'yes'
-    vim.o.shell = "fish"
+    vim.o.shell = "bash"
     vim.o.termguicolors = true -- NOTE: make sure your terminal supports this
     --[[
       [!IMPORTANT]

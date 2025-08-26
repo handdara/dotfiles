@@ -7,7 +7,7 @@ in {
     home.file = {
         ".config/ghostty/config".text = ''
           theme = ${name}
-          font-family = Hurmit Nerd Font
+          font-family = Maple Mono
           cursor-style = block
           cursor-style-blink = false
           background-opacity = 0.85
