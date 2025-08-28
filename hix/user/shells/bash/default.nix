@@ -1,6 +1,8 @@
 {...}: {
     programs.bash = {
         enable = true;
+        historySize = 100000;
+        historyFileSize = 10000000;
         shellAliases = {
             z = "cd";
             e = "ls";
@@ -34,9 +36,8 @@
             zc = "z \"\$(fd -utf -td --min-depth 2 '' ~/code | fzf | xargs dirname || echo '/DNE')\"";
             alfred = "__h_boot_alfred";
         };
-        # bashrcExtra = ''
-        #     alfred(){
-        #     }
-        # '';
+        bashrcExtra = ''
+          export SUDO_ASKPASS=$HOME/.local/scripts/__h_sha76passwd
+        '';
     };
 }

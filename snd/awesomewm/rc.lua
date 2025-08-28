@@ -142,7 +142,7 @@ local kbd_layout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local stbar_txtclk = wibox.widget.textclock()
+local stbar_txtclk = wibox.widget.textclock('│ %A %B %d, %H:%M │ Week %V Day %j of %Y │ %s ')
 
 local cal_widget = awful.popup {
     widget       = {

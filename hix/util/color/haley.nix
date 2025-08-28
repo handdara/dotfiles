@@ -82,7 +82,13 @@ in
                 bright_magenta = "#" + base16.bright_magenta;
                 bright_cyan = "#" + base16.bright_cyan;
                 bright_white = "#" + base16.bright_white;
-                window_focus = hexcodes.green;
+            };
+            wm = {
+                window_border = {
+                    focus = bright_blue;
+                    normal = black;
+                    marked = bright_green;
+                };
             };
             starship = {
                 fg1 = hexcodes.yellow; # os

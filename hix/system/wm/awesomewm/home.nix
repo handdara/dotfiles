@@ -20,8 +20,8 @@ in {
 
           theme.system_font   = "${systemFont}"
           theme.font          = theme.system_font .. " 14"
-          theme.hotkeys_font  = "Monoid Nerd Font 12"
-          theme.hotkeys_description_font  = theme.hotkeys_font
+          theme.hotkeys_font  = "${systemFont}"
+          theme.hotkeys_description_font  = theme.hotkeys_font .. " Italic"
 
           theme.bg_normal     = "${c.bg}"
           theme.bg_focus      = "${c.bg}"
@@ -36,9 +36,9 @@ in {
 
           theme.useless_gap   = dpi(4)
           theme.border_width  = dpi(3)
-          theme.border_normal = "${c.black}"
-          theme.border_focus  = "${c.window_focus}"
-          theme.border_marked = "${c.cyan}"
+          theme.border_normal = "#${theme.wm.window_border.normal or c.black}"
+          theme.border_focus  = "#${theme.wm.window_border.focus or c.cyan}"
+          theme.border_marked = "#${theme.wm.window_border.marked or c.white}"
 
           -- There are other variable sets
           -- overriding the default one when

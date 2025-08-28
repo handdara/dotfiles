@@ -31,7 +31,7 @@ local sdate = s("today", {
 local sdatetime = s("datetime", {
     f(function()
         local ts = u.timestamp()
-        return ts.yr .. '-' .. ts.mo_num .. '-' .. ts.dy .. ' ' .. ts.hr .. '' .. ts.mi
+        return ts.yr .. '-' .. ts.mo_num .. '-' .. ts.dy .. ' ' .. ts.hr .. ':' .. ts.mi
     end),
 })
 

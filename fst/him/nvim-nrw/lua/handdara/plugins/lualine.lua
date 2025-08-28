@@ -71,17 +71,13 @@ return {
                 'filetype',
                 function()
                     local ts = u.timestamp()
-                    return 'WK' .. u.dtnum2str(ts.wk)
-                end,
-                function()
-                    local ts = u.timestamp()
                     return ts.hr .. ts.mi .. ' ' .. ts.sc .. 's'
                 end,
             },
             lualine_z = {
                 function()
                     local ts = u.timestamp()
-                    return ts.yr .. ' ' .. ts.month .. ' ' .. ts.dy .. ', Week ' .. ts.wk .. ', Day ' .. ts.yrdy
+                    return ts.yr .. '-' .. ts.mo_num .. '-' .. ts.dy
                 end,
                 'progress',
                 'location',

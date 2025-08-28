@@ -23,6 +23,7 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.local/scripts
 
 #set -gx EZA_COLORS "di=38;5;12:da=38;5;12"
+set -gx SUDO_ASKPASS "$HOME/.local/scripts/__h_sha76passwd"
 
 # Custom Funcs
 # -------------------------------------------------------------------------------------------------

@@ -8,6 +8,7 @@ in {
         ".config/ghostty/config".text = ''
           theme = ${name}
           font-family = Maple Mono
+          font-size = 14
           cursor-style = block
           cursor-style-blink = false
           background-opacity = 0.85
@@ -22,6 +23,8 @@ in {
           keybind = ctrl+,=unbind
           keybind = ctrl+shift+a=unbind
           keybind = ctrl+alt+shift+t=toggle_tab_overview
+          keybind = ctrl+alt+minus=toggle_tab_overview
+          keybind = global:super+ctrl+enter=toggle_quick_terminal
         '';
         ".config/ghostty/themes/${name}".text = ''
           palette =  0=${theme.ghostty.palette0 or c.black}
