@@ -62,6 +62,8 @@ local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
 local ansible = "tmux attach -t ansible || tmux new -s ansible nvim SUMMARY.md"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
+local misc_tmux = [['bash --login -c "tmux attach -t misc || tmux new -s misc"']]
+local misc_tmux_cmd = terminal_cmd .. misc_tmux
 local nsi_cmd = "ghostty -e ~/.local/scripts/nsi"
 local osi_cmd = "ghostty -e ~/.local/scripts/osi"
 local email = "mbsync -a && neomutt"
@@ -142,7 +144,7 @@ local kbd_layout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local stbar_txtclk = wibox.widget.textclock('│ %A %B %d, %H:%M │ Week %V Day %j of %Y │ %s ')
+local stbar_txtclk = wibox.widget.textclock('│ %A %B %d, %H:%M │ Week %V Day %j of %Y ')
 
 local cal_widget = awful.popup {
     widget       = {
@@ -396,6 +398,8 @@ local globalkeys = gears.table.join(
         { description = "Open Web Browser", group = "launcher" }),
     awful.key({ super, }, "e", function() awful.spawn(discord_cmd) end,
         { description = "Contact Ekumen", group = "launcher" }),
+    awful.key({ super, }, "g", function() awful.spawn(misc_tmux_cmd) end,
+        { description = "Open miscellaneous tmux session", group = "launcher" }),
     awful.key({ super, }, "a", function() awful.spawn(ansible_cmd) end,
         { description = "Use Ansible", group = "launcher" }),
     awful.key({ super, "Control" }, "a", function() awful.spawn(nsi_cmd) end,

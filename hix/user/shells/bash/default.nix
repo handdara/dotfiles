@@ -24,6 +24,8 @@
             fdfh = "fd -utf '' ~ | fzf -m";
             fdrh = "fd -utd '' ~ | fzf -m";
             "z-" = "z -";
+            vpdf = "zathura";
+            vimg = "fim";
             zt = "z $(mktemp -d)";
             zd = "z \"\$(fd -utd '' . | fzf || echo '/DNE')\"";
             zf = "z \"\$(fd -utf '' . | fzf | xargs dirname || echo '/DNE')\"";
