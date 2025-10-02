@@ -43,8 +43,8 @@ Handdara = require 'handdara'.setup {
   -- colorscheme = "marrissa-only",
   -- colorscheme = "e-ink",
   -- colorscheme = "noirblaze",
-  colorscheme = "sunbather",
+  -- colorscheme = "sunbather",
   -- colorscheme = { name = "e-ink", is_light = true },
-  -- colorscheme = { name = "paper", is_light = true },
+  colorscheme = { name = "paper", is_light = true },
   -- colorscheme = "paper",
 }

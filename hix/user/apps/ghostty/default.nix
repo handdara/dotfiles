@@ -8,11 +8,14 @@ in {
         ".config/ghostty/config".text = ''
           theme = ${name}
           font-family = Maple Mono
+          font-family-bold = Maple Mono Bold
+          font-family-italic = Maple Mono Italic
+          font-family-bold-italic = Maple Mono BoldItalic
           font-size = 14
           cursor-style = block
           cursor-style-blink = false
           background-opacity = 0.85
-          window-padding-x = 0
+          window-padding-x = 2
           window-padding-y = 0
           command = fish
           window-decoration = false

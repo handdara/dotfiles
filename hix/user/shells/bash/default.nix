@@ -33,6 +33,7 @@
             zhd = "z \"\$(fd -utd '' ~ | fzf || echo '/DNE')\"";
             zhf = "z \"\$(fd -utf '' ~ | fzf | xargs dirname || echo '/DNE')\"";
             zh = "z \"\$(fd -utf -td '' ~ | fzf | xargs dirname || echo '/DNE')\"";
+            zm = "z \"\$(fd -utf -td '' ~/MEGA | fzf | xargs dirname || echo '/DNE')\"";
             zcd = "z \"\$(fd -utd '' ~/code | fzf || echo '/DNE')\"";
             zcf = "z \"\$(fd -utf --min-depth 2 '' ~/code | fzf | xargs dirname  || echo '/DNE')\"";
             zc = "z \"\$(fd -utf -td --min-depth 2 '' ~/code | fzf | xargs dirname || echo '/DNE')\"";
@@ -40,6 +41,8 @@
         };
         bashrcExtra = ''
           export SUDO_ASKPASS=$HOME/.local/scripts/__h_sha76passwd
+          export PATH="~/.local/bin:$PATH"
+          export PATH="~/.local/scripts:$PATH"
         '';
     };
 }

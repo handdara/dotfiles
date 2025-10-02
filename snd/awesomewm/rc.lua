@@ -62,7 +62,7 @@ local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
 local ansible = "tmux attach -t ansible || tmux new -s ansible nvim SUMMARY.md"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
-local misc_tmux = [['bash --login -c "tmux attach -t misc || tmux new -s misc"']]
+local misc_tmux = "'tmux attach -t misc || tmux new -s misc'"
 local misc_tmux_cmd = terminal_cmd .. misc_tmux
 local nsi_cmd = "ghostty -e ~/.local/scripts/nsi"
 local osi_cmd = "ghostty -e ~/.local/scripts/osi"

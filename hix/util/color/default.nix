@@ -4,4 +4,4 @@ let
     theme = import ./haley.nix;
     # theme = import ./pinkbatman.nix;
 in
-    theme.dark
+    theme.light

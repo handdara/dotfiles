@@ -216,5 +216,12 @@ in
                 paletteF = bright_white;
                 cursor = red;
             };
+            wm = {
+                window_border = {
+                    focus = bright_blue;
+                    normal = black;
+                    marked = bright_green;
+                };
+            };
         };
     }
