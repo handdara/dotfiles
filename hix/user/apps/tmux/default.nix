@@ -7,6 +7,7 @@
           set-option -g status-left-length 20
           set-option -g status-justify centre
           set-option -g detach-on-destroy off
+          set -g default-terminal "tmux-256color"
         '';
     };
 }

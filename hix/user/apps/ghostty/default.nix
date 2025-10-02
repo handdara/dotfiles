@@ -2,16 +2,16 @@
     theme = import ../../../util/color;
     name = theme.name;
     c = theme.hexcodes;
+    font = "Maple Mono";
+    # font = "Hasklug Nerd Font";
 in {
     home.packages = [pkgs_unstable.ghostty];
     home.file = {
         ".config/ghostty/config".text = ''
           theme = ${name}
-          font-family = Maple Mono
-          font-family-bold = Maple Mono Bold
-          font-family-italic = Maple Mono Italic
-          font-family-bold-italic = Maple Mono BoldItalic
-          font-size = 14
+          font-family = ""
+          font-family = "${font}"
+          font-size = 13
           cursor-style = block
           cursor-style-blink = false
           background-opacity = 0.85

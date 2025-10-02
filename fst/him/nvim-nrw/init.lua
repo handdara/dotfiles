@@ -32,7 +32,7 @@ require("lazy").setup({
 vim.cmd('colorscheme ' .. inital_colorscheme)
 
 Handdara = require 'handdara'.setup {
-  -- colorscheme = "rose-pine-moon",
+  colorscheme = "rose-pine-moon",
   -- colorscheme = { name = "rose-pine-dawn", is_light = true },
   -- colorscheme = "darkrose",
   -- colorscheme = "lunaperche",
@@ -45,6 +45,6 @@ Handdara = require 'handdara'.setup {
   -- colorscheme = "noirblaze",
   -- colorscheme = "sunbather",
   -- colorscheme = { name = "e-ink", is_light = true },
-  colorscheme = { name = "paper", is_light = true },
+  -- colorscheme = { name = "paper", is_light = true },
   -- colorscheme = "paper",
 }

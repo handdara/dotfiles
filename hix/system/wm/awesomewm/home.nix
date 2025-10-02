@@ -3,6 +3,7 @@
     theme = import ./../../../util/color;
     c = theme.hexcodes;
     systemFont = "Maple Mono";
+    # systemFont = "Hasklug Nerg Font";
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;
