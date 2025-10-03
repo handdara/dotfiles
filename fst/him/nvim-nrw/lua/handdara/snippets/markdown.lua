@@ -24,13 +24,13 @@ local filetypes = { 'yaml', 'just', 'lua', 'markdown', 'matlab', 'nix', 'tex', '
     'haskell' }
 
 local sdateheader = s('dateheader', {
-    c(1, { t'#', t'##', t'###', t'####', t'#####', t'######' }),
+    c(1, { t '#', t '##', t '###', t '####', t '#####', t '######' }),
     f(function()
         local ts = u.timestamp()
         return ' ' .. ts.wd .. ', ' .. ts.month .. ' ' .. ts.dy .. ', Week ' .. ts.wk
             .. ', Day ' .. ts.yrdy .. ' of ' .. ts.yr
     end),
-    t{'',''},
+    t { '', '' },
 })
 use(sdateheader)
 
@@ -156,8 +156,8 @@ end
 local function mkStacheFilt(idx)
     return c(idx,
         {
-            { i(1),       t 'STACHE ',  mkCBasic(2, stache.itemTypes) },
-            { i(1),       t 'FIELD ',   mkCBasic(2, { 'status', 'priority' }, 'id') },
+            { i(1),       t 'STACHE ',   mkCBasic(2, stache.itemTypes) },
+            { i(1),       t 'FIELD ',    mkCBasic(2, { 'status', 'priority' }, 'id') },
             { t 'GREP "', i(1, 'regex'), t '"' },
         })
 end
@@ -181,16 +181,58 @@ local mkGrpOp = function(idx)
 end
 use(s('grpop', mkGrpOp(1)))
 
-use(s('tasks', { t {
-    '```stache',
-    'UNION FROM - STACHE task',
-    'SUBTRACT FIELD status "closed"',
-    'SUBTRACT FIELD status "archived"',
-    'GROUP SPL FIELD status ASC',
-    'GROUP FIELD priority DES',
-    'LIST',
-    '```',
-} }))
+use(s('tasks', c(1, {
+    t {
+        '```stache',
+        'UNION FROM - STACHE task',
+        'SUBTRACT FIELD status "closed"',
+        'SUBTRACT FIELD status "archived"',
+        'GROUP SPL FIELD status ASC',
+        'GROUP FIELD priority DES',
+        'LIST',
+        '```',
+    },
+    t {
+        '```stache',
+        '# non-work stuff',
+        'UNION FROM - STACHE task',
+        'SUBTRACT FIELD status "closed"',
+        'SUBTRACT FIELD status "archived"',
+        'SUBTRACT FIELD id "tacr"',
+        'SUBTRACT FIELD id "thesis"',
+        'SUBTRACT FIELD id "seal"',
+        'GROUP SPL FIELD status ASC',
+        'GROUP FIELD priority DES',
+        'LIST',
+        '```',
+    },
+    t {
+        '```stache',
+        '# thesis tasks',
+        'UNION FROM - FIELD id "thesis"',
+        'UNION FROM - FIELD id "tacr"',
+        'SUBTRACT FIELD status "closed"',
+        'GROUP SPL FIELD status ASC',
+        'GROUP FIELD priority DES',
+        'LIST',
+        '```',
+    },
+    t {
+        '```stache',
+        '# personal projects',
+        'UNION FROM - FIELD id "stache"',
+        'UNION FROM - FIELD id "prj"',
+        'UNION FROM - FIELD id "learning"',
+        'UNION FROM - FIELD id "devenv"',
+        'UNION FROM - FIELD id "hobbies"',
+        'SUBTRACT FIELD status "closed"',
+        'SUBTRACT FIELD status "archived"',
+        'GROUP SPL FIELD status ASC',
+        'GROUP FIELD priority DES',
+        'LIST',
+        '```',
+    },
+})))
 
 use(s('inv-items', { t {
     '```stache',

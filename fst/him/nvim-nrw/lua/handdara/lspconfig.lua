@@ -84,7 +84,7 @@ require 'lspconfig'.tinymist.setup { -- fish lsp config
     on_attach = on_attach,
     settings = {
         formmaterMode = "typstyle",
-        exportPdf = "onType",
+        -- exportPdf = "onType", -- defaults to "never"
         sematicTokens = "disable",
     },
 }

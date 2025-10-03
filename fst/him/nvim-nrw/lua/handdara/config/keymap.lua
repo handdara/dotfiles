@@ -2,6 +2,8 @@ local map = vim.keymap.set
 
 return function()
     map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- space is my leader key
+    -- map({ 'n', 'x' }, ';', ':', { silent = true })
+    -- map({ 'n', 'x' }, ':', ';', { silent = true })
     map('n', 'Q', '<Nop>', { silent = true })
     map('i', 'jk', '<Esc>')                                  -- Better feeling exit insert mode
     map('i', 'kj', '<Esc>')                                  -- Better feeling exit insert mode
@@ -16,7 +18,7 @@ return function()
     map('v', '<leader>S', '!sort -r<CR>', { desc = 'reverse [S]ort highlighted' })
     map('v', '<leader>y', '!yq -y<CR>', { desc = 'clean up YAML with yq' })
 
-    map('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%H%M\'<CR>', { desc = 'insert [D]ate [T]ime' })
+    map('n', '<leader>dt', '<CMD>r!date -u \'+\\%F \\%H\\%M\'<CR>', { desc = 'insert [D]ate [T]ime' })
 
     -- Diagnostic, quickfix, location, keymaps
     map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
