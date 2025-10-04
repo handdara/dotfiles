@@ -60,6 +60,8 @@ local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
+local monitor = "tmux attach -t monitor || tmux new -s monitor btop"
+local monitor_cmd = terminal_cmd .. monitor
 local ansible = "tmux attach -t ansible || tmux new -s ansible nvim SUMMARY.md"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
 local misc_tmux = "'tmux attach -t misc || tmux new -s misc'"
@@ -68,7 +70,7 @@ local nsi_cmd = "ghostty -e ~/.local/scripts/nsi"
 local osi_cmd = "ghostty -e ~/.local/scripts/osi"
 local email = "mbsync -a && neomutt"
 local email_cmd = terminal_cmd .. email
-local calendar = "ikhal"
+local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
 local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
@@ -402,6 +404,8 @@ local globalkeys = gears.table.join(
         { description = "Open miscellaneous tmux session", group = "launcher" }),
     awful.key({ super, }, "a", function() awful.spawn(ansible_cmd) end,
         { description = "Use Ansible", group = "launcher" }),
+    awful.key({ super, }, "b", function() awful.spawn(monitor_cmd) end,
+        { description = "Open btop", group = "launcher" }),
     awful.key({ super, "Control" }, "a", function() awful.spawn(nsi_cmd) end,
         { description = "[a]dd New Stache Item", group = "launcher" }),
     awful.key({ super, "Shift" }, "a", function() awful.spawn(osi_cmd) end,
