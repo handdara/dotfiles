@@ -7,12 +7,13 @@
         ./user/apps/btop
         ./user/apps/cal
         ./user/apps/chafa
+        ./user/apps/ctags
         ./user/apps/desmume
         ./user/apps/eza
         ./user/apps/fim
+        ./user/apps/fortune
         ./user/apps/fzf
         ./user/apps/ghostty
-        ./user/apps/ctags
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad

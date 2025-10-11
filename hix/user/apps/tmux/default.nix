@@ -10,6 +10,7 @@
           set-option -g detach-on-destroy no-detached
           set -g default-terminal "tmux-256color"
           bind-key 'C-.' new-window "bash -ic mg"
+          bind-key 'C-l' previous-window
         '';
     };
 }

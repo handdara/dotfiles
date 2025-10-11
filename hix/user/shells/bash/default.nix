@@ -21,8 +21,10 @@
             xp = "xclip -selection clipboard -o";
             fdf = "fd -utf '' . | fzf -m";
             fdr = "fd -utd '' . | fzf -m";
+            fdi = "fd -utf -e png -e jpg -e jpeg '' . | __h_pick_imgs";
             fdfh = "fd -utf '' ~ | fzf -m";
             fdrh = "fd -utd '' ~ | fzf -m";
+            fdih = "fd -utf -e png -e jpg -e jpeg '' ~ | __h_pick_imgs";
             "z-" = "z -";
             vpdf = "zathura";
             vimg = "fim";
