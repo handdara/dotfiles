@@ -6,8 +6,10 @@
           set-option -g display-time 750
           set-option -g status-left-length 20
           set-option -g status-justify centre
+          set-option -g status-position top
           set-option -g detach-on-destroy no-detached
           set -g default-terminal "tmux-256color"
+          bind-key 'C-.' new-window "bash -ic mg"
         '';
     };
 }

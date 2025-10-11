@@ -87,6 +87,5 @@ use(s({ trig = '**', snippetType = 'autosnippet', wordTrig = false }, { t '^(', 
 use(s({ trig = '*_', snippetType = 'autosnippet', wordTrig = false }, { t '^(', i(1), t ')_(', i(2), t ')' }))
 use(s({ trig = '$$', snippetType = 'autosnippet', wordTrig = false }, { t '$', i(1), t '$' }))
 use(s({ trig = '$  ', snippetType = 'autosnippet', wordTrig = false }, { t '$ ', i(1), t ' $' }))
-use(s({ trig = 'ddt', snippetType = 'autosnippet', wordTrig = false }, c(1, {t'partial/(partial tensions)',t'ddt'}) ))
 
 ls.add_snippets("typst", S)

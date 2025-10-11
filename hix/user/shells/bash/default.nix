@@ -39,6 +39,8 @@
             zc = "z \"\$(fd -utf -td --min-depth 2 '' ~/code | fzf | xargs dirname || echo '/DNE')\"";
             # alfred = "__h_boot_alfred";
             cal = "cal -mv";
+            mkrem = "khal new -a rem";
+            mkobl = "khal new -a obl";
         };
         bashrcExtra = ''
           export SUDO_ASKPASS=$HOME/.local/scripts/__h_sha76passwd

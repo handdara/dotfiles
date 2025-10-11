@@ -3,7 +3,12 @@ return {
     'kmonad/kmonad-vim',
     {
         'NFrid/due.nvim',
-        opts = {},
+        config = function()
+            require("due_nvim").setup({
+                -- default_due_time = "noon",
+                date_hi = "String",
+            })
+        end
     },
     {
         'rcarriga/nvim-notify',
