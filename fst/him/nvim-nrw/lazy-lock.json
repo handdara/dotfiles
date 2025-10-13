@@ -43,5 +43,6 @@
   "undotree": { "branch": "master", "commit": "78b5241191852ffa9bb5da5ff2ee033160798c3b" },
   "vim-paper": { "branch": "main", "commit": "d8decc44569aec6247bae54d971e658bb8108399" },
   "vim-sunbather": { "branch": "master", "commit": "64506a07a735ad92752e0e9935c4fc304f0327a4" },
+  "vim-tidal": { "branch": "master", "commit": "e440fe5bdfe07f805e21e6872099685d38e8b761" },
   "which-key.nvim": { "branch": "main", "commit": "9b365a6428a9633e3eeb34dbef1b791511c54f70" }
 }
