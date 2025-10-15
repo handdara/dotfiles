@@ -43,10 +43,13 @@
         ./user/misc/theme
         ./user/shells/bash
         ./user/shells/fish
+        ./user/theme
     ];
 
     home.username = user_opts.username;
     home.homeDirectory = "/home/" + user_opts.username;
+
+    handdara.lightworks = true;
 
     nixpkgs.config.allowUnfree = true;
 

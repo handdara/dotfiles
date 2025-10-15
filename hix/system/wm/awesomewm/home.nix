@@ -1,6 +1,14 @@
-{...}: let
+{
+    config,
+    user_opts,
+    ...
+}: let
     awm_dir = ../../../../snd/awesomewm;
-    theme = import ./../../../util/color;
+    bothThemes = import ../../../util/color;
+    theme =
+        if (config.handdara.lightworks == true)
+        then bothThemes.light
+        else bothThemes.dark;
     c = theme.hexcodes;
     systemFont = "Maple Mono";
     # systemFont = "Hasklug Nerg Font";

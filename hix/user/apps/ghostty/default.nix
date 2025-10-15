@@ -1,5 +1,14 @@
-{pkgs_unstable, ...}: let
-    theme = import ../../../util/color;
+{
+    config,
+    user_opts,
+    pkgs_unstable,
+    ...
+}: let
+    bothThemes = import ../../../util/color;
+    theme =
+        if (config.handdara.lightworks == true)
+        then bothThemes.light
+        else bothThemes.dark;
     name = theme.name;
     c = theme.hexcodes;
     font = "Maple Mono";

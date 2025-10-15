@@ -1,4 +1,5 @@
 {
+    config,
     pkgs,
     user_opts,
     ...
@@ -6,7 +7,11 @@
     # fish_light_theme = "Snow Day";
     fish_light_theme = "fish default";
     fish_dark_theme = "Just a Touch";
-    theme = import ../../../util/color;
+    bothThemes = import ../../../util/color;
+    theme =
+        if (config.handdara.lightworks == true)
+        then bothThemes.light
+        else bothThemes.dark;
 in {
     home.file = {
         ".config/fish/config.fish".source = pkgs.substituteAll {

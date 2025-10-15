@@ -1,5 +1,13 @@
-{...}: let
-    c = import ../../../util/color;
+{
+    config,
+    user_opts,
+    ...
+}: let
+    bothThemes = import ../../../util/color;
+    c =
+        if (config.handdara.lightworks == true)
+        then bothThemes.light
+        else bothThemes.dark;
     mkText = import ../../../util/mkTheme;
     themeText = mkText c;
 in {

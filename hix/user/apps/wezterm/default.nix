@@ -1,9 +1,14 @@
 {
+    config,
     pkgs,
     user_opts,
     ...
 }: let
-    theme = import ./../../../util/color;
+    bothThemes = import ../../../util/color;
+    theme =
+        if (config.handdara.lightworks == true)
+        then bothThemes.light
+        else bothThemes.dark;
     c = theme.hexcodes;
 in {
     home.packages = [pkgs.wezterm];
@@ -56,27 +61,27 @@ in {
         ".config/wezterm/colors/marrissa.toml".text = ''
           [colors]
           background = '${
-                if user_opts.term_invert or false
+                if (config.handdara.lightworks == true)
                 then c.fg
                 else c.bg
             }'
           foreground = '${
-                if user_opts.term_invert or false
+                if (config.handdara.lightworks == true)
                 then c.bg
                 else c.fg
             }'
           cursor_bg = '${
-                if user_opts.term_invert
+                if (config.handdara.lightworks == true)
                 then c.black
                 else c.white
             }'
           cursor_border = '${
-                if user_opts.term_invert
+                if (config.handdara.lightworks == true)
                 then c.black
                 else c.white
             }'
           cursor_fg = '${
-                if user_opts.term_invert
+                if (config.handdara.lightworks == true)
                 then c.white
                 else c.black
             }'

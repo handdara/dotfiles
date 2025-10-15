@@ -1,5 +1,13 @@
-{...}: let
-    theme = import ../../../util/color;
+{
+    config,
+    user_opts,
+    ...
+}: let
+    bothThemes = import ../../../util/color;
+    theme =
+        if (config.handdara.lightworks == true)
+        then bothThemes.light
+        else bothThemes.dark;
 in {
     programs.btop = {
         enable = true;

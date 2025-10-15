@@ -1,9 +1,17 @@
-{user_opts, ...}: let
-    theme = import ./../../../util/color;
+{
+    config,
+    user_opts,
+    ...
+}: let
+    bothThemes = import ../../../util/color;
+    theme =
+        if (config.handdara.lightworks == true)
+        then bothThemes.light
+        else bothThemes.dark;
     st =
         theme.starship
         or (
-            if theme.is_light
+            if (config.handdara.lightworks == true)
             then {
                 fg1 = theme.hexcodes.black; # os
                 bg1 = theme.hexcodes.white;

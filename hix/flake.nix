@@ -24,19 +24,20 @@
         nix-matlab,
         ...
     } @ inputs: let
-        user_opts = rec {
-            username = "handdara";
-            name = username;
-            email = "${username}.core@proton.me";
-            which_nvim = "nrw";
-            term_invert = false;
-        };
         flake-overlays = [nix-matlab.overlay];
         system = "x86_64-linux";
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
         pkgs = nixpkgs.legacyPackages.${system};
         pkgs_unstable = nixpkgs-unstable.legacyPackages.${system};
+        useLight = lib.mkDefault false;
+        user_opts = rec {
+            inherit useLight;
+            username = "handdara";
+            name = username;
+            email = "${username}.core@proton.me";
+            which_nvim = "nrw";
+        };
     in {
         nixosConfigurations = {
             sha76 = lib.nixosSystem {
