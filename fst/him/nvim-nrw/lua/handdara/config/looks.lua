@@ -42,6 +42,7 @@ local function set_looks(colorscheme, is_light)
         end
     end
     if not light then
+        vim.o.background = 'dark'
         local colo_grp = vim.api.nvim_create_augroup('ColoGrp', { clear = true })
         vim.api.nvim_create_autocmd('ColorScheme', {
             callback = function()
