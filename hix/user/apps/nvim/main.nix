@@ -66,19 +66,19 @@ in {
         ".config/nvim/init.lua".source = ../../../../fst/him/nvim-main/init.lua;
         ".config/nvim/lazy-lock.json".source = ../../../../fst/him/nvim-main/lazy-lock.json;
         ".config/nvim/lua/handdara/config/init.lua".text = ''
-          require("handdara.config.telescope")
-          require("handdara.config.treesitter")
-          require("handdara.config.set")
-          require("handdara.config.luasnip")
-          require("handdara.config.snippet")
-          require("handdara.config.lsp")
-          require("handdara.config.keymap")
-          require("handdara.config.looks")
-          require("handdara.config.minifiles")
-          require("handdara.config.telekasten")
-          require("handdara.config.oil")
-          -- require("handdara.config.mkdnflow")
-          vim.opt.runtimepath:append("${treesitter-parsers}")
+            require("handdara.config.telescope")
+            require("handdara.config.treesitter")
+            require("handdara.config.set")
+            require("handdara.config.luasnip")
+            require("handdara.config.snippet")
+            require("handdara.config.lsp")
+            require("handdara.config.keymap")
+            require("handdara.config.looks")
+            require("handdara.config.minifiles")
+            require("handdara.config.telekasten")
+            require("handdara.config.oil")
+            -- require("handdara.config.mkdnflow")
+            vim.opt.runtimepath:append("${treesitter-parsers}")
         '';
     };
 

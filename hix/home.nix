@@ -49,7 +49,7 @@
     home.username = user_opts.username;
     home.homeDirectory = "/home/" + user_opts.username;
 
-    handdara.lightworks = false;
+    handdara.lightworks = true;
 
     nixpkgs.config.allowUnfree = true;
 

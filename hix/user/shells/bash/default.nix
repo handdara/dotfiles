@@ -46,9 +46,9 @@
             tempvim = "nvim -n --clean -u NONE -i NONE";
         };
         bashrcExtra = ''
-          export SUDO_ASKPASS=$HOME/.local/scripts/__h_sha76passwd
-          export PATH="~/.local/bin:$PATH"
-          export PATH="~/.local/scripts:$PATH"
+            export SUDO_ASKPASS=$HOME/.local/scripts/__h_sha76passwd
+            export PATH="~/.local/bin:$PATH"
+            export PATH="~/.local/scripts:$PATH"
         '';
     };
 }

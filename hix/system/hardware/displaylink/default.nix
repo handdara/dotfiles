@@ -21,7 +21,7 @@
         # services.xserver.videoDrivers = ["displaylink" "modesetting" "nvidia"];
         services.xserver.videoDrivers = ["displaylink" "modesetting"];
         services.xserver.displayManager.sessionCommands = ''
-          ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0
+            ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0
         '';
     };
 }
