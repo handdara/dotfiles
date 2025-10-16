@@ -26,7 +26,7 @@ in {
           background-opacity = 0.85
           window-padding-x = 2
           window-padding-y = 0
-          command = fish
+          command = bash
           window-decoration = false
           window-theme = auto
           confirm-close-surface = false

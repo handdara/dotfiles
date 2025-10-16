@@ -60,11 +60,11 @@ local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
-local monitor = "tmux attach -t monitor || tmux new -s monitor btop"
+local monitor = "tmux attach -t monitor || tmux new -s monitor btop; tmux detach"
 local monitor_cmd = terminal_cmd .. monitor
 local ansible = "tmux attach -t ansible || tmux new -s ansible nvim SUMMARY.md"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
-local misc_tmux = "'tmux attach -t misc || tmux new -s misc'"
+local misc_tmux = "'tmux attach -t misc || tmux new -s misc'; $SHELL"
 local misc_tmux_cmd = terminal_cmd .. misc_tmux
 local nsi_cmd = "ghostty -e ~/.local/scripts/nsi"
 local osi_cmd = "ghostty -e ~/.local/scripts/osi"
