@@ -44,6 +44,7 @@
             mkrem = "khal new -a rem";
             mkobl = "khal new -a obl";
             tempvim = "nvim -n --clean -u NONE -i NONE";
+            lzg = "lazygit";
         };
         bashrcExtra = ''
             export SUDO_ASKPASS=$HOME/.local/scripts/__h_sha76passwd
