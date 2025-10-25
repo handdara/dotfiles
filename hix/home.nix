@@ -17,6 +17,7 @@
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
+        ./user/apps/lazygit
         ./user/apps/mail
         ./user/apps/matlab
         ./user/apps/megacmd
