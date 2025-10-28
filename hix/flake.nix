@@ -15,6 +15,10 @@
             url = "gitlab:doronbehar/nix-matlab";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        nix-vimrc = {
+            url = "github:handdara/nix-vimrc/main";
+            inputs.nixpkgs.follows = "nixpkgs-unstable";
+        };
     };
 
     outputs = {
@@ -22,6 +26,7 @@
         nixpkgs-unstable,
         home-manager,
         nix-matlab,
+        nix-vimrc,
         ...
     } @ inputs: let
         flake-overlays = [nix-matlab.overlay];
@@ -83,7 +88,7 @@
                     ./home.nix
                 ];
                 extraSpecialArgs = {
-                    inherit user_opts pkgs_unstable;
+                    inherit user_opts pkgs_unstable nix-vimrc;
                 };
             };
         };

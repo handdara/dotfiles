@@ -67,19 +67,26 @@ if require 'mini.files' then
 end
 
 if require 'fzf-lua' then
-    vim.cmd [[nnoremap <leader>ss :FzfLua<cr>]]
-    vim.cmd [[nnoremap <leader>sh :FzfLua helptags<cr>]]
+    vim.cmd [[nnoremap <leader>/l :FzfLua blines<cr>]]
+    vim.cmd [[nnoremap <leader>/t :FzfLua btags<cr>]]
+    vim.cmd [[nnoremap <leader>sb :FzfLua buffers<cr>]]
+    vim.cmd [[nnoremap <leader>sc :FzfLua files cwd=~/code<cr>]]
+    vim.cmd [[nnoremap <leader>sd :FzfLua files cwd=~/code/dotfiles<cr>]]
     vim.cmd [[nnoremap <leader>sf :FzfLua files<cr>]]
     vim.cmd [[nnoremap <leader>sF :FzfLua files fd_opts=-u<cr>]]
-    vim.cmd [[nnoremap <leader>so :FzfLua oldfiles<cr>]]
-    vim.cmd [[nnoremap <leader>sb :FzfLua buffers<cr>]]
-    vim.cmd [[nnoremap <leader>sm :FzfLua manpages<cr>]]
-    vim.cmd [[nnoremap <leader>sr :FzfLua resume<cr>]]
-    vim.cmd [[nnoremap <leader>st :FzfLua tags<cr>]]
-    vim.cmd [[nnoremap <leader>sl :FzfLua lines<cr>]]
+    vim.cmd [[nnoremap <leader>s: :FzfLua command_history<cr>]]
     vim.cmd [[nnoremap <leader>sg :FzfLua live_grep rg_opts=--no-ignore\ --line-number\ --column<cr>]]
-    vim.cmd [[nnoremap <leader>/t :FzfLua btags<cr>]]
-    vim.cmd [[nnoremap <leader>/l :FzfLua blines<cr>]]
+    vim.cmd [[nnoremap <leader>sh :FzfLua helptags<cr>]]
+    vim.cmd [[nnoremap <leader>sl :FzfLua lines<cr>]]
+    vim.cmd [[nnoremap <leader>sm :FzfLua manpages<cr>]]
+    vim.cmd [[nnoremap <leader>so :FzfLua oldfiles<cr>]]
+    vim.cmd [[nnoremap <leader>sr :FzfLua resume<cr>]]
+    vim.cmd [[nnoremap <leader>ss :FzfLua files cwd=~/code/scripts<cr>]]
+    vim.cmd [[nnoremap <leader>st :FzfLua tags<cr>]]
+    vim.cmd [[nnoremap <leader>sT :FzfLua treesitter<cr>]]
+    vim.cmd [[nnoremap <leader>sx :FzfLua files cwd=~/.config fd_opts=-u<cr>]]
+    vim.cmd [[nnoremap <leader>sZ :FzfLua<cr>]]
+    vim.cmd [[nnoremap <leader>sz :FzfLua zoxide<cr>]]
 end
 
 vim.cmd [[nnoremap <leader>ut :UndotreeShow<cr>]]
@@ -158,3 +165,6 @@ if require('obsidian') then
 
 end
 
+local ls = require'luasnip'
+if ls then
+end

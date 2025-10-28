@@ -1,4 +1,8 @@
-{user_opts, ...}: {
+{
+    user_opts,
+    nix-vimrc,
+    ...
+}: {
     imports = [
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
@@ -53,6 +57,7 @@
     handdara.lightworks = false;
 
     nixpkgs.config.allowUnfree = true;
+    nixpkgs.overlays = [nix-vimrc.overlay];
 
     programs.home-manager.enable = true; # Let Home Manager install and manage itself.
 

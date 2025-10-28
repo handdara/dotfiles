@@ -12,8 +12,9 @@
     name = theme.name;
     c = theme.hexcodes;
     # font = "Maple Mono NF";
-    font = "iMWritingMono Nerd Font";
-    # font = "Hasklug Nerd Font";
+    # font = "iMWritingMono Nerd Font";
+    # font = "OpenDyslexic Nerd Font";
+    font = "Hasklug Nerd Font";
 in {
     home.packages = [pkgs_unstable.ghostty];
     home.file = {
