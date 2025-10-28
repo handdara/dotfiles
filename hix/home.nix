@@ -1,4 +1,8 @@
-{user_opts, ...}: {
+{
+    user_opts,
+    nix-vimrc,
+    ...
+}: {
     imports = [
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
@@ -17,6 +21,7 @@
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
+        ./user/apps/lazygit
         ./user/apps/mail
         ./user/apps/matlab
         ./user/apps/megacmd
@@ -33,7 +38,6 @@
         ./user/apps/vivaldi
         ./user/apps/w3m
         ./user/apps/watchexec
-        ./user/apps/wezterm
         ./user/apps/wiki-tui
         ./user/apps/write
         ./user/apps/xcolor
@@ -42,7 +46,6 @@
         ./user/apps/zoxide
         ./user/misc/theme
         ./user/shells/bash
-        ./user/shells/fish
         ./user/theme
     ];
 
@@ -52,6 +55,7 @@
     handdara.lightworks = false;
 
     nixpkgs.config.allowUnfree = true;
+    nixpkgs.overlays = [nix-vimrc.overlay];
 
     programs.home-manager.enable = true; # Let Home Manager install and manage itself.
 

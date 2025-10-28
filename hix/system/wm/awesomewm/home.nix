@@ -10,8 +10,10 @@
         then bothThemes.light
         else bothThemes.dark;
     c = theme.hexcodes;
-    systemFont = "Maple Mono NF";
+    # systemFont = "Maple Mono NF";
     # systemFont = "iMWriting Nerd Font";
+    # systemFont = "DepartureMono Nerd Font";
+    systemFont = "HeavyData Nerd Font";
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;

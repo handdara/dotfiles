@@ -10,6 +10,11 @@
         nerd-fonts.atkynson-mono
         nerd-fonts.agave
         nerd-fonts._3270
+        nerd-fonts.departure-mono
+        nerd-fonts.fantasque-sans-mono
+        nerd-fonts.monofur
+        nerd-fonts.bigblue-terminal
+        nerd-fonts.terminess-ttf
         maple-mono.NF
     ];
 }

@@ -1,7 +1,7 @@
 {
     config,
     user_opts,
-    pkgs_unstable,
+    pkgs,
     ...
 }: let
     bothThemes = import ../../../util/color;
@@ -12,16 +12,20 @@
     name = theme.name;
     c = theme.hexcodes;
     # font = "Maple Mono NF";
-    font = "iMWritingMono Nerd Font";
+    # font = "iMWritingMono Nerd Font";
+    # font = "OpenDyslexic Nerd Font";
     # font = "Hasklug Nerd Font";
+    # font = "3270 Nerd Font";
+    # font = "DepartureMono Nerd Font";
+    font = "BigBlueTerm437 Nerd Font";
 in {
-    home.packages = [pkgs_unstable.ghostty];
+    home.packages = [pkgs.ghostty];
     home.file = {
         ".config/ghostty/config".text = ''
             theme = ${name}
             font-family = ""
             font-family = "${font}"
-            font-size = 14
+            font-size = 16
             cursor-style = block
             cursor-style-blink = false
             background-opacity = 0.85

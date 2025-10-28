@@ -23,16 +23,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1758463745,
-        "narHash": "sha256-uhzsV0Q0I9j2y/rfweWeGif5AWe0MGrgZ/3TjpDYdGA=",
+        "lastModified": 1761584077,
+        "narHash": "sha256-dISPEZahlfs5K6d58zR4akRRyogfE9P4WSyPPNT7HiE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3b955f5f0a942f9f60cdc9cacb7844335d0f21c3",
+        "rev": "e82585308aef3d4cc2c36c7b6946051c8cdf24ef",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-25.05",
         "repo": "home-manager",
         "type": "github"
       }
@@ -45,20 +44,20 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1760515095,
-        "narHash": "sha256-ss5+gpWz4I5vezFc9SAX3681Q1Mu6ltECJ13xVCFHTM=",
+        "lastModified": 1761259732,
+        "narHash": "sha256-u8/mpvpkSq7gLSKT8ynxduerYw2CghiwQyqDfLUvTAo=",
         "ref": "refs/heads/master",
-        "rev": "646b05994b9f0f62cd9458d8356fdae5061951ea",
-        "revCount": 996,
+        "rev": "7f8a0b38d4777fbacf3629b6ff8805e8eeec2f19",
+        "revCount": 998,
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/kmonad/kmonad?dir=nix"
+        "url": "https://github.com/kmonad/kmonad"
       },
       "original": {
         "dir": "nix",
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/kmonad/kmonad?dir=nix"
+        "url": "https://github.com/kmonad/kmonad"
       }
     },
     "nix-matlab": {
@@ -82,29 +81,34 @@
         "type": "gitlab"
       }
     },
-    "nixpkgs": {
+    "nix-vimrc": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1760423683,
-        "narHash": "sha256-Tb+NYuJhWZieDZUxN6PgglB16yuqBYQeMJyYBGCXlt8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "a493e93b4a259cd9fea8073f89a7ed9b1c5a1da2",
+        "lastModified": 1761624051,
+        "narHash": "sha256-GhrktNGeoVEjyZdsveX4CIsiLIO7zV7i0xpuxF+Y2ro=",
+        "owner": "handdara",
+        "repo": "nix-vimrc",
+        "rev": "aa5fa9de200570dce0e6b788036d87563d15f7a6",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-25.05",
-        "repo": "nixpkgs",
+        "owner": "handdara",
+        "ref": "main",
+        "repo": "nix-vimrc",
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
+    "nixpkgs": {
       "locked": {
-        "lastModified": 1760524057,
-        "narHash": "sha256-EVAqOteLBFmd7pKkb0+FIUyzTF61VKi7YmvP1tw4nEw=",
+        "lastModified": 1761373498,
+        "narHash": "sha256-Q/uhWNvd7V7k1H1ZPMy/vkx3F8C13ZcdrKjO7Jv7v0c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "544961dfcce86422ba200ed9a0b00dd4b1486ec5",
+        "rev": "6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
         "type": "github"
       },
       "original": {
@@ -119,8 +123,8 @@
         "home-manager": "home-manager",
         "kmonad": "kmonad",
         "nix-matlab": "nix-matlab",
-        "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nix-vimrc": "nix-vimrc",
+        "nixpkgs": "nixpkgs"
       }
     }
   },

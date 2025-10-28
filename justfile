@@ -34,30 +34,11 @@ purge:
     -just {{jd}}/fst/hish/ purge
     -just {{jd}}/snd/awesomewm/ purge
 
-# retrieve the lazy.vim lock-files
-get-lazylock:
-    just {{jd}}/fst/him/ get-lazylock
-
-# retrieve the lazy.vim lock-files
-place-lazylock:
-    just {{jd}}/fst/him/ place-lazylock
-
-dev-nvim:
-    just {{jd}}/fst/him/ replace-nix
-
-# "dev mode", i.e. replace the nix home manager controlled cfgs with a symlink for fast dev
-dev: dev-nvim
-    just {{jd}}/fst/hez/ replace-nix
-    just {{jd}}/snd/awesomewm/ replace-nix
-
 _git_add: _check_fmt
     git add .
 
 # replace the symlinked cfgs with nix home manager controlled, i.e. quit "dev-mode"
-stable: _git_add purge && switch-home place-lazylock
-
-edit:
-    nvim
+stable: _git_add purge && switch-home
 
 @_check_fmt:
     nix develop --command alejandra --check .

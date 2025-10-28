@@ -4,7 +4,7 @@
   */
     ...
 }: {
-    home.file.".vimrc".source = ../../../../fst/him/vim-plain/init.vim;
+    home.file.".vimrc".source = ../../../../fst/him/vim-plain/dot-vimrc;
     # home.file.".vim/after" = {
     #     source = ../../../../fst/him/vim-plain/after;
     #     recursive = true;

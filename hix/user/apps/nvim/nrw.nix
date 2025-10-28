@@ -1,8 +1,4 @@
-{
-    pkgs,
-    pkgs_unstable,
-    ...
-}: let
+{pkgs, ...}: let
     nvim_dir = ../../../../fst/him/nvim-nrw;
     handdara_dir = nvim_dir + /lua/handdara;
     plugin_dir = handdara_dir + /plugins;
@@ -32,7 +28,7 @@ in {
         withNodeJs = true;
         withPython3 = true;
         viAlias = true;
-        package = pkgs_unstable.neovim-unwrapped;
+        package = pkgs.neovim-unwrapped;
         extraPackages = with pkgs; [
             python3
             gcc

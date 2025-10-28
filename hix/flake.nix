@@ -2,9 +2,8 @@
     description = "handdara nixos flake";
 
     inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-        nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-        home-manager.url = "github:nix-community/home-manager/release-25.05";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
         kmonad = {
             url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
@@ -15,13 +14,17 @@
             url = "gitlab:doronbehar/nix-matlab";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        nix-vimrc = {
+            url = "github:handdara/nix-vimrc/main";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = {
         nixpkgs,
-        nixpkgs-unstable,
         home-manager,
         nix-matlab,
+        nix-vimrc,
         ...
     } @ inputs: let
         flake-overlays = [nix-matlab.overlay];
@@ -29,14 +32,13 @@
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
         pkgs = nixpkgs.legacyPackages.${system};
-        pkgs_unstable = nixpkgs-unstable.legacyPackages.${system};
         useLight = lib.mkDefault false;
         user_opts = rec {
             inherit useLight;
             username = "handdara";
             name = username;
             email = "${username}.core@proton.me";
-            which_nvim = "nrw";
+            which_nvim = "sm";
         };
     in {
         nixosConfigurations = {
@@ -83,7 +85,7 @@
                     ./home.nix
                 ];
                 extraSpecialArgs = {
-                    inherit user_opts pkgs_unstable;
+                    inherit user_opts nix-vimrc;
                 };
             };
         };

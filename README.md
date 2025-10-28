@@ -15,9 +15,7 @@ MICRO: 1
 `fst`: first layer: core tools. right now this is: neovim, wezterm, git & fish.
 
 - `git`: git config
-- `hez`: wezterm config
 - `him`: neovim config
-- `hish`: fish config
 
 `snd`: secondary layer: tools that don't fit into core. their dotfiles are here
 
