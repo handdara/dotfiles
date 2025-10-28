@@ -1,3 +1,3 @@
-{pkgs_unstable, ...}: {
-    home.packages = [pkgs_unstable.universal-ctags];
+{pkgs, ...}: {
+    home.packages = [pkgs.universal-ctags];
 }

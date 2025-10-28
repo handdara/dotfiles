@@ -1,7 +1,7 @@
 {
     config,
     user_opts,
-    pkgs_unstable,
+    pkgs,
     ...
 }: let
     bothThemes = import ../../../util/color;
@@ -16,7 +16,7 @@
     # font = "OpenDyslexic Nerd Font";
     font = "Hasklug Nerd Font";
 in {
-    home.packages = [pkgs_unstable.ghostty];
+    home.packages = [pkgs.ghostty];
     home.file = {
         ".config/ghostty/config".text = ''
             theme = ${name}

@@ -2,9 +2,8 @@
     description = "handdara nixos flake";
 
     inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-        nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-        home-manager.url = "github:nix-community/home-manager/release-25.05";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
         kmonad = {
             url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
@@ -17,13 +16,12 @@
         };
         nix-vimrc = {
             url = "github:handdara/nix-vimrc/main";
-            inputs.nixpkgs.follows = "nixpkgs-unstable";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
     outputs = {
         nixpkgs,
-        nixpkgs-unstable,
         home-manager,
         nix-matlab,
         nix-vimrc,
@@ -34,7 +32,6 @@
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
         pkgs = nixpkgs.legacyPackages.${system};
-        pkgs_unstable = nixpkgs-unstable.legacyPackages.${system};
         useLight = lib.mkDefault false;
         user_opts = rec {
             inherit useLight;
@@ -88,7 +85,7 @@
                     ./home.nix
                 ];
                 extraSpecialArgs = {
-                    inherit user_opts pkgs_unstable nix-vimrc;
+                    inherit user_opts nix-vimrc;
                 };
             };
         };

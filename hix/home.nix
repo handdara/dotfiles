@@ -38,7 +38,6 @@
         ./user/apps/vivaldi
         ./user/apps/w3m
         ./user/apps/watchexec
-        ./user/apps/wezterm
         ./user/apps/wiki-tui
         ./user/apps/write
         ./user/apps/xcolor
@@ -47,7 +46,6 @@
         ./user/apps/zoxide
         ./user/misc/theme
         ./user/shells/bash
-        ./user/shells/fish
         ./user/theme
     ];
 

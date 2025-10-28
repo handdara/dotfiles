@@ -1,3 +1,3 @@
-{pkgs_unstable, ...}: {
-    home.packages = [pkgs_unstable.styluslabs-write];
+{pkgs, ...}: {
+    home.packages = [pkgs.styluslabs-write];
 }
