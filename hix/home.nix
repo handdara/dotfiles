@@ -22,6 +22,7 @@
         ./user/apps/just
         ./user/apps/kmonad
         ./user/apps/lazygit
+        ./user/apps/libnotify
         ./user/apps/mail
         ./user/apps/matlab
         ./user/apps/megacmd
