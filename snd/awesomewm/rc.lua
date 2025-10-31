@@ -74,8 +74,7 @@ local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
 local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
-local sys_manage = scripts_dir .. "mg"
-local sys_manage_cmd = terminal_cmd .. [["sleep 0.156 || ]] .. sys_manage .. [["]]
+local sys_manage_cmd = terminal_cmd .. [[sh -c 'sleep 0.156 && . ~/.local/scripts/mg']]
 local music = "nix run ~/apps/hmus"
 local music_cmd = terminal_cmd .. music
 local passmenu_cmd = "passmenu"
@@ -146,7 +145,7 @@ local kbd_layout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local stbar_txtclk = wibox.widget.textclock('│ %A %B %d, %H:%M │ Week %V Day %j of %Y ')
+local stbar_txtclk = wibox.widget.textclock('│ %A %B %d %Y │ Week %V Day %j │ %H:%M ')
 
 local cal_widget = awful.popup {
     widget       = {
