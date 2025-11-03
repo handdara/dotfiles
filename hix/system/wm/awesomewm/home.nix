@@ -30,7 +30,7 @@ in {
             local theme = {}
 
             theme.system_font   = "${systemFont}"
-            theme.font          = theme.system_font .. " 14"
+            theme.font          = theme.system_font .. " 16"
             theme.hotkeys_font  = "${systemFont}"
             theme.hotkeys_description_font  = theme.hotkeys_font .. " Italic"
 

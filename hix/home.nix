@@ -56,7 +56,16 @@
     handdara.lightworks = false;
 
     nixpkgs.config.allowUnfree = true;
-    nixpkgs.overlays = [nix-vimrc.overlay];
+    nixpkgs.overlays = [
+        nix-vimrc.overlay
+        (final: prev: {
+            neovim = prev.neovim.override {
+                extraLuaConfig = ''
+                    vim.cmd [[colorscheme boo]]
+                '';
+            };
+        })
+    ];
 
     programs.home-manager.enable = true; # Let Home Manager install and manage itself.
 
