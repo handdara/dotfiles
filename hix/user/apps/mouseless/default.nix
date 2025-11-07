@@ -3,7 +3,7 @@
     home.file = {
         ".config/mouseless/config.yaml".text = ''
             # the default speed for mouse movement and scrolling
-            mouseLoopInterval: 85
+            mouseLoopInterval: 100
             mouseAccelerationTime: 0
             baseMouseSpeed: 3750.0 # 4000*3.0/4.0
             baseScrollSpeed: 40.0
@@ -29,6 +29,10 @@
                   j: move  0  0.64
                   k: move  0 -0.64
                   l: move  1  0
+                  left: move -1  0
+                  down: move  0  0.64
+                  up: move  0 -0.64
+                  right: move  1  0
                   y: move -50 0
                   u: move  0  50
                   i: move  0 -50
@@ -38,6 +42,9 @@
                   leftshift: speed 0.5
                   leftctrl: speed 0.2
                   leftalt: speed 0.1
+                  rightshift: speed 0.5
+                  rightctrl: speed 0.2
+                  rightalt: speed 0.1
                   f: button left
                   e: button middle
                   d: button right
