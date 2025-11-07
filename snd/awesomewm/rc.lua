@@ -77,7 +77,8 @@ local netmgr_cmd = terminal_cmd .. netmgr
 local sys_manage_cmd = terminal_cmd .. [[sh -c 'sleep 0.156 && . ~/.local/scripts/mg']]
 local music = "nix run ~/apps/hmus"
 local music_cmd = terminal_cmd .. music
-local passmenu_cmd = "passmenu"
+local passmenu_cmd = terminal_cmd .. scripts_dir .. "__h_pick_pass"
+local username_cmd = terminal_cmd .. scripts_dir .. "__h_pick_username"
 local discord_cmd = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p discord --run discord"
 
 -- Default modkey.
@@ -394,7 +395,9 @@ local globalkeys = gears.table.join(
     awful.key({ super, }, ".", function() awful.spawn(sys_manage_cmd) end,
         { description = "run manage script", group = "launcher" }),
     awful.key({ super, }, ",", function() awful.spawn(passmenu_cmd) end,
-        { description = "run passmenu", group = "launcher" }),
+        { description = "copy a password from gnupass", group = "launcher" }),
+    awful.key({ super, "Shift" }, ",", function() awful.spawn(username_cmd) end,
+        { description = "copy a username from gnupass", group = "launcher" }),
     awful.key({ super, }, "v", function() awful.spawn(browser_cmd) end,
         { description = "Open Web Browser", group = "launcher" }),
     awful.key({ super, }, "e", function() awful.spawn(discord_cmd) end,
