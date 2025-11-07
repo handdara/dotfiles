@@ -1,6 +1,5 @@
 {
     config,
-    user_opts,
     pkgs,
     ...
 }: let
@@ -11,13 +10,13 @@
         else bothThemes.dark;
     name = theme.name;
     c = theme.hexcodes;
-    # font = "Maple Mono NF";
+    font = "Maple Mono NF";
     # font = "iMWritingMono Nerd Font";
     # font = "OpenDyslexic Nerd Font";
     # font = "Hasklug Nerd Font";
     # font = "3270 Nerd Font";
     # font = "DepartureMono Nerd Font";
-    font = "BigBlueTerm437 Nerd Font";
+    # font = "BigBlueTerm437 Nerd Font";
 in {
     home.packages = [pkgs.ghostty];
     home.file = {
@@ -25,7 +24,7 @@ in {
             theme = ${name}
             font-family = ""
             font-family = "${font}"
-            font-size = 16
+            font-size = 24
             cursor-style = block
             cursor-style-blink = false
             background-opacity = 0.85
