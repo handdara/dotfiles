@@ -12,6 +12,7 @@
             set -g default-terminal "tmux-256color"
             bind-key 'C-.' new-window "bash -ic mg"
             bind-key 'C-l' last-window
+            bind-key 'C-;' last-pane
         '';
     };
 }
