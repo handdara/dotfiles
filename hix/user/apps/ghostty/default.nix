@@ -10,8 +10,8 @@
         else bothThemes.dark;
     name = theme.name;
     c = theme.hexcodes;
-    font = "Maple Mono NF";
-    # font = "iMWritingMono Nerd Font";
+    # font = "Maple Mono NF";
+    font = "iMWritingMono Nerd Font";
     # font = "OpenDyslexic Nerd Font";
     # font = "Hasklug Nerd Font";
     # font = "3270 Nerd Font";
@@ -24,7 +24,7 @@ in {
             theme = ${name}
             font-family = ""
             font-family = "${font}"
-            font-size = 24
+            font-size = 16
             cursor-style = block
             cursor-style-blink = false
             background-opacity = 0.85
