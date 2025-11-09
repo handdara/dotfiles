@@ -5,7 +5,7 @@
             # the default speed for mouse movement and scrolling
             mouseLoopInterval: 100
             mouseAccelerationTime: 0
-            baseMouseSpeed: 3750.0 # 4000*3.0/4.0
+            baseMouseSpeed: 1500
             baseScrollSpeed: 40.0
             # the rest of the config defines the layers with their bindings
             layers:
@@ -39,12 +39,12 @@
                   o: move  50 0
                   p: scroll up
                   n: scroll down
-                  leftshift: speed 0.5
-                  leftctrl: speed 0.2
-                  leftalt: speed 0.1
-                  rightshift: speed 0.5
-                  rightctrl: speed 0.2
+                  rightshift: speed 2
+                  rightctrl: speed 0.5
                   rightalt: speed 0.1
+                  leftshift: speed 2
+                  leftctrl: speed 0.5
+                  leftalt: speed 0.1
                   f: button left
                   e: button middle
                   d: button right
