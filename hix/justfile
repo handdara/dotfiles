@@ -8,6 +8,9 @@ alias h := switch-home-mngr
 default: 
     @just -l
 
+update-nvim: && switch-home-mngr
+    nix flake update nix-vimrc
+
 # rebuild NixOS system (flake-based)
 switch-nixos:
     sudo nixos-rebuild switch --flake .

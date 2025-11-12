@@ -1,8 +1,4 @@
-{
-    config,
-    user_opts,
-    ...
-}: let
+{config, ...}: let
     awm_dir = ../../../../snd/awesomewm;
     bothThemes = import ../../../util/color;
     theme =
@@ -13,7 +9,11 @@
     # systemFont = "Maple Mono NF";
     # systemFont = "iMWriting Nerd Font";
     # systemFont = "DepartureMono Nerd Font";
-    systemFont = "HeavyData Nerd Font";
+    # systemFont = "3270 Nerd Font";
+    systemFont = "Monofur Nerd Font";
+    # systemFont = "Monoid Nerd Font";
+    # systemFont = "Hurmit Nerd Font";
+    # systemFont = "HeavyData Nerd Font";
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;
@@ -30,7 +30,7 @@ in {
             local theme = {}
 
             theme.system_font   = "${systemFont}"
-            theme.font          = theme.system_font .. " 24"
+            theme.font          = theme.system_font .. " 20"
             theme.hotkeys_font  = "${systemFont}"
             theme.hotkeys_description_font  = theme.hotkeys_font .. " Italic"
 
@@ -91,7 +91,7 @@ in {
             -- menu_[border_color|border_width]
             theme.menu_submenu_icon = themes_path.."default/submenu.png"
             theme.menu_height = dpi(25)
-            theme.menu_width  = dpi(250)
+            theme.menu_width  = dpi(500)
 
             -- You can add as many variables as
             -- you wish and access them by using

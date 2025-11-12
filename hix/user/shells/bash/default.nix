@@ -39,7 +39,7 @@
             zcd = "z \"\$(fd -utd '' ~/code | fzf || echo '/DNE')\"";
             zcf = "z \"\$(fd -utf --min-depth 2 '' ~/code | fzf | xargs dirname  || echo '/DNE')\"";
             zc = "z \"\$(fd -utf -td --min-depth 2 '' ~/code | fzf | xargs dirname || echo '/DNE')\"";
-            # alfred = "__h_boot_alfred";
+            cat = "bat";
             cal = "cal -mv";
             mkrem = "khal new -a rem";
             mkobl = "khal new -a obl";

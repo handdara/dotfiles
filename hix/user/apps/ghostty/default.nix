@@ -11,11 +11,11 @@
     name = theme.name;
     c = theme.hexcodes;
     # font = "Maple Mono NF";
-    font = "iMWritingMono Nerd Font";
+    # font = "iMWritingMono Nerd Font";
     # font = "OpenDyslexic Nerd Font";
-    # font = "Hasklug Nerd Font";
+    font = "Hasklug Nerd Font";
     # font = "3270 Nerd Font";
-    # font = "DepartureMono Nerd Font";
+    # font = "DepartureMono Nerd Font"; # no bold, italic
     # font = "BigBlueTerm437 Nerd Font";
 in {
     home.packages = [pkgs.ghostty];

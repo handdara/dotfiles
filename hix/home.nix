@@ -2,7 +2,9 @@
     user_opts,
     nix-vimrc,
     ...
-}: {
+}: let
+    lightworks = true;
+in {
     imports = [
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
@@ -54,7 +56,7 @@
     home.username = user_opts.username;
     home.homeDirectory = "/home/" + user_opts.username;
 
-    handdara.lightworks = false;
+    handdara.lightworks = lightworks;
 
     nixpkgs.config.allowUnfree = true;
     nixpkgs.overlays = [
@@ -62,7 +64,11 @@
         (final: prev: {
             neovim = prev.neovim.override {
                 extraLuaConfig = ''
-                    vim.cmd [[colorscheme boo]]
+                    vim.cmd [[colorscheme ${
+                        if lightworks
+                        then "paper"
+                        else "boo"
+                    }]]
                 '';
             };
         })
