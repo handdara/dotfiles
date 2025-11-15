@@ -15,6 +15,7 @@ flake-overlays: {
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
             ./system/theme
+            ./system/remote
             # ./system/hardware/displaylink
         ]
         ++ inputs.extraModules;
@@ -122,7 +123,6 @@ flake-overlays: {
         enableSSHSupport = true;
     };
     services.xbanish.enable = true;
-    services.teamviewer.enable = true;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

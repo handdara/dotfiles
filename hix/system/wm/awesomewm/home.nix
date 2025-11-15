@@ -10,10 +10,11 @@
     # systemFont = "iMWriting Nerd Font";
     # systemFont = "DepartureMono Nerd Font";
     # systemFont = "3270 Nerd Font";
-    systemFont = "Monofur Nerd Font";
+    # systemFont = "Monofur Nerd Font";
     # systemFont = "Monoid Nerd Font";
     # systemFont = "Hurmit Nerd Font";
     # systemFont = "HeavyData Nerd Font";
+    systemFont = "Rec Mono Duotone";
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;
@@ -30,7 +31,7 @@ in {
             local theme = {}
 
             theme.system_font   = "${systemFont}"
-            theme.font          = theme.system_font .. " 20"
+            theme.font          = theme.system_font .. " 16"
             theme.hotkeys_font  = "${systemFont}"
             theme.hotkeys_description_font  = theme.hotkeys_font .. " Italic"
 

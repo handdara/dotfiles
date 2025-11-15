@@ -16,5 +16,6 @@
         nerd-fonts.bigblue-terminal
         nerd-fonts.terminess-ttf
         maple-mono.NF
+        recursive
     ];
 }

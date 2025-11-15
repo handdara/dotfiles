@@ -90,8 +90,8 @@ local super = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.corner.nw,
     awful.layout.suit.tile.bottom,
+    awful.layout.suit.corner.nw,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.spiral,
@@ -315,7 +315,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.wibox = awful.wibar({
         position = "top",
         screen = s,
-        height = 28,
+        height = 34,
     })
 
     -- Add widgets to the wibox

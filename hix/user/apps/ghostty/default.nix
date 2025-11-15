@@ -10,13 +10,25 @@
         else bothThemes.dark;
     name = theme.name;
     c = theme.hexcodes;
-    # font = "Maple Mono NF";
-    # font = "iMWritingMono Nerd Font";
-    # font = "OpenDyslexic Nerd Font";
-    font = "Hasklug Nerd Font";
     # font = "3270 Nerd Font";
-    # font = "DepartureMono Nerd Font"; # no bold, italic
+    # font = "Agave Nerd Font";
+    # font = "AtkynsonMono Nerd Font";
     # font = "BigBlueTerm437 Nerd Font";
+    # font = "BigBlueTermPlus Nerd Font";
+    # font = "BlexMono Nerd Font";
+    # font = "DepartureMono Nerd Font"; #no bold,italic
+    # font = "FantasqueSansM Nerd Font";
+    # font = "Hasklug Nerd Font";
+    # font = "HeavyData Nerd Font";
+    # font = "Hurmit Nerd Font";
+    font = "Maple Mono NF";
+    # font = "Monofur Nerd Font";
+    # font = "Monoid Nerd Font";
+    # font = "OpenDyslexic Nerd Font";
+    # font = "OpenDyslexicAlt Nerd Font";
+    # font = "OpenDyslexicM Nerd Font";
+    # font = "Terminess Nerd Font"; # no bold
+    # font = "iMWritingMono Nerd Font";
 in {
     home.packages = [pkgs.ghostty];
     home.file = {
@@ -24,7 +36,7 @@ in {
             theme = ${name}
             font-family = ""
             font-family = "${font}"
-            font-size = 16
+            font-size = 13
             cursor-style = block
             cursor-style-blink = false
             background-opacity = 0.85
