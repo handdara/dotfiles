@@ -9,5 +9,6 @@
         rust-analyzer-unwrapped # rust lang server
         nil # nix lang server
         tinymist
+        bash-language-server
     ];
 }

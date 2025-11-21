@@ -4,7 +4,7 @@ let
         fg = "d3c7b7"; #d3c7b7
         black = "42101c"; #42101c
         red = "8a0b3c"; #8a0b3c
-        green = "3d3c26"; #3d3c26
+        green = "6c6a43"; #3d3c26
         yellow = "db9003"; #db9003
         blue = "524471"; #524471
         magenta = "653044"; #653044

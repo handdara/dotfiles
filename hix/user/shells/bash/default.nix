@@ -1,4 +1,5 @@
-{...}: {
+{pkgs, ...}: {
+    home.packages = [pkgs.blesh];
     programs.bash = {
         enable = true;
         historySize = 100000;
@@ -52,6 +53,11 @@
             export PATH="~/.local/bin:$PATH"
             export PATH="~/.local/scripts:$PATH"
             export EDITOR="nvim"
+        '';
+        initExtra = ''
+            source -- $(blesh-share)/ble.sh
+            export _ZO_MAXAGE=100000
+            export _ZO_DOCTOR=0
         '';
     };
 }
