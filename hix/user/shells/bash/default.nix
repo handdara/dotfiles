@@ -29,6 +29,7 @@
             "z-" = "z -";
             vpdf = "zathura";
             vimg = "fim";
+            viman = "nvim -Rc 'set ft=man'";
             zt = "z $(mktemp -d)";
             zd = "z \"\$(fd -utd '' . | fzf || echo '/DNE')\"";
             zf = "z \"\$(fd -utf '' . | fzf | xargs dirname || echo '/DNE')\"";
