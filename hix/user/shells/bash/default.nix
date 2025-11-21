@@ -53,11 +53,12 @@
             export PATH="~/.local/bin:$PATH"
             export PATH="~/.local/scripts:$PATH"
             export EDITOR="nvim"
+            export _ZO_MAXAGE=100000
         '';
         initExtra = ''
             source -- $(blesh-share)/ble.sh
-            export _ZO_MAXAGE=100000
-            export _ZO_DOCTOR=0
+            eval "$(fzf --bash)"
+            eval "$(zoxide init bash )"
         '';
     };
 }
