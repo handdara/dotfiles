@@ -74,6 +74,7 @@ flake-overlays: {
         isNormalUser = true;
         description = inputs.user_opts.name;
         extraGroups = ["networkmanager" "wheel"];
+        useDefaultShell = true;
     };
 
     virtualisation.vmVariant = {
@@ -91,7 +92,8 @@ flake-overlays: {
     environment.shells = with pkgs; [fish bash zsh dash];
     programs.fish.enable = true;
     programs.bash.enableLsColors = false;
-    users.defaultUserShell = pkgs.bash;
+    users.defaultUserShell = pkgs.dash;
+    users.users.root.shell = pkgs.dash;
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;

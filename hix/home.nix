@@ -54,9 +54,6 @@ in {
         ./user/theme
     ];
 
-    home.username = user_opts.username;
-    home.homeDirectory = "/home/" + user_opts.username;
-
     handdara.lightworks = lightworks;
 
     nixpkgs.config.allowUnfree = true;
@@ -77,10 +74,21 @@ in {
         })
     ];
 
-    programs.home-manager.enable = true; # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
+    home = rec {
+        username = user_opts.username;
+        homeDirectory = "/home/" + username;
+        sessionPath = [
+            "${homeDirectory}/.local/scripts"
+        ];
+        sessionVariables = {
+            SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_sha76passwd";
+        };
+        # Let Home Manager install and manage itself.
 
-    # You should not change this value, even if you update Home Manager. If you do
-    # want to update the value, then make sure to first check the Home Manager
-    # release notes.
-    home.stateVersion = "24.05"; # Please read the comment before changing.
+        # You should not change this value, even if you update Home Manager. If you do
+        # want to update the value, then make sure to first check the Home Manager
+        # release notes.
+        stateVersion = "24.05";
+    }; # Please read the comment before changing.
 }
