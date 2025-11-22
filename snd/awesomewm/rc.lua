@@ -72,6 +72,8 @@ local email = "mbsync -a && neomutt"
 local email_cmd = terminal_cmd .. email
 local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
+local weather = scripts_dir .. "__h_chk_weather"
+local weather_cmd = terminal_cmd .. weather
 local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
 local sys_manage_cmd = terminal_cmd .. [[sh -c 'sleep 0.156 && . ~/.local/scripts/mg']]
@@ -123,8 +125,9 @@ local start_menu = awful.menu({
         { "Contact Ekumen", discord_cmd },
         { "Boot-Up Terminal", terminal },
         { "Web Browser",    browser_cmd },
-        { "Calendar",       calendar_cmd },
-        { "Music",          music_cmd },
+        { "Calendar",       weather_cmd },
+        { "Weather",       calendar_cmd },
+        -- { "Music",          music_cmd },
         { "Manage System",  sys_manage_cmd },
         -- { "Bluetooth",      bluemgr_cmd },
     }
@@ -186,20 +189,6 @@ local cal_yr_widget = awful.popup {
     placement    = (awful.placement.under_mouse + awful.placement.no_offscreen),
     shape        = gears.shape.rounded_rect,
 }
-stbar_txtclk:buttons(gears.table.join(
-    awful.button({}, 1, function()
-        cal_widget.visible = not cal_widget.visible
-        if cal_widget.visible then
-            cal_widget:move_next_to(mouse.current_widget_geometry)
-        end
-    end),
-    awful.button({}, 3, function()
-        cal_yr_widget.visible = not cal_yr_widget.visible
-        if cal_yr_widget.visible then
-            cal_yr_widget:move_next_to(mouse.current_widget_geometry)
-        end
-    end)
-))
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -645,8 +634,10 @@ awful.rules.rules = {
     -- Set browser to always map on the tag named "3" on screen 1.
     {
         rule = { class = "Vivaldi" },
-        properties = { screen = 1, tag = "3" }
+        properties = { tag = "3" }
     },
+
+    { rule = { }, properties = { }, callback = awful.client.setslave }
 }
 -- }}}
 
