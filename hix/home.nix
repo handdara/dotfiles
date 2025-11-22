@@ -64,14 +64,12 @@ in {
         (final: prev: {
             neovim = prev.neovim.override {
                 extraLuaConfig = ''
-                    vim.cmd [[nnoremap ; :]]
-                    vim.cmd [[nnoremap : ;]]
                 '';
                 extraLuaPreConfig = ''
                     vim.cmd [[colorscheme ${
                         if lightworks
                         then "paper"
-                        else "boo"
+                        else "crimson_moonlight"
                     }]]
                 '';
             };
