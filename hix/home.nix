@@ -29,6 +29,7 @@ in {
         ./user/apps/matlab
         ./user/apps/megacmd
         ./user/apps/mouseless
+        ./user/apps/mpv
         ./user/apps/neofetch
         ./user/apps/nvim
         ./user/apps/pandoc

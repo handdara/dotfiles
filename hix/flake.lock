@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763776699,
-        "narHash": "sha256-2PHNiw5jC/Ns2Y66eVI7enkQbd2gr5u5CSCF/XYdQnw=",
+        "lastModified": 1763776967,
+        "narHash": "sha256-esNXYiSNnrby84mBediBmu/BPo0HGwUk0BfO292PKyY=",
         "owner": "handdara",
         "repo": "nix-vimrc",
-        "rev": "e0fc7e1d4574f47c455054c173309138046b39f1",
+        "rev": "f9190d7691c561e7e06bc76a73195acb51e8ce8f",
         "type": "github"
       },
       "original": {
