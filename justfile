@@ -28,10 +28,7 @@ switch-home: _check_fmt
 
 # purge directories needed to switch home-manager
 purge: 
-    -just {{jd}}/fst/hish/ purge
     -just {{jd}}/fst/him/ purge
-    -just {{jd}}/fst/hez/ purge
-    -just {{jd}}/fst/hish/ purge
     -just {{jd}}/snd/awesomewm/ purge
 
 _git_add: _check_fmt
