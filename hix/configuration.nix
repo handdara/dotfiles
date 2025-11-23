@@ -100,22 +100,36 @@ flake-overlays: {
 
     # base system packages
     environment.systemPackages = with pkgs; [
+        alacritty
+        alsa-utils
+        bc
+        brightnessctl
+        chafa
+        fastfetch
+        fim
+        ghostty
+        git
+        libnotify
+        mpv
+        pandoc
+        pass
+        pastel
+        pavucontrol
+        pinentry-curses
+        tree
+        universal-ctags
+        unzip
         vim
         wget
-        git
-        unzip
         xclip
         xlockmore
-        pavucontrol
-        alsa-utils
-        brightnessctl
-        pinentry-curses
-        pass
-        tree
+        zathura
+        # see ./flake.nix input `nix-matlab`
         matlab
     ];
 
     programs.tmux.enable = true;
+    programs.fzf.fuzzyCompletion = true;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
