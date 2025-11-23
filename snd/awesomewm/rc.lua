@@ -54,34 +54,35 @@ local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible/'
 local scripts_dir = os.getenv("HOME") .. '/.local/scripts/'
 beautiful.init(theme_dir .. theme .. "/theme.lua")
 
-local browser_cmd = "vivaldi"
-local bluemgr_cmd = "blueman-manager"
 local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
-local editor = os.getenv("EDITOR") or "vim"
-local editor_cmd = terminal_cmd .. editor
-local monitor = "tmux new -As monitor btop"
-local monitor_cmd = terminal_cmd .. monitor
+
 local ansible = "tmux new -As ansible nvim"
 local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
-local misc_tmux = "tmux new -As misc"
-local misc_tmux_cmd = terminal_cmd .. misc_tmux
-local nsi_cmd = terminal_cmd .. scripts_dir .. 'nsi'
-local osi_cmd = terminal_cmd .. scripts_dir .. 'osi'
-local email = "mbsync -a && neomutt"
-local email_cmd = terminal_cmd .. email
+local bluemgr_cmd = "blueman-manager"
+local browser_cmd = "vivaldi"
 local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
-local weather = scripts_dir .. "__h_chk_weather"
-local weather_cmd = terminal_cmd .. weather
-local netmgr = "nmtui"
-local netmgr_cmd = terminal_cmd .. netmgr
-local sys_manage_cmd = terminal_cmd .. [[sh -c 'sleep 0.156 && . ~/.local/scripts/mg']]
+local discord_cmd = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p discord --run discord"
+local editor = os.getenv("EDITOR") or "vim"
+local editor_cmd = terminal_cmd .. editor
+local email = "mbsync -a && neomutt"
+local email_cmd = terminal_cmd .. email
+local misc_tmux = "tmux new -As misc"
+local misc_tmux_cmd = terminal_cmd .. misc_tmux
+local monitor = "tmux new -As monitor btop"
+local monitor_cmd = terminal_cmd .. monitor
 local music = "nix run ~/apps/hmus"
 local music_cmd = terminal_cmd .. music
+local netmgr = "nmtui"
+local netmgr_cmd = terminal_cmd .. netmgr
+local nsi_cmd = terminal_cmd .. scripts_dir .. 'nsi'
+local osi_cmd = terminal_cmd .. scripts_dir .. 'osi'
 local passmenu_cmd = terminal_cmd .. scripts_dir .. "__h_pick_pass"
+local sys_manage_cmd = terminal_cmd .. [[sh -c 'sleep 0.156 && . ~/.local/scripts/mg']]
 local username_cmd = terminal_cmd .. scripts_dir .. "__h_pick_username"
-local discord_cmd = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p discord --run discord"
+local weather = scripts_dir .. "__h_chk_weather"
+local weather_cmd = terminal_cmd .. weather
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -125,8 +126,8 @@ local start_menu = awful.menu({
         { "Contact Ekumen", discord_cmd },
         { "Boot-Up Terminal", terminal },
         { "Web Browser",    browser_cmd },
-        { "Calendar",       weather_cmd },
-        { "Weather",       calendar_cmd },
+        { "Calendar",       calendar_cmd },
+        { "Weather",        weather_cmd },
         -- { "Music",          music_cmd },
         { "Manage System",  sys_manage_cmd },
         -- { "Bluetooth",      bluemgr_cmd },
@@ -387,7 +388,7 @@ local globalkeys = gears.table.join(
         { description = "copy a username from gnupass", group = "launcher" }),
     awful.key({ super, }, "v", function() awful.spawn(browser_cmd) end,
         { description = "Open Web Browser", group = "launcher" }),
-    awful.key({ super, }, "e", function() awful.spawn(discord_cmd) end,
+    awful.key({ super, }, "e", function() awful.spawn(discord_cmd) end, -- FixMe)) 
         { description = "Contact Ekumen", group = "launcher" }),
     awful.key({ super, }, "g", function() awful.spawn(misc_tmux_cmd) end,
         { description = "Open miscellaneous tmux session", group = "launcher" }),
