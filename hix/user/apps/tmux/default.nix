@@ -1,6 +1,7 @@
 {...}: {
     home.file = {
         ".tmux.conf".text = ''
+            set-option -g default-command bash
             set-option -g mode-keys vi
             set-option -g status-style bg=magenta,fg=white
             set-option -sg escape-time 10

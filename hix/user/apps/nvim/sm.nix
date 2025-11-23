@@ -11,4 +11,7 @@
         tinymist
         bash-language-server
     ];
+    home.sessionVariables = {
+        EDITOR = "nvim";
+    };
 }
