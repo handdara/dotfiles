@@ -46,6 +46,7 @@ in {
         ./user/apps/wiki-tui
         ./user/apps/write
         ./user/apps/xcolor
+        ./user/apps/yt-dlp
         ./user/apps/zathura
         ./user/apps/zotero
         ./user/apps/zoxide

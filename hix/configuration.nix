@@ -106,6 +106,7 @@ flake-overlays: {
         brightnessctl
         chafa
         fastfetch
+        ffmpeg
         fim
         ghostty
         git
