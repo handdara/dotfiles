@@ -13,6 +13,7 @@ in {
         ./user/apps/btop
         ./user/apps/cal
         ./user/apps/chafa
+        ./user/apps/croc
         ./user/apps/ctags
         ./user/apps/desmume
         ./user/apps/eza
