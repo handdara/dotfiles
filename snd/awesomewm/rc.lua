@@ -129,9 +129,7 @@ local start_menu = awful.menu({
         { "Web Browser",    browser_cmd },
         { "Calendar",       calendar_cmd },
         { "Weather",        weather_cmd },
-        -- { "Music",          music_cmd },
         { "Manage System",  sys_manage_cmd },
-        -- { "Bluetooth",      bluemgr_cmd },
     }
 })
 
