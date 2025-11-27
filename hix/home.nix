@@ -24,6 +24,7 @@ in {
         ./user/apps/fzf
         ./user/apps/ghostty
         ./user/apps/imagemagick
+        ./user/apps/lxappearance
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
