@@ -10,6 +10,7 @@ in {
         ./user/apps/alacritty
         ./user/apps/bat
         ./user/apps/bc
+        ./user/apps/asciinema
         ./user/apps/flameshot
         ./user/apps/btop
         ./user/apps/cal
