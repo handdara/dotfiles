@@ -72,7 +72,8 @@ in {
             palette = 15=${theme.ghostty.paletteF or c.bright_white}
             background = ${theme.ghostty.bg or c.bg}
             foreground = ${c.fg}
-            cursor-color = ${theme.ghostty.cursor or c.red}
+            cursor-color = cell-foreground
+            cursor-text = cell-background
             selection-background = 626880
             selection-foreground = c6d0f5
         '';
