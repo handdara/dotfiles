@@ -10,6 +10,7 @@ in {
         ./user/apps/alacritty
         ./user/apps/bat
         ./user/apps/bc
+        ./user/apps/flameshot
         ./user/apps/btop
         ./user/apps/cal
         ./user/apps/chafa
@@ -36,7 +37,7 @@ in {
         ./user/apps/pandoc
         ./user/apps/pastel
         # ./user/apps/r
-        # ./user/apps/redshift
+        ./user/apps/redshift
         ./user/apps/starship
         ./user/apps/tealdeer
         ./user/apps/tmux
