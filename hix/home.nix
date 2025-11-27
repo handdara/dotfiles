@@ -8,10 +8,9 @@ in {
     imports = [
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
+        ./user/apps/asciinema
         ./user/apps/bat
         ./user/apps/bc
-        ./user/apps/asciinema
-        ./user/apps/flameshot
         ./user/apps/btop
         ./user/apps/cal
         ./user/apps/chafa
@@ -20,9 +19,11 @@ in {
         ./user/apps/desmume
         ./user/apps/eza
         ./user/apps/fim
+        ./user/apps/flameshot
         ./user/apps/fortune
         ./user/apps/fzf
         ./user/apps/ghostty
+        ./user/apps/imagemagick
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
