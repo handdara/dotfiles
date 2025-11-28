@@ -16,10 +16,10 @@
             external_edit = ctrl e
             [locale]
             timeformat = "%H%M"
-            dateformat = "%d%b%Y"
-            datetimeformat = "%d%b%Y %H%M"
-            longdateformat = "%d%b%Y"
-            longdatetimeformat = "%d%b%Y %H%M"
+            dateformat = "%Y-%m-%d"
+            datetimeformat = "%Y-%m-%d %H%M"
+            longdateformat = "%Y-%m-%d"
+            longdatetimeformat = "%Y-%m-%d %H%M"
         '';
     };
 }
