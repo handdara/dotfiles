@@ -63,6 +63,8 @@ local bluemgr_cmd = "blueman-manager"
 local browser_cmd = "vivaldi"
 local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
+local prog = scripts_dir .. "__h_boot_prog"
+local prog_cmd = terminal_cmd .. prog
 local discord_cmd = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p discord --run discord"
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
@@ -80,6 +82,8 @@ local nsi_cmd = terminal_cmd .. scripts_dir .. 'nsi'
 local osi_cmd = terminal_cmd .. scripts_dir .. 'osi'
 local passmenu_cmd = terminal_cmd .. scripts_dir .. "__h_pick_pass"
 local sys_manage_cmd = terminal_cmd .. [[sh -c 'sleep 0.156 && . ~/.local/scripts/mg ; sleep 0.1']]
+local sysinfo = scripts_dir .. "sys/sysinfo"
+local sysinfo_cmd = terminal_cmd .. sysinfo
 local username_cmd = terminal_cmd .. scripts_dir .. "__h_pick_username"
 local weather = scripts_dir .. "__h_chk_weather"
 local weather_cmd = terminal_cmd .. weather
@@ -114,22 +118,25 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local menu_awesome = {
-    { "hotkeys",     function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-    { "manual",      terminal_cmd .. " man awesome" },
-    { "edit config", editor_cmd .. " " .. awesome.conffile },
-    { "restart",     awesome.restart },
-    { "quit",        function() awesome.quit() end },
+    { "┬──AWM:Hotkeys",     function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+    { "├──AWM:Manual",      terminal_cmd .. " man awesome" },
+    { "├──AWM.Conf:Edit",   editor_cmd .. " " .. awesome.conffile },
+    { "├──AWM:Restart",     awesome.restart },
+    { "└──AWM:KILL",        function() awesome.quit() end },
 }
 
 local start_menu = awful.menu({
     items = {
-        { "Awesome",        menu_awesome,  beautiful.awesome_icon },
-        { "Contact Ekumen", discord_cmd },
-        { "Boot-Up Terminal", terminal },
-        { "Web Browser",    browser_cmd },
-        { "Calendar",       calendar_cmd },
-        { "Weather",        weather_cmd },
-        { "Manage System",  sys_manage_cmd },
+        { "┬──SHA76",   sysinfo_cmd },
+        { "│  ├──SHA76.Sys:Manage",         sys_manage_cmd },
+        { "│  ├──SHA76.Sys:Status",         monitor_cmd },
+        { "│  └──SHA76.Sys.AWM",            menu_awesome,  beautiful.awesome_icon },
+        { "├──Contact Ekumen",              discord_cmd },
+        { "├──Access Terminal",             terminal },
+        { "│  ├──Terminal.Prog:Boot",       prog_cmd },
+        { "│  └──Terminal.Calendar:Boot",   calendar_cmd },
+        { "├──Access Net",                  browser_cmd },
+        { "└──Environmental Status Report", weather_cmd },
     }
 })
 
@@ -337,7 +344,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 
--- {{{ Key bindings
+-- {{{ Key bindings, also keymap, keybinds
 local globalkeys = gears.table.join(
     awful.key({ super, }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
     awful.key({ super, }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
@@ -391,14 +398,14 @@ local globalkeys = gears.table.join(
         { description = "Contact Ekumen", group = "launcher" }),
     awful.key({ super, }, "g", function() awful.spawn(misc_tmux_cmd) end,
         { description = "Open miscellaneous tmux session", group = "launcher" }),
-    awful.key({ super, }, "a", function() awful.spawn(ansible_cmd) end,
-        { description = "Use Ansible", group = "launcher" }),
+    awful.key({ super, }, "a", function() awful.spawn(prog_cmd) end,
+        { description = "Attach to programming session", group = "launcher" }),
     awful.key({ super, }, "b", function() awful.spawn(monitor_cmd) end,
         { description = "Open btop", group = "launcher" }),
-    awful.key({ super, "Control" }, "a", function() awful.spawn(nsi_cmd) end,
-        { description = "[a]dd New Stache Item", group = "launcher" }),
-    awful.key({ super, "Shift" }, "a", function() awful.spawn(osi_cmd) end,
-        { description = "[o]pen New Stache Item", group = "launcher" }),
+    -- awful.key({ super, "Control" }, "a", function() awful.spawn(nsi_cmd) end,
+    --     { description = "[a]dd New Stache Item", group = "launcher" }),
+    -- awful.key({ super, "Shift" }, "a", function() awful.spawn(osi_cmd) end,
+    --     { description = "[o]pen New Stache Item", group = "launcher" }),
     awful.key({ super, }, "c", function() awful.spawn(calendar_cmd) end,
         { description = "Open Calendar Ekumen", group = "launcher" }),
     awful.key({ super, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),

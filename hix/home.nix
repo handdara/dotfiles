@@ -20,19 +20,19 @@ in {
         ./user/apps/eza
         ./user/apps/fim
         ./user/apps/flameshot
-        ./user/apps/fortune
         ./user/apps/fzf
         ./user/apps/ghostty
         ./user/apps/imagemagick
-        ./user/apps/lxappearance
         ./user/apps/jqyq
         ./user/apps/just
         ./user/apps/kmonad
         ./user/apps/lazygit
         ./user/apps/libnotify
+        ./user/apps/lxappearance
         ./user/apps/mail
         ./user/apps/matlab
         ./user/apps/megacmd
+        ./user/apps/misc-cli
         ./user/apps/mouseless
         ./user/apps/mpv
         ./user/apps/neofetch
@@ -73,7 +73,7 @@ in {
                     vim.cmd [[colorscheme ${
                         if lightworks
                         then "paper"
-                        else "crimson_moonlight"
+                        else "lackluster"
                     }]]
                 '';
             };

@@ -10,6 +10,7 @@
         nil # nix lang server
         tinymist
         bash-language-server
+        neovim-remote
     ];
     home.sessionVariables = {
         EDITOR = "nvim";

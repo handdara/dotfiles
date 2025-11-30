@@ -53,7 +53,7 @@
             export SUDO_ASKPASS=$HOME/.local/scripts/__h_sha76passwd
             export PATH="~/.local/bin:$PATH"
             export PATH="~/.local/scripts:$PATH"
-            export EDITOR="nvim"
+            export EDITOR="nvr --remote-wait-silent"
             export _ZO_MAXAGE=100000
         '';
         initExtra = ''
