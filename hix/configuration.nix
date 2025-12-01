@@ -110,6 +110,7 @@ flake-overlays: {
         fim
         ghostty
         git
+        graphite-gtk-theme
         libnotify
         mpv
         pandoc
@@ -117,6 +118,7 @@ flake-overlays: {
         pastel
         pavucontrol
         pinentry-curses
+        themechanger
         tree
         universal-ctags
         unzip
