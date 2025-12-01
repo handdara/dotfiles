@@ -127,10 +127,10 @@ local menu_awesome = {
 
 local start_menu = awful.menu({
     items = {
-        { "┬──SHA76",   sysinfo_cmd },
+        { "┬──SHA76",                       sysinfo_cmd },
         { "│  ├──SHA76.Sys:Manage",         sys_manage_cmd },
         { "│  ├──SHA76.Sys:Status",         monitor_cmd },
-        { "│  └──SHA76.Sys.AWM",            menu_awesome,  beautiful.awesome_icon },
+        { "│  └──SHA76.Sys.AWM",            menu_awesome, beautiful.awesome_icon },
         { "├──Contact Ekumen",              discord_cmd },
         { "├──Access Terminal",             terminal },
         { "│  ├──Terminal.Prog:Boot",       prog_cmd },
