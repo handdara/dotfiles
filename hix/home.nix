@@ -3,7 +3,7 @@
     nix-vimrc,
     ...
 }: let
-    lightworks = false;
+    lightworks = true;
 in {
     imports = [
         ./system/wm/awesomewm/home.nix
@@ -28,7 +28,7 @@ in {
         ./user/apps/kmonad
         ./user/apps/lazygit
         ./user/apps/libnotify
-        ./user/apps/lxappearance
+        # ./user/apps/lxappearance
         ./user/apps/mail
         ./user/apps/matlab
         ./user/apps/megacmd
@@ -72,7 +72,7 @@ in {
                 extraLuaPreConfig = ''
                     vim.cmd [[colorscheme ${
                         if lightworks
-                        then "paper"
+                        then "delek"
                         else "lackluster"
                     }]]
                 '';

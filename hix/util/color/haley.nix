@@ -120,7 +120,7 @@ in
                 paletteD = bright_magenta;
                 paletteE = bright_cyan;
                 paletteF = bright_white;
-                cursor = bright_red;
+                cursor_bg = bright_red;
             };
         };
         light = rec {
@@ -214,7 +214,8 @@ in
                 paletteD = bright_magenta;
                 paletteE = bright_cyan;
                 paletteF = bright_white;
-                cursor = red;
+                cursor_fg = fg;
+                cursor_bg = bg;
             };
             wm = {
                 window_border = {
