@@ -3,7 +3,7 @@
     nix-vimrc,
     ...
 }: let
-    lightworks = true;
+    lightworks = false;
 in {
     imports = [
         ./system/wm/awesomewm/home.nix

@@ -14,7 +14,8 @@
     # systemFont = "Monoid Nerd Font";
     # systemFont = "Hurmit Nerd Font";
     # systemFont = "HeavyData Nerd Font";
-    systemFont = "Rec Mono Duotone";
+    systemFont = "Terminess Nerd Font";
+    # systemFont = "Rec Mono Duotone";
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;

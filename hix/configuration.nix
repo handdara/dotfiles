@@ -131,6 +131,7 @@ flake-overlays: {
         matlab
     ];
 
+    programs.thunar.enable = true;
     programs.tmux.enable = true;
     programs.fzf.fuzzyCompletion = true;
 

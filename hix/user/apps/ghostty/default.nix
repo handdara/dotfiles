@@ -39,7 +39,7 @@ in {
             font-size = 13
             cursor-style = block
             cursor-style-blink = false
-            background-opacity = 0.93
+            background-opacity = 0.85
             window-padding-x = 2
             window-padding-y = 0
             window-decoration = false
