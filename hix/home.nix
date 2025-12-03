@@ -73,7 +73,7 @@ in {
                     vim.cmd [[colorscheme ${
                         if lightworks
                         then "delek"
-                        else "lackluster"
+                        else "monalisa"
                     }]]
                 '';
             };

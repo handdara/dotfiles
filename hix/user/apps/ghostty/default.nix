@@ -29,6 +29,9 @@
     # font = "OpenDyslexicM Nerd Font";
     # font = "Terminess Nerd Font"; # no bold
     # font = "iMWritingMono Nerd Font";
+    overrides = {
+        bg = "120b0d";
+    };
 in {
     home.packages = [pkgs.ghostty];
     home.file = {
@@ -39,7 +42,7 @@ in {
             font-size = 13
             cursor-style = block
             cursor-style-blink = false
-            background-opacity = 0.85
+            background-opacity = 0.92
             window-padding-x = 2
             window-padding-y = 0
             window-decoration = false
@@ -70,7 +73,7 @@ in {
             palette = 13=${theme.ghostty.paletteD or c.bright_magenta}
             palette = 14=${theme.ghostty.paletteE or c.bright_cyan}
             palette = 15=${theme.ghostty.paletteF or c.bright_white}
-            background = ${theme.ghostty.bg or c.bg}
+            background = ${overrides.bg or theme.ghostty.bg or c.bg}
             foreground = ${c.fg}
             cursor-color = ${theme.ghostty.cursor_bg or "cell-foreground"}
             cursor-text = ${theme.ghostty.cursor_fg or "cell-background"}
