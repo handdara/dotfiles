@@ -131,7 +131,11 @@ flake-overlays: {
         matlab
     ];
 
-    programs.thunar.enable = true;
+    programs.thunar = {
+        enable = true;
+        plugins = [ pkgs.xfce.thunar-volman ];
+    };
+
     programs.tmux.enable = true;
     programs.fzf.fuzzyCompletion = true;
 
