@@ -109,6 +109,7 @@ flake-overlays: {
         ffmpeg
         fim
         ghostty
+        gimp
         git
         graphite-gtk-theme
         libnotify
