@@ -118,7 +118,7 @@ flake-overlays: {
         pastel
         pavucontrol
         pinentry-curses
-        ristretto
+        xfce.ristretto
         themechanger
         tree
         universal-ctags
