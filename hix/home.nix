@@ -67,8 +67,6 @@ in {
         nix-vimrc.overlay
         (final: prev: {
             neovim = prev.neovim.override {
-                extraLuaConfig = ''
-                '';
                 extraLuaPreConfig = ''
                     vim.cmd [[colorscheme ${
                         if lightworks
