@@ -112,13 +112,14 @@ flake-overlays: {
         git
         graphite-gtk-theme
         libnotify
+        matlab
         mpv
         pandoc
         pass
         pastel
         pavucontrol
         pinentry-curses
-        xfce.ristretto
+        # see ./flake.nix input `nix-matlab`
         themechanger
         tree
         universal-ctags
@@ -126,10 +127,10 @@ flake-overlays: {
         vim
         wget
         xclip
+        xfce.ristretto
+        xfce.tumbler
         xlockmore
         zathura
-        # see ./flake.nix input `nix-matlab`
-        matlab
     ];
 
     programs.thunar = {
