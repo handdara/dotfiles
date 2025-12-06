@@ -118,6 +118,7 @@ flake-overlays: {
         pastel
         pavucontrol
         pinentry-curses
+        ristretto
         themechanger
         tree
         universal-ctags
