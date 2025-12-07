@@ -1,10 +1,9 @@
 {
     user_opts,
+    config,
     nix-vimrc,
     ...
-}: let
-    lightworks = false;
-in {
+}: {
     imports = [
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
@@ -35,9 +34,7 @@ in {
         ./user/apps/misc-cli
         ./user/apps/mouseless
         ./user/apps/mpv
-        ./user/apps/neofetch
         ./user/apps/nvim
-        ./user/apps/pandoc
         ./user/apps/pastel
         # ./user/apps/r
         ./user/apps/redshift
@@ -49,18 +46,20 @@ in {
         ./user/apps/w3m
         ./user/apps/watchexec
         ./user/apps/wiki-tui
-        ./user/apps/write
         ./user/apps/xcolor
         ./user/apps/yt-dlp
-        ./user/apps/zathura
-        ./user/apps/zotero
+        ./user/apps/pdfs
         ./user/apps/zoxide
         ./user/misc/theme
         ./user/shells/bash
         ./user/theme
     ];
 
-    handdara.lightworks = lightworks;
+    handdara = {
+        lightworks = false;
+        font = "Terminess Nerd Font";
+        fontsize = 18;
+    };
 
     nixpkgs.config.allowUnfree = true;
     nixpkgs.overlays = [
@@ -69,7 +68,7 @@ in {
             neovim = prev.neovim.override {
                 extraLuaPreConfig = ''
                     vim.cmd [[colorscheme ${
-                        if lightworks
+                        if config.handdara.lightworks
                         then "delek"
                         else "monalisa"
                     }]]

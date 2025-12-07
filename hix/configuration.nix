@@ -136,7 +136,7 @@ flake-overlays: {
 
     programs.thunar = {
         enable = true;
-        plugins = [ pkgs.xfce.thunar-volman ];
+        plugins = [pkgs.xfce.thunar-volman];
     };
 
     programs.tmux.enable = true;
