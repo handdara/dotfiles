@@ -32,12 +32,10 @@
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
         pkgs = nixpkgs.legacyPackages.${system};
-        useLight = lib.mkDefault false;
         user_opts = rec {
-            inherit useLight;
             username = "handdara";
             name = username;
-            email = "${username}.core@proton.me";
+            email = "email@handdara.com";
             which_nvim = "sm";
         };
     in {
@@ -55,10 +53,20 @@
                     sys_opts = import ./machines/sha76/options.nix {};
                 };
             };
+            mixed = lib.nixosSystem {
+                modules = [
+                    (import ./configuration.nix flake-overlays)
+                    inputs.kmonad.nixosModules.default
+                ];
+                specialArgs = {
+                    inherit system user_opts;
+                    # extraModules = [./battery.nix];
+                    sys_opts = import ./machines/mixed/options.nix {};
+                };
+            };
             theseus = lib.nixosSystem {
                 modules = [
                     ./configuration.nix
-                    # inputs.kmonad.nixosModules.default
                 ];
                 specialArgs = {
                     inherit system user_opts;
@@ -69,7 +77,6 @@
             tadok = lib.nixosSystem {
                 modules = [
                     ./configuration.nix
-                    # inputs.kmonad.nixosModules.default
                 ];
                 specialArgs = {
                     inherit system user_opts;
