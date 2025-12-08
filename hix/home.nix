@@ -57,7 +57,7 @@
 
     handdara = {
         lightworks = false;
-        font = "AtkynsonMono NF"; # Terminess Nerd Font | 
+        font = "FantasqueSansM Nerd Font Bold"; # Terminess Nerd Font | BlexMono Nerd Font | AtkynsonMono NF
         fontsize = 18;
     };
 

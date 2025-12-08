@@ -1,3 +1,3 @@
 throw ''
-    FixMe)) replace this with the correct hardware-configuration.nix 
+    FixMe)) replace this with the correct hardware-configuration.nix
 ''
