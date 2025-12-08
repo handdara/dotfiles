@@ -58,7 +58,7 @@
     handdara = {
         lightworks = false;
         font = "iMWritingDuo Nerd Font"; # Terminess Nerd Font | BlexMono Nerd Font | AtkynsonMono NF | FantasqueSansM Nerd Font Bold
-        fontsize = 18;
+        fontsize = 14;
     };
 
     nixpkgs.config.allowUnfree = true;
