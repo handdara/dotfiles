@@ -23,8 +23,8 @@ in {
 
             theme.system_font   = "${config.handdara.font}"
             theme.font          = theme.system_font .. " ${builtins.toString config.handdara.fontsize}"
-            theme.hotkeys_font  = theme.system_font .. " 12"
-            theme.hotkeys_description_font  = theme.system_font .. " Italic 12"
+            theme.hotkeys_font  = theme.system_font .. " 14"
+            theme.hotkeys_description_font  = theme.system_font .. " Italic 14"
 
             theme.bg_normal     = "${c.bg}"
             theme.bg_focus      = "${c.bg}"
