@@ -58,8 +58,6 @@ local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
 
 local ansible = "tmux new -As ansible nvim"
-local ansible_cmd = "ghostty --working-directory=" .. ansible_dir .. " -e " .. ansible
-local bluemgr_cmd = "blueman-manager"
 local browser_cmd = "vivaldi"
 local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
@@ -67,7 +65,7 @@ local mediamgr = scripts_dir .. "__h_boot_media"
 local mediamgr_cmd = terminal_cmd .. mediamgr
 local prog = scripts_dir .. "__h_boot_prog"
 local prog_cmd = terminal_cmd .. prog
-local discord_cmd = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p discord --run discord"
+local filebrowser_cmd = "thundar"
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
 local email = "mbsync -a && neomutt"
@@ -129,16 +127,17 @@ local menu_awesome = {
 
 local start_menu = awful.menu({
     items = {
-        { "┬──SHA76",                       sysinfo_cmd },
-        { "│  ├──SHA76.Sys:Manage",         sys_manage_cmd },
-        { "│  ├──SHA76.Sys:Status",         monitor_cmd },
-        { "│  └──SHA76.Sys.AWM",            menu_awesome, beautiful.awesome_icon },
-        { "├──Contact Ekumen",              discord_cmd },
-        { "├──Access Terminal",             terminal },
-        { "│  ├──Terminal.Prog:Boot",       prog_cmd },
-        { "│  └──Terminal.Calendar:Boot",   calendar_cmd },
-        { "├──Access Net",                  browser_cmd },
-        { "└──Environmental Status Report", weather_cmd },
+        { "      ┌──Terminal.Prog:Boot",        prog_cmd },
+        { "      ├──Terminal.Media:Boot",       mediamgr_cmd },
+        { "      ├──Terminal.Calendar:Boot",    calendar_cmd },
+        { "   ┌──Access Terminal",              terminal },
+        { "───SHA76",                           sysinfo_cmd },
+        { "   ├──SHA76.Sys",                    sys_manage_cmd },
+        { "   │  ├──SHA76.Sys:Monitor",         monitor_cmd },
+        { "   │  └──SHA76.Sys.AWM",             menu_awesome, beautiful.awesome_icon },
+        { "   ├──Access Manifest",              filebrowser_cmd },
+        { "   └──Access Net",                   browser_cmd },
+        { "      └──Environmental Status Report", weather_cmd },
     }
 })
 
@@ -396,7 +395,7 @@ local globalkeys = gears.table.join(
         { description = "copy a username from gnupass", group = "launcher" }),
     awful.key({ super, }, "v", function() awful.spawn(browser_cmd) end,
         { description = "Open Web Browser", group = "launcher" }),
-    awful.key({ super, }, "e", function() awful.spawn(discord_cmd) end, -- FixMe)) 
+    awful.key({ super, }, "e", function() awful.spawn(filebrowser_cmd) end,
         { description = "Contact Ekumen", group = "launcher" }),
     awful.key({ super, }, "g", function() awful.spawn(misc_tmux_cmd) end,
         { description = "Open miscellaneous tmux session", group = "launcher" }),
@@ -404,10 +403,6 @@ local globalkeys = gears.table.join(
         { description = "Attach to programming session", group = "launcher" }),
     awful.key({ super, }, "b", function() awful.spawn(monitor_cmd) end,
         { description = "Open btop", group = "launcher" }),
-    -- awful.key({ super, "Control" }, "a", function() awful.spawn(nsi_cmd) end,
-    --     { description = "[a]dd New Stache Item", group = "launcher" }),
-    -- awful.key({ super, "Shift" }, "a", function() awful.spawn(osi_cmd) end,
-    --     { description = "[o]pen New Stache Item", group = "launcher" }),
     awful.key({ super, }, "c", function() awful.spawn(calendar_cmd) end,
         { description = "Open Calendar Ekumen", group = "launcher" }),
     awful.key({ super, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
