@@ -134,7 +134,7 @@ local start_menu = awful.menu({
         { "───SHA76",                           sysinfo_cmd },
         { "   ├──SHA76.Sys",                    sys_manage_cmd },
         { "   │  ├──SHA76.Sys:Monitor",         monitor_cmd },
-        { "   │  └──SHA76.Sys.AWM",             menu_awesome, beautiful.awesome_icon },
+        { "   │  └──SHA76.Sys.AWM",             menu_awesome },
         { "   ├──Access Manifest",              filebrowser_cmd },
         { "   └──Access Net",                   browser_cmd },
         { "      └──Environmental Status Report", weather_cmd },
