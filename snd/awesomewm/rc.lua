@@ -63,6 +63,8 @@ local bluemgr_cmd = "blueman-manager"
 local browser_cmd = "vivaldi"
 local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
+local mediamgr = scripts_dir .. "__h_boot_media"
+local mediamgr_cmd = terminal_cmd .. mediamgr
 local prog = scripts_dir .. "__h_boot_prog"
 local prog_cmd = terminal_cmd .. prog
 local discord_cmd = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p discord --run discord"
