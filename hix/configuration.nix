@@ -9,9 +9,9 @@ flake-overlays: {
             ./machines/${sys_opts.hostname}/bootloader.nix
             ./machines/${sys_opts.hostname}/networking.nix
             ./machines/${sys_opts.hostname}/gpu.nix
-            # ./system/wm/gdm
             ./system/wm/awesomewm
             ./system/wm/plasma
+            ./system/wm/xmonad
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
             ./system/theme
