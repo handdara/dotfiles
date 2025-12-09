@@ -5,6 +5,7 @@
     ...
 }: {
     imports = [
+        ./machines/mixed/home.nix
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
         ./user/apps/asciinema
@@ -57,8 +58,6 @@
 
     handdara = {
         lightworks = false;
-        font = "iMWritingMono Nerd Font"; # Terminess Nerd Font | BlexMono Nerd Font | AtkynsonMono NF | FantasqueSansM Nerd Font Bold
-        fontsize = 14;
     };
 
     nixpkgs.config.allowUnfree = true;
@@ -86,7 +85,8 @@
             "${homeDirectory}/.local/scripts"
         ];
         sessionVariables = {
-            SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_sha76passwd";
+            SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_passwd";
+            STACHE_DIR = "\"$HOME\"/MEGA/ansible/5-stache ";
         };
 
         # You should not change this value, even if you update Home Manager. If you do

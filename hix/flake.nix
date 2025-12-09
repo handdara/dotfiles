@@ -18,6 +18,7 @@
             url = "github:handdara/nix-vimrc/main";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        nixos-hardware.url = "github:NixOS/nixos-hardware";
     };
 
     outputs = {
@@ -25,6 +26,7 @@
         home-manager,
         nix-matlab,
         nix-vimrc,
+        nixos-hardware,
         ...
     } @ inputs: let
         flake-overlays = [nix-matlab.overlay];
@@ -57,10 +59,12 @@
                 modules = [
                     (import ./configuration.nix flake-overlays)
                     inputs.kmonad.nixosModules.default
+                    nixos-hardware.nixosModules.apple-t2
+                    ./battery.nix
                 ];
                 specialArgs = {
                     inherit system user_opts;
-                    # extraModules = [./battery.nix];
+                    extraModules = [];
                     sys_opts = import ./machines/mixed/options.nix {};
                 };
             };

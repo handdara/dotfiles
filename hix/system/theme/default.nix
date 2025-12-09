@@ -7,9 +7,9 @@
         };
     };
     config = {
-        handdara.lightworks = lib.mkDefault false;
-        specialisation.lightworks.configuration = {
-            handdara.lightworks = lib.mkForce true;
-        };
+        # handdara.lightworks = lib.mkDefault false;
+        # specialisation.lightworks.configuration = {
+        #     handdara.lightworks = lib.mkForce true;
+        # };
     };
 }

@@ -104,7 +104,9 @@ flake-overlays: {
         alsa-utils
         bc
         brightnessctl
+        caligula
         chafa
+        dust
         fastfetch
         ffmpeg
         fim
@@ -113,16 +115,15 @@ flake-overlays: {
         git
         graphite-gtk-theme
         libnotify
-        matlab
+        matlab # see ./flake.nix input `nix-matlab`
         mpv
         pandoc
         pass
         pastel
         pavucontrol
         pinentry-curses
-        # see ./flake.nix input `nix-matlab`
+        stow
         themechanger
-        tree
         universal-ctags
         unzip
         vim
