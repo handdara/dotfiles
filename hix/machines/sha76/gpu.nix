@@ -3,10 +3,10 @@
         hardware.nvidia.prime = {
             sync.enable = true;
             # reverseSync.enable = true;
-        };
-        offload = {
-            enable = false;
-            enableOffloadCmd = false;
+            offload = {
+                enable = lib.mkOverride 0 false;
+                enableOffloadCmd = lib.mkOverride 0 false;
+            };
         };
         system.nixos.tags = ["nvidia-sync"];
     };
