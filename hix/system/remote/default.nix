@@ -11,8 +11,8 @@
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
         offload = {
-            enable = lib.mkDefault true;
-            enableOffloadCmd = lib.mkDefault true;
+            enable = lib.mkForce true;
+            enableOffloadCmd = lib.mkForce true;
         };
     };
     system.nixos.tags = lib.mkDefault ["nvidia" "offload"];
