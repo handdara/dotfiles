@@ -5,8 +5,8 @@
             # reverseSync.enable = true;
         };
         offload = {
-            enable = lib.mkOverride 0 false;
-            enableOffloadCmd = lib.mkOverride 0 false;
+            enable = lib.mkOverride 25 false;
+            enableOffloadCmd = lib.mkOverride 25 false;
         };
         system.nixos.tags = ["nvidia" "sync"];
     };
