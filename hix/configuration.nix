@@ -8,6 +8,7 @@ flake-overlays: {
             ./machines/${sys_opts.hostname}/hardware-configuration.nix
             ./machines/${sys_opts.hostname}/bootloader.nix
             ./machines/${sys_opts.hostname}/networking.nix
+            ./machines/${sys_opts.hostname}/extra.nix
             ./machines/${sys_opts.hostname}/gpu.nix
             ./system/wm/awesomewm
             ./system/wm/plasma
@@ -25,15 +26,9 @@ flake-overlays: {
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
     networking.hostName = sys_opts.hostname;
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     # Set your time zone.
     time.timeZone = sys_opts.timezone;
-
     # Select internationalisation properties.
     i18n.defaultLocale = sys_opts.locale;
 
@@ -76,18 +71,6 @@ flake-overlays: {
         extraGroups = ["networkmanager" "wheel"];
         useDefaultShell = true;
     };
-
-    virtualisation.vmVariant = {
-        # following configuration is added only when building VM with build-vm
-        virtualisation = {
-            memorySize = 8192;
-            cores = 3;
-        };
-        users.users.${inputs.user_opts.username}.initialHashedPassword = "$y$j9T$VMBnrWXrevKVHuJkDP4z11$UIXwWcYS8H05Rl8c7wZpvb2LEr6duAqZRvXEWORhn5C";
-    };
-
-    # Install firefox for all users
-    programs.firefox.enable = true;
 
     environment.shells = with pkgs; [fish bash zsh dash];
     programs.fish.enable = true;
@@ -136,21 +119,22 @@ flake-overlays: {
         zathura
     ];
 
-    programs.thunar = {
-        enable = true;
-        plugins = [pkgs.xfce.thunar-volman];
-    };
-
-    programs.tmux.enable = true;
+    # Install firefox for all users
+    programs.firefox.enable = true;
     programs.fzf.fuzzyCompletion = true;
-
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    services.pcscd.enable = true;
     programs.gnupg.agent = {
         enable = true;
         enableSSHSupport = true;
     };
+    programs.thunar = {
+        enable = true;
+        plugins = [pkgs.xfce.thunar-volman];
+    };
+    programs.tmux.enable = true;
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    services.pcscd.enable = true;
     services.xbanish.enable = true;
 
     # This value determines the NixOS release from which the default

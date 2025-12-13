@@ -1,7 +1,4 @@
-{
-    config,
-    ...
-}: {
+{config, ...}: {
     home.file.".Xresources".text = ''
         XTerm*faceName: ${config.handdara.font or "Monospace"}
         XTerm*faceSize: ${builtins.toString (config.handdara.fontsize + 2)}

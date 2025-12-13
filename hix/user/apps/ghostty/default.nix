@@ -10,11 +10,12 @@
         else bothThemes.dark;
     name = theme.name;
     c = theme.hexcodes;
-    overrides = if config.handdara.lightworks 
+    overrides =
+        if config.handdara.lightworks
         then {}
         else {
-        bg = "120b0d";
-    };
+            bg = "120b0d";
+        };
     # font = "3270 Nerd Font";
     # font = "Agave Nerd Font";
     # font = "AtkynsonMono Nerd Font";
