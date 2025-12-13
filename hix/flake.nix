@@ -60,7 +60,6 @@
                     (import ./configuration.nix flake-overlays)
                     inputs.kmonad.nixosModules.default
                     nixos-hardware.nixosModules.apple-t2
-                    ./battery.nix
                 ];
                 specialArgs = {
                     inherit system user_opts;
