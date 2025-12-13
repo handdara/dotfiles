@@ -7,6 +7,7 @@ flake-overlays: {
         [
             ./machines/${sys_opts.hostname}/hardware-configuration.nix
             ./machines/${sys_opts.hostname}/bootloader.nix
+            ./machines/${sys_opts.hostname}/battery.nix
             ./machines/${sys_opts.hostname}/networking.nix
             ./machines/${sys_opts.hostname}/extra.nix
             ./machines/${sys_opts.hostname}/gpu.nix
@@ -109,7 +110,6 @@ flake-overlays: {
         pkgs.jq
         pkgs.just
         pkgs.lazygit
-        pkgs.libnotify
         pkgs.libnotify
         # pkgs.lxappearance
         pkgs.matlab # see ./flake.nix input `nix-matlab`

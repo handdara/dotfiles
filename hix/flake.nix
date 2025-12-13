@@ -51,7 +51,7 @@
                 ];
                 specialArgs = {
                     inherit system user_opts;
-                    extraModules = [./battery.nix];
+                    extraModules = [];
                     sys_opts = import ./machines/sha76/options.nix {};
                 };
             };
@@ -76,16 +76,6 @@
                     inherit system user_opts;
                     extraModules = [];
                     sys_opts = import ./machines/theseus/options.nix {};
-                };
-            };
-            tadok = lib.nixosSystem {
-                modules = [
-                    ./configuration.nix
-                ];
-                specialArgs = {
-                    inherit system user_opts;
-                    extraModules = [./battery.nix];
-                    sys_opts = import ./machines/tadok/options.nix {};
                 };
             };
         };
