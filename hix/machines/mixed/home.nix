@@ -1,6 +1,6 @@
 {...}: {
     handdara = {
         font = "iMWritingMono Nerd Font";
-        fontsize = 18;
+        fontsize = 16;
     };
 }
