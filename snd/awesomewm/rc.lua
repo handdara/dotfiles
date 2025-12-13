@@ -80,11 +80,11 @@ local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
 local nsi_cmd = terminal_cmd .. scripts_dir .. 'nsi'
 local osi_cmd = terminal_cmd .. scripts_dir .. 'osi'
-local passmenu_cmd = terminal_cmd .. scripts_dir .. "__h_pick_pass"
+local username_cmd = "xterm -e __h_pick_username"
+local passmenu_cmd = "xterm -e __h_pick_pass"
 local sys_manage_cmd = "xterm mg"
 local sysinfo = scripts_dir .. "sys/sysinfo"
 local sysinfo_cmd = terminal_cmd .. sysinfo
-local username_cmd = terminal_cmd .. scripts_dir .. "__h_pick_username"
 local weather = scripts_dir .. "__h_chk_weather"
 local weather_cmd = terminal_cmd .. weather
 
