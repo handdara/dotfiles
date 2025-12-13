@@ -1,5 +1,4 @@
-{pkgs, ...}: {
-    home.packages = [pkgs.mouseless];
+{...}: {
     home.file = {
         ".config/mouseless/config.yaml".text = ''
             # the default speed for mouse movement and scrolling

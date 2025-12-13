@@ -82,41 +82,69 @@ flake-overlays: {
     nixpkgs.config.allowUnfree = true;
 
     # base system packages
-    environment.systemPackages = with pkgs; [
-        alacritty
-        alsa-utils
-        bc
-        brightnessctl
-        caligula
-        chafa
-        dust
-        fastfetch
-        ffmpeg
-        fim
-        ghostty
-        gimp
-        git
-        graphite-gtk-theme
-        libnotify
-        matlab # see ./flake.nix input `nix-matlab`
-        mpv
-        pandoc
-        pass
-        pastel
-        pavucontrol
-        pinentry-curses
-        st
-        stow
-        themechanger
-        universal-ctags
-        unzip
-        vim
-        wget
-        xclip
-        xfce.ristretto
-        xfce.tumbler
-        xlockmore
-        zathura
+    environment.systemPackages = [
+        pkgs.alacritty
+        pkgs.alsa-utils
+        pkgs.asciinema
+        pkgs.bat
+        pkgs.bc
+        pkgs.boxes
+        pkgs.brightnessctl
+        pkgs.btop
+        pkgs.caligula
+        pkgs.chafa
+        pkgs.croc
+        pkgs.dust
+        pkgs.eza
+        pkgs.fastfetch
+        pkgs.ffmpeg
+        pkgs.flameshot
+        pkgs.fortune
+        pkgs.ghostty
+        pkgs.gimp
+        pkgs.git
+        pkgs.graphite-gtk-theme
+        pkgs.imagemagick
+        pkgs.isync
+        pkgs.jq
+        pkgs.just
+        pkgs.lazygit
+        pkgs.libnotify
+        pkgs.libnotify
+        # pkgs.lxappearance
+        pkgs.matlab # see ./flake.nix input `nix-matlab`
+        pkgs.megacmd
+        pkgs.mouseless
+        pkgs.mpv
+        pkgs.msmtp
+        pkgs.neomutt
+        pkgs.pandoc
+        pkgs.pass
+        pkgs.pastel
+        pkgs.pavucontrol
+        pkgs.pinentry-curses
+        pkgs.redshift
+        pkgs.stow
+        pkgs.tealdeer
+        pkgs.themechanger
+        pkgs.toilet
+        pkgs.universal-ctags
+        pkgs.unzip
+        pkgs.vim
+        pkgs.vivaldi
+        pkgs.w3m
+        pkgs.watchexec
+        pkgs.wget
+        pkgs.wiki-tui
+        pkgs.xclip
+        pkgs.xcolor
+        pkgs.xfce.ristretto
+        pkgs.xfce.tumbler
+        pkgs.xlockmore
+        pkgs.yq
+        pkgs.yt-dlp
+        pkgs.zathura
+        pkgs.zoxide
     ];
 
     # Install firefox for all users

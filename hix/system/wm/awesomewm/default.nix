@@ -20,7 +20,5 @@
             };
         };
     };
-    services.displayManager.sddm.enable = lib.mkDefault false;
-    services.displayManager.sddm.wayland.enable = lib.mkDefault false;
     services.displayManager.ly.enable = lib.mkDefault true;
 }

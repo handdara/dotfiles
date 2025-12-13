@@ -8,48 +8,24 @@
         ./machines/mixed/home.nix
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
-        ./user/apps/asciinema
         ./user/apps/bat
-        ./user/apps/bc
         ./user/apps/btop
         ./user/apps/cal
-        ./user/apps/chafa
-        ./user/apps/croc
-        ./user/apps/ctags
-        ./user/apps/desmume
+        # ./user/apps/desmume
         ./user/apps/eza
-        ./user/apps/fim
-        ./user/apps/flameshot
         ./user/apps/fzf
         ./user/apps/ghostty
-        ./user/apps/imagemagick
-        ./user/apps/jqyq
-        ./user/apps/just
         ./user/apps/kmonad
         ./user/apps/lazygit
-        ./user/apps/libnotify
-        # ./user/apps/lxappearance
-        ./user/apps/mail
         ./user/apps/matlab
-        ./user/apps/megacmd
-        ./user/apps/misc-cli
         ./user/apps/mouseless
-        ./user/apps/mpv
+        # ./user/apps/megasync
         ./user/apps/nvim
-        ./user/apps/pastel
         # ./user/apps/r
-        ./user/apps/redshift
         ./user/apps/starship
-        ./user/apps/tealdeer
         ./user/apps/tmux
         ./user/apps/vim
-        ./user/apps/vivaldi
-        ./user/apps/w3m
-        ./user/apps/watchexec
-        ./user/apps/wiki-tui
-        ./user/apps/xcolor
         ./user/apps/x
-        ./user/apps/yt-dlp
         ./user/apps/pdfs
         ./user/apps/zoxide
         ./user/misc/theme

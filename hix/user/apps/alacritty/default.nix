@@ -1,9 +1,6 @@
-{...}: {
-    programs.alacritty = {
-        enable = true;
-    };
+{config, ...}: {
     home.file.".config/alacritty/alacritty.toml".text = ''
         [font]
-        normal = { family = "Terminess Nerd Font", style = "Mono" }
+        normal = { family = "${config.handdara.font or "Monospace"}" }
     '';
 }

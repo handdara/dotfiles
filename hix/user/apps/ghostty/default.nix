@@ -36,7 +36,6 @@
     # font = "Terminess Nerd Font"; # no bold
     # font = "iMWritingMono Nerd Font";
 in {
-    home.packages = [pkgs.ghostty];
     home.file = {
         ".config/ghostty/config".text = ''
             theme = ${name}
