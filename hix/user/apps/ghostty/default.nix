@@ -5,11 +5,16 @@
 }: let
     bothThemes = import ../../../util/color;
     theme =
-        if (config.handdara.lightworks == true)
+        if (config.handdara.lightworks)
         then bothThemes.light
         else bothThemes.dark;
     name = theme.name;
     c = theme.hexcodes;
+    overrides = if (config.handdara.lightworks) 
+        then {}
+        else {
+        bg = "120b0d";
+    };
     # font = "3270 Nerd Font";
     # font = "Agave Nerd Font";
     # font = "AtkynsonMono Nerd Font";
@@ -29,9 +34,6 @@
     # font = "OpenDyslexicM Nerd Font";
     # font = "Terminess Nerd Font"; # no bold
     # font = "iMWritingMono Nerd Font";
-    overrides = {
-        bg = "120b0d";
-    };
 in {
     home.packages = [pkgs.ghostty];
     home.file = {
