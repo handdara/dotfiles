@@ -48,6 +48,7 @@
         ./user/apps/watchexec
         ./user/apps/wiki-tui
         ./user/apps/xcolor
+        ./user/apps/x
         ./user/apps/yt-dlp
         ./user/apps/pdfs
         ./user/apps/zoxide
