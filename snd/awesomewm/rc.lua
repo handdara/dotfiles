@@ -65,7 +65,7 @@ local mediamgr = scripts_dir .. "__h_boot_media"
 local mediamgr_cmd = terminal_cmd .. mediamgr
 local prog = scripts_dir .. "__h_boot_prog"
 local prog_cmd = terminal_cmd .. prog
-local filebrowser_cmd = "thundar"
+local filebrowser_cmd = "thunar"
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal_cmd .. editor
 local email = "mbsync -a && neomutt"
@@ -396,7 +396,7 @@ local globalkeys = gears.table.join(
     awful.key({ super, }, "v", function() awful.spawn(browser_cmd) end,
         { description = "Open Web Browser", group = "launcher" }),
     awful.key({ super, }, "e", function() awful.spawn(filebrowser_cmd) end,
-        { description = "Contact Ekumen", group = "launcher" }),
+        { description = "Access Manifest", group = "launcher" }),
     awful.key({ super, }, "g", function() awful.spawn(misc_tmux_cmd) end,
         { description = "Open miscellaneous tmux session", group = "launcher" }),
     awful.key({ super, }, "a", function() awful.spawn(prog_cmd) end,

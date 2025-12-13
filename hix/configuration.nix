@@ -122,6 +122,7 @@ flake-overlays: {
         pastel
         pavucontrol
         pinentry-curses
+        st
         stow
         themechanger
         universal-ctags
