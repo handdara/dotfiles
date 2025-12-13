@@ -5,12 +5,12 @@
 }: let
     bothThemes = import ../../../util/color;
     theme =
-        if (config.handdara.lightworks)
+        if config.handdara.lightworks
         then bothThemes.light
         else bothThemes.dark;
     name = theme.name;
     c = theme.hexcodes;
-    overrides = if (config.handdara.lightworks) 
+    overrides = if config.handdara.lightworks 
         then {}
         else {
         bg = "120b0d";
