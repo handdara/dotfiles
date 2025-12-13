@@ -58,7 +58,7 @@
     ];
 
     handdara = {
-        lightworks = true;
+        lightworks = false;
     };
 
     nixpkgs.config.allowUnfree = true;
