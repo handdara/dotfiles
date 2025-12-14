@@ -31,11 +31,12 @@
         nixos-hardware,
         ...
     } @ inputs: let
-        flake-overlays = [nix-matlab.overlay];
-        system = "x86_64-linux";
+        system-overlays = [nix-matlab.overlay];
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
         pkgs = nixpkgs.legacyPackages.${system};
+        system = "x86_64-linux";
+        timezone = "America/New_York";
         user_opts = rec {
             username = "handdara";
             name = username;
@@ -45,25 +46,25 @@
         nixosConfigurations = {
             sha76 = lib.nixosSystem {
                 modules = [
-                    (import ./configuration.nix flake-overlays)
+                    ./configuration.nix
                     inputs.kmonad.nixosModules.default
                     ./games/minecraft
                     ./games/steam
                 ];
                 specialArgs = {
-                    inherit system user_opts;
-                    extraModules = [];
+                    inherit system timezone user_opts system-overlays;
+                    hostname = "sha76";
                 };
             };
             mixed = lib.nixosSystem {
                 modules = [
-                    (import ./configuration.nix flake-overlays)
+                    ./configuration.nix
                     inputs.kmonad.nixosModules.default
                     nixos-hardware.nixosModules.apple-t2
                 ];
                 specialArgs = {
-                    inherit system user_opts;
-                    extraModules = [];
+                    inherit system timezone user_opts system-overlays;
+                    hostname = "mixed";
                 };
             };
             theseus = lib.nixosSystem {
@@ -71,8 +72,8 @@
                     ./configuration.nix
                 ];
                 specialArgs = {
-                    inherit system user_opts;
-                    extraModules = [];
+                    inherit system timezone user_opts;
+                    hostname = "theseus";
                 };
             };
         };

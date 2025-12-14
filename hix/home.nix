@@ -1,9 +1,4 @@
-{
-    user_opts,
-    config,
-    nix-vimrc,
-    ...
-}: {
+{user_opts, ...}: {
     imports = [
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
@@ -34,8 +29,8 @@
 
     handdara = {
         lightworks = false;
-        font = "iMWritingMono Nerd Font";
-        fontsize = 14;
+        font = "AtkynsonMono Nerd Font";
+        fontsize = 12;
     };
 
     nixpkgs.config.allowUnfree = true;
@@ -50,7 +45,7 @@
         ];
         sessionVariables = {
             SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_passwd";
-            STACHE_DIR = "\"$HOME\"/.local/5-stache";
+            STACHE_DIR = "\"$HOME\"/.local/stache";
         };
 
         # You should not change this value, even if you update Home Manager. If you do

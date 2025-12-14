@@ -1,16 +1,19 @@
-flake-overlays: {
+{
     pkgs,
-    sys_opts,
+    hostname,
+    system-overlays,
     ...
-} @ inputs: {
+} @ inputs: let
+    locale = inputs.locale or "en_US.UTF-8";
+in {
     imports =
         [
-            ./machines/${sys_opts.hostname}/hardware-configuration.nix
-            ./machines/${sys_opts.hostname}/bootloader.nix
-            ./machines/${sys_opts.hostname}/battery.nix
-            ./machines/${sys_opts.hostname}/networking.nix
-            ./machines/${sys_opts.hostname}/extra.nix
-            ./machines/${sys_opts.hostname}/gpu.nix
+            ./machines/${hostname}/hardware-configuration.nix
+            ./machines/${hostname}/bootloader.nix
+            ./machines/${hostname}/battery.nix
+            ./machines/${hostname}/networking.nix
+            ./machines/${hostname}/extra.nix
+            ./machines/${hostname}/gpu.nix
             ./system/wm/awesomewm
             ./system/wm/plasma
             ./system/wm/xmonad
@@ -19,29 +22,29 @@ flake-overlays: {
             ./system/remote
             # ./system/hardware/displaylink
         ]
-        ++ inputs.extraModules;
+        ++ (inputs.extraModules or []);
 
-    nixpkgs.overlays = flake-overlays;
+    nixpkgs.overlays = system-overlays;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
-    networking.hostName = sys_opts.hostname;
+    networking.hostName = hostname;
 
     # Set your time zone.
-    time.timeZone = sys_opts.timezone;
+    time.timeZone = inputs.timezone;
     # Select internationalisation properties.
-    i18n.defaultLocale = sys_opts.locale;
+    i18n.defaultLocale = locale;
 
     i18n.extraLocaleSettings = {
-        LC_ADDRESS = sys_opts.locale;
-        LC_IDENTIFICATION = sys_opts.locale;
-        LC_MEASUREMENT = sys_opts.locale;
-        LC_MONETARY = sys_opts.locale;
-        LC_NAME = sys_opts.locale;
-        LC_NUMERIC = sys_opts.locale;
-        LC_PAPER = sys_opts.locale;
-        LC_TELEPHONE = sys_opts.locale;
-        LC_TIME = sys_opts.locale;
+        LC_ADDRESS = locale;
+        LC_IDENTIFICATION = locale;
+        LC_MEASUREMENT = locale;
+        LC_MONETARY = locale;
+        LC_NAME = locale;
+        LC_NUMERIC = locale;
+        LC_PAPER = locale;
+        LC_TELEPHONE = locale;
+        LC_TIME = locale;
     };
 
     services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
