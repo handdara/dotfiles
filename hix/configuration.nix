@@ -86,6 +86,7 @@ in {
 
     # base system packages
     environment.systemPackages = [
+        pkgs.acpi
         pkgs.alacritty
         pkgs.alsa-utils
         pkgs.asciinema

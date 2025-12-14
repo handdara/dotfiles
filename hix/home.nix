@@ -46,7 +46,7 @@
         ];
         sessionVariables = {
             SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_passwd";
-            STACHE_DIR = "\"$HOME\"/.local/stache";
+            STACHE_DIR = "\"$HOME\"/.stache";
             EDITOR = "nvim";
             MANPAGER = "nv -c 'Man!' -o -";
         };
