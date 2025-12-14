@@ -107,6 +107,7 @@ in {
         pkgs.gimp
         pkgs.git
         pkgs.graphite-gtk-theme
+        pkgs.gvfs
         pkgs.imagemagick
         pkgs.isync
         pkgs.jq
