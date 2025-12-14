@@ -144,7 +144,6 @@ in {
         pkgs.xclip
         pkgs.xcolor
         pkgs.xfce.ristretto
-        pkgs.xfce.tumbler
         pkgs.xlockmore
         pkgs.yq
         pkgs.yt-dlp
@@ -161,14 +160,17 @@ in {
     };
     programs.thunar = {
         enable = true;
-        plugins = [pkgs.xfce.thunar-volman];
+        plugins = [pkgs.xfce.thunar-volman pkgs.xfce.thunar-archive-plugin];
     };
+
     programs.tmux.enable = true;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     services.pcscd.enable = true;
     services.xbanish.enable = true;
+    services.gvfs.enable = true; # Mount, trash, and other functionalities
+    services.tumbler.enable = true; # Thumbnail support for images
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
