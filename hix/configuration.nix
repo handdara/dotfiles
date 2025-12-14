@@ -95,6 +95,7 @@ in {
         pkgs.brightnessctl
         pkgs.btop
         pkgs.caligula
+        pkgs.cdparanoia
         pkgs.chafa
         pkgs.croc
         pkgs.dust
