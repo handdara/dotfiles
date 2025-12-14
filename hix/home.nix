@@ -30,7 +30,7 @@
     handdara = {
         lightworks = false;
         font = "AtkynsonMono Nerd Font";
-        fontsize = 12;
+        fontsize = 14;
     };
 
     nixpkgs.config.allowUnfree = true;
