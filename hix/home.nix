@@ -5,7 +5,6 @@
     ...
 }: {
     imports = [
-        ./machines/mixed/home.nix
         ./system/wm/awesomewm/home.nix
         ./user/apps/alacritty
         ./user/apps/bat
@@ -35,23 +34,11 @@
 
     handdara = {
         lightworks = false;
+        font = "iMWritingMono Nerd Font";
+        fontsize = 14;
     };
 
     nixpkgs.config.allowUnfree = true;
-    nixpkgs.overlays = [
-        nix-vimrc.overlay
-        (final: prev: {
-            neovim = prev.neovim.override {
-                extraLuaPreConfig = ''
-                    vim.cmd [[colorscheme ${
-                        if config.handdara.lightworks
-                        then "delek"
-                        else "monalisa"
-                    }]]
-                '';
-            };
-        })
-    ];
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
@@ -63,7 +50,7 @@
         ];
         sessionVariables = {
             SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_passwd";
-            STACHE_DIR = "\"$HOME\"/MEGA/ansible/5-stache";
+            STACHE_DIR = "\"$HOME\"/.local/5-stache";
         };
 
         # You should not change this value, even if you update Home Manager. If you do

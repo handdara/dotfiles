@@ -3,8 +3,10 @@
 
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        home-manager.url = "github:nix-community/home-manager";
-        home-manager.inputs.nixpkgs.follows = "nixpkgs";
+        home-manager = {
+            url = "github:nix-community/home-manager";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         kmonad = {
             url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +40,6 @@
             username = "handdara";
             name = username;
             email = "email@handdara.com";
-            which_nvim = "sm";
         };
     in {
         nixosConfigurations = {
@@ -52,7 +53,6 @@
                 specialArgs = {
                     inherit system user_opts;
                     extraModules = [];
-                    sys_opts = import ./machines/sha76/options.nix {};
                 };
             };
             mixed = lib.nixosSystem {
@@ -64,7 +64,6 @@
                 specialArgs = {
                     inherit system user_opts;
                     extraModules = [];
-                    sys_opts = import ./machines/mixed/options.nix {};
                 };
             };
             theseus = lib.nixosSystem {
@@ -74,7 +73,6 @@
                 specialArgs = {
                     inherit system user_opts;
                     extraModules = [];
-                    sys_opts = import ./machines/theseus/options.nix {};
                 };
             };
         };

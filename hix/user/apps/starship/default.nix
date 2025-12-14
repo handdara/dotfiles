@@ -1,8 +1,4 @@
-{
-    config,
-    user_opts,
-    ...
-}: let
+{config, ...}: let
     bothThemes = import ../../../util/color;
     theme =
         if (config.handdara.lightworks == true)

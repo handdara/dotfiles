@@ -16,7 +16,6 @@ flake-overlays: {
             ./system/wm/xmonad
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
-            ./system/theme
             ./system/remote
             # ./system/hardware/displaylink
         ]
