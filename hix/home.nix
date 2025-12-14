@@ -48,7 +48,7 @@
             SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_passwd";
             STACHE_DIR = "\"$HOME\"/.local/stache";
             EDITOR = "nvim";
-            MANPAGER = "$EDITOR -c 'Man!' -o -";
+            MANPAGER = "nv -c 'Man!' -o -";
         };
 
         # You should not change this value, even if you update Home Manager. If you do
