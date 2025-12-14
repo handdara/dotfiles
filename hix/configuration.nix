@@ -136,6 +136,7 @@ flake-overlays: {
         pkgs.w3m
         pkgs.watchexec
         pkgs.wget
+        pkgs.wikiman
         pkgs.wiki-tui
         pkgs.xclip
         pkgs.xcolor
