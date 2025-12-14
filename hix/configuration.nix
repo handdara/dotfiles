@@ -118,6 +118,7 @@ flake-overlays: {
         pkgs.mpv
         pkgs.msmtp
         pkgs.neomutt
+        pkgs.noip
         pkgs.pandoc
         pkgs.pass
         pkgs.pastel

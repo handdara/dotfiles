@@ -8,8 +8,14 @@
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     # Enable the OpenSSH daemon.
-    services.openssh.enable = lib.mkDefault true;
-    services.openssh.settings.PermitRootLogin = lib.mkDefault "no";
+    services.openssh = {
+        enable = true;
+        settings = {
+            PasswordAuthentication = false;
+            PubkeyAuthentication = true;
+            PermitRootLogin = "no";
+        };
+    };
 
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];
