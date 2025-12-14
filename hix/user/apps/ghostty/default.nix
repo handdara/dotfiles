@@ -40,7 +40,7 @@ in {
             font-size = ${builtins.toString config.handdara.fontsize}
             cursor-style = block
             cursor-style-blink = false
-            background-opacity = 0.89
+            background-opacity = 0.91
             window-padding-x = 2
             window-padding-y = 0
             window-decoration = false
@@ -52,7 +52,7 @@ in {
             keybind = ctrl+shift+a=unbind
             keybind = ctrl+alt+shift+t=toggle_tab_overview
             keybind = ctrl+alt+minus=toggle_tab_overview
-            keybind = global:super+ctrl+enter=toggle_quick_terminal
+            keybind = global:super+shift+enter=toggle_quick_terminal
         '';
         ".config/ghostty/themes/${name}".text = ''
             palette =  0=${theme.ghostty.palette0 or c.black}
