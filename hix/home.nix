@@ -63,7 +63,7 @@
         ];
         sessionVariables = {
             SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_passwd";
-            STACHE_DIR = "\"$HOME\"/MEGA/ansible/5-stache ";
+            STACHE_DIR = "\"$HOME\"/MEGA/ansible/5-stache";
         };
 
         # You should not change this value, even if you update Home Manager. If you do
