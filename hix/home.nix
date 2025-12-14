@@ -42,10 +42,12 @@
         homeDirectory = "/home/" + username;
         sessionPath = [
             "${homeDirectory}/.local/scripts"
+            "${homeDirectory}/.local/bin"
         ];
         sessionVariables = {
             SUDO_ASKPASS = "\"$HOME\"/.local/scripts/__h_passwd";
             STACHE_DIR = "\"$HOME\"/.local/stache";
+            EDITOR = "nvim";
         };
 
         # You should not change this value, even if you update Home Manager. If you do

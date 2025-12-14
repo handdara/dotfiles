@@ -28,7 +28,6 @@
             fdih = "fd -utf -e png -e jpg -e jpeg '' ~ | __h_pick_imgs";
             "z-" = "z -";
             vpdf = "zathura";
-            vimg = "fim";
             viman = "nvim -Rc 'set ft=man'";
             zt = "z $(mktemp -d)";
             zd = "z \"\$(fd -utd '' . | fzf || echo '/DNE')\"";
@@ -46,15 +45,12 @@
             mkrem = "khal new -a rem";
             mkobl = "khal new -a obl";
             tempvim = "nvim -n --clean -u NONE -i NONE";
+            nv = "nvim -n --clean -u NONE -i NONE";
             editor = "nvr --remote-wait-silent";
             lzg = "lazygit";
             lfg = "lazygit; fg";
         };
         bashrcExtra = ''
-            export SUDO_ASKPASS=$HOME/.local/scripts/__h_passwd
-            export PATH="~/.local/bin:$PATH"
-            export PATH="~/.local/scripts:$PATH"
-            export EDITOR="nvr --remote-wait-silent"
             export _ZO_MAXAGE=100000
         '';
         initExtra = ''
