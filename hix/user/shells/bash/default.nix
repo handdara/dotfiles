@@ -45,8 +45,9 @@
             mkrem = "khal new -a rem";
             mkobl = "khal new -a obl";
             tempvim = "nvim -n --clean -u NONE -i NONE";
-            nv = "nvim -n --clean -u NONE -i NONE";
-            editor = "nvr --remote-wait-silent";
+            nv = "nvim";
+            nvs = "EDITOR='nvr --remote-wait-silent' nvr -s";
+            editor = "$EDITOR";
             lzg = "lazygit";
             lfg = "lazygit; fg";
         };
