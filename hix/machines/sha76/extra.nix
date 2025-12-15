@@ -1,4 +1,5 @@
 {user_opts, ...}: {
+    services.logind.lidSwitchExternalPower = "ignore";
     virtualisation.vmVariant = {
         # following configuration is added only when building VM with build-vm
         virtualisation = {
