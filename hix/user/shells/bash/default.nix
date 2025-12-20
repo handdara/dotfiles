@@ -28,7 +28,7 @@
             fdih = "fd -utf -e png -e jpg -e jpeg '' ~ | __h_pick_imgs";
             "z-" = "z -";
             vpdf = "zathura";
-            viman = "nvim -Rc 'set ft=man'";
+            viman = "__h_nvim -Rc 'set ft=man'";
             zt = "z $(mktemp -d)";
             zd = "z \"\$(fd -utd '' . | fzf || echo '/DNE')\"";
             zf = "z \"\$(fd -utf '' . | fzf | xargs dirname || echo '/DNE')\"";
@@ -45,8 +45,8 @@
             mkrem = "khal new -a rem";
             mkobl = "khal new -a obl";
             tempvim = "nvim -n --clean -u NONE -i NONE";
-            nvs = "EDITOR='nvr --remote-wait-silent' nvr -s";
-            editor = "$EDITOR";
+            n = "__h_nvim";
+            editor = "__h_nvim";
             lzg = "lazygit";
             lfg = "lazygit; fg";
         };
