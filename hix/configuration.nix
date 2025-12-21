@@ -154,7 +154,7 @@ in {
     ];
 
     # Install firefox for all users
-    programs.firefox.enable = true;
+    programs.firefox.enable = false;
     programs.fzf.fuzzyCompletion = true;
     programs.gnupg.agent = {
         enable = true;
