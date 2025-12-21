@@ -66,12 +66,12 @@
 )
 
 (deflayer l0
-  XX        XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   _
+  XX        XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   @
   tab       q    w    e    r    t    XX   y    u    i    o    p    \    bspc
   esc       @ahm @shm @dhm @fhm g    XX   h    @jhm @khm @lhm @chm '    @shn
-  grv       z    x    c    v    b    XX   n    m    ,    .    /    _
-  XX        XX   @to3 @bs2 XX   XX   XX   XX   @so1 XX   XX   XX   _
-  XX   XX   XX   XX             @shn           XX   XX   XX   XX   _
+  grv       z    x    c    v    b    XX   n    m    ,    .    /    XX
+  XX        XX   @to3 @bs2 XX   XX   XX   @so1 XX   XX   XX   XX   XX
+  XX   XX   XX   XX             @shn           XX   XX   XX   XX   XX
 )
 
 (deflayer l1
@@ -87,7 +87,7 @@
   _         _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _         \    del  _    bspc >    _    ^    7    8    9    -    _    _
   _         _    _    _    _    <    _    $    4    5    6    +    _    _
-  @to3      !    ret  _    spc  .    _    %    1    2    3    S--  _ 
+  _         !    ret  _    spc  .    _    %    1    2    3    S--  _ 
   _         _    _    XX   _    _    _    _    _    _    _    _    _
   _    _    _    _              _              _    _    _    _    _
 )
