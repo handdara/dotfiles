@@ -1,0 +1,20 @@
+kmonad: Parse error at 71:18:
+   |
+71 |   esc       @ahm \shm @dhm \fhm g    _    h    @jhm @khm @lhm @chm '    @sh
+   |                  ^
+unexpected '\'
+expecting ')'
+
+HasCallStack backtrace:
+  collectBacktraces, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:169:13 in ghc-internal:GHC.Internal.Exception
+  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/IO.hs:260:11 in ghc-internal:GHC.Internal.IO
+  throwIO, called at src/UnliftIO/Exception.hs:356:7 in unliftio-0.2.25.1-9zS8G91IUFRCT9UHh8SwRR:UnliftIO.Exception
+
+
+kmonad: Reference to non-existent alias: sh
+HasCallStack backtrace:
+  collectBacktraces, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:169:13 in ghc-internal:GHC.Internal.Exception
+  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/IO.hs:260:11 in ghc-internal:GHC.Internal.IO
+  throwIO, called at src/UnliftIO/Exception.hs:356:7 in unliftio-0.2.25.1-9zS8G91IUFRCT9UHh8SwRR:UnliftIO.Exception
+
+
