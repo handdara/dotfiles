@@ -28,7 +28,7 @@
     ];
 
     handdara = {
-        lightworks = true;
+        lightworks = false;
         font = "AtkynsonMono Nerd Font";
         fontsize = 14;
     };
