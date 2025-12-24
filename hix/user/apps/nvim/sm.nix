@@ -11,7 +11,7 @@
                 extraLuaPreConfig = ''
                     vim.cmd [[colorscheme ${
                         if config.handdara.lightworks
-                        then "delek"
+                        then "paper"
                         else "monalisa"
                     }]]
                 '';

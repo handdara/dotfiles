@@ -17,7 +17,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         nix-vimrc = {
-            url = "github:handdara/nix-vimrc/main";
+            url = "github:handdara/nix-vimrc/oil";
             inputs.nixpkgs.follows = "nixpkgs";
         };
         nixos-hardware.url = "github:NixOS/nixos-hardware";
