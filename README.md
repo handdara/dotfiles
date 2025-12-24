@@ -8,7 +8,7 @@ MICRO: 1
 -->
 # handdara's dotfiles
 
-[![Version Badge][]](https://github.com/handdara/dotfiles/releases/latest )
+_readme needs updating, will get to it soon _
 
 `hix`: NixOS configuration files
 
