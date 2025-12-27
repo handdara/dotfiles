@@ -70,16 +70,16 @@
   tab       q    w    e    r    t    XX   y    u    i    o    p    \    bspc
   esc       @ahm @shm @dhm @fhm g    XX   h    @jhm @khm @lhm @chm '    @shn
   grv       z    x    c    v    b    XX   n    m    ,    .    /    XX
-  XX        XX   @to3 @bs2 XX   XX   XX   @so1 XX   XX   XX   XX   _
+  XX        XX   @to3 @bs2 left rght XX   @so1 down up   XX   XX   _
   XX   XX   XX   XX             @shn           XX   XX   _    _    _
 )
 
 (deflayer l1
-  _         _    _    _    _    _    _    _    left up   down rght _    _    _
+  _         _    _    _    _    _    _    _    _    _    _    _    _    _    _
   !         {    S-9  S-0  }    ?    _    _    rsft rctl ralt rmet _    _
   #         ^    =    S--  $    *    _    del  bspc tab  spc  ret  _    _
-  ~         <    |    -    >    /    _    _    _    _    _    _    _ 
-  _         &    +    [    ]    _    _    _    XX   _    _    _    _
+  ~         <    |    -    >    /    _    _    left up   down rght _ 
+  _         &    +    [    ]    _    _    XX   _    _    _    _    _
   _    _    _    _              _              _    _    _    _    _
 )
 
