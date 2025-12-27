@@ -70,8 +70,8 @@
   tab       q    w    e    r    t    XX   y    u    i    o    p    \    bspc
   esc       @ahm @shm @dhm @fhm g    XX   h    @jhm @khm @lhm @chm '    @shn
   grv       z    x    c    v    b    XX   n    m    ,    .    /    XX
-  XX        XX   @to3 @bs2 XX   XX   XX   @so1 XX   XX   XX   XX   XX
-  XX   XX   XX   XX             @shn           XX   XX   XX   XX   XX
+  XX        XX   @to3 @bs2 XX   XX   XX   @so1 XX   XX   XX   XX   _
+  XX   XX   XX   XX             @shn           XX   XX   _    _    _
 )
 
 (deflayer l1
