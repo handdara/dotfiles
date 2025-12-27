@@ -40,7 +40,7 @@ in {
             font-size = ${builtins.toString config.handdara.fontsize}
             cursor-style = block
             cursor-style-blink = false
-            background-opacity = 0.92
+            background-opacity = 0.85
             window-padding-x = 2
             window-padding-y = 0
             window-decoration = false
