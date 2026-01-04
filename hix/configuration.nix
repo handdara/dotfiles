@@ -167,6 +167,13 @@ in {
 
     programs.tmux.enable = true;
 
+    documentation.enable = true;
+    documentation.man.enable = true;
+    documentation.doc.enable = true;
+    documentation.dev.enable = true;
+    documentation.info.enable = true;
+    documentation.nixos.enable = true;
+
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     services.pcscd.enable = true;
