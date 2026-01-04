@@ -322,14 +322,15 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             start_menu_launcher,
             s.taglist,
+            wibox.widget.textbox(' '),
+            wibox.widget.systray(),
+            wibox.widget.textbox(' '),
             s.prompt_box,
         },
         s.tasks_widget, -- Middle widget
         {               -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.textbox(' '),
-            wibox.widget.systray(),
-            wibox.widget.textbox('  │  '),
+            wibox.widget.textbox('  '),
             stbar_txtclk,
             wibox.widget.textbox('  │  '),
             s.layout_box,
