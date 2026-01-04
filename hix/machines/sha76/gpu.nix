@@ -1,9 +1,9 @@
 {config, lib, ...}: {
     hardware.graphics.enable = true;
-    services.xserver.videoDrivers = ["nvidia" "modesetting"];
+    services.xserver.videoDrivers = lib.mkDefault ["nvidia"];
     # boot.kernelParams = ["module_blacklist=i915"];
-    # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
-    hardware.nvidia.open = true; # Set to false to use the proprietary kernel module
+    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
+    hardware.nvidia.open = false; # Set to false to use the proprietary kernel module
     hardware.nvidia.prime = {
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -21,6 +21,7 @@
                 enableOffloadCmd = lib.mkOverride 0 false;
             };
         };
+        services.xserver.videoDrivers =lib.mkForce ["nvidia" "modesetting"];
         services.teamviewer.enable = lib.mkForce false;
         services.openssh.enable = lib.mkForce false;
         system.nixos.tags = ["nvidia-sync"];
