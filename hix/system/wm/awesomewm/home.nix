@@ -21,7 +21,7 @@ in {
 
             local theme = {}
 
-            theme.system_font   = "${config.handdara.font}"
+            theme.system_font   = "${config.handdara.font} Propo"
             theme.font          = theme.system_font .. " ${builtins.toString config.handdara.fontsize}"
             theme.hotkeys_font  = theme.system_font .. " 14"
             theme.hotkeys_description_font  = theme.system_font .. " Italic 14"

@@ -331,7 +331,8 @@ awful.screen.connect_for_each_screen(function(s)
         {               -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.textbox('  '),
-            -- wibox.widget.textbox('  │  '),
+            awful.widget.watch('__h_mem_usage', 2),
+            wibox.widget.textbox('  │  '),
             stbar_txtclk,
             wibox.widget.textbox(' '),
             s.layout_box,
