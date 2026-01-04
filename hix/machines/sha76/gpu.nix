@@ -21,6 +21,8 @@
                 enableOffloadCmd = lib.mkOverride 0 false;
             };
         };
+        services.teamviewer.enable = lib.mkForce false;
+        services.openssh.enable = lib.mkForce false;
         system.nixos.tags = ["nvidia-sync"];
     };
 }
