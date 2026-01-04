@@ -155,7 +155,7 @@ local kbd_layout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local stbar_txtclk = wibox.widget.textclock('│ W%V - %d/%j │ %H:%M ')
+local stbar_txtclk = wibox.widget.textclock('W%V - %d/%j - %H:%M')
 
 local cal_widget = awful.popup {
     widget       = {
@@ -327,8 +327,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.tasks_widget, -- Middle widget
         {               -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            kbd_layout,
             wibox.widget.systray(),
+            wibox.widget.textbox('  │  '),
             stbar_txtclk,
             s.layout_box,
         },
