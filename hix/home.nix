@@ -29,8 +29,8 @@
 
     handdara = {
         lightworks = false;
-        font = "AtkynsonMono Nerd Font";
-        fontsize = 14;
+        font = "Agave Nerd Font"; # font = "AtkynsonMono Nerd Font";
+        fontsize = 16;
     };
 
     nixpkgs.config.allowUnfree = true;

@@ -10,7 +10,7 @@
     # Enable the OpenSSH daemon.
     services.openssh = {
         enable = lib.mkDefault true;
-        ports = [ 76 2222 ];
+        ports = [76 2222];
         settings = {
             PasswordAuthentication = false;
             PubkeyAuthentication = true;

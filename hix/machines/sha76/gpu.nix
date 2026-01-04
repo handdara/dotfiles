@@ -1,4 +1,8 @@
-{config, lib, ...}: {
+{
+    config,
+    lib,
+    ...
+}: {
     hardware.graphics.enable = true;
     services.xserver.videoDrivers = lib.mkDefault ["nvidia"];
     # boot.kernelParams = ["module_blacklist=i915"];
@@ -21,7 +25,7 @@
                 enableOffloadCmd = lib.mkOverride 0 false;
             };
         };
-        services.xserver.videoDrivers =lib.mkForce ["nvidia" "modesetting"];
+        services.xserver.videoDrivers = lib.mkForce ["nvidia" "modesetting"];
         services.teamviewer.enable = lib.mkForce false;
         services.openssh.enable = lib.mkForce false;
         system.nixos.tags = ["nvidia-sync"];
