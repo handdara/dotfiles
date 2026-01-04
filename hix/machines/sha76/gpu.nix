@@ -1,7 +1,7 @@
 {lib, ...}: {
     hardware.graphics.enable = lib.mkDefault true;
     services.xserver.videoDrivers = lib.mkDefault ["nvidia"];
-    hardware.nvidia.open = lib.mkDefault false; # Set to false to use the proprietary kernel module
+    hardware.nvidia.open = lib.mkDefault true; # Set to false to use the proprietary kernel module
     # boot.kernelParams = ["module_blacklist=i915"];
     hardware.nvidia.prime = {
         intelBusId = "PCI:0:2:0";

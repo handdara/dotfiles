@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
     # Enable networking
     networking.networkmanager.enable = true;
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -9,7 +9,7 @@
 
     # Enable the OpenSSH daemon.
     services.openssh = {
-        enable = true;
+        enable = lib.mkDefault true;
         ports = [ 76 2222 ];
         settings = {
             PasswordAuthentication = false;
