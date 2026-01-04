@@ -155,7 +155,7 @@ local kbd_layout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local stbar_txtclk = wibox.widget.textclock(' %V 󰖚 %d/%j    %H:%M')
+local stbar_txtclk = wibox.widget.textclock(' %V 󰖚 %d/%j  %H:%M')
 
 local cal_widget = awful.popup {
     widget       = {
@@ -332,13 +332,13 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.textbox('  '),
             awful.widget.watch('__h_cpu_usage', 2),
-            wibox.widget.textbox('    '),
+            wibox.widget.textbox('  '),
             awful.widget.watch('__h_mem_usage', 2),
-            wibox.widget.textbox('    '),
+            wibox.widget.textbox('  '),
             awful.widget.watch('__h_bat_status', 2),
-            wibox.widget.textbox('    '),
+            wibox.widget.textbox('  '),
             stbar_txtclk,
-            wibox.widget.textbox('  '),
+            wibox.widget.textbox(' '),
             s.layout_box,
         },
     }

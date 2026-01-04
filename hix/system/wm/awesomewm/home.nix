@@ -83,7 +83,7 @@ in {
             -- menu_[border_color|border_width]
             theme.menu_submenu_icon = themes_path.."default/submenu.png"
             theme.menu_height = dpi(25)
-            theme.menu_width  = dpi(500)
+            theme.menu_width  = dpi(550)
 
             -- You can add as many variables as
             -- you wish and access them by using

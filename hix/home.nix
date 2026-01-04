@@ -29,7 +29,7 @@
 
     handdara = {
         lightworks = false;
-        font = "Agave Nerd Font"; # font = "AtkynsonMono Nerd Font";
+        font = "AtkynsonMono Nerd Font";
         fontsize = 16;
     };
 

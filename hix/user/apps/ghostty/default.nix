@@ -37,7 +37,7 @@ in {
             theme = ${name}
             font-family = ""
             font-family = "${font}"
-            font-size = ${builtins.toString config.handdara.fontsize}
+            font-size = ${builtins.toString (config.handdara.fontsize - 2)}
             cursor-style = block
             cursor-style-blink = false
             background-opacity = 0.85
