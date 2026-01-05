@@ -20,6 +20,7 @@
         ./user/apps/tmux
         ./user/apps/vim
         ./user/apps/x
+        ./user/apps/xmonad
         ./user/apps/pdfs
         ./user/apps/zoxide
         ./user/misc/theme
