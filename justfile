@@ -1,4 +1,3 @@
-alias a := session
 alias home := switch-home
 session_name := 'cfg'
 hd := env_var('HOME')
@@ -9,6 +8,9 @@ startup_cmd := 'nix develop'
 default:
     @echo "nothing to do..."
     @just --list
+
+build-vm:
+    just {{jd}}/hix/ build-vm
 
 # test rebuild nixos and home-manager
 test:
@@ -42,18 +44,3 @@ stable: _git_add purge && switch-home
 
 fmt:
     nix develop --command alejandra .
-
-# start tmux session
-session:
-    #!/usr/bin/env bash
-    set -exo pipefail
-    if ! tmux has-session -t={{session_name}} 2> /dev/null; then
-        tmux new-session -ds {{session_name}} -c {{jd}} {{startup_cmd}}
-    fi
-    if [ -z $TMUX ] ; then
-        echo 'tmux a -t {{session_name}}' | xclip -rmlastnl -selection clipboard
-        echo 'Run `tmux a -t {{session_name}}`. Which has been placed into the system clipboard.'
-    else
-        echo 'switching client'
-        tmux switch-client -t {{session_name}}
-    fi
