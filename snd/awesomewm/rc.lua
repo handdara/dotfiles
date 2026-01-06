@@ -154,8 +154,10 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 local kbd_layout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+-- local wibar_separator = '  '
+local wibar_separator = ' ᛫ '
 -- Create a textclock widget
-local stbar_txtclk = wibox.widget.textclock(' %V 󰖚 %d/%j  %H:%M')
+local stbar_txtclk = wibox.widget.textclock('ᚹ%V ☀ %d/%j' .. wibar_separator .. '%H:%M')
 
 local cal_widget = awful.popup {
     widget       = {
@@ -332,11 +334,11 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.textbox('  '),
             awful.widget.watch('__h_cpu_usage', 2),
-            wibox.widget.textbox('  '),
+            wibox.widget.textbox(wibar_separator),
             awful.widget.watch('__h_mem_usage', 2),
-            wibox.widget.textbox('  '),
-            awful.widget.watch('__h_bat_status', 2),
-            wibox.widget.textbox('  '),
+            wibox.widget.textbox(wibar_separator),
+            awful.widget.watch('__h_bat_status', 0.2),
+            wibox.widget.textbox(wibar_separator),
             stbar_txtclk,
             wibox.widget.textbox(' '),
             s.layout_box,

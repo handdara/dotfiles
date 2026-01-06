@@ -28,9 +28,14 @@
         ./user/theme
     ];
 
-    handdara = {
+    handdara = rec {
         lightworks = false;
-        font = "AtkynsonMono Nerd Font";
+        font = "scientifica";
+        fontui = "Monocraft";# = font + " Bold";
+        fontterm = font;
+        # font = "AtkynsonMono Nerd Font";
+        # fontui = font + " Propo";
+        # fontterm = "Maple Mono NF";
         fontsize = 16;
     };
 

@@ -12,34 +12,12 @@
         else {
             bg = "120b0d";
         };
-    # font = "3270 Nerd Font";
-    # font = "Agave Nerd Font";
-    # font = "AtkynsonMono Nerd Font";
-    # font = "BigBlueTerm437 Nerd Font";
-    # font = "BigBlueTermPlus Nerd Font";
-    # font = "BlexMono Nerd Font";
-    # font = "DepartureMono Nerd Font"; # no bold,italic
-    # font = "FantasqueSansM Nerd Font";
-    # font = "Hasklug Nerd Font";
-    # font = "HeavyData Nerd Font";
-    # font = "Hurmit Nerd Font";
-    # font = "iMWritingMono Nerd Font";
-    # font = "Maple Mono NF";
-    # font = "Monofur Nerd Font";
-    # font = "Monoid Nerd Font";
-    # font = "Mononoki Nerd Font";
-    # font = "OpenDyslexicAlt Nerd Font";
-    # font = "OpenDyslexicM Nerd Font";
-    # font = "OpenDyslexic Nerd Font";
-    # font = "ProggyClean Nerd Font";
-    # font = "Terminess Nerd Font"; # no bold
-    font = "scientifica";
 in {
     home.file = {
         ".config/ghostty/config".text = ''
             theme = ${name}
             font-family = ""
-            font-family = "${font}"
+            font-family = "${config.handdara.fontterm}"
             font-size = ${builtins.toString (config.handdara.fontsize - 2)}
             cursor-style = block
             cursor-style-blink = false
