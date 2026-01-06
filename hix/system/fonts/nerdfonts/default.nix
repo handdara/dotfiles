@@ -1,6 +1,7 @@
 {pkgs, ...}: {
     fonts.packages = with pkgs; [
         maple-mono.NF
+        monocraft
         nerd-fonts._3270
         nerd-fonts.agave
         nerd-fonts.atkynson-mono
@@ -12,6 +13,7 @@
         nerd-fonts.heavy-data
         nerd-fonts.hurmit
         nerd-fonts.im-writing
+        nerd-fonts.monaspace
         nerd-fonts.monofur
         nerd-fonts.monoid
         nerd-fonts.mononoki
