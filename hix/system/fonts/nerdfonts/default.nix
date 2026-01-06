@@ -14,6 +14,7 @@
         nerd-fonts.im-writing
         nerd-fonts.monofur
         nerd-fonts.monoid
+        nerd-fonts.mononoki
         nerd-fonts.open-dyslexic
         nerd-fonts.proggy-clean-tt
         nerd-fonts.terminess-ttf

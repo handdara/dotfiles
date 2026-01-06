@@ -23,14 +23,16 @@
     # font = "Hasklug Nerd Font";
     # font = "HeavyData Nerd Font";
     # font = "Hurmit Nerd Font";
+    # font = "iMWritingMono Nerd Font";
     # font = "Maple Mono NF";
     # font = "Monofur Nerd Font";
     # font = "Monoid Nerd Font";
-    # font = "OpenDyslexic Nerd Font";
+    # font = "Mononoki Nerd Font";
     # font = "OpenDyslexicAlt Nerd Font";
     # font = "OpenDyslexicM Nerd Font";
+    # font = "OpenDyslexic Nerd Font";
+    # font = "ProggyClean Nerd Font";
     # font = "Terminess Nerd Font"; # no bold
-    # font = "iMWritingMono Nerd Font";
 in {
     home.file = {
         ".config/ghostty/config".text = ''
