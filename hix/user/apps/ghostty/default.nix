@@ -21,7 +21,7 @@ in {
             font-size = ${builtins.toString (config.handdara.fontsize - 2)}
             cursor-style = block
             cursor-style-blink = false
-            background-opacity = 0.70
+            background-opacity = ${builtins.toString (config.handdara.transparency / 100.0)}
             window-padding-x = 2
             window-padding-y = 0
             window-decoration = false

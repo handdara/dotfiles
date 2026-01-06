@@ -16,17 +16,22 @@ in {
         handdara.fontui = lib.mkOption {
             type = lib.types.str;
             default = default-font;
-            description = "system font to use";
+            description = "system font to use for ui elements (hint: add 'Propo' for nerd fonts)";
         };
         handdara.fontterm = lib.mkOption {
             type = lib.types.str;
             default = default-font;
-            description = "system font to use";
+            description = "terminal font to use";
         };
         handdara.fontsize = lib.mkOption {
             type = lib.types.ints.between 2 100;
             default = 12;
             description = "system font size";
+        };
+        handdara.transparency = lib.mkOption {
+            type = lib.types.ints.between 2 100;
+            default = 85;
+            description = "default transparency";
         };
     };
 }

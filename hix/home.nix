@@ -37,6 +37,7 @@
         # fontui = font + " Propo";
         # fontterm = "Maple Mono NF";
         fontsize = 16;
+        transparency = 90;
     };
 
     nixpkgs.config.allowUnfree = true;
