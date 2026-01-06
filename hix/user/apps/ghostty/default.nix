@@ -31,8 +31,9 @@
     # font = "OpenDyslexicAlt Nerd Font";
     # font = "OpenDyslexicM Nerd Font";
     # font = "OpenDyslexic Nerd Font";
-    font = "ProggyClean Nerd Font";
+    # font = "ProggyClean Nerd Font";
     # font = "Terminess Nerd Font"; # no bold
+    font = "scientifica";
 in {
     home.file = {
         ".config/ghostty/config".text = ''

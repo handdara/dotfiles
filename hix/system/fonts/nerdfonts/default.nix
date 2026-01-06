@@ -21,5 +21,6 @@
         nerd-fonts.proggy-clean-tt
         nerd-fonts.terminess-ttf
         recursive
+        scientifica
     ];
 }
