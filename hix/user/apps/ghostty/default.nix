@@ -16,7 +16,7 @@
     # font = "Agave Nerd Font";
     # font = "AtkynsonMono Nerd Font";
     # font = "BigBlueTerm437 Nerd Font";
-    # font = "BigBlueTermPlus Nerd Font";
+    font = "BigBlueTermPlus Nerd Font";
     # font = "BlexMono Nerd Font";
     # font = "DepartureMono Nerd Font"; # no bold,italic
     # font = "FantasqueSansM Nerd Font";
@@ -28,7 +28,7 @@
     # font = "Monoid Nerd Font";
     # font = "OpenDyslexic Nerd Font";
     # font = "OpenDyslexicAlt Nerd Font";
-    font = "OpenDyslexicM Nerd Font";
+    # font = "OpenDyslexicM Nerd Font";
     # font = "Terminess Nerd Font"; # no bold
     # font = "iMWritingMono Nerd Font";
 in {
