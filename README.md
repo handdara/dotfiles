@@ -1,11 +1,3 @@
-<!--
----
-YY: 25
-0M: 04
-MINOR: 0
-MICRO: 1
----
--->
 # handdara's dotfiles
 
 _readme needs updating, will get to it soon _
