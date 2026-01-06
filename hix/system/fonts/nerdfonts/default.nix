@@ -1,7 +1,9 @@
 {pkgs, ...}: {
     fonts.packages = with pkgs; [
+        curie
         maple-mono.NF
         monocraft
+        miracode
         nerd-fonts._3270
         nerd-fonts.agave
         nerd-fonts.atkynson-mono
