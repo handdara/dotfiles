@@ -15,8 +15,8 @@
     # font = "3270 Nerd Font";
     # font = "Agave Nerd Font";
     # font = "AtkynsonMono Nerd Font";
-    # font = "BigBlueTerm437 Nerd Font";
-    font = "BigBlueTermPlus Nerd Font";
+    font = "BigBlueTerm437 Nerd Font";
+    # font = "BigBlueTermPlus Nerd Font";
     # font = "BlexMono Nerd Font";
     # font = "DepartureMono Nerd Font"; # no bold,italic
     # font = "FantasqueSansM Nerd Font";
