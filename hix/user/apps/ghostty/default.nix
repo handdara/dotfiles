@@ -23,12 +23,12 @@
     # font = "Hasklug Nerd Font";
     # font = "HeavyData Nerd Font";
     # font = "Hurmit Nerd Font";
-    font = "Maple Mono NF";
+    # font = "Maple Mono NF";
     # font = "Monofur Nerd Font";
     # font = "Monoid Nerd Font";
     # font = "OpenDyslexic Nerd Font";
     # font = "OpenDyslexicAlt Nerd Font";
-    # font = "OpenDyslexicM Nerd Font";
+    font = "OpenDyslexicM Nerd Font";
     # font = "Terminess Nerd Font"; # no bold
     # font = "iMWritingMono Nerd Font";
 in {
