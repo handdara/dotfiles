@@ -155,7 +155,8 @@ local kbd_layout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- local wibar_separator = '  '
-local wibar_separator = ' ᛫ '
+-- local wibar_separator = ' ᛫ '
+local wibar_separator = ' · '
 -- Create a textclock widget
 local stbar_txtclk = wibox.widget.textclock('ᚹ%V ☀ %d/%j' .. wibar_separator .. '%H:%M')
 
