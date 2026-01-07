@@ -6,7 +6,9 @@
     hardware.graphics.enable = true;
     services.xserver.videoDrivers = lib.mkDefault ["nvidia"];
     # boot.kernelParams = ["module_blacklist=i915"];
-    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
+    #hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable; # Default
+    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+    # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
     hardware.nvidia.open = false; # Set to false to use the proprietary kernel module
     hardware.nvidia.prime = {
         intelBusId = "PCI:0:2:0";

@@ -38,6 +38,7 @@
         # fontterm = "Maple Mono NF";
         fontsize = 16;
         transparency = 90;
+        shprompt = "simple";
     };
 
     nixpkgs.config.allowUnfree = true;

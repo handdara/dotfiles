@@ -32,5 +32,10 @@ in {
             default = 85;
             description = "default transparency";
         };
+        handdara.shprompt = lib.mkOption {
+            type = lib.types.str;
+            default = "regular";
+            description = "mode for starship prompt: regular, simple, off";
+        };
     };
 }
