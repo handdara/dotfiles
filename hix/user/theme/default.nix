@@ -1,5 +1,4 @@
-{lib, ...}: 
-let
+{lib, ...}: let
     default-font = "FreeMono";
 in {
     options = {

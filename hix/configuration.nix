@@ -154,6 +154,9 @@ in {
         pkgs.yt-dlp
         pkgs.zathura
         pkgs.zoxide
+        (pkgs.ollama.override {
+            acceleration = "cuda";
+        })
     ];
 
     # Install firefox for all users

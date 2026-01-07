@@ -31,7 +31,7 @@
     handdara = rec {
         lightworks = false;
         font = "scientifica";
-        fontui = "Monocraft";# = font + " Bold";
+        fontui = "Monocraft"; # = font + " Bold";
         fontterm = font;
         # font = "AtkynsonMono Nerd Font";
         # fontui = font + " Propo";
