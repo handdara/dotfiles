@@ -106,7 +106,6 @@ in {
         pkgs.ghostty
         pkgs.gimp
         pkgs.git
-        pkgs.graphite-gtk-theme
         pkgs.gvfs
         pkgs.imagemagick
         pkgs.isync
@@ -134,7 +133,7 @@ in {
         pkgs.redshift
         pkgs.stow
         pkgs.tealdeer
-        pkgs.themechanger
+        # pkgs.themechanger
         pkgs.toilet
         pkgs.universal-ctags
         pkgs.unzip
