@@ -34,7 +34,6 @@ in {
     time.timeZone = inputs.timezone;
     # Select internationalisation properties.
     i18n.defaultLocale = locale;
-
     i18n.extraLocaleSettings = {
         LC_ADDRESS = locale;
         LC_IDENTIFICATION = locale;
@@ -61,7 +60,6 @@ in {
         alsa.support32Bit = true;
         pulse.enable = true;
         jack.enable = true;
-
         # use the example session manager (no others are packaged yet so this is enabled by default,
         # no need to redefine it in your config for now)
         #media-session.enable = true;
@@ -117,7 +115,7 @@ in {
         pkgs.lazygit
         pkgs.libnotify
         pkgs.linux-manual
-        # pkgs.lxappearance
+        pkgs.lxappearance
         pkgs.man-pages
         pkgs.man-pages-posix
         pkgs.matlab # see ./flake.nix input `nix-matlab`
@@ -145,10 +143,12 @@ in {
         pkgs.watchexec
         pkgs.wget
         pkgs.wikiman
+        pkgs.volctl
         pkgs.wiki-tui
         pkgs.xclip
         pkgs.xcolor
         pkgs.xfce.ristretto
+        pkgs.xfce.xfce4-volumed-pulse
         pkgs.xlockmore
         pkgs.yq
         pkgs.yt-dlp
@@ -170,6 +170,7 @@ in {
         enable = true;
         plugins = [pkgs.xfce.thunar-volman pkgs.xfce.thunar-archive-plugin];
     };
+    programs.dconf.enable = true;
 
     programs.tmux.enable = true;
 

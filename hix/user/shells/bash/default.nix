@@ -2,8 +2,6 @@
     home.packages = [pkgs.blesh];
     programs.bash = {
         enable = true;
-        historySize = 100000;
-        historyFileSize = 10000000;
         shellAliases = {
             z = "cd";
             e = "ls";
@@ -52,6 +50,8 @@
         };
         bashrcExtra = ''
             export _ZO_MAXAGE=100000
+            export historySize=100000
+            export historyFileSize=10000000
         '';
         initExtra = ''
             source -- $(blesh-share)/ble.sh

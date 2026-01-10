@@ -66,7 +66,7 @@
 )
 
 (deflayer l0
-  XX        XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   @
+  XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  XX   @
   tab       q    w    e    r    t    XX   y    u    i    o    p    \    bspc
   esc       @ahm @shm @dhm @fhm g    XX   h    @jhm @khm @lhm @chm '    @shn
   grv       z    x    c    v    b    XX   n    m    ,    .    /    XX

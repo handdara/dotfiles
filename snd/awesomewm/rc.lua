@@ -120,7 +120,8 @@ awful.layout.layouts = {
 local menu_awesome = {
     { "┬──AWM:Hotkeys",     function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
     { "├──AWM:Manual",      terminal_cmd .. " man awesome" },
-    { "├──AWM.Conf:Edit",   editor_cmd .. " " .. awesome.conffile },
+    { "├──AWM:Launcher",    function() menubar.show() end},
+    { "├──AWM.Conf:Read",   editor_cmd .. " " .. awesome.conffile },
     { "├──AWM:Restart",     awesome.restart },
     { "└──AWM:KILL",        function() awesome.quit() end },
 }
@@ -158,7 +159,7 @@ local kbd_layout = awful.widget.keyboardlayout()
 -- local wibar_separator = ' ᛫ '
 local wibar_separator = ' · '
 -- Create a textclock widget
-local stbar_txtclk = wibox.widget.textclock('ᚹ%V ☀ %d/%j' .. wibar_separator .. '%H:%M')
+local stbar_txtclk = wibox.widget.textclock('W %V _*_ %d/%j' .. wibar_separator .. '%H:%M')
 
 local cal_widget = awful.popup {
     widget       = {
@@ -326,7 +327,6 @@ awful.screen.connect_for_each_screen(function(s)
             start_menu_launcher,
             s.taglist,
             wibox.widget.textbox(' '),
-            wibox.widget.systray(),
             wibox.widget.textbox(' '),
             s.prompt_box,
         },
@@ -342,6 +342,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.textbox(wibar_separator),
             stbar_txtclk,
             wibox.widget.textbox(' '),
+            wibox.widget.systray(),
             s.layout_box,
         },
     }
@@ -397,7 +398,7 @@ local globalkeys = gears.table.join(
         { description = "go back", group = "client" }),
 
     -- Standard program
-    awful.key({ super, }, "Return", function() awful.spawn(terminal) end,
+    awful.key({ super, }, "Return", function() awful.spawn(terminal .. " -e bash") end,
         { description = "open a terminal", group = "launcher" }),
     awful.key({ super, }, ".", function() awful.spawn(sys_manage_cmd) end,
         { description = "run manage script", group = "launcher" }),
@@ -464,6 +465,27 @@ local globalkeys = gears.table.join(
     -- Menubar
     awful.key({ super }, "p", function() menubar.show() end, { description = "show the menubar", group = "launcher" }),
 
+    -- Volume keys Keys
+    awful.key({}, "XF86AudioLowerVolume", function ()
+        awful.util.spawn("amixer -q sset Master 5%-", false)
+    end),
+    awful.key({}, "XF86AudioRaiseVolume", function ()
+        awful.util.spawn("amixer -q sset Master 5%+", false)
+    end),
+    awful.key({}, "XF86AudioMute", function ()
+        awful.util.spawn("amixer set Master 1+ toggle", false)
+    end),
+    -- Media Keys
+    -- awful.key({}, "XF86AudioPlay", function()
+    --     awful.util.spawn("playerctl play-pause", false)
+    -- end),
+    -- awful.key({}, "XF86AudioNext", function()
+    --     awful.util.spawn("playerctl next", false)
+    -- end),
+    -- awful.key({}, "XF86AudioPrev", function()
+    --     awful.util.spawn("playerctl previous", false)
+    -- end),
+    --
     -- Dismiss the latest notification
     -- awful.key({ super }, "d", function()
     --     if #naughty.notifications > 0 then
@@ -720,3 +742,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")

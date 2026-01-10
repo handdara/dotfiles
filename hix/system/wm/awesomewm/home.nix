@@ -9,6 +9,7 @@
 in {
     home.file = {
         ".config/awesome/rc.lua".source = awm_dir + /rc.lua;
+        ".config/awesome/autorun.sh".source = awm_dir + /autorun.sh;
         ".config/awesome/themes/marrissa/theme.lua".text = ''
             local theme_assets = require("beautiful.theme_assets")
             local xresources = require("beautiful.xresources")

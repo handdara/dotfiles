@@ -15,6 +15,9 @@
                         else "monalisa"
                     }]]
                 '';
+                extraLuaConfig = ''
+                    vim.cmd [[ClearBG]]
+                '';
             };
         })
     ];
