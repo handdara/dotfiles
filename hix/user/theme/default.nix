@@ -53,7 +53,7 @@ in {
         };
         gtk = {
             enable = true;
-            font.name = config.handdara.fontui;
+            font.name = config.handdara.font;
             font.size = config.handdara.fontsize;
             theme.name = "Chicago95";
             theme.package = pkgs.chicago95;
@@ -68,7 +68,7 @@ in {
         qt = {
             enable = true;
             platformTheme.name = "gtk";
-            style.name = "Chicago95";
+            style.name = "gtk2";
         };
     };
 }
