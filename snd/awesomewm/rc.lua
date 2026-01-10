@@ -118,26 +118,26 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local menu_awesome = {
-    { "┬──AWM:Hotkeys",     function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-    { "├──AWM:Manual",      terminal_cmd .. " man awesome" },
-    { "├──AWM:Launcher",    function() menubar.show() end},
-    { "├──AWM.Conf:Read",   editor_cmd .. " " .. awesome.conffile },
-    { "├──AWM:Restart",     awesome.restart },
-    { "└──AWM:KILL",        function() awesome.quit() end },
+    { "┬──AWM:Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+    { "├──AWM:Manual", terminal_cmd .. " man awesome" },
+    { "├──AWM:Launcher", function() menubar.show() end },
+    { "├──AWM.Conf:Read", editor_cmd .. " " .. awesome.conffile },
+    { "├──AWM:Restart", awesome.restart },
+    { "└──AWM:KILL", function() awesome.quit() end },
 }
 
 local start_menu = awful.menu({
     items = {
-        { "      ┌──Terminal.Prog:Boot",        prog_cmd },
-        { "      ├──Terminal.Media:Boot",       mediamgr_cmd },
-        { "      ├──Terminal.Calendar:Boot",    calendar_cmd },
-        { "   ┌──Access Terminal",              terminal },
-        { "───SHA76",                           sysinfo_cmd },
-        { "   ├──SHA76.Sys",                    sys_manage_cmd },
-        { "   │  ├──SHA76.Sys:Monitor",         monitor_cmd },
-        { "   │  └──SHA76.Sys.AWM",             menu_awesome },
-        { "   ├──Access Manifest",              filebrowser_cmd },
-        { "   └──Access Net",                   browser_cmd },
+        { "      ┌──Terminal.Prog:Boot", prog_cmd },
+        { "      ├──Terminal.Media:Boot", mediamgr_cmd },
+        { "      ├──Terminal.Calendar:Boot", calendar_cmd },
+        { "   ┌──Access Terminal", terminal },
+        { "───SHA76", sysinfo_cmd },
+        { "   ├──SHA76.Sys", sys_manage_cmd },
+        { "   │  ├──SHA76.Sys:Monitor", monitor_cmd },
+        { "   │  └──SHA76.Sys.AWM", menu_awesome },
+        { "   ├──Access Manifest", filebrowser_cmd },
+        { "   └──Access Net", browser_cmd },
         { "      └──Environmental Status Report", weather_cmd },
     }
 })
@@ -465,16 +465,25 @@ local globalkeys = gears.table.join(
     -- Menubar
     awful.key({ super }, "p", function() menubar.show() end, { description = "show the menubar", group = "launcher" }),
 
-    -- Volume keys Keys
-    awful.key({}, "XF86AudioLowerVolume", function ()
+    -- Volume Keys
+    awful.key({}, "XF86AudioLowerVolume", function()
         awful.util.spawn("amixer -q sset Master 5%-", false)
     end),
-    awful.key({}, "XF86AudioRaiseVolume", function ()
+    awful.key({}, "XF86AudioRaiseVolume", function()
         awful.util.spawn("amixer -q sset Master 5%+", false)
     end),
-    awful.key({}, "XF86AudioMute", function ()
+    awful.key({}, "XF86AudioMute", function()
         awful.util.spawn("amixer set Master 1+ toggle", false)
     end),
+
+    -- Brightness Keys
+    awful.key({}, "XF86MonBrightnessDown", function()
+        awful.util.spawn("brightnessctl set '3%-'", false)
+    end),
+    awful.key({}, "XF86MonBrightnessUp", function()
+        awful.util.spawn("brightnessctl set '3%+'", false)
+    end),
+
     -- Media Keys
     -- awful.key({}, "XF86AudioPlay", function()
     --     awful.util.spawn("playerctl play-pause", false)
@@ -485,7 +494,7 @@ local globalkeys = gears.table.join(
     -- awful.key({}, "XF86AudioPrev", function()
     --     awful.util.spawn("playerctl previous", false)
     -- end),
-    --
+
     -- Dismiss the latest notification
     -- awful.key({ super }, "d", function()
     --     if #naughty.notifications > 0 then
@@ -675,7 +684,7 @@ awful.rules.rules = {
         properties = { tag = "3" }
     },
 
-    { rule = { }, properties = { }, callback = awful.client.setslave }
+    { rule = {}, properties = {}, callback = awful.client.setslave }
 }
 -- }}}
 
@@ -743,4 +752,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.spawn.with_shell('. '..os.getenv("HOME").."/.config/awesome/autorun.sh")
+awful.spawn.with_shell('. ' .. os.getenv("HOME") .. "/.config/awesome/autorun.sh")
