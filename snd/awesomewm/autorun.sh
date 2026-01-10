@@ -5,3 +5,4 @@ run() {
     fi
 }
 run "volctl"
+run "flameshot"
