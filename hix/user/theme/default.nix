@@ -56,7 +56,7 @@ in {
             iconTheme.package = pkgs.chicago95;
             cursorTheme = {
                 name = "Bibata-Tinted";
-                size = 36;
+                size = 48;
                 package = pkgs.bibata-cursors-translucent;
             };
         };
