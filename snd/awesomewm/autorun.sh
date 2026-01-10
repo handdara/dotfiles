@@ -4,4 +4,4 @@ run() {
         nohup "$@" >/dev/null 2>&1 &
     fi
 }
-run "volctl" &
+run "volctl"
