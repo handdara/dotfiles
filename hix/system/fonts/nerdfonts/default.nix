@@ -1,6 +1,9 @@
 {pkgs, ...}: {
     fonts.packages = with pkgs; [
         curie
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-color-emoji
         maple-mono.NF
         monocraft
         miracode

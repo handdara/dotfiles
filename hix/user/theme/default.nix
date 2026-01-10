@@ -1,4 +1,9 @@
-{config, pkgs, lib, ...}: let
+{
+    config,
+    pkgs,
+    lib,
+    ...
+}: let
     default-font = "FreeMono";
 in {
     options = {
