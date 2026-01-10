@@ -115,7 +115,7 @@ in {
         pkgs.lazygit
         pkgs.libnotify
         pkgs.linux-manual
-        pkgs.lxappearance
+        # pkgs.lxappearance
         pkgs.man-pages
         pkgs.man-pages-posix
         pkgs.matlab # see ./flake.nix input `nix-matlab`
