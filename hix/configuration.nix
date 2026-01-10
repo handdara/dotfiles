@@ -114,6 +114,7 @@ in {
         pkgs.just
         pkgs.lazygit
         pkgs.libnotify
+        pkgs.libreoffice
         pkgs.linux-manual
         # pkgs.lxappearance
         pkgs.man-pages

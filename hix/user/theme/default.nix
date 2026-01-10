@@ -1,4 +1,4 @@
-{lib, ...}: let
+{config, pkgs, lib, ...}: let
     default-font = "FreeMono";
 in {
     options = {
@@ -36,6 +36,34 @@ in {
             type = lib.types.str;
             default = "regular";
             description = "mode for starship prompt: regular, simple, off";
+        };
+    };
+    config = {
+        fonts.fontconfig = {
+            enable = true;
+            antialiasing = false;
+            defaultFonts = {
+                monospace = ["scientifica" default-font];
+            };
+        };
+        gtk = {
+            enable = true;
+            font.name = config.handdara.fontui;
+            font.size = config.handdara.fontsize;
+            theme.name = "Chicago95";
+            theme.package = pkgs.chicago95;
+            iconTheme.name = "Chicago95";
+            iconTheme.package = pkgs.chicago95;
+            cursorTheme = {
+                name = "Bibata-Tinted";
+                size = 36;
+                package = pkgs.bibata-cursors-translucent;
+            };
+        };
+        qt = {
+            enable = true;
+            platformTheme.name = "gtk";
+            style.name = "Chicago95";
         };
     };
 }
