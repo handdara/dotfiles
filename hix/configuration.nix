@@ -103,6 +103,7 @@ in {
         pkgs.ffmpeg
         pkgs.flameshot
         pkgs.fortune
+        pkgs.gallery-dl
         pkgs.ghostty
         pkgs.gimp
         pkgs.git
@@ -139,11 +140,11 @@ in {
         pkgs.unzip
         pkgs.vim
         pkgs.vivaldi
+        pkgs.volctl
         pkgs.w3m
         pkgs.watchexec
         pkgs.wget
         pkgs.wikiman
-        pkgs.volctl
         pkgs.wiki-tui
         pkgs.xclip
         pkgs.xcolor

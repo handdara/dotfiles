@@ -1,17 +1,14 @@
 {pkgs, ...}: {
     fonts.packages = with pkgs; [
-        curie
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-color-emoji
         maple-mono.NF
         monocraft
         miracode
-        nerd-fonts._3270
         nerd-fonts.agave
         nerd-fonts.atkynson-mono
         nerd-fonts.bigblue-terminal
-        nerd-fonts.blex-mono
         nerd-fonts.departure-mono
         nerd-fonts.fantasque-sans-mono
         nerd-fonts.hasklug

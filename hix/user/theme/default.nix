@@ -44,17 +44,11 @@ in {
         };
     };
     config = {
-        fonts.fontconfig = {
-            enable = true;
-            antialiasing = false;
-            defaultFonts = {
-                monospace = ["scientifica" default-font];
-            };
-        };
         gtk = {
             enable = true;
             font.name = config.handdara.font;
             font.size = config.handdara.fontsize;
+            font.package = pkgs.scientifica;
             theme.name = "Chicago95";
             theme.package = pkgs.chicago95;
             iconTheme.name = "Chicago95";
@@ -68,7 +62,7 @@ in {
         qt = {
             enable = true;
             platformTheme.name = "gtk";
-            style.name = "gtk2";
+            style.name = "Chicago95";
         };
     };
 }
