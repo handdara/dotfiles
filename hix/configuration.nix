@@ -14,9 +14,8 @@ in {
             ./machines/${hostname}/networking.nix
             ./machines/${hostname}/extra.nix
             ./machines/${hostname}/gpu.nix
-            ./system/fonts/nerdfonts
+            ./system/fonts
             ./system/hardware/kmonad
-            ./system/remote
             # ./system/hardware/displaylink
         ]
         ++ (inputs.extraModules or []);

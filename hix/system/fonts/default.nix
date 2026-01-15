@@ -1,0 +1,37 @@
+{pkgs, ...}: {
+    fonts = {
+        packages = with pkgs; [
+            noto-fonts
+            noto-fonts-cjk-sans
+            noto-fonts-color-emoji
+            maple-mono.NF
+            monocraft
+            miracode
+            nerd-fonts.agave
+            nerd-fonts.atkynson-mono
+            nerd-fonts.bigblue-terminal
+            nerd-fonts.departure-mono
+            nerd-fonts.fantasque-sans-mono
+            nerd-fonts.hasklug
+            nerd-fonts.heavy-data
+            nerd-fonts.hurmit
+            nerd-fonts.im-writing
+            nerd-fonts.monaspace
+            nerd-fonts.monofur
+            nerd-fonts.monoid
+            nerd-fonts.mononoki
+            nerd-fonts.open-dyslexic
+            nerd-fonts.proggy-clean-tt
+            nerd-fonts.terminess-ttf
+            recursive
+            scientifica
+        ];
+        fontconfig = {
+            defaultFonts = {
+                serif = ["MonaspiceXe-NF" "Noto Serif"];
+                sansSerif = ["Miracode" "MonaspiceAr-NF" "Noto Sans"];
+                monospace = ["MonaspiceXe-NF"  "Noto Sans Mono"];
+            };
+        };
+    };
+}

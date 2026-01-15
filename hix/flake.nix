@@ -88,8 +88,8 @@
                     ./configuration.nix
                     inputs.kmonad.nixosModules.default
                     ./system/wm/awesomewm
-                    # ./games/minecraft
-                    # ./games/steam
+                    ./games/minecraft
+                    ./games/steam
                 ];
                 specialArgs = {
                     inherit

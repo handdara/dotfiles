@@ -46,9 +46,9 @@ in {
     config = {
         gtk = {
             enable = true;
-            font.name = config.handdara.font;
-            font.size = config.handdara.fontsize;
-            font.package = pkgs.scientifica;
+            # font.name = config.handdara.font;
+            # font.size = config.handdara.fontsize;
+            # font.package = pkgs.scientifica;
             theme.name = "Chicago95";
             theme.package = pkgs.chicago95;
             iconTheme.name = "Chicago95";
