@@ -14,9 +14,6 @@ in {
             ./machines/${hostname}/networking.nix
             ./machines/${hostname}/extra.nix
             ./machines/${hostname}/gpu.nix
-            ./system/wm/awesomewm
-            ./system/wm/plasma
-            ./system/wm/xmonad
             ./system/fonts/nerdfonts
             ./system/hardware/kmonad
             ./system/remote
@@ -87,6 +84,7 @@ in {
         pkgs.acpi
         pkgs.alacritty
         pkgs.alsa-utils
+        pkgs.ani-cli
         pkgs.asciinema
         pkgs.bat
         pkgs.bc

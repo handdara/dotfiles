@@ -48,8 +48,12 @@
                 modules = [
                     ./configuration.nix
                     inputs.kmonad.nixosModules.default
+                    ./system/wm/awesomewm
+                    ./system/wm/plasma
+                    ./system/wm/xmonad
                     ./games/minecraft
                     ./games/steam
+                    ./system/remote
                 ];
                 specialArgs = {
                     inherit
@@ -64,8 +68,10 @@
             mixed = lib.nixosSystem {
                 modules = [
                     ./configuration.nix
+                    ./system/wm/awesomewm
                     inputs.kmonad.nixosModules.default
                     nixos-hardware.nixosModules.apple-t2
+                    ./system/remote
                 ];
                 specialArgs = {
                     inherit
@@ -81,6 +87,7 @@
                 modules = [
                     ./configuration.nix
                     inputs.kmonad.nixosModules.default
+                    ./system/wm/awesomewm
                     # ./games/minecraft
                     # ./games/steam
                 ];
