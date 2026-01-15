@@ -38,7 +38,7 @@
         system = "x86_64-linux";
         timezone = "America/New_York";
         user_opts = rec {
-            username = "handdara";
+            username = "estraven";
             name = username;
             email = "email@handdara.com";
         };
@@ -80,15 +80,32 @@
             theseus = lib.nixosSystem {
                 modules = [
                     ./configuration.nix
+                    inputs.kmonad.nixosModules.default
+                    # ./games/minecraft
+                    # ./games/steam
                 ];
                 specialArgs = {
-                    inherit system timezone user_opts;
+                    inherit
+                        system
+                        timezone
+                        user_opts
+                        system-overlays
+                        ;
                     hostname = "theseus";
                 };
             };
         };
         homeConfigurations = {
             handdara = hmlib.homeManagerConfiguration {
+                inherit pkgs;
+                modules = [
+                    ./home.nix
+                ];
+                extraSpecialArgs = {
+                    inherit user_opts nix-vimrc;
+                };
+            };
+            estraven = hmlib.homeManagerConfiguration {
                 inherit pkgs;
                 modules = [
                     ./home.nix
