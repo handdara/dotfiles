@@ -116,7 +116,7 @@ in {
         pkgs.libreoffice
         # pkgs.linux-manual
         # pkgs.lxappearance
-        # pkgs.man-pages
+        pkgs.man-pages
         # pkgs.man-pages-posix
         pkgs.matlab # see ./flake.nix input `nix-matlab`
         pkgs.megacmd
@@ -160,7 +160,6 @@ in {
         })
     ];
 
-    # Install firefox for all users
     programs.firefox.enable = false;
     programs.fzf.fuzzyCompletion = true;
     programs.gnupg.agent = {
