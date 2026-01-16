@@ -107,6 +107,7 @@
                 inherit pkgs;
                 modules = [
                     ./home.nix
+                    ./user/apps/matlab/r2022b
                 ];
                 extraSpecialArgs = {
                     inherit user_opts nix-vimrc;
@@ -116,6 +117,7 @@
                 inherit pkgs;
                 modules = [
                     ./home.nix
+                    ./user/apps/matlab/r2025b
                 ];
                 extraSpecialArgs = {
                     inherit user_opts nix-vimrc;

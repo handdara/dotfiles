@@ -16,7 +16,6 @@
         ./user/apps/ghostty
         ./user/apps/kmonad
         ./user/apps/lazygit
-        ./user/apps/matlab
         ./user/apps/mouseless
         # ./user/apps/megasync
         ./user/apps/nvim
@@ -42,8 +41,8 @@
         # font = "AtkynsonMono Nerd Font";
         # fontui = font + " Propo";
         # fontterm = "Maple Mono NF";
-        fontsize = 16;
-        transparency = 90;
+        fontsize = 18;
+        transparency = 83;
         shprompt = "simple";
     };
 
