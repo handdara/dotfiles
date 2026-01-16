@@ -10,7 +10,7 @@ in {
         [
             ./machines/${hostname}/hardware-configuration.nix
             ./machines/${hostname}/bootloader.nix
-            ./machines/${hostname}/battery.nix
+            ./machines/${hostname}/power.nix
             ./machines/${hostname}/networking.nix
             ./machines/${hostname}/extra.nix
             ./machines/${hostname}/gpu.nix
