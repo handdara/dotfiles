@@ -35,13 +35,9 @@
     handdara = rec {
         lightworks = false;
         font = "scientifica";
-        # fontui = "Monocraft";
         fontui = font + " Bold";
         fontterm = font;
-        # font = "AtkynsonMono Nerd Font";
-        # fontui = font + " Propo";
-        # fontterm = "Maple Mono NF";
-        fontsize = 18;
+        fontsize = 16;
         transparency = 83;
         shprompt = "simple";
     };
