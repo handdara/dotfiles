@@ -109,6 +109,8 @@ in {
         pkgs.isync
         pkgs.jq
         pkgs.just
+        pkgs.kiwix
+        pkgs.kiwix-tools
         pkgs.lazygit
         pkgs.libnotify
         pkgs.libreoffice
