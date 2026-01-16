@@ -38,7 +38,7 @@
         fontui = font + " Bold";
         fontterm = font;
         fontsize = 16;
-        transparency = 83;
+        transparency = 90;
         shprompt = "simple";
     };
 

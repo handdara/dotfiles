@@ -30,7 +30,7 @@
             defaultFonts = {
                 serif = ["MonaspiceXe-NF" "Noto Serif"];
                 sansSerif = ["Miracode" "MonaspiceAr-NF" "Noto Sans"];
-                monospace = ["MonaspiceXe-NF"  "Noto Sans Mono"];
+                monospace = ["MonaspiceXe-NF" "Noto Sans Mono"];
             };
         };
     };

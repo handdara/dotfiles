@@ -37,11 +37,6 @@
         pkgs = nixpkgs.legacyPackages.${system};
         system = "x86_64-linux";
         timezone = "America/New_York";
-        user_opts = rec {
-            username = "estraven";
-            name = username;
-            email = "email@handdara.com";
-        };
     in {
         nixosConfigurations = {
             sha76 = lib.nixosSystem {
@@ -59,10 +54,14 @@
                     inherit
                         system
                         timezone
-                        user_opts
                         system-overlays
                         ;
                     hostname = "sha76";
+                    user_opts = rec {
+                        username = "handdara";
+                        name = username;
+                        email = "email@handdara.com";
+                    };
                 };
             };
             mixed = lib.nixosSystem {
@@ -77,10 +76,14 @@
                     inherit
                         system
                         timezone
-                        user_opts
                         system-overlays
                         ;
                     hostname = "mixed";
+                    user_opts = rec {
+                        username = "estraven";
+                        name = username;
+                        email = "email@handdara.com";
+                    };
                 };
             };
             theseus = lib.nixosSystem {
@@ -95,10 +98,14 @@
                     inherit
                         system
                         timezone
-                        user_opts
                         system-overlays
                         ;
                     hostname = "theseus";
+                    user_opts = rec {
+                        username = "estraven";
+                        name = username;
+                        email = "email@handdara.com";
+                    };
                 };
             };
         };
@@ -110,7 +117,12 @@
                     ./user/apps/matlab/r2022b
                 ];
                 extraSpecialArgs = {
-                    inherit user_opts nix-vimrc;
+                    inherit nix-vimrc;
+                    user_opts = rec {
+                        username = "handdara";
+                        name = username;
+                        email = "email@handdara.com";
+                    };
                 };
             };
             estraven = hmlib.homeManagerConfiguration {
@@ -120,7 +132,12 @@
                     ./user/apps/matlab/r2023a
                 ];
                 extraSpecialArgs = {
-                    inherit user_opts nix-vimrc;
+                    inherit nix-vimrc;
+                    user_opts = rec {
+                        username = "estraven";
+                        name = username;
+                        email = "email@handdara.com";
+                    };
                 };
             };
         };
