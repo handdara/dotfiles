@@ -130,6 +130,7 @@ in {
         pkgs.pastel
         pkgs.pavucontrol
         pkgs.pinentry-curses
+        pkgs.qutebrowser
         pkgs.redshift
         pkgs.stow
         pkgs.tealdeer
