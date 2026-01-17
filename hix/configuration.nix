@@ -87,7 +87,7 @@ in {
         pkgs.asciinema
         pkgs.bat
         pkgs.bc
-        pkgs.bibata-cursors-translucent
+        # pkgs.bibata-cursors-translucent
         pkgs.boxes
         pkgs.brightnessctl
         pkgs.btop

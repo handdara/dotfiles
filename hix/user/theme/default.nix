@@ -53,11 +53,13 @@ in {
             theme.package = pkgs.chicago95;
             iconTheme.name = "Chicago95";
             iconTheme.package = pkgs.chicago95;
-            cursorTheme = {
-                name = "Bibata-Tinted";
-                size = 48;
-                package = pkgs.bibata-cursors-translucent;
-            };
+        };
+        home.pointerCursor = {
+            gtk.enable = true;
+            x11.enable = true;
+            name = "Bibata-Tinted";
+            size = 48;
+            package = pkgs.bibata-cursors-translucent;
         };
         qt = {
             enable = true;
