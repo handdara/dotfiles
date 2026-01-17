@@ -71,7 +71,7 @@ local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
 
 local ansible = "tmux new -As ansible nvim"
-local browser_cmd = "vivaldi"
+local browser_cmd = "qutebrowser"
 local calendar = scripts_dir .. "__h_boot_cal"
 local calendar_cmd = terminal_cmd .. calendar
 local mediamgr = scripts_dir .. "__h_boot_media"
@@ -715,7 +715,7 @@ awful.rules.rules = {
     },
     {
         rule = { class = "MATLAB" },
-        properties = { floating = true }
+        properties = { floatin = true }
     },
 
     { rule = {}, properties = {}, callback = awful.client.setslave }
