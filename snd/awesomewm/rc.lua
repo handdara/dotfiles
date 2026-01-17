@@ -705,10 +705,13 @@ awful.rules.rules = {
         rule = { class = "Vivaldi" },
         properties = { tag = "3" }
     },
-    -- {
-    --     rule = { class = "Vivaldi" },
-    --     properties = { tag = "3" }
-    -- },
+    {
+        rule = { class = "Firefox" },
+        properties = { tag = "3" },
+    },
+        rule = { class = "qutebrowser" },
+        properties = { tag = "3" }
+    },
 
     { rule = {}, properties = {}, callback = awful.client.setslave }
 }
