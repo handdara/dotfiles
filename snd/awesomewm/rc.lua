@@ -713,6 +713,10 @@ awful.rules.rules = {
         rule = { class = "qutebrowser" },
         properties = { tag = "3" }
     },
+    {
+        rule = { class = "MATLAB" },
+        properties = { floating = true }
+    },
 
     { rule = {}, properties = {}, callback = awful.client.setslave }
 }

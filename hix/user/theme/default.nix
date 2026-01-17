@@ -57,9 +57,10 @@ in {
         home.pointerCursor = {
             gtk.enable = true;
             x11.enable = true;
-            name = "Bibata-Tinted";
-            size = 48;
-            package = pkgs.bibata-cursors-translucent;
+            name = "Bibata-Original-Amber";
+            size = 36;
+            package = pkgs.bibata-cursors;
+            # package = pkgs.bibata-cursors-translucent;
         };
         qt = {
             enable = true;
