@@ -707,8 +707,9 @@ awful.rules.rules = {
     },
     {
         rule = { class = "Firefox" },
-        properties = { tag = "3" },
+        properties = { tag = "3" }
     },
+    {
         rule = { class = "qutebrowser" },
         properties = { tag = "3" }
     },
