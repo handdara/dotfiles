@@ -18,6 +18,19 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local function inspect(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. inspect(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -111,7 +124,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
-    -- awful.layout.suit.floating,
+    awful.layout.suit.floating,
 }
 -- }}}
 
@@ -548,8 +561,17 @@ local clientkeys = gears.table.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end,
-        { description = "(un)maximize horizontally", group = "client" })
-)
+        { description = "(un)maximize horizontally", group = "client" }),
+    awful.key({ super, "Control" }, [[\]],
+        function(c)
+            naughty.notify({
+                preset = naughty.config.presets.critical,
+                title = "Current Client",
+                text = "current_client = "..inspect(c).."\n class is "..inspect(c.class)
+            })
+        end,
+        { description = "debug: print client table", group = "client" })
+    )
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
@@ -683,6 +705,10 @@ awful.rules.rules = {
         rule = { class = "Vivaldi" },
         properties = { tag = "3" }
     },
+    -- {
+    --     rule = { class = "Vivaldi" },
+    --     properties = { tag = "3" }
+    -- },
 
     { rule = {}, properties = {}, callback = awful.client.setslave }
 }
