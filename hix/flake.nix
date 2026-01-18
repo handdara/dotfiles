@@ -95,6 +95,7 @@
                     inputs.kmonad.nixosModules.default
                     ./system/wm/awesomewm
                     ./games/minecraft
+                    nix-minecraft.nixosModules.minecraft-servers
                     ./games/steam
                 ];
                 specialArgs = {
