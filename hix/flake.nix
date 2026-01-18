@@ -21,6 +21,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         nixos-hardware.url = "github:NixOS/nixos-hardware";
+        nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     };
 
     outputs = {
@@ -29,9 +30,10 @@
         nix-matlab,
         nix-vimrc,
         nixos-hardware,
+        nix-minecraft,
         ...
     } @ inputs: let
-        system-overlays = [nix-matlab.overlay];
+        system-overlays = [nix-matlab.overlay nix-minecraft.overlay];
         lib = nixpkgs.lib;
         hmlib = home-manager.lib;
         pkgs = nixpkgs.legacyPackages.${system};
@@ -47,6 +49,7 @@
                     ./system/wm/plasma
                     ./system/wm/xmonad
                     ./games/minecraft
+                    nix-minecraft.nixosModules.minecraft-servers
                     ./games/steam
                     ./system/remote
                 ];
