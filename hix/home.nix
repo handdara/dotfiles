@@ -35,7 +35,8 @@
   handdara = rec {
     lightworks = false;
     font = "scientifica";
-    fontui = font + " Bold";
+    # fontui = font + " Bold";
+    fontui = "Miracode";
     fontterm = font;
     fontsize = 16;
     transparency = 90;

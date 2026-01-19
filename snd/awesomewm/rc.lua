@@ -69,6 +69,8 @@ beautiful.init(theme_dir .. theme .. "/theme.lua")
 
 local terminal = "ghostty"
 local terminal_cmd = terminal .. " -e "
+local fast_terminal = "alacritty" -- "xterm"
+local fast_terminal_cmd = fast_terminal .. " -e "
 
 local ansible = "tmux new -As ansible nvim"
 local browser_cmd = "qutebrowser"
@@ -93,9 +95,9 @@ local netmgr = "nmtui"
 local netmgr_cmd = terminal_cmd .. netmgr
 local nsi_cmd = terminal_cmd .. scripts_dir .. 'nsi'
 local osi_cmd = terminal_cmd .. scripts_dir .. 'osi'
-local username_cmd = "xterm -e __h_pick_username"
-local passmenu_cmd = "xterm -e __h_pick_pass"
-local sys_manage_cmd = "xterm mg"
+local username_cmd = fast_terminal_cmd .. "__h_pick_username"
+local passmenu_cmd = fast_terminal_cmd .. "__h_pick_pass"
+local sys_manage_cmd = fast_terminal_cmd .. "mg"
 local sysinfo = scripts_dir .. "sys/sysinfo"
 local sysinfo_cmd = terminal_cmd .. sysinfo
 local weather = scripts_dir .. "__h_chk_weather"
