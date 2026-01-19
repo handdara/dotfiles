@@ -28,6 +28,15 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
+  fileSystems."/mnt/hdda" = {
+    device = "/dev/disk/by-uuid/22d1e115-4e49-42b9-80bd-192d7a50b37d";
+    fsType = "xfs";
+    options = [
+      # "users" # Allows any user to mount and unmount
+      "nofail" # Prevent system from failing if this drive doesn't mount
+    ];
+  };
+
   swapDevices = [];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
