@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   services = {
     picom.enable = true;

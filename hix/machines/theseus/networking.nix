@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -9,7 +9,7 @@
   # OpenSSH daemon config
   services.openssh = {
     enable = lib.mkDefault true;
-    ports = [22 2222];
+    ports = [ 22 2222 ];
     settings = {
       PasswordAuthentication = false;
       PubkeyAuthentication = true;

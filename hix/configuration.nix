@@ -1,11 +1,12 @@
-{
-  pkgs,
-  hostname,
-  system-overlays,
-  ...
-} @ inputs: let
+{ pkgs
+, hostname
+, system-overlays
+, ...
+} @ inputs:
+let
   locale = inputs.locale or "en_US.UTF-8";
-in {
+in
+{
   imports =
     [
       ./machines/${hostname}/hardware-configuration.nix
@@ -18,11 +19,11 @@ in {
       ./system/hardware/kmonad
       # ./system/hardware/displaylink
     ]
-    ++ (inputs.extraModules or []);
+    ++ (inputs.extraModules or [ ]);
 
   nixpkgs.overlays = system-overlays;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = hostname;
 
@@ -65,11 +66,11 @@ in {
   users.users.${inputs.user_opts.username} = {
     isNormalUser = true;
     description = inputs.user_opts.name;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [ "networkmanager" "wheel" ];
     useDefaultShell = true;
   };
 
-  environment.shells = with pkgs; [fish bash zsh dash];
+  environment.shells = with pkgs; [ fish bash zsh dash ];
   programs.fish.enable = true;
   programs.bash.enableLsColors = false;
   users.defaultUserShell = pkgs.dash;
@@ -169,7 +170,7 @@ in {
   };
   programs.thunar = {
     enable = true;
-    plugins = [pkgs.xfce.thunar-volman pkgs.xfce.thunar-archive-plugin];
+    plugins = [ pkgs.xfce.thunar-volman pkgs.xfce.thunar-archive-plugin ];
   };
   programs.dconf.enable = true;
 

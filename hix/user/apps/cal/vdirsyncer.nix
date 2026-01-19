@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  home.packages = [pkgs.vdirsyncer];
+{ pkgs, ... }: {
+  home.packages = [ pkgs.vdirsyncer ];
   home.file = {
     ".vdirsyncer/config".text = ''
       [general]

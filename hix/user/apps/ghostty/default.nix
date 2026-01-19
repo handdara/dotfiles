@@ -1,4 +1,5 @@
-{config, ...}: let
+{ config, ... }:
+let
   bothThemes = import ../../../util/color;
   theme =
     if config.handdara.lightworks
@@ -8,11 +9,12 @@
   c = theme.hexcodes;
   overrides =
     if config.handdara.lightworks
-    then {}
+    then { }
     else {
       bg = "120b0d";
     };
-in {
+in
+{
   home.file = {
     ".config/ghostty/config".text = ''
       theme = ${name}

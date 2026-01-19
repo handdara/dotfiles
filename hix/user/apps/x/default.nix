@@ -1,4 +1,4 @@
-{config, ...}: {
+{ config, ... }: {
   xresources.extraConfig = ''
     XTerm*faceName: ${config.handdara.fontui or "Monospace"}
     XTerm*faceSize: ${builtins.toString (config.handdara.fontsize - 2)}

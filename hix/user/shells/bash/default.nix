@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  home.packages = [pkgs.blesh];
+{ pkgs, ... }: {
+  home.packages = [ pkgs.blesh ];
   programs.bash = {
     enable = true;
     shellAliases = {

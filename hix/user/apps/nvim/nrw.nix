@@ -1,28 +1,33 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   nvim_dir = ../../../../fst/him/nvim-nrw;
   handdara_dir = nvim_dir + /lua/handdara;
   plugin_dir = handdara_dir + /plugins;
-  get_plugin_path = f: let
-    ps = toString plugin_dir;
-    fs = "${ps}/${f}";
-  in
+  get_plugin_path = f:
+    let
+      ps = toString plugin_dir;
+      fs = "${ps}/${f}";
+    in
     builtins.toPath fs;
-  get_handdara_path = f: let
-    hs = toString handdara_dir;
-    fs = "${hs}/${f}";
-  in
+  get_handdara_path = f:
+    let
+      hs = toString handdara_dir;
+      fs = "${hs}/${f}";
+    in
     builtins.toPath fs;
-  inc_plugin = f: let
-    fext = f + ".lua";
-    cpath = get_handdara_path fext;
-  in
-    {".config/nvim/lua/handdara/plugins/${fext}".source = get_plugin_path fext;}
+  inc_plugin = f:
+    let
+      fext = f + ".lua";
+      cpath = get_handdara_path fext;
+    in
+    { ".config/nvim/lua/handdara/plugins/${fext}".source = get_plugin_path fext; }
     // (
       if pkgs.lib.pathExists cpath
-      then {".config/nvim/lua/handdara/${fext}".source = cpath;}
-      else {}
+      then { ".config/nvim/lua/handdara/${fext}".source = cpath; }
+      else { }
     );
-in {
+in
+{
   programs.neovim = {
     enable = true;
     withNodeJs = true;

@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  user_opts,
-  ...
+{ config
+, pkgs
+, user_opts
+, ...
 }: {
   imports = [
     ./system/wm/awesomewm/home.nix

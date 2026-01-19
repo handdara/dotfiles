@@ -1,4 +1,4 @@
-{colorData}:
+{ colorData }:
 with colorData; {
   dark = rec {
     name = "${theme_name}_dark";

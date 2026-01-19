@@ -1,4 +1,5 @@
-{config, ...}: let
+{ config, ... }:
+let
   bothThemes = import ../../../util/color;
   theme =
     if (config.handdara.lightworks == true)
@@ -6,7 +7,7 @@
     else bothThemes.dark;
   st =
     theme.starship
-        or (
+      or (
       if (config.handdara.lightworks == true)
       then {
         fg1 = theme.hexcodes.black; # os
@@ -303,7 +304,8 @@
     style = "italic purple"
     format = "[ $duration ]($style)"
   '';
-in {
+in
+{
   programs.starship =
     if config.handdara.shprompt != "off"
     then {
@@ -312,7 +314,7 @@ in {
       enableBashIntegration = true;
       enableZshIntegration = true;
     }
-    else {};
+    else { };
 
   home.file = {
     ".config/starship.toml".text =

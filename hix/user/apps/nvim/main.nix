@@ -1,10 +1,11 @@
 {
   /*
-  config, lib,
+    config, lib,
   */
-  pkgs,
-  ...
-}: let
+  pkgs
+, ...
+}:
+let
   treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
     p.bash
     p.c
@@ -42,7 +43,8 @@
     name = "treesitter-parsers";
     paths = treesitterWithGrammars.dependencies;
   };
-in {
+in
+{
   home.packages = with pkgs; [
     ripgrep
     fd
