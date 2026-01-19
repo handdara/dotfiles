@@ -1,12 +1,12 @@
 {
-    config,
-    pkgs,
-    ...
+  config,
+  pkgs,
+  ...
 }: {
-    home.file = {
-        ".config/kmonad/" = {
-            source = ../../../../snd/kmonad/keymap;
-            recursive = true;
-        };
+  home.file = {
+    ".config/kmonad/" = {
+      source = ../../../../snd/kmonad/keymap;
+      recursive = true;
     };
+  };
 }

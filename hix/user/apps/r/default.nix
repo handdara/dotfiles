@@ -1,6 +1,6 @@
 {pkgs, ...}: {
-    home.packages = with pkgs; [
-        R
-        rstudio
-    ];
+  home.packages = with pkgs; [
+    R
+    rstudio
+  ];
 }

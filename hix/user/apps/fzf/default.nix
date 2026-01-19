@@ -1,8 +1,8 @@
 {...}: {
-    programs.fzf = {
-        enable = true;
-        # enableFishIntegration = true;
-        # enableBashIntegration = true;
-        # enableZshIntegration = true;
-    };
+  programs.fzf = {
+    enable = true;
+    # enableFishIntegration = true;
+    # enableBashIntegration = true;
+    # enableZshIntegration = true;
+  };
 }

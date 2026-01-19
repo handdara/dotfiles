@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-    home.packages = [pkgs.desmume];
+  home.packages = [pkgs.desmume];
 }

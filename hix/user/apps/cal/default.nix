@@ -1,7 +1,7 @@
 {...} @ inputs: {
-    imports = [
-        ./calcurse.nix
-        ./khal.nix
-        ./vdirsyncer.nix
-    ];
+  imports = [
+    ./calcurse.nix
+    ./khal.nix
+    ./vdirsyncer.nix
+  ];
 }
