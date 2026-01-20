@@ -98,7 +98,9 @@ in {
     pkgs.dust
     pkgs.eza
     pkgs.fastfetch
+    pkgs.fd
     pkgs.ffmpeg
+    pkgs.figlet
     pkgs.flameshot
     pkgs.fortune
     pkgs.gallery-dl
