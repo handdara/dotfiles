@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  nix-vimrc,
-  ...
+{ config
+, pkgs
+, nix-vimrc
+, ...
 }: {
   nixpkgs.overlays = [
     nix-vimrc.overlay
@@ -22,7 +21,6 @@
     })
   ];
   home.packages = with pkgs; [
-    alejandra
     bash-language-server
     fd
     lua-language-server # lua lang server
@@ -30,6 +28,7 @@
     neovim
     neovim-remote
     nil # nix lang server
+    nixpkgs-fmt
     ripgrep
     rust-analyzer-unwrapped # rust lang server
     tinymist

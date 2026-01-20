@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [khal];
+{ pkgs, ... }: {
+  home.packages = with pkgs; [ khal ];
   home.file = {
     ".config/khal/config".text = ''
       [calendars]

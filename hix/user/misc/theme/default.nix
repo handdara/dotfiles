@@ -1,8 +1,8 @@
-{
-  config,
-  user_opts,
-  ...
-}: let
+{ config
+, user_opts
+, ...
+}:
+let
   bothThemes = import ../../../util/color;
   c =
     if (config.handdara.lightworks == true)
@@ -10,7 +10,8 @@
     else bothThemes.dark;
   mkText = import ../../../util/mkTheme;
   themeText = mkText c;
-in {
+in
+{
   home.file = {
     ".local/share/theme/current.base16".text = themeText.base16;
   };

@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   home.file = {
     ".tmux.conf".text = ''
       set-option -g default-command bash

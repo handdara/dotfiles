@@ -1,3 +1,3 @@
-{...}: {
+{ ... }: {
   services.logind.lidSwitchExternalPower = "ignore";
 }

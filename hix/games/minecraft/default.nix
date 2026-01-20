@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  environment.systemPackages = [pkgs.prismlauncher];
+{ pkgs, ... }: {
+  environment.systemPackages = [ pkgs.prismlauncher ];
   services.minecraft-servers = {
     enable = true;
     eula = true;

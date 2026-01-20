@@ -43,4 +43,4 @@ stable: _git_add purge && switch-home
     nix develop --command alejandra --check .
 
 fmt:
-    alejandra .
+    nixpkgs-fmt .

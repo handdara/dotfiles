@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   home.file.".config/lazygit/config.yml".text = ''
     os:
       #editPreset: 'nvim-remote'

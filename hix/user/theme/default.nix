@@ -1,11 +1,12 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, lib
+, ...
+}:
+let
   default-font = "FreeMono";
-in {
+in
+{
   options = {
     handdara.lightworks = lib.mkOption {
       type = lib.types.bool;

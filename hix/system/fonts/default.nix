@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   fonts = {
     packages = with pkgs; [
       noto-fonts
@@ -28,9 +28,9 @@
     ];
     fontconfig = {
       defaultFonts = {
-        serif = ["MonaspiceXe-NF" "Noto Serif"];
-        sansSerif = ["Miracode" "MonaspiceAr-NF" "Noto Sans"];
-        monospace = ["MonaspiceXe-NF" "Noto Sans Mono"];
+        serif = [ "MonaspiceXe-NF" "Noto Serif" ];
+        sansSerif = [ "Miracode" "MonaspiceAr-NF" "Noto Sans" ];
+        monospace = [ "MonaspiceXe-NF" "Noto Sans Mono" ];
       };
     };
   };

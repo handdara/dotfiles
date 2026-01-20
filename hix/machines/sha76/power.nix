@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   ## POWER
   powerManagement = {
     enable = true;

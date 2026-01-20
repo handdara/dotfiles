@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   specialisation.ccrf.configuration = {
     # ALERT: This uses unfree software, here is a helpful log report:
@@ -19,7 +18,7 @@
     # nix-prefetch-url file://$PWD/displaylink-580.zip
     # ***
     # services.xserver.videoDrivers = ["displaylink" "modesetting" "nvidia"];
-    services.xserver.videoDrivers = ["displaylink" "modesetting"];
+    services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
     services.xserver.displayManager.sessionCommands = ''
       ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0
     '';

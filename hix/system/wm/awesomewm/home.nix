@@ -1,4 +1,5 @@
-{config, ...}: let
+{ config, ... }:
+let
   awm_dir = ../../../../snd/awesomewm;
   bothThemes = import ../../../util/color;
   theme =
@@ -6,7 +7,8 @@
     then bothThemes.light
     else bothThemes.dark;
   c = theme.hexcodes;
-in {
+in
+{
   home.file = {
     ".config/awesome/rc.lua".source = awm_dir + /rc.lua;
     ".config/awesome/autorun.sh".source = awm_dir + /autorun.sh;

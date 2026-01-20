@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  home.packages = [pkgs.calcurse];
+{ pkgs, ... }: {
+  home.packages = [ pkgs.calcurse ];
   home.file = {
     ".config/calcurse" = {
       source = ./../../../../snd/calcurse;
