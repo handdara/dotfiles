@@ -46,7 +46,6 @@
           ./configuration.nix
           inputs.kmonad.nixosModules.default
           ./system/wm/awesomewm
-          ./system/wm/plasma
           ./system/wm/xmonad
           ./games/minecraft
           nix-minecraft.nixosModules.minecraft-servers
@@ -94,6 +93,7 @@
           ./configuration.nix
           inputs.kmonad.nixosModules.default
           ./system/wm/awesomewm
+          ./system/wm/plasma
           ./games/minecraft
           nix-minecraft.nixosModules.minecraft-servers
           ./games/steam
