@@ -21,7 +21,7 @@
     # ./user/apps/r
     ./user/apps/starship
     ./user/apps/tmux
-    ./user/apps/vim
+    # ./user/apps/vim # atm using the vimrc from github:handdara/nix-vimrc
     ./user/apps/x
     ./user/apps/xmonad
     ./user/apps/pdfs
