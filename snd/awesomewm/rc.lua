@@ -87,7 +87,7 @@ local email = "mbsync -a && neomutt"
 local email_cmd = terminal_cmd .. email
 local misc_tmux = "tmux new -As misc"
 local misc_tmux_cmd = terminal_cmd .. misc_tmux
-local monitor = "tmux new -As monitor btop"
+local monitor = "__h_monitor"
 local monitor_cmd = terminal_cmd .. monitor
 local music = "nix run ~/apps/hmus"
 local music_cmd = terminal_cmd .. music
@@ -355,8 +355,10 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.textbox(wibar_separator),
             awful.widget.watch('__h_bat_status', 0.2),
             wibox.widget.textbox(wibar_separator),
-            stbar_txtclk,
-            wibox.widget.textbox(' '),
+            awful.widget.watch('__h_bar_date', 60),
+            wibox.widget.textbox(wibar_separator),
+            awful.widget.watch('__h_bar_time', 0.5),
+            wibox.widget.textbox(wibar_separator),
             wibox.widget.systray(),
             s.layout_box,
         },
@@ -789,3 +791,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 awful.spawn.with_shell('. ' .. os.getenv("HOME") .. "/.config/awesome/autorun.sh")
+awful.spawn.with_shell('mega-sync')
