@@ -96,6 +96,7 @@
             ./configuration.nix
             inputs.kmonad.nixosModules.default
             ./system/wm/awesomewm
+            ./system/jellyfin
             ./games/minecraft
             nix-minecraft.nixosModules.minecraft-servers
             ./games/steam
