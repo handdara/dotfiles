@@ -719,7 +719,11 @@ awful.rules.rules = {
     },
     {
         rule = { class = "MATLAB" },
-        properties = { floatin = true }
+        properties = { floating = true }
+    },
+    {
+        rule = { class = "Thunar" },
+        properties = { tag = "6" }
     },
 
     { rule = {}, properties = {}, callback = awful.client.setslave }
