@@ -45,16 +45,19 @@ in
     };
   };
   config = {
-    gtk = {
-      enable = true;
-      # font.name = config.handdara.font;
-      # font.size = config.handdara.fontsize;
-      # font.package = pkgs.scientifica;
-      theme.name = "Chicago95";
-      theme.package = pkgs.chicago95;
-      iconTheme.name = "Chicago95";
-      iconTheme.package = pkgs.chicago95;
-    };
+    gtk =
+      if config.handdara.lightworks then {
+        enable = true;
+        theme.name = "Chicago95";
+        theme.package = pkgs.chicago95;
+        iconTheme.name = "Chicago95";
+        iconTheme.package = pkgs.chicago95;
+      } else {
+        theme.name = "Layan";
+        theme.package = pkgs.layan-gtk-theme;
+        # iconTheme.name = "Layan";
+        # iconTheme.package = pkgs.layan-gtk-theme;
+      };
     home.pointerCursor = {
       gtk.enable = true;
       x11.enable = true;
@@ -66,7 +69,7 @@ in
     qt = {
       enable = true;
       platformTheme.name = "gtk";
-      style.name = "Chicago95";
+      style.name = if config.handdara.lightworks then "Chicago95" else "Layan";
     };
   };
 }
