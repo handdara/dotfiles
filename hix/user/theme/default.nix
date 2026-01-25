@@ -45,31 +45,32 @@ in
     };
   };
   config = {
-    gtk =
-      if config.handdara.lightworks then {
-        enable = true;
-        theme.name = "Chicago95";
-        theme.package = pkgs.chicago95;
-        iconTheme.name = "Chicago95";
-        iconTheme.package = pkgs.chicago95;
-      } else {
-        theme.name = "Layan";
-        theme.package = pkgs.layan-gtk-theme;
-        # iconTheme.name = "Layan";
-        # iconTheme.package = pkgs.layan-gtk-theme;
-      };
-    home.pointerCursor = {
-      gtk.enable = true;
-      x11.enable = true;
-      name = "Bibata-Original-Amber";
-      size = 36;
-      package = pkgs.bibata-cursors;
-      # package = pkgs.bibata-cursors-translucent;
-    };
-    qt = {
-      enable = true;
-      platformTheme.name = "gtk";
-      style.name = if config.handdara.lightworks then "Chicago95" else "Layan";
-    };
+    home.packages = [pkgs.themechanger];
+    # gtk =
+    #   if config.handdara.lightworks then {
+    #     enable = true;
+    #     theme.name = "Chicago95";
+    #     theme.package = pkgs.chicago95;
+    #     iconTheme.name = "Chicago95";
+    #     iconTheme.package = pkgs.chicago95;
+    #   } else {
+    #     theme.name = "Juno";
+    #     theme.package = pkgs.juno-theme;
+    #     iconTheme.name = "Juno";
+    #     iconTheme.package = pkgs.juno-theme;
+    #   };
+    # home.pointerCursor = {
+    #   gtk.enable = true;
+    #   x11.enable = true;
+    #   name = "Bibata-Original-Amber";
+    #   size = 36;
+    #   package = pkgs.bibata-cursors;
+    #   # package = pkgs.bibata-cursors-translucent;
+    # };
+    # qt = {
+    #   enable = true;
+    #   platformTheme.name = "gtk";
+    #   style.name = if config.handdara.lightworks then "Chicago95" else "Juno";
+    # };
   };
 }
