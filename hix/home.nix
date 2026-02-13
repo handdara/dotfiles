@@ -38,8 +38,8 @@
     # fontui = font + " Bold";
     fontui = "Miracode";
     fontterm = font;
-    fontsize = 16;
-    transparency = 90;
+    fontsize = 18;
+    transparency = 75;
     shprompt = "simple";
   };
 
