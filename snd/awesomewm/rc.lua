@@ -19,16 +19,16 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 local function inspect(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. inspect(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
+    if type(o) == 'table' then
+        local s = '{ '
+        for k, v in pairs(o) do
+            if type(k) ~= 'number' then k = '"' .. k .. '"' end
+            s = s .. '[' .. k .. '] = ' .. inspect(v) .. ','
+        end
+        return s .. '} '
+    else
+        return tostring(o)
+    end
 end
 
 -- {{{ Error handling
@@ -65,6 +65,7 @@ local theme = "marrissa" -- also available: default zenburn gtk sky
 local theme_dir = os.getenv("HOME") .. '/.config/awesome/themes/'
 local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible/'
 local scripts_dir = os.getenv("HOME") .. '/.local/scripts/'
+local screenshots_dir = os.getenv("HOME") .. '/Pictures/Screenshots/'
 beautiful.init(theme_dir .. theme .. "/theme.lua")
 
 local terminal = "ghostty"
@@ -501,6 +502,14 @@ local globalkeys = gears.table.join(
         awful.util.spawn("brightnessctl set '3%+'", false)
     end),
 
+    -- Screenshot Keys
+    awful.key({ super, "Shift" }, "s", function()
+        awful.util.spawn('flameshot full --path "'..screenshots_dir..'"', false)
+    end),
+    awful.key({ super, "Control" }, "s", function()
+        awful.util.spawn('flameshot gui --path "'..screenshots_dir..'"', false)
+    end),
+
     -- Media Keys
     -- awful.key({}, "XF86AudioPlay", function()
     --     awful.util.spawn("playerctl play-pause", false)
@@ -571,11 +580,11 @@ local clientkeys = gears.table.join(
             naughty.notify({
                 preset = naughty.config.presets.critical,
                 title = "Current Client",
-                text = "current_client = "..inspect(c).."\n class is "..inspect(c.class)
+                text = "current_client = " .. inspect(c) .. "\n class is " .. inspect(c.class)
             })
         end,
         { description = "debug: print client table", group = "client" })
-    )
+)
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.

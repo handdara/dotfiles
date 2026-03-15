@@ -33,15 +33,31 @@
 
   handdara = rec {
     lightworks = false;
-    font = "scientifica";
+    # font = "scientifica";
+    font = "MonaspiceAr NF";
     # font = "Maple Mono NF";
     # fontui = font + " Bold";
-    fontui = "Miracode";
+    # fontui = "Miracode";
+    fontui = "MonaspiceKr NF";
     fontterm = font;
-    fontsize = 18;
-    transparency = 75;
+    fontsize = 16;
+    transparency = 92;
     shprompt = "simple";
   };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "org.qutebrowser.qutebrowser.desktop";
+      "inode/directory" = "thunar.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+    };
+  };
+
 
   nixpkgs.config.allowUnfree = true;
 

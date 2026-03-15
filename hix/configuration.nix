@@ -138,6 +138,9 @@ in
     pkgs.redshift
     pkgs.stow
     pkgs.tealdeer
+    # pkgs.teams #not supported on linux
+    pkgs.teams-for-linux
+    # pkgs.teamspeak3
     # pkgs.themechanger
     pkgs.toilet
     pkgs.universal-ctags
