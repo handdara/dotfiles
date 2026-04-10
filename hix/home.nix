@@ -33,18 +33,20 @@
 
   handdara = rec {
     lightworks = false;
-    # font = "scientifica";
-    font = "MonaspiceAr NF";
+    font = "scientifica";
+    # font = "MonaspiceAr NF";
     # font = "Maple Mono NF";
-    # fontui = font + " Bold";
+    fontui = font + " Bold";
     # fontui = "Miracode";
-    fontui = "MonaspiceKr NF";
+    # fontui = "MonaspiceKr NF";
     fontterm = font;
+    # fontterm = "scientifica";
     fontsize = 16;
-    transparency = 92;
+    transparency = 50;
     shprompt = "simple";
   };
 
+  # Setting default applications on x11
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -55,9 +57,12 @@
       "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
       "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
       "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+      "image/jpeg" = "org.xfce.ristretto.desktop";
+      "image/png" = "org.xfce.ristretto.desktop";
+      "image/webp" = "org.xfce.ristretto.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "impress.desktop";
     };
   };
-
 
   nixpkgs.config.allowUnfree = true;
 

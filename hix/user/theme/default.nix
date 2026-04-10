@@ -45,7 +45,7 @@ in
     };
   };
   config = {
-    home.packages = [pkgs.themechanger];
+    home.packages = [ pkgs.themechanger ];
     # gtk =
     #   if config.handdara.lightworks then {
     #     enable = true;

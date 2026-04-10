@@ -25,6 +25,7 @@
       nerd-fonts.terminess-ttf
       recursive
       scientifica
+      fira-math
     ];
     fontconfig = {
       defaultFonts = {

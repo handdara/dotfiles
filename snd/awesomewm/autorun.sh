@@ -6,4 +6,4 @@ run() {
 }
 run "volctl"
 run "flameshot"
-run "rm /tmp/nvimsocket"
+run "bash -c 'rm /tmp/nvimsocket'"
