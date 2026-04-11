@@ -32,7 +32,7 @@
   ];
 
   handdara = rec {
-    lightworks = false;
+    lightworks = true;
     font = "scientifica";
     # font = "MonaspiceAr NF";
     # font = "Maple Mono NF";

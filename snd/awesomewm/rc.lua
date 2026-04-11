@@ -730,7 +730,7 @@ awful.rules.rules = {
     },
     {
         rule = { class = "MATLAB" },
-        properties = { floating = true }
+        properties = { floating = true, tag = "2" }
     },
     {
         rule = { class = "Thunar" },
