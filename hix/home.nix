@@ -39,10 +39,13 @@
     fontui = font + " Bold";
     # fontui = "Miracode";
     # fontui = "MonaspiceKr NF";
-    fontterm = font;
+    # fontterm = font;
     # fontterm = "scientifica";
+    # fontterm = "Miracode";
+    # fontterm = "Hasklug Nerd Font";
+    fontterm = "Maple Mono NF";
     fontsize = 16;
-    transparency = 50;
+    transparency = if lightworks then 50 else 80;
     shprompt = "simple";
   };
 
