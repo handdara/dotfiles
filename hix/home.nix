@@ -33,6 +33,7 @@
 
   handdara = rec {
     lightworks = false;
+    transparency = 50;
     font = "scientifica";
     # font = "MonaspiceAr NF";
     # font = "Maple Mono NF";
@@ -45,8 +46,6 @@
     # fontterm = "Hasklug Nerd Font";
     # fontterm = "Maple Mono NF";
     fontsize = 18;
-    # transparency = if lightworks then 50 else 85;
-    transparency = 50;
     shprompt = "simple";
   };
 
