@@ -12,7 +12,7 @@ in
   home.file = {
     ".config/awesome/rc.lua".source = awm_dir + /rc.lua;
     ".config/awesome/autorun.sh".source = awm_dir + /autorun.sh;
-    ".config/awesome/themes/marrissa/theme.lua".text = ''
+    ".config/awesome/themes/handdara/theme.lua".text = ''
       local theme_assets = require("beautiful.theme_assets")
       local xresources = require("beautiful.xresources")
       local dpi = xresources.apply_dpi
@@ -42,9 +42,9 @@ in
 
       theme.useless_gap   = dpi(4)
       theme.border_width  = dpi(3)
-      theme.border_normal = "#${theme.wm.window_border.normal or c.black}"
-      theme.border_focus  = "#${theme.wm.window_border.focus or c.cyan}"
-      theme.border_marked = "#${theme.wm.window_border.marked or c.white}"
+      theme.border_normal = "${theme.wm.window_border.normal or c.black}"
+      theme.border_focus  = "${theme.wm.window_border.focus or c.cyan}"
+      theme.border_marked = "${theme.wm.window_border.marked or c.white}"
 
       -- There are other variable sets
       -- overriding the default one when
