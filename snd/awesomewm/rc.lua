@@ -61,7 +61,7 @@ end
 -- }}}
 
 -- {{{ Variable definitions
-local theme = "marrissa" -- also available: default zenburn gtk sky
+local theme = "handdara" -- also available: default zenburn gtk sky
 local theme_dir = os.getenv("HOME") .. '/.config/awesome/themes/'
 local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible/'
 local scripts_dir = os.getenv("HOME") .. '/.local/scripts/'
@@ -382,6 +382,11 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings, also keymap, keybinds
 local globalkeys = gears.table.join(
     awful.key({ super, }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+    awful.key({ super, "Control" }, "b", function()
+        for s in screen do
+            s.wibox.visible = not s.wibox.visible
+        end
+    end, { description = "toggle statusbar", group = "awesome" }),
     awful.key({ super, }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
     awful.key({ super, }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
     awful.key({ super, }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
@@ -507,10 +512,10 @@ local globalkeys = gears.table.join(
 
     -- Screenshot Keys
     awful.key({ super, "Shift" }, "s", function()
-        awful.util.spawn('flameshot full --path "'..screenshots_dir..'"', false)
+        awful.util.spawn('flameshot full --path "' .. screenshots_dir .. '"', false)
     end),
     awful.key({ super, "Control" }, "s", function()
-        awful.util.spawn('flameshot gui --path "'..screenshots_dir..'"', false)
+        awful.util.spawn('flameshot gui --path "' .. screenshots_dir .. '"', false)
     end),
 
     -- Media Keys
