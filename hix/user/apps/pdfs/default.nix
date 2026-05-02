@@ -6,6 +6,7 @@
     enable = true;
     options = {
       font = "${config.handdara.font} normal ${builtins.toString (config.handdara.fontsize)}";
+      recolor-keephue = true;
     };
   };
   programs.pandoc.enable = true;
