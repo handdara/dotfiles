@@ -43,6 +43,11 @@ in
       default = "regular";
       description = "mode for starship prompt: regular, simple, off";
     };
+    handdara.colortheme = lib.mkOption {
+      type = lib.types.path;
+      default = ../../util/color;
+      description = "path to the color theme to use (from ../theme/ dir)";
+    };
   };
   config = {
     home.packages = [ pkgs.themechanger ];

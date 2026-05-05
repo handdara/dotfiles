@@ -85,9 +85,9 @@ with colordata; {
     };
     wm = {
       window_border = {
-        focus = bright_blue;
-        normal = black;
-        marked = bright_green;
+        focus = hexcodes.bright_blue;
+        normal = hexcodes.black;
+        marked = hexcodes.bright_green;
       };
     };
     starship = {
