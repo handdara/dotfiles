@@ -16,7 +16,7 @@
     ./user/apps/kmonad
     ./user/apps/lazygit
     ./user/apps/mouseless
-    ./user/apps/spotify-player
+    # ./user/apps/spotify-player
     # ./user/apps/megasync
     ./user/apps/nvim
     # ./user/apps/r
