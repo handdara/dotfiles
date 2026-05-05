@@ -153,6 +153,7 @@ in
     pkgs.wget
     pkgs.wikiman
     pkgs.wiki-tui
+    pkgs.spotify-player
     pkgs.xclip
     pkgs.xcolor
     pkgs.xfce.ristretto

@@ -16,6 +16,7 @@
     ./user/apps/kmonad
     ./user/apps/lazygit
     ./user/apps/mouseless
+    ./user/apps/spotify-player
     # ./user/apps/megasync
     ./user/apps/nvim
     # ./user/apps/r
@@ -33,7 +34,7 @@
 
   handdara = rec {
     lightworks = false;
-    transparency = 50;
+    transparency = 60;
     font = "scientifica";
     # font = "MonaspiceAr NF";
     # font = "Maple Mono NF";
@@ -47,6 +48,7 @@
     # fontterm = "Maple Mono NF";
     fontsize = 18;
     shprompt = "simple";
+    colortheme = ./util/color/haley.nix;
   };
 
   # Setting default applications on x11
