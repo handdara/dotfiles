@@ -86,12 +86,14 @@
       EDITOR = "nvim";
       MANPAGER = "__h_nvim -c 'Man!' -o -";
     };
-
+    file.".gnupg/gpg-agent.conf".text = ''
+      default-cache-ttl 34560000
+      max-cache-ttl 34560000
+    ''; # gnupg agent config
     packages = [
       pkgs.nps
       pkgs.youtube-tui
     ];
-
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
