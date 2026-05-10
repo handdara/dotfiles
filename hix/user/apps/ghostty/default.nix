@@ -13,6 +13,7 @@ let
     else {
       bg = "120b0d";
     };
+  fontsize-scaled = builtins.ceil (config.handdara.uiscale * (config.handdara.fontsize - 2));
 in
 {
   home.file = {
@@ -20,7 +21,7 @@ in
       theme = ${name}
       font-family = ""
       font-family = "${config.handdara.fontterm}"
-      font-size = ${builtins.toString (config.handdara.fontsize - 2)}
+      font-size = ${builtins.toString fontsize-scaled}
       cursor-style = block
       cursor-style-blink = false
       background-opacity = ${builtins.toString (config.handdara.transparency / 100.0)}

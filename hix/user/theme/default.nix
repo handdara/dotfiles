@@ -33,6 +33,11 @@ in
       default = 12;
       description = "system font size";
     };
+    handdara.uiscale = lib.mkOption {
+      type = lib.types.numbers.between 0.5 3;
+      default = 1;
+      description = "scale ui elements by this, e.g. ui/terminal text";
+    };
     handdara.transparency = lib.mkOption {
       type = lib.types.ints.between 2 100;
       default = 85;

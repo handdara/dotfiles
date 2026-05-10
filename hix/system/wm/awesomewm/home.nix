@@ -7,6 +7,8 @@ let
     then bothThemes.light
     else bothThemes.dark;
   c = theme.hexcodes;
+  fontsize-scaled = builtins.ceil (config.handdara.uiscale * config.handdara.fontsize);
+  uiscale = builtins.toString config.handdara.uiscale;
 in
 {
   home.file = {
@@ -25,7 +27,7 @@ in
       local theme = {}
 
       theme.system_font   = "${config.handdara.fontui}"
-      theme.font          = theme.system_font .. " ${builtins.toString (config.handdara.fontsize - 2)}"
+      theme.font          = theme.system_font .. " ${builtins.toString fontsize-scaled}"
       theme.hotkeys_font  = theme.system_font .. " 14"
       theme.hotkeys_description_font  = theme.system_font .. " Italic 14"
 
@@ -40,8 +42,8 @@ in
       theme.fg_urgent     = "${c.bright_white}"
       theme.fg_minimize   = "${c.bg}"
 
-      theme.useless_gap   = dpi(4)
-      theme.border_width  = dpi(3)
+      theme.useless_gap   = dpi(math.ceil(${uiscale} * 4))
+      theme.border_width  = dpi(math.ceil(${uiscale} * 3))
       theme.border_normal = "${theme.wm.window_border.normal or c.black}"
       theme.border_focus  = "${theme.wm.window_border.focus or c.cyan}"
       theme.border_marked = "${theme.wm.window_border.marked or c.white}"
@@ -63,7 +65,7 @@ in
       theme.hotkeys_fg = "${c.magenta}"
 
       -- Generate taglist squares:
-      local taglist_square_size = dpi(6)
+      local taglist_square_size = dpi(math.ceil(${uiscale} * 6))
       theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
       taglist_square_size, "${c.blue}"
       )
@@ -85,8 +87,8 @@ in
       theme.menu_fg_focus = "${c.bg}"
       -- menu_[border_color|border_width]
       theme.menu_submenu_icon = themes_path.."default/submenu.png"
-      theme.menu_height = dpi(25)
-      theme.menu_width  = dpi(550)
+      theme.menu_height = dpi(math.ceil(${uiscale} * 25))
+      theme.menu_width  = dpi(math.ceil(${uiscale} * 550))
 
       -- You can add as many variables as
       -- you wish and access them by using
@@ -121,6 +123,7 @@ in
       theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
       theme.wallpaper = bg_path .. "handdara.png"
+      theme.uiscale = ${uiscale}
 
       -- You can use your own layout icons like this:
       theme.layout_fairh = themes_path.."default/layouts/fairhw.png"

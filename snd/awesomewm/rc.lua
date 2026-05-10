@@ -175,51 +175,10 @@ local kbd_layout = awful.widget.keyboardlayout()
 -- local wibar_separator = '  '
 -- local wibar_separator = ' ᛫ '
 local wibar_separator = ' · '
+
 -- Create a textclock widget
 local stbar_txtclk = wibox.widget.textclock('W %V _*_ %d/%j' .. wibar_separator .. '%H:%M')
 
-local cal_widget = awful.popup {
-    widget       = {
-        wibox.widget {
-            date         = os.date('*t'),
-            font         = 'Sans 14',
-            spacing      = 2,
-            week_numbers = false,
-            start_sunday = false,
-            widget       = wibox.widget.calendar.month,
-        },
-        margins = 4,
-        widget = wibox.container.margin,
-    },
-    border_color = '#777777',
-    border_width = 2,
-    ontop        = true,
-    visible      = false,
-    placement    = (awful.placement.under_mouse + awful.placement.no_offscreen),
-    shape        = gears.shape.rounded_rect,
-}
-local cal_yr_widget = awful.popup {
-    widget       = {
-        wibox.widget {
-            date         = os.date('*t'),
-            font         = 'Sans 14',
-            spacing      = 2,
-            week_numbers = false,
-            start_sunday = false,
-            widget       = wibox.widget.calendar.year,
-        },
-        margins = 4,
-        widget = wibox.container.margin,
-    },
-    border_color = '#777777',
-    border_width = 2,
-    ontop        = true,
-    visible      = false,
-    placement    = (awful.placement.under_mouse + awful.placement.no_offscreen),
-    shape        = gears.shape.rounded_rect,
-}
-
--- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
     awful.button({}, 1, function(t) t:view_only() end),
     awful.button({ super }, 1, function(t)
@@ -333,7 +292,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.wibox = awful.wibar({
         position = "top",
         screen = s,
-        height = 30,
+        height = math.ceil(beautiful.uiscale * 30),
     })
 
     -- Add widgets to the wibox

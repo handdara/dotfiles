@@ -49,6 +49,7 @@
     fontsize = 18;
     shprompt = "simple";
     colortheme = ./util/color/haley.nix;
+    uiscale = 1.5;
   };
 
   # Setting default applications on x11
