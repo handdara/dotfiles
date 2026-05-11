@@ -11,7 +11,7 @@
           vim.cmd [[colorscheme ${
             if config.handdara.lightworks
             then "paper"
-            else "monalisa"
+            else "nvimgelion"
           }]]
         '';
         extraLuaConfig = ''
