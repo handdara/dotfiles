@@ -108,6 +108,7 @@ in
     pkgs.ghostty
     pkgs.gimp
     pkgs.git
+    pkgs.glirc
     pkgs.gvfs
     pkgs.imagemagick
     pkgs.isync
