@@ -219,14 +219,14 @@ local tasklist_buttons = gears.table.join(
     end))
 
 local function set_wallpaper(s)
-    -- Wallpaper
+    -- Wallpaper, background
     if beautiful.wallpaper then
         local wallpaperfile = beautiful.wallpaper
         -- If wallpaper is a function, call it with the screen
         if type(wallpaperfile) == "function" then
             wallpaperfile = wallpaperfile(s)
         end
-        gears.wallpaper.maximized(wallpaperfile, s)
+        gears.wallpaper.fit(wallpaperfile, s)
     end
 end
 
