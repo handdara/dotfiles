@@ -186,32 +186,32 @@ let
   '';
   simple_cfg = ''
     format = """
-    [░▒▓](bg:black fg:blue)\
-    [ NixOS ](bold bg:blue fg:bright-blue)\
+    [░▒▓](bg:black fg:${st.bg1})\
+    [ NixOS ](bold bg:${st.bg1} fg:${st.fg1})\
     $username\
     $hostname\
     $battery\
-    [▓▒░](bg:black fg:prev_bg)\
+    [▓▒░](fg:${st.bg2} bg:black)\
     $directory\
     $git_branch\
     $git_status\
     $nix_shell\
     $time\
-    [▓▒░](fg:black)\
+    [▓▒░](fg:${st.bg5})\
     $cmd_duration\
     \n\
     $character\
     """
 
     [username]
-    style_root = 'bold fg:white bg:red'
-    style_user = 'bold fg:black bg:bright-blue'
+    style_root = 'bold fg:${theme.hexcodes.red} bg:${st.bg1}'
+    style_user = 'bold fg:${st.bg1} bg:${st.fg1}'
     show_always = true
     format = '[ $user]($style)'
 
     [hostname]
     ssh_only = false
-    style = 'fg:black bg:bright-blue'
+    style = 'fg:${st.bg1} bg:${st.fg1}'
     ssh_symbol = ' via \(ssh\)'
     format = '[::$hostname](bold $style)[$ssh_symbol ](italic $style)'
 
@@ -231,37 +231,37 @@ let
     threshold = 100
     discharging_symbol = '\[===\]:'
     charging_symbol = '\[>>>\]:'
-    style = 'fg:white bg:blue'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
 
     [[battery.display]]
     threshold = 90
     discharging_symbol = '\[==-\]:'
     charging_symbol = ' \[>>>\]: '
-    style = 'fg:white bg:blue'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
 
     [[battery.display]]
     threshold = 75
     discharging_symbol = '\[== \]:'
     charging_symbol = '\[>> \]:'
-    style = 'fg:white bg:blue'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
 
     [[battery.display]]
     threshold = 60
     discharging_symbol = '\[=- \]:'
     charging_symbol = ' \[>> \]: '
-    style = 'fg:white bg:blue'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
 
     [[battery.display]]
     threshold = 40
     discharging_symbol = '\[=  \]:'
     charging_symbol = ' \[>> \]:'
-    style = 'fg:white bg:blue'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
 
     [[battery.display]]
     threshold = 25
     discharging_symbol = '\[-  \]:'
     charging_symbol = '\[>  \]:'
-    style = 'fg:yellow bg:blue'
+    style = 'fg:yellow bg:${st.bg2}'
 
     [[battery.display]]
     threshold = 10
@@ -295,7 +295,7 @@ let
     [time]
     disabled = false
     time_format = "%R" # Hour:Minute Format
-    style = "bold fg:bright-blue bg:black"
+    style = "bold fg:${st.fg5} bg:${st.bg5}"
     format = '[ $time ]($style)'
 
     [cmd_duration]
