@@ -6,12 +6,12 @@ let
     then bothThemes.light
     else bothThemes.dark;
   name = theme.name;
-  c = theme.hexcodes;
+  c = theme.base16;
   overrides =
     if config.handdara.lightworks
     then { }
     else {
-      bg = "120b0d";
+      # bg = "120b0d";
     };
   fontsize-scaled = builtins.ceil (config.handdara.uiscale * (config.handdara.fontsize - 2));
 in

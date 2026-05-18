@@ -34,7 +34,7 @@
 
   handdara = rec {
     lightworks = false;
-    transparency = 60;
+    transparency = 75;
     font = "scientifica";
     # font = "MonaspiceAr NF";
     # font = "Maple Mono NF";
@@ -46,10 +46,10 @@
     # fontterm = "Miracode";
     # fontterm = "Hasklug Nerd Font";
     # fontterm = "Maple Mono NF";
-    fontsize = 18;
+    fontsize = 16;
     shprompt = "simple";
-    colortheme = ./util/color/haley.nix;
-    uiscale = 1.5;
+    colortheme = ./util/color/sagekit.nix;
+    # uiscale = 1.5;
   };
 
   # Setting default applications on x11

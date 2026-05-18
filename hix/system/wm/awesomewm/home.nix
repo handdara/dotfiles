@@ -7,7 +7,8 @@ let
     then bothThemes.light
     else bothThemes.dark;
   c = theme.hexcodes;
-  fontsize-scaled = builtins.ceil (config.handdara.uiscale * config.handdara.fontsize);
+  # fontsize-scaled = builtins.ceil (config.handdara.uiscale * config.handdara.fontsize);
+  fontsize-scaled = builtins.ceil (config.handdara.uiscale * (config.handdara.fontsize - 2));
   uiscale = builtins.toString config.handdara.uiscale;
 in
 {
