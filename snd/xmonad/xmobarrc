@@ -1,8 +1,11 @@
 Config { 
-    font = "xfg:monospace-14",
+    font = "scientifica 16",
     bgColor = "#000000",
     fgColor = "#cccccc",
-    position = Top,
+    position = TopSize C 100 30,
+    border = BottomB,
+    borderColor = "#444b6a",
+    borderWidth = 2,
     commands = [ Run XMonadLog ],
     template = "%XMonadLog%"
   }
