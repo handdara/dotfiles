@@ -1,0 +1,8 @@
+Config { 
+    font = "xfg:monospace-14",
+    bgColor = "#000000",
+    fgColor = "#cccccc",
+    position = Top,
+    commands = [ Run XMonadLog ],
+    template = "%XMonadLog%"
+  }
