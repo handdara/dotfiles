@@ -15,9 +15,14 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        nativeBuildInputs = [ pkgs.nixpkgs-fmt ];
+        nativeBuildInputs = [
+          pkgs.nixpkgs-fmt
+        ];
 
-        buildInputs = [ ];
+        buildInputs = [
+          pkgs.ghc
+          pkgs.haskell-language-server
+        ];
       in
       {
         devShells.default = pkgs.mkShell {
