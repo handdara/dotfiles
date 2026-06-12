@@ -191,11 +191,13 @@ let
     $username\
     $hostname\
     $battery\
-    [▓▒░](fg:${st.bg2} bg:black)\
+    [▓▒░](fg:${st.bg2} bg:${st.bg3})\
     $directory\
+    [▓▒░](fg:${st.bg3} bg:${st.bg4})\
     $git_branch\
     $git_status\
     $nix_shell\
+    [▓▒░](fg:${st.bg4} bg:${st.bg5})\
     $time\
     [▓▒░](fg:${st.bg5})\
     $cmd_duration\
@@ -216,7 +218,7 @@ let
     format = '[::$hostname](bold $style)[$ssh_symbol ](italic $style)'
 
     [directory]
-    style = "italic fg:white bg:black"
+    style = "italic fg:${st.fg3} bg:${st.bg3}"
     format = "[ $path ]($style)"
     truncation_length = 4
     truncation_symbol = "*/"
@@ -279,11 +281,11 @@ let
 
     [git_branch]
     symbol = "|/"
-    style = "fg:white bg:black"
+    style = "fg:${st.fg4} bg:${st.bg4}"
     format = '[ $symbol $branch ]($style)'
 
     [git_status]
-    style = "fg:white bg:black"
+    style = "fg:${st.fg4} bg:${st.bg4}"
     format = '[($all_status$ahead_behind )]($style)'
 
     [nix_shell]

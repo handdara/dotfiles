@@ -19,7 +19,8 @@
     # fontterm = "Maple Mono NF";
     fontsize = 16;
     shprompt = "simple";
-    colortheme = ./util/color/sagekit.nix;
+    # colortheme = ./util/color/sagekit.nix;
+    colortheme = ./util/color/haley.nix;
     # uiscale = 1.5;
   };
 
