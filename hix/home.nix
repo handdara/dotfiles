@@ -3,6 +3,26 @@
 , user_opts
 , ...
 }: {
+  handdara = rec {
+    lightworks = false;
+    transparency = 85;
+    font = "scientifica";
+    # font = "MonaspiceAr NF";
+    # font = "Maple Mono NF";
+    fontui = font + " Bold";
+    # fontui = "Miracode";
+    # fontui = "MonaspiceKr NF";
+    # fontterm = font;
+    fontterm = "scientifica";
+    # fontterm = "Miracode";
+    # fontterm = "Hasklug Nerd Font";
+    # fontterm = "Maple Mono NF";
+    fontsize = 16;
+    shprompt = "simple";
+    colortheme = ./util/color/sagekit.nix;
+    # uiscale = 1.5;
+  };
+
   imports = [
     ./system/wm/awesomewm/home.nix
     ./user/apps/alacritty
@@ -31,26 +51,6 @@
     ./user/shells/bash
     ./user/theme
   ];
-
-  handdara = rec {
-    lightworks = false;
-    transparency = 75;
-    font = "scientifica";
-    # font = "MonaspiceAr NF";
-    # font = "Maple Mono NF";
-    fontui = font + " Bold";
-    # fontui = "Miracode";
-    # fontui = "MonaspiceKr NF";
-    # fontterm = font;
-    fontterm = "scientifica";
-    # fontterm = "Miracode";
-    # fontterm = "Hasklug Nerd Font";
-    # fontterm = "Maple Mono NF";
-    fontsize = 16;
-    shprompt = "simple";
-    colortheme = ./util/color/sagekit.nix;
-    # uiscale = 1.5;
-  };
 
   # Setting default applications on x11
   xdg.mimeApps = {
