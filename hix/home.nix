@@ -17,7 +17,7 @@
     # fontterm = "Miracode";
     # fontterm = "Hasklug Nerd Font";
     # fontterm = "Maple Mono NF";
-    fontsize = 16;
+    fontsize = 17;
     shprompt = "simple";
     # colortheme = ./util/color/sagekit.nix;
     colortheme = ./util/color/haley.nix;
