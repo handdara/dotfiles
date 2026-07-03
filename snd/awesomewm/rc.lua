@@ -132,7 +132,7 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Menu
+-- {{{2 Menu
 -- Create a launcher widget and a main menu
 local menu_awesome = {
     { "┬──AWM:Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
