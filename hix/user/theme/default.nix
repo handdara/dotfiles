@@ -55,7 +55,10 @@ in
     };
   };
   config = {
-    home.packages = [ pkgs.themechanger ];
+    home.packages = [ 
+      pkgs.themechanger 
+      pkgs.lxappearance
+    ];
     # gtk =
     #   if config.handdara.lightworks then {
     #     enable = true;
