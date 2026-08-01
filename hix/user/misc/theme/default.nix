@@ -3,7 +3,7 @@
 , ...
 }:
 let
-  bothThemes = import ../../../util/color;
+  bothThemes = import config.handdara.colortheme;
   c =
     if (config.handdara.lightworks == true)
     then bothThemes.light

@@ -3,6 +3,27 @@
 , user_opts
 , ...
 }: {
+  handdara = rec {
+    lightworks = false;
+    transparency = 85;
+    font = "scientifica";
+    # font = "MonaspiceAr NF";
+    # font = "Maple Mono NF";
+    fontui = font + " Bold";
+    # fontui = "Miracode";
+    # fontui = "MonaspiceKr NF";
+    # fontterm = font;
+    fontterm = "scientifica";
+    # fontterm = "Miracode";
+    # fontterm = "Hasklug Nerd Font";
+    # fontterm = "Maple Mono NF";
+    fontsize = 19;
+    shprompt = "simple";
+    # colortheme = ./util/color/sagekit.nix;
+    colortheme = ./util/color/haley.nix;
+    # uiscale = 1.5;
+  };
+
   imports = [
     ./system/wm/awesomewm/home.nix
     ./user/apps/alacritty
@@ -16,6 +37,7 @@
     ./user/apps/kmonad
     ./user/apps/lazygit
     ./user/apps/mouseless
+    # ./user/apps/spotify-player
     # ./user/apps/megasync
     ./user/apps/nvim
     # ./user/apps/r
@@ -31,16 +53,22 @@
     ./user/theme
   ];
 
-  handdara = rec {
-    lightworks = false;
-    font = "scientifica";
-    # font = "Maple Mono NF";
-    # fontui = font + " Bold";
-    fontui = "Miracode";
-    fontterm = font;
-    fontsize = 18;
-    transparency = 75;
-    shprompt = "simple";
+  # Setting default applications on x11
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "org.qutebrowser.qutebrowser.desktop";
+      "inode/directory" = "thunar.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+      "image/jpeg" = "org.xfce.ristretto.desktop";
+      "image/png" = "org.xfce.ristretto.desktop";
+      "image/webp" = "org.xfce.ristretto.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "impress.desktop";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -60,12 +88,14 @@
       EDITOR = "nvim";
       MANPAGER = "__h_nvim -c 'Man!' -o -";
     };
-
+    file.".gnupg/gpg-agent.conf".text = ''
+      default-cache-ttl 34560000
+      max-cache-ttl 34560000
+    ''; # gnupg agent config
     packages = [
       pkgs.nps
       pkgs.youtube-tui
     ];
-
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.

@@ -2,13 +2,13 @@
 
 let
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://codeberg.org/handdara/scip/raw/tag/v20260212.0/pack.toml";
+    url = "https://codeberg.org/handdara/scip/src/commit/d6937d2c2bdfa8894df368550fa4faed7f1d2b52/pack.toml";
     packHash = "sha256-pxYu8IeRhhvre2tobwG4JsQLESj6Q5kW4S1gfyqWcBo=";
   };
 in
 
 {
-  environment.systemPackages = [ pkgs.prismlauncher pkgs.packwiz ];
+  environment.systemPackages = [ pkgs.prismlauncher pkgs.atlauncher pkgs.packwiz ];
   services.minecraft-servers = {
     enable = true;
     eula = true;

@@ -10,7 +10,7 @@
   };
   environment.systemPackages = [
     pkgs.xmobar
-    pkgs.haskell-language-server
     pkgs.dmenu
+    pkgs.feh
   ];
 }

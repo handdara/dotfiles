@@ -14,6 +14,8 @@
       bind-key 'C-.' new-window "bash -ic mg; sleep 0.1"
       bind-key 'C-l' last-window
       bind-key 'C-;' last-pane
+      bind-key 'C-s' set status on
+      bind-key 'M-s' set status off
     '';
   };
 }

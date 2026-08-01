@@ -33,6 +33,11 @@ in
       default = 12;
       description = "system font size";
     };
+    handdara.uiscale = lib.mkOption {
+      type = lib.types.numbers.between 0.5 3;
+      default = 1;
+      description = "scale ui elements by this, e.g. ui/terminal text";
+    };
     handdara.transparency = lib.mkOption {
       type = lib.types.ints.between 2 100;
       default = 85;
@@ -43,9 +48,17 @@ in
       default = "regular";
       description = "mode for starship prompt: regular, simple, off";
     };
+    handdara.colortheme = lib.mkOption {
+      type = lib.types.path;
+      default = ../../util/color;
+      description = "path to the color theme to use (from ../theme/ dir)";
+    };
   };
   config = {
-    home.packages = [pkgs.themechanger];
+    home.packages = [ 
+      pkgs.themechanger 
+      pkgs.lxappearance
+    ];
     # gtk =
     #   if config.handdara.lightworks then {
     #     enable = true;

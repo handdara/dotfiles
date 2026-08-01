@@ -108,6 +108,7 @@ in
     pkgs.ghostty
     pkgs.gimp
     pkgs.git
+    pkgs.glirc
     pkgs.gvfs
     pkgs.imagemagick
     pkgs.isync
@@ -138,6 +139,9 @@ in
     pkgs.redshift
     pkgs.stow
     pkgs.tealdeer
+    # pkgs.teams #not supported on linux
+    pkgs.teams-for-linux
+    # pkgs.teamspeak3
     # pkgs.themechanger
     pkgs.toilet
     pkgs.universal-ctags
@@ -150,6 +154,7 @@ in
     pkgs.wget
     pkgs.wikiman
     pkgs.wiki-tui
+    pkgs.spotify-player
     pkgs.xclip
     pkgs.xcolor
     pkgs.xfce.ristretto

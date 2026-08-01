@@ -1,18 +1,19 @@
 { config, ... }:
 let
-  bothThemes = import ../../../util/color;
+  bothThemes = import config.handdara.colortheme;
   theme =
     if config.handdara.lightworks
     then bothThemes.light
     else bothThemes.dark;
   name = theme.name;
-  c = theme.hexcodes;
+  c = theme.base16;
   overrides =
     if config.handdara.lightworks
     then { }
     else {
-      bg = "120b0d";
+      # bg = "120b0d";
     };
+  fontsize-scaled = builtins.ceil (config.handdara.uiscale * (config.handdara.fontsize - 2));
 in
 {
   home.file = {
@@ -20,7 +21,7 @@ in
       theme = ${name}
       font-family = ""
       font-family = "${config.handdara.fontterm}"
-      font-size = ${builtins.toString (config.handdara.fontsize - 2)}
+      font-size = ${builtins.toString fontsize-scaled}
       cursor-style = block
       cursor-style-blink = false
       background-opacity = ${builtins.toString (config.handdara.transparency / 100.0)}
@@ -57,8 +58,8 @@ in
       palette = 15=${theme.ghostty.paletteF or c.bright_white}
       background = ${overrides.bg or theme.ghostty.bg or c.bg}
       foreground = ${c.fg}
-      cursor-color = ${theme.ghostty.cursor_bg or "cell-foreground"}
-      cursor-text = ${theme.ghostty.cursor_fg or "cell-background"}
+      cursor-color = cell-foreground
+      cursor-text = cell-background
       selection-background = 626880
       selection-foreground = c6d0f5
     '';

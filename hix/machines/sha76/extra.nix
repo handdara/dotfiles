@@ -1,5 +1,12 @@
 { user_opts, ... }: {
-  services.logind.lidSwitchExternalPower = "ignore";
+  # see https://wiki.nixos.org/wiki/Laptop for more. each of the following
+  # options should be one of: "ignore", "poweroff", "reboot", "halt", "kexec",
+  # "suspend", "hibernate", "hybrid-sleep", "suspend-then-hibernate", "lock"
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {

@@ -19,16 +19,16 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 local function inspect(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. inspect(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
+    if type(o) == 'table' then
+        local s = '{ '
+        for k, v in pairs(o) do
+            if type(k) ~= 'number' then k = '"' .. k .. '"' end
+            s = s .. '[' .. k .. '] = ' .. inspect(v) .. ','
+        end
+        return s .. '} '
+    else
+        return tostring(o)
+    end
 end
 
 -- {{{ Error handling
@@ -61,10 +61,11 @@ end
 -- }}}
 
 -- {{{ Variable definitions
-local theme = "marrissa" -- also available: default zenburn gtk sky
+local theme = "handdara" -- also available: default zenburn gtk sky
 local theme_dir = os.getenv("HOME") .. '/.config/awesome/themes/'
 local ansible_dir = os.getenv("HOME") .. '/MEGA/ansible/'
 local scripts_dir = os.getenv("HOME") .. '/.local/scripts/'
+local screenshots_dir = os.getenv("HOME") .. '/Pictures/Screenshots/'
 beautiful.init(theme_dir .. theme .. "/theme.lua")
 
 local terminal = "ghostty"
@@ -97,7 +98,8 @@ local nsi_cmd = terminal_cmd .. scripts_dir .. 'nsi'
 local osi_cmd = terminal_cmd .. scripts_dir .. 'osi'
 local username_cmd = fast_terminal_cmd .. "__h_pick_username"
 local passmenu_cmd = fast_terminal_cmd .. "__h_pick_pass"
-local sys_manage_cmd = fast_terminal_cmd .. "mg"
+-- local sys_manage_cmd = fast_terminal_cmd .. "mg"
+local sys_manage_cmd = terminal_cmd .. "mg"
 local sysinfo = scripts_dir .. "sys/sysinfo"
 local sysinfo_cmd = terminal_cmd .. sysinfo
 local weather = scripts_dir .. "__h_chk_weather"
@@ -130,7 +132,7 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Menu
+-- {{{2 Menu
 -- Create a launcher widget and a main menu
 local menu_awesome = {
     { "┬──AWM:Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -173,51 +175,10 @@ local kbd_layout = awful.widget.keyboardlayout()
 -- local wibar_separator = '  '
 -- local wibar_separator = ' ᛫ '
 local wibar_separator = ' · '
+
 -- Create a textclock widget
 local stbar_txtclk = wibox.widget.textclock('W %V _*_ %d/%j' .. wibar_separator .. '%H:%M')
 
-local cal_widget = awful.popup {
-    widget       = {
-        wibox.widget {
-            date         = os.date('*t'),
-            font         = 'Sans 14',
-            spacing      = 2,
-            week_numbers = false,
-            start_sunday = false,
-            widget       = wibox.widget.calendar.month,
-        },
-        margins = 4,
-        widget = wibox.container.margin,
-    },
-    border_color = '#777777',
-    border_width = 2,
-    ontop        = true,
-    visible      = false,
-    placement    = (awful.placement.under_mouse + awful.placement.no_offscreen),
-    shape        = gears.shape.rounded_rect,
-}
-local cal_yr_widget = awful.popup {
-    widget       = {
-        wibox.widget {
-            date         = os.date('*t'),
-            font         = 'Sans 14',
-            spacing      = 2,
-            week_numbers = false,
-            start_sunday = false,
-            widget       = wibox.widget.calendar.year,
-        },
-        margins = 4,
-        widget = wibox.container.margin,
-    },
-    border_color = '#777777',
-    border_width = 2,
-    ontop        = true,
-    visible      = false,
-    placement    = (awful.placement.under_mouse + awful.placement.no_offscreen),
-    shape        = gears.shape.rounded_rect,
-}
-
--- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
     awful.button({}, 1, function(t) t:view_only() end),
     awful.button({ super }, 1, function(t)
@@ -258,14 +219,14 @@ local tasklist_buttons = gears.table.join(
     end))
 
 local function set_wallpaper(s)
-    -- Wallpaper
+    -- Wallpaper, background
     if beautiful.wallpaper then
         local wallpaperfile = beautiful.wallpaper
         -- If wallpaper is a function, call it with the screen
         if type(wallpaperfile) == "function" then
             wallpaperfile = wallpaperfile(s)
         end
-        gears.wallpaper.maximized(wallpaperfile, s)
+        gears.wallpaper.fit(wallpaperfile, s)
     end
 end
 
@@ -331,7 +292,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.wibox = awful.wibar({
         position = "top",
         screen = s,
-        height = 30,
+        height = math.ceil(beautiful.uiscale * 30),
     })
 
     -- Add widgets to the wibox
@@ -349,11 +310,13 @@ awful.screen.connect_for_each_screen(function(s)
         {               -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.textbox('  '),
-            awful.widget.watch('__h_cpu_usage', 2),
+            awful.widget.watch('__h_bar_cpu', 2),
             wibox.widget.textbox(wibar_separator),
-            awful.widget.watch('__h_mem_usage', 2),
+            awful.widget.watch('__h_bar_memory', 2),
             wibox.widget.textbox(wibar_separator),
-            awful.widget.watch('__h_bat_status', 0.2),
+            awful.widget.watch('__h_bar_battery', 0.2),
+            wibox.widget.textbox(wibar_separator),
+            awful.widget.watch('__h_bar_internet', 1),
             wibox.widget.textbox(wibar_separator),
             awful.widget.watch('__h_bar_date', 60),
             wibox.widget.textbox(wibar_separator),
@@ -378,6 +341,11 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings, also keymap, keybinds
 local globalkeys = gears.table.join(
     awful.key({ super, }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+    awful.key({ super, "Control" }, "b", function()
+        for s in screen do
+            s.wibox.visible = not s.wibox.visible
+        end
+    end, { description = "toggle statusbar", group = "awesome" }),
     awful.key({ super, }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
     awful.key({ super, }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
     awful.key({ super, }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
@@ -501,6 +469,14 @@ local globalkeys = gears.table.join(
         awful.util.spawn("brightnessctl set '3%+'", false)
     end),
 
+    -- Screenshot Keys
+    awful.key({ super, "Shift" }, "s", function()
+        awful.util.spawn('flameshot full --path "' .. screenshots_dir .. '"', false)
+    end),
+    awful.key({ super, "Control" }, "s", function()
+        awful.util.spawn('flameshot gui --path "' .. screenshots_dir .. '"', false)
+    end),
+
     -- Media Keys
     -- awful.key({}, "XF86AudioPlay", function()
     --     awful.util.spawn("playerctl play-pause", false)
@@ -571,11 +547,11 @@ local clientkeys = gears.table.join(
             naughty.notify({
                 preset = naughty.config.presets.critical,
                 title = "Current Client",
-                text = "current_client = "..inspect(c).."\n class is "..inspect(c.class)
+                text = "current_client = " .. inspect(c) .. "\n class is " .. inspect(c.class)
             })
         end,
         { description = "debug: print client table", group = "client" })
-    )
+)
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
@@ -719,7 +695,7 @@ awful.rules.rules = {
     },
     {
         rule = { class = "MATLAB" },
-        properties = { floating = true }
+        properties = { floating = true, tag = "2" }
     },
     {
         rule = { class = "Thunar" },

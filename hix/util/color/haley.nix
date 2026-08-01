@@ -85,22 +85,22 @@ with colordata; {
     };
     wm = {
       window_border = {
-        focus = bright_blue;
-        normal = black;
-        marked = bright_green;
+        focus = hexcodes.bright_blue;
+        normal = hexcodes.black;
+        marked = hexcodes.bright_green;
       };
     };
     starship = {
-      fg1 = hexcodes.yellow; # os
+      fg1 = hexcodes.yellow;
       bg1 = hexcodes.bright_black;
-      fg2 = hexcodes.bright_black; # directory
-      bg2 = hexcodes.bright_green;
-      fg3 = hexcodes.bright_cyan; # git
+      fg2 = hexcodes.bright_blue;
+      bg2 = hexcodes.magenta;
+      fg3 = hexcodes.white;
       bg3 = hexcodes.red;
-      fg4 = hexcodes.white; # lang/env
+      fg4 = hexcodes.white;
       bg4 = hexcodes.bright_magenta;
-      fg5 = hexcodes.cyan; # time
-      bg5 = hexcodes.magenta;
+      fg5 = hexcodes.green;
+      bg5 = hexcodes.black;
       bgchar = hexcodes.black;
     };
     ghostty = {
@@ -219,9 +219,9 @@ with colordata; {
     };
     wm = {
       window_border = {
-        focus = bright_blue;
-        normal = black;
-        marked = bright_green;
+        focus = hexcodes.bright_blue;
+        normal = hexcodes.black;
+        marked = hexcodes.bright_green;
       };
     };
   };
