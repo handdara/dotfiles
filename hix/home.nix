@@ -5,7 +5,7 @@
 }: {
   handdara = rec {
     lightworks = false;
-    transparency = 30;
+    transparency = 85;
     font = "scientifica";
     # font = "MonaspiceAr NF";
     # font = "Maple Mono NF";
