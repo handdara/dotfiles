@@ -96,6 +96,7 @@ in
     pkgs.cdparanoia
     pkgs.chafa
     pkgs.croc
+    pkgs.dua
     pkgs.dust
     pkgs.eza
     pkgs.fastfetch
