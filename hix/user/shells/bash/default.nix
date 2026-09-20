@@ -53,7 +53,9 @@
       export historyFileSize=10000000
     '';
     initExtra = ''
-      source -- $(blesh-share)/ble.sh
+      if [ ! $H_DISABLE_BLESH ]; then
+        source -- $(blesh-share)/ble.sh
+      fi
       eval "$(fzf --bash)"
       eval "$(zoxide init bash )"
     '';
