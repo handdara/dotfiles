@@ -3,4 +3,5 @@ git_config_fr := justfile_directory() / '.gitconfig'
 
 # symlink .gitconfig
 link-gitconfig:
+    echo "[ERROR] use '.git/config' instead" >&2 && exit 1
     ln -svf {{git_config_fr}} {{git_config_to}}
