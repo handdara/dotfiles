@@ -32,6 +32,8 @@
       mkrem = "khal new -a rem";
       n = "__h_nvim";
       tempvim = "nvim -n --clean -u NONE -i NONE";
+      tree = "eza --tree";
+      unstage = "git restore --staged";
       viman = "nvim -Rc 'set ft=man'";
       xcn = "xclip -selection clipboard";
       xc = "xclip -rmlastnl -selection clipboard";

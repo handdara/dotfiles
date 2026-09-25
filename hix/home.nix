@@ -92,6 +92,7 @@
       default-cache-ttl 34560000
       max-cache-ttl 34560000
     ''; # gnupg agent config
+    file.".gitconfig".source = ../fst/git/dot-gitconfig;
     packages = [
       pkgs.nps
       pkgs.youtube-tui
