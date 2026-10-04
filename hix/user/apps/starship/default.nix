@@ -306,6 +306,123 @@ let
     style = "italic purple"
     format = "[ $duration ]($style)"
   '';
+  barebones_cfg = ''
+    format = """
+    $username\
+    $hostname\
+    $battery\
+    $directory\
+    \n\
+    $git_branch\
+    $git_status\
+    $nix_shell\
+    $cmd_duration\
+    \n\
+    $time\
+    $character\
+    """
+
+    [username]
+    style_root = 'bold fg:${theme.hexcodes.red} bg:${st.bg1}'
+    style_user = 'bold fg:${st.bg1} bg:${st.fg1}'
+    show_always = true
+    format = '[ $user]($style)'
+
+    [hostname]
+    ssh_only = false
+    style = 'fg:${st.bg1} bg:${st.fg1}'
+    ssh_symbol = ' via \(ssh\)'
+    format = '[@$hostname](bold $style)[$ssh_symbol ](italic $style)'
+
+    [directory]
+    style = "italic fg:${st.fg3} bg:${st.bg3}"
+    format = "[ $path ]($style)"
+    truncation_length = 4
+    truncation_symbol = "*/"
+
+    [battery]
+    full_symbol = '\[≡≡≡\]:'
+    charging_symbol = '\[>>>\]:'
+    unknown_symbol = '\[|||\]:'
+    format = '[ $symbol $percentage ]($style)'
+
+    [[battery.display]]
+    threshold = 100
+    discharging_symbol = '\[===\]:'
+    charging_symbol = '\[>>>\]:'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
+
+    [[battery.display]]
+    threshold = 90
+    discharging_symbol = '\[==-\]:'
+    charging_symbol = ' \[>>>\]: '
+    style = 'fg:${st.fg2} bg:${st.bg2}'
+
+    [[battery.display]]
+    threshold = 75
+    discharging_symbol = '\[== \]:'
+    charging_symbol = '\[>> \]:'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
+
+    [[battery.display]]
+    threshold = 60
+    discharging_symbol = '\[=- \]:'
+    charging_symbol = ' \[>> \]: '
+    style = 'fg:${st.fg2} bg:${st.bg2}'
+
+    [[battery.display]]
+    threshold = 40
+    discharging_symbol = '\[=  \]:'
+    charging_symbol = ' \[>> \]:'
+    style = 'fg:${st.fg2} bg:${st.bg2}'
+
+    [[battery.display]]
+    threshold = 25
+    discharging_symbol = '\[-  \]:'
+    charging_symbol = '\[>  \]:'
+    style = 'fg:yellow bg:${st.bg2}'
+
+    [[battery.display]]
+    threshold = 10
+    discharging_symbol = '\[!  \]: LOW!'
+    charging_symbol = '\[>  \]: LOW!'
+    style = 'bg:red fg:white'
+
+    [character]
+    success_symbol = '[*>](cyan) '
+    vimcmd_symbol = '[N>](blue)'
+    vimcmd_visual_symbol = '[V>](blue) '
+    vimcmd_replace_symbol = '[R>](blue) '
+    error_symbol = '[!!](red) '
+    format = '[$symbol]()'
+
+    [git_branch]
+    symbol = "|/"
+    style = "fg:${st.fg4} bg:${st.bg4}"
+    format = '[ $symbol $branch ]($style)'
+
+    [git_status]
+    style = "fg:${st.fg4} bg:${st.bg4}"
+    format = '[($all_status$ahead_behind )]($style)'
+
+    [nix_shell]
+    symbol = "*"
+    disabled = false
+    style = "fg:prev_fg bg:prev_bg"
+    format = '[via ](italic $style)[▒$symbol $state \($name\)▒](inverted $style)'
+
+    [time]
+    disabled = false
+    time_format = "%R" # Hour:Minute Format
+    style = "bold fg:${st.fg5} bg:${st.bg5}"
+    format = '[ $time ]($style)'
+
+    [cmd_duration]
+    show_milliseconds = false
+    disabled = false
+    style = "italic purple"
+    format = "[ $duration ]($style)"
+  '';
 in
 {
   programs.starship =
@@ -322,6 +439,8 @@ in
     ".config/starship.toml".text =
       if config.handdara.shprompt == "simple"
       then simple_cfg
-      else regular_cfg;
+      else if config.handdara.shprompt == "barebones"
+        then barebones_cfg
+        else regular_cfg;
   };
 }

@@ -46,12 +46,17 @@ in
     handdara.shprompt = lib.mkOption {
       type = lib.types.str;
       default = "regular";
-      description = "mode for starship prompt: regular, simple, off";
+      description = "mode for starship prompt: regular, simple, barebones, off";
     };
     handdara.colortheme = lib.mkOption {
       type = lib.types.path;
       default = ../../util/color;
       description = "path to the color theme to use (from ../theme/ dir)";
+    };
+    handdara.wallmethod = lib.mkOption {
+      type = lib.types.str;
+      default = "maximized";
+      description = "how the wallpaper is set, one of: centered, tiled, maximized (default), or fit";
     };
   };
   config = {

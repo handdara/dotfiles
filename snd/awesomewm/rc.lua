@@ -132,7 +132,7 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{2 Menu
+-- {{{ Menu
 -- Create a launcher widget and a main menu
 local menu_awesome = {
     { "┬──AWM:Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -218,7 +218,7 @@ local tasklist_buttons = gears.table.join(
         awful.client.focus.byidx(-1)
     end))
 
-local function set_wallpaper(s)
+local function SetWallpaper(s)
     -- Wallpaper, background
     if beautiful.wallpaper then
         local wallpaperfile = beautiful.wallpaper
@@ -226,16 +226,32 @@ local function set_wallpaper(s)
         if type(wallpaperfile) == "function" then
             wallpaperfile = wallpaperfile(s)
         end
-        gears.wallpaper.fit(wallpaperfile, s)
+        local mth = beautiful.wallpaper_method
+        if mth == "fit" then
+            gears.wallpaper.fit(wallpaperfile, s)
+        elseif mth == "centered" then
+            gears.wallpaper.centered(wallpaperfile, s)
+        elseif mth == "tiled" then
+            gears.wallpaper.tiled(wallpaperfile, s)
+        elseif mth == "maximized" then
+            gears.wallpaper.maximized(wallpaperfile, s)
+        else
+            error("[ERROR] invalid wallpaper setting method, " .. mth .. ", must be one of fit, centered, tiled, maximized")
+        end
     end
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+screen.connect_signal("property::geometry", SetWallpaper)
+screen.connect_signal("global::wallpaper", SetWallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    set_wallpaper(s)
+    SetWallpaper(s)
+    awesome.connect_signal("global::wallpaper", function()
+        -- SetWallpaper(s)
+        s:emit_signal('global::wallpaper')
+    end)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
@@ -336,7 +352,6 @@ root.buttons(gears.table.join(
     awful.button({}, 5, awful.tag.viewprev)
 ))
 -- }}}
-
 
 -- {{{ Key bindings, also keymap, keybinds
 local globalkeys = gears.table.join(

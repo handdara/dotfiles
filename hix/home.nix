@@ -4,24 +4,28 @@
 , ...
 }: {
   handdara = rec {
-    lightworks = false;
-    transparency = 93;
-    font = "scientifica";
+    lightworks = true;
+    transparency = if lightworks 
+      then 88
+      else 93;
+    font = "Monaco";
     # font = "MonaspiceAr NF";
     # font = "Maple Mono NF";
-    fontui = font + " Bold";
+    # fontui = font + " Bold"; # good for scientifica
+    fontui = font;
     # fontui = "Miracode";
     # fontui = "MonaspiceKr NF";
-    # fontterm = font;
-    fontterm = "scientifica";
+    fontterm = "TexGyreCursor-Regular";
+    # fontterm = "scientifica";
     # fontterm = "Miracode";
     # fontterm = "Hasklug Nerd Font";
     # fontterm = "Maple Mono NF";
-    fontsize = 19;
-    shprompt = "simple";
+    fontsize = 18;
+    shprompt = "barebones";
     # colortheme = ./util/color/sagekit.nix;
     colortheme = ./util/color/haley.nix;
     # uiscale = 1.5;
+    # wallmethod = "fit";
   };
 
   imports = [

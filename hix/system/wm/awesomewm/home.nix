@@ -10,6 +10,7 @@ let
   # fontsize-scaled = builtins.ceil (config.handdara.uiscale * config.handdara.fontsize);
   fontsize-scaled = builtins.ceil (config.handdara.uiscale * (config.handdara.fontsize - 2));
   uiscale = builtins.toString config.handdara.uiscale;
+  wpMthd = config.handdara.wallmethod;
 in
 {
   home.file = {
@@ -124,6 +125,7 @@ in
       theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
       theme.wallpaper = bg_path .. "handdara.png"
+      theme.wallpaper_method = "${wpMthd}"
       theme.uiscale = ${uiscale}
 
       -- You can use your own layout icons like this:
