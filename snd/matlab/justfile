@@ -1,8 +1,0 @@
-ln_dir := 'ln -sv'
-rm_tree := 'rm -Rf'
-
-default: nothing
-
-nothing:
-    @echo "Nothing to do yet..."
-

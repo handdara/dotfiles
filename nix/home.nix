@@ -8,19 +8,20 @@
     transparency = if lightworks 
       then 88
       else 93;
+    # font = "Maple Mono NF";
     font = "Monaco";
     # font = "MonaspiceAr NF";
-    # font = "Maple Mono NF";
     # fontui = font + " Bold"; # good for scientifica
     fontui = font;
     # fontui = "Miracode";
     # fontui = "MonaspiceKr NF";
-    fontterm = font;
-    # fontterm = "TexGyreCursor-Regular";
-    # fontterm = "scientifica";
-    # fontterm = "Miracode";
+    # fontterm = font;
+    # fontterm = "AtkynsonMono NF";
     # fontterm = "Hasklug Nerd Font";
     # fontterm = "Maple Mono NF";
+    # fontterm = "Miracode";
+    # fontterm = "scientifica";
+    fontterm = "TeX Gyre Cursor";
     fontsize = 18;
     shprompt = "simple";
     # colortheme = ./util/color/sagekit.nix;

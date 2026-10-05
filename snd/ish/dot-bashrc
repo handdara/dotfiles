@@ -1,0 +1,15 @@
+# echo "$(date) 0=$0" | tee rc.log
+[ "$0" = 'ash' ] && exec bash $@
+[ "$0" = '-ash' ] && exec bash $@
+
+export EDITOR=nvim
+
+alias n=nvim
+alias connthes='ssh estraven@estre.handdara.com -t bash -l'
+alias ls='exa'
+alias e='exa'
+alias el='exa -l'
+alias ea='exa -a'
+alias ela='exa -la'
+
+eval "$(zoxide init bash)"
