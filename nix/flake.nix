@@ -1,7 +1,7 @@
 {
   description = "handdara nixos flake";
 
-  inputs = {
+  inputs = { # {{{
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,7 +22,7 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-  };
+  }; # }}}
 
   outputs =
     { nixpkgs
@@ -43,6 +43,7 @@
     in
     {
       nixosConfigurations = {
+        # {{{ 'sha76' configuration
         sha76 = lib.nixosSystem {
           modules = [
             ./configuration.nix
@@ -68,7 +69,8 @@
               email = "email@handdara.com";
             };
           };
-        };
+        }; # }}}
+        # {{{ 'mixed' configuration
         mixed = lib.nixosSystem {
           modules = [
             ./configuration.nix
@@ -90,7 +92,8 @@
               email = "email@handdara.com";
             };
           };
-        };
+        }; # }}}
+        # {{{ 'theseus' configuration
         theseus = lib.nixosSystem {
           modules = [
             ./configuration.nix
@@ -114,9 +117,10 @@
               email = "email@handdara.com";
             };
           };
-        };
+        }; # }}}
       };
       homeConfigurations = {
+        # {{{ 'handdara' user
         handdara = hmlib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
@@ -131,7 +135,8 @@
               email = "email@handdara.com";
             };
           };
-        };
+        }; # }}}
+        # {{{ 'estraven' user
         estraven = hmlib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
@@ -146,7 +151,7 @@
               email = "email@handdara.com";
             };
           };
-        };
+        }; # }}}
       };
     };
 }

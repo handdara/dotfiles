@@ -44,6 +44,7 @@ let
   time_sym = " ";
   home_sym = " ";
   custom_latex = "\${custom.latex}";
+  # {{{ regular config
   regular_cfg = ''
     format = """
     [░▒▓](${st.bg1})\
@@ -183,7 +184,8 @@ let
     disabled = false
     style = "italic #394260"
     format = "[$duration]($style)"
-  '';
+  ''; # }}}
+  # {{{ simple config
   simple_cfg = ''
     format = """
     [░▒▓](bg:black fg:${st.bg1})\
@@ -305,7 +307,8 @@ let
     disabled = false
     style = "italic purple"
     format = "[ $duration ]($style)"
-  '';
+  ''; # }}}
+  # {{{ barebones config
   barebones_cfg = ''
     format = """
     $username\
@@ -422,7 +425,7 @@ let
     disabled = false
     style = "italic purple"
     format = "[ $duration ]($style)"
-  '';
+  ''; # }}}
 in
 {
   programs.starship =

@@ -3,7 +3,7 @@
 , user_opts
 , ...
 }: {
-  handdara = rec {
+  handdara = rec { # these options are defined in `./hix/user/theme/default.nix`
     lightworks = true;
     transparency = if lightworks 
       then 88
@@ -15,13 +15,14 @@
     fontui = font;
     # fontui = "Miracode";
     # fontui = "MonaspiceKr NF";
-    fontterm = "TexGyreCursor-Regular";
+    fontterm = font;
+    # fontterm = "TexGyreCursor-Regular";
     # fontterm = "scientifica";
     # fontterm = "Miracode";
     # fontterm = "Hasklug Nerd Font";
     # fontterm = "Maple Mono NF";
     fontsize = 18;
-    shprompt = "barebones";
+    shprompt = "simple";
     # colortheme = ./util/color/sagekit.nix;
     colortheme = ./util/color/haley.nix;
     # uiscale = 1.5;
@@ -101,6 +102,7 @@
       pkgs.nps
       pkgs.youtube-tui
     ];
+
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
