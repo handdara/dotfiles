@@ -1,20 +1,27 @@
 # handdara's dotfiles
 
-_readme needs updating, will get to it soon _
+i think you should listen to _by storm's_ album _my ghost's go ghost_.
 
-`hix`: NixOS configuration files
+`nix`: Nix(OS) configuration files. almost the whole shebang.
 
-`fst`: first layer: core tools. right now this is: neovim, wezterm, git & fish.
+`fst`: first layer: core tools. right now this is: neovim, and git, of which the former has been subsumed by [codeberg:handdara/nix-vimrc][], and the latter is quite barebones, to say the least.
+basically, what i'm trying to say is moving to nix destroyed any need for this folder's old contents.
+i should probably just remove it or merge it with `snd` but i left it on a whim and now i don't feel like changing that.
 
 - `git`: git config
-- `him`: neovim config
+- `him`: neovim configs, all of these are older versions who've been subsumed by [codeberg:handdara/nix-vimrc][].
 
-`snd`: secondary layer: tools that don't fit into core. their dotfiles are here
+`snd`: secondary layer: tools that don't fit into core.[^1]
 
+-   `awesomewm`: my window manager, i like it. don't love it. mostly because of the documentation, and for another reason whose precise definition eludes me tbh
+-   ~`calcurse`~: not using this at the moment, instead i've been using [github:pimutils/khal][].[^2]
+-   `ish`: an ios app[^3] that provides a linux like environment based on alpine (or maybe even
 -   `kmonad`: an amazing keyboard remapping utility! also, it's written in haskell :)
--   `AwesomeWM`: currently testing out as my window manager pick
+-   `xmonad`: slowly building up a config by messing around with it every now and then 
 
 ## usage
+
+_section needs updating, will get to it soon._
 
 1.  install NixOS 
 1.  enable flakes and set hostname
@@ -35,7 +42,7 @@ _readme needs updating, will get to it soon _
     `/etc/nixos/hardware-configuration.nix` into it
 1.  make a new file `dotfiles/hix/machines/<HOSTNAME-GOES-HERE>/bootloader.nix` and copy the bootloader
     code from `/etc/nixos/configuration.nix` into it
-    - here's an ezxample 
+    - here's an example 
       ```nix
       # bootloader.nix content:
       { config, pkgs, ... }:
@@ -55,6 +62,9 @@ _readme needs updating, will get to it soon _
     ```
 1.  run `just purge && just switch`
 
----
+[^1]: now this basically just means i didn't feel like putting their dotfiles into a nix string.
+[^2]: i like and would recommend both.
+[^3]: yea yea i know, iphones: gross. the iSH project is pretty cool though and i've enjoyed my experience with it.
 
-[Version Badge]:https://img.shields.io/badge/version-25.04.0.1-a47daa?style=for-the-badge&labelColor=616097
+[codeberg:handdara/nix-vimrc]: https://codeberg.org/handdara/nix-vimrc
+[github:pimutils/khal]: https://github.com/pimutils/khal

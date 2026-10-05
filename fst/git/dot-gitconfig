@@ -9,3 +9,4 @@
     email = git@handdara.com
 [diff]
     tool = nvimdiff
+; vi: filetype=gitconfig

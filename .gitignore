@@ -7,3 +7,4 @@ hix/result
 en.utf-8*
 *.qcow2
 hix/repl-result-out
+*.tar.gz
